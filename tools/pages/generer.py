@@ -36,7 +36,7 @@ def header(active):
     cta_cur = ' aria-current="page"' if active == "contact-devis.html" else ""
     return f"""<body>
 <a class="skip" href="#contenu">Aller au contenu</a>
-<div class="utility{' utility--overlay' if active == 'accueil.html' else ''}">
+<div class="utility utility--overlay{' utility--on-orange' if active in PAGE_BG else ''}">
   <div class="wrap utility__inner">
     {TEL.replace('class="wa-link"', 'class="wa-link utility__tel"')}
     <div class="utility__end">
@@ -49,9 +49,9 @@ def header(active):
     </div>
   </div>
 </div>
-<header class="topbar{' topbar--overlay' if active == 'accueil.html' else ''}">
+<header class="topbar topbar--overlay{' topbar--on-orange' if active in PAGE_BG else ''}">
   <div class="wrap topbar__inner">
-    <a class="brand" href="accueil.html"><img src="assets/logo-pea.webp" alt="Parc des Expositions d’Abidjan — accueil" width="394" height="210"></a>
+    <a class="brand" href="index.html"><img src="assets/logo-pea.webp" alt="Parc des Expositions d’Abidjan — accueil" width="394" height="210"></a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-principale"><span class="menu-toggle__bars" aria-hidden="true"></span>Menu</button>
     <nav class="nav" id="nav-principale" aria-label="Navigation principale">
       <ul>
@@ -258,7 +258,7 @@ def results(target, text, empty):
 
 
 PLAN_PDF = "https://www.parcdesexpositionsabidjan.com/sites/default/files/assets/fichier/dervin/2025-02/plan-commercial-pea.pdf"
-A = "Accueil", "accueil.html"
+A = "Accueil", "index.html"
 PAGES = {}
 
 EXT = '<svg class="i i--ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg>'
@@ -415,7 +415,7 @@ LOGOS = [  # images/logos -> assets/img/logos (tools/optimiser-images.py)
     ("ardci", "ARDCI — Assemblée des Régions et Districts de Côte d’Ivoire"),
     ("uvicoci", "UVICOCI — Union des Villes et Communes de Côte d’Ivoire"),
     ("cnfci", "CNFCI — Commission Nationale des Frontières de la Côte d’Ivoire"),
-    ("abidjan-border-forum", "Abidjan Border Forum"),
+    ("abidjan-border-forum", "Abidjan Border Forum"),  # logo blanc sur transparent -> tuile sombre
     ("sirexe", "SIREXE 2026 — African Mining, Oil, Gas and Energy Exhibition"),
     ("conseil-cafe-cacao", "Le Conseil du Café-Cacao"),
     ("gibtp", "GIBTP — Groupement Ivoirien du Bâtiment et des Travaux Publics"),
@@ -423,12 +423,13 @@ LOGOS = [  # images/logos -> assets/img/logos (tools/optimiser-images.py)
     ("ordre-architectes", "Ordre des Architectes de Côte d’Ivoire"),
     ("sila", "SILA — Salon International du Livre d’Abidjan"),
 ]
-LOGO_ITEMS = "".join(f'<li class="logos__item">{img("logos/" + n, a)}</li>' for n, a in LOGOS)
+LOGOS_SOMBRES = {"abidjan-border-forum"}
+LOGO_ITEMS = "".join(f'<li class="logos__item{" logos__item--dark" if n in LOGOS_SOMBRES else ""}">{img("logos/" + n, a)}</li>' for n, a in LOGOS)
 CHEV_L = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg>'
 CHEV_R = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg>'
 
 # ---------------------------------------------------------------- Accueil
-PAGES["accueil.html"] = ("Accueil — Parc des Expositions d’Abidjan", f"""
+PAGES["index.html"] = ("Accueil — Parc des Expositions d’Abidjan", f"""
 <section class="hero hero--slider hero--under-header" data-slider style="--slide-accent: {slide_accent(SLIDES[0])[0]}; --slide-accent-hover: {slide_accent(SLIDES[0])[1]}; --slide-title: {slide_accent(SLIDES[0])[2]}">
   <div class="slider" aria-hidden="true">
 {SLIDES_HTML}
@@ -760,7 +761,7 @@ SPACES = [
 def space_page(sp):
     figs = "".join(f'<li class="figure{" figure--ink" if i == 0 else ""}"><strong>{v}</strong>{l}</li>' for i, (v, l) in enumerate(sp["figures"]))
     n = len(sp["photos"])
-    items = "".join(gallery_item(name, alt, "(min-width: 768px) 50vw, 100vw" if i == 0 else "(min-width: 768px) 25vw, 50vw", lazy=i != 0)
+    items = "".join(gallery_item(name, alt, "(min-width: 768px) 33vw, 50vw", lazy=i > 2)
                     for i, (name, alt) in enumerate(sp["photos"]))
     usages = "".join(f"<li>{u}</li>" for u in sp["usages"])
     equip = ""
@@ -910,7 +911,7 @@ PHOTOS = [  # (fichier, espace, type, texte alternatif) — espaces et types dé
     ("phototheque/public-ambiance", "dome", "concerts", "Spectatrices photographiant la scène"),
 ]
 photo_items = "".join(
-    gallery_item(n, a, "(min-width: 768px) 25vw, 50vw", f' data-espace="{e}" data-type="{t}"') for n, e, t, a in PHOTOS)
+    gallery_item(n, a, "(min-width: 768px) 33vw, 50vw", f' data-espace="{e}" data-type="{t}"') for n, e, t, a in PHOTOS)
 PAGES["phototheque.html"] = ("Photothèque — Parc des Expositions d’Abidjan", page_hero(
     crumbs(A, ("Photothèque", None)), "Photothèque",
     "Le Parc en images.",
@@ -967,7 +968,7 @@ PAGES["agenda.html"] = ("Agenda — Parc des Expositions d’Abidjan", page_hero
 
 # ---------------------------------------------------------------- Fiche événement
 PAGES["fiche-evenement.html"] = ("Événement — Parc des Expositions d’Abidjan", f"""
-<section class="hero hero--small">
+<section class="hero hero--small hero--under-header">
   <div class="hero__img" aria-hidden="true">{img("agenda/auto-expo", priority=True, lazy=False)}</div>
   <div class="wrap hero__inner">
     {crumbs(A, ("Agenda", "agenda.html"), ("Auto Expo", None), ink=True)}
@@ -1225,7 +1226,7 @@ def _tr(text):
 def to_english(page, src):
     """Version anglaise d'une page : chaînes entières traduites (tools/i18n/en.json), chemins relatifs à en/."""
     src = src.replace('<html lang="fr"', '<html lang="en"')
-    src = re.sub(r'(href="accueil\.html"[^>]*>)Accueil(?=[\s<])', r"\1Home", src)  # « Accueil » = page d'accueil (sinon : service d'accueil)
+    src = re.sub(r'(href="index\.html"[^>]*>)Accueil(?=[\s<])', r"\1Home", src)  # « Accueil » = page d'accueil (sinon : service d'accueil)
     parts, last = [], 0
     for m in _SKIP.finditer(src):
         parts.append((src[last:m.start()], True)); parts.append((m.group(0), False)); last = m.end()
@@ -1261,9 +1262,9 @@ def with_lang_links(page, src, lang):
     return src.replace("</head>", alt, 1)
 
 
-# Image d’arrière-plan subtile de l’en-tête de chaque page (voile blanc à 94 %)
+# Image de l’en-tête de chaque page : photo désaturée fondue (produit) dans l’orange du logo ; l’en-tête transparent s’y pose
 PAGE_BG = {
-    "qui-sommes-nous.html": "slider/journee-internationale",
+    "qui-sommes-nous.html": "slider/dome-rendu",
     "nos-espaces.html": "espaces/hall/salon-vue-plongeante",
     "hall-exposition.html": "espaces/hall/interieur",
     "le-dome.html": "espaces/parvis/dome-sous-le-nuage",
@@ -1293,7 +1294,7 @@ for name, (title, body) in PAGES.items():
     print("écrit", name, "+ en/" + name)
 
 # ---------------------------------------------------------------- Planche d’index (inchangée sur le fond)
-LINKS = [("accueil.html", "Accueil"), ("qui-sommes-nous.html", "Qui Sommes Nous"), ("nos-espaces.html", "Nos Espaces"),
+LINKS = [("index.html", "Accueil"), ("qui-sommes-nous.html", "Qui Sommes Nous"), ("nos-espaces.html", "Nos Espaces"),
          ("hall-exposition.html", "Hall Exposition"), ("le-dome.html", "Le Dome"), ("parvis-esplanades.html", "Parvis Esplanades"), ("nos-services.html", "Nos Services"), ("phototheque.html", "Phototheque"),
          ("agenda.html", "Agenda"), ("fiche-evenement.html", "Fiche Evenement"), ("contact-devis.html", "Contact Devis"),
          ("visite-virtuelle.html", "Visite Virtuelle"), ("informations-legales.html", "Informations Legales")]
@@ -1314,6 +1315,23 @@ index = head("Parc des Expositions d’Abidjan — Planche HTML") + f"""
 </body>
 </html>
 """
-(ROOT / "index.html").write_text(with_lang_links("index.html", index, "fr"), encoding="utf-8")
-(ROOT / "en" / "index.html").write_text(with_lang_links("index.html", to_english("index.html", index), "en"), encoding="utf-8")
-print("écrit index.html")
+(ROOT / "planches.html").write_text(with_lang_links("planches.html", index, "fr"), encoding="utf-8")
+(ROOT / "en" / "planches.html").write_text(with_lang_links("planches.html", to_english("planches.html", index), "en"), encoding="utf-8")
+print("écrit planches.html")
+
+# Ancienne adresse de l’accueil : redirection vers index.html (liens et favoris existants)
+REDIRECT = """<!doctype html>
+<html lang="{lang}">
+<head>
+<meta charset="utf-8">
+<title>Parc des Expositions d’Abidjan</title>
+<meta name="robots" content="noindex">
+<link rel="canonical" href="index.html">
+<meta http-equiv="refresh" content="0; url=index.html">
+</head>
+<body><p><a href="index.html">{label}</a></p></body>
+</html>
+"""
+(ROOT / "accueil.html").write_text(REDIRECT.format(lang="fr", label="Accueil du Parc des Expositions d’Abidjan"), encoding="utf-8")
+(ROOT / "en" / "accueil.html").write_text(REDIRECT.format(lang="en", label="Abidjan Exhibition Center home page"), encoding="utf-8")
+print("écrit accueil.html (redirection)")

@@ -15,6 +15,7 @@ colors:
   field: "#84878d"
   placeholder-text: "#6b6f75"
   orange: "#f36a00"
+  orange-title: "#db5913"
   orange-action: "#c2410c"
   orange-action-hover: "#9a3412"
   green: "#0e6f54"
@@ -22,25 +23,25 @@ colors:
   note-text: "#6f4a2f"
 typography:
   hero:
-    fontFamily: "Barlow Condensed, Arial Narrow, sans-serif"
-    fontSize: "clamp(2.25rem, 4.8vw, 4.25rem)"
-    fontWeight: 800
-    lineHeight: 0.92
+    fontFamily: "Poppins, sans-serif"
+    fontSize: "clamp(1.75rem, 3.5vw, 3rem)"
+    fontWeight: 600
+    lineHeight: 1.08
   display:
-    fontFamily: "Barlow Condensed, Arial Narrow, sans-serif"
-    fontSize: "clamp(2.25rem, 5vw, 4.25rem)"
-    fontWeight: 800
-    lineHeight: 0.92
+    fontFamily: "Poppins, sans-serif"
+    fontSize: "clamp(1.75rem, 3.6vw, 3rem)"
+    fontWeight: 600
+    lineHeight: 1.08
   headline:
-    fontFamily: "Barlow Condensed, Arial Narrow, sans-serif"
-    fontSize: "clamp(1.75rem, 3.2vw, 2.75rem)"
-    fontWeight: 800
-    lineHeight: 0.95
+    fontFamily: "Poppins, sans-serif"
+    fontSize: "clamp(1.5rem, 2.3vw, 2rem)"
+    fontWeight: 600
+    lineHeight: 1.12
   title:
-    fontFamily: "Barlow Condensed, Arial Narrow, sans-serif"
-    fontSize: "clamp(1.25rem, 1.6vw, 1.5rem)"
-    fontWeight: 700
-    lineHeight: 1.05
+    fontFamily: "Poppins, sans-serif"
+    fontSize: "clamp(1.0625rem, 1.2vw, 1.25rem)"
+    fontWeight: 600
+    lineHeight: 1.25
     letterSpacing: "0.01em"
   figure:
     fontFamily: "Barlow Condensed, Arial Narrow, sans-serif"
@@ -138,7 +139,7 @@ La densité est généreuse sur les sections (64 à 128 px) et serrée dans les 
 
 **Key Characteristics:**
 - Encre, blanc et papier chaud, avec l'orange réservé aux signaux et aux actions.
-- Barlow Condensed en capitales pour la voix, Barlow pour la lecture. Polices 100 % Google Fonts.
+- Titres en Poppins 600 orange logo (#DB5913), la police du logo ; Barlow Condensed en capitales pour les labels, boutons et chiffres ; Barlow pour la lecture. Polices 100 % Google Fonts.
 - Grilles visibles, cellules de tailles inégales : bento, bandes de chiffres, une vedette et une liste.
 - Angles vifs, pas d'ombres, filet orange de 4 px sous l'en-tête.
 
@@ -149,6 +150,7 @@ Une palette de chantier noble : de l'encre profonde, un papier chaud et un orang
 ### Primary
 - **Orange PEA** (#f36a00) : la couleur du logo. Elle sert aux aplats (lettres de hall, plaques), au filet d'en-tête, aux chiffres et aux accents sur fond encre. Jamais pour du texte sur fond clair (3,06:1).
 - **Orange Action** (#c2410c) : fond des boutons principaux (texte blanc, 5,18:1), eyebrows et page active sur fond clair. Au survol : #9a3412.
+- **Orange Titre** (#db5913) : couleur du texte du logo, réservée aux h1/h2 (Poppins 600, ≥ 24 px). Grand texte uniquement : 3,85:1 sur blanc, 3,5:1 sur papier, 4,87:1 sur encre. Jamais pour un texte de moins de 24 px.
 
 ### Secondary
 - **Vert Lagune** (#0e6f54) : dates et statut « à venir » (6,14:1 sur blanc).
@@ -171,16 +173,17 @@ Chaque image du diaporama fournit une teinte dominante calculée à la générat
 
 ## Typography
 
-**Display Font :** Barlow Condensed (Google Fonts), repli `sans-serif`
+**Title Font :** Poppins 600 (Google Fonts), la police du logo, couleur #DB5913, en capitales
+**Signage Font :** Barlow Condensed (Google Fonts) : labels, boutons, dates, chiffres-clés
 **Body Font :** Barlow (Google Fonts), repli `sans-serif`
 
-**Character :** une grotesque condensée de signalétique, dense et autoritaire, posée sur une Barlow ouverte et lisible de la même famille. Le tout reste cohérent avec le sans-serif arrondi du logo.
+**Character :** les titres parlent avec la voix du logo (géométrique, arrondie, orange) ; la grotesque condensée reste la couche de signalétique (labels, boutons, chiffres) ; Barlow assure la lecture. L'ancienne police des titres (Barlow Condensed 800 en capitales) est archivée dans `design-system/pea/ARCHIVE-TITRES-BARLOW.md`.
 
 ### Hierarchy
-- **Hero** (800, clamp 36→68 px, lh .92, MAJ) : titre du diaporama de l’accueil, en blanc.
-- **Display** (800, clamp 36→68 px, lh .92, MAJ) : h1 de page ; 32→52 px dans les en-têtes compacts.
-- **Headline** (800, clamp 28→44 px, lh .95, MAJ) : h2 de section.
-- **Title** (700, clamp 20→24 px, lh 1.05, MAJ) : titres de cartes, de services et d'encarts. La classe `.t3` applique ce style à un h2 pour garder une hiérarchie correcte.
+- **Hero** (Poppins 600 MAJ, clamp 28→48 px, lh 1.08) : titre du diaporama de l’accueil, en blanc (sur photo).
+- **Display** (Poppins 600 MAJ, clamp 28→48 px, lh 1.08) : h1 de page, blanc sur l’en-tête orange ; 26→40 px dans les en-têtes compacts.
+- **Headline** (Poppins 600 MAJ, clamp 24→32 px, lh 1.12, #DB5913) : h2 de section (≥ 24 px : grand texte, 3,85:1 sur blanc, 4,87:1 sur encre).
+- **Title** (Poppins 600 MAJ, clamp 17→20 px, lh 1.25, encre ou blanc) : titres de cartes, de services et d'encarts ; pas d'orange à cette taille (3,85:1 < 4,5:1). La classe `.t3` applique ce style à un h2 pour garder une hiérarchie correcte.
 - **Figure** (800, clamp 32→48 px) : chiffres-clés, jamais plus grands que les titres de section.
 - **Lead** (400, 17→20 px, lh 1.55, 60ch max) : chapô.
 - **Body** (400, 17 px, lh 1.6, 68ch max) : texte courant.
@@ -188,7 +191,8 @@ Chaque image du diaporama fournit une teinte dominante calculée à la générat
 
 ### Named Rules
 **La règle du trait.** Les eyebrows portent un simple trait orange de 2 px en bordure gauche ; aucun carré ni pseudo-élément décoratif.
-**La règle de la voix condensée.** Les capitales sont réservées aux titres, labels et boutons. Le texte courant reste en casse normale.
+**La règle des capitales.** Titres (Poppins), labels et boutons (Barlow Condensed) en capitales ; le texte courant reste en casse normale.
+**La règle du titre logo.** h1 et h2 prennent la police et l'orange du logo (Poppins 600, #DB5913) ; sur photo ils restent blancs, et les petits titres (h3) restent encre.
 **La règle du sur-titre discret.** Le sur-titre orange (carré de 10 px) n'apparaît que dans les héros et le bloc d'appel à l'action. Dans le corps des pages, il passe en ardoise avec un tiret de 16 px.
 
 ## Layout
@@ -228,6 +232,9 @@ Angles vifs partout (0 px) ; 2 px seulement sur les champs de formulaire. L'arch
 - **Carte d'accès** : iframe Google Maps chargée en différé, au ratio 4:3 sur mobile et 16:10 sur grand écran, à côté de l'adresse et des boutons Itinéraire / Google Maps.
 - **Pied de page** : une vraie navigation (Espaces, Services, Destination, Expertise), le téléphone et le logo GL events (le carré rouge est recadré en CSS, avec son coin arrondi, pour supprimer la marge blanche du fichier). FR / EN renvoient vers la page équivalente dans l’autre langue.
 - **Diaporama Ken Burns** (héros de l’accueil, 90vh) : 8 images en fondu enchaîné toutes les 7 s avec zoom lent ; bouton Pause/Lecture (`aria-pressed`) et 8 indicateurs (l’actif prend la teinte de l’image) ; boutons orange, titre blanc ; mouvement réduit = fondu sans zoom. Indicateur « souris » animé (4 cycles) vers la section suivante.
+- **Références (accueil, avant le pied de page)** : « Ils nous ont fait confiance », carrousel de 10 logos d’organisateurs (`images/logos` → `assets/img/logos`, 400 px), 5 par page dès 1024 px (3 dès 600 px, 2 en dessous). Tuiles blanches en 3:2, logos désaturés (gris, opacité .75), couleur au survol (toujours en couleur sur écran tactile). Le logo Abidjan Border Forum, blanc sur transparent, a une tuile encre. Défilement automatique d’une page toutes les 5 s (retour au début à la fin), boutons Précédent / Pause / Suivant de 48 px, pause au survol, au focus et quand l’onglet est masqué ; aucune animation si mouvement réduit.
+- **En-tête de page orange (`.page-hero--bg`)** : fond orange logo #DB5913 ; la photo du sujet (choix dans `PAGE_BG`, `tools/pages/generer.py`), désaturée, s’y fond en mode produit à 60 % (elle ne peut que foncer l’orange), sous un voile encre de 14 %. Pire cas #bf4f14 : texte blanc 4,85:1. Titre, chapô, sur-titre, fil d’Ariane, filtres (contour blanc, actif blanc plein) et focus passent en blanc. Fiche événement : héros photo sombre.
+- **En-tête transparent (toutes les pages)** : comme sur l’accueil, barre utilitaire et en-tête se posent sur le héros ou l’en-tête orange ; sur l’orange, logo passé en blanc (filtre), page active soulignée de blanc, bouton devis encre, langues en blanc. Barre utilitaire : léger fond noir translucide (encre 32 %).
 - **En-tête transparent (accueil)** : avec JavaScript, la barre utilitaire et l’en-tête se posent sur le diaporama (fond et filet transparents, liens et bouton « Menu » en blanc, page active en orange, bouton devis orange), au-dessus d’un voile encre dédié (.82 → 0 sur 260 px ; texte blanc ≥ 7,6:1 dans le pire cas). Fond blanc et filet orange dès 8 px de défilement ou menu ouvert. Sans JavaScript : en-tête blanc.
 - **Retour en haut** : carré encre de 48 px fixé en bas à droite, visible après un écran de défilement ; remonte au-dessus du bandeau cookies (`--banner-h`).
 - **Galeries et visionneuse** : sur les pages espaces, toutes les photos du dossier source (1 grande en 2×2, chargée immédiatement, puis vignettes en grille dense 4 colonnes) ; vignettes jointives (4 px) en `cover` ; chaque vignette ouvre une visionneuse `<dialog>` plein écran (légende, compteur, précédent/suivant au clavier, Échap, retour du focus). Photothèque en grille dense 4 colonnes avec une vignette sur cinq en 2×2.

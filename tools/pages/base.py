@@ -18,7 +18,7 @@ NAV = [
 
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
-         '<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800'
+         '<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&amp;family=Barlow+Condensed:wght@600;700;800'
          '&amp;family=Barlow:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet">')
 
 

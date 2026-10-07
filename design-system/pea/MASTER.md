@@ -41,18 +41,19 @@ Interdits : dégradés violets, dégradés « placeholder » gris-vert, ombres p
 ```html
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Barlow+Condensed:wght@600;700;800&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 ```
 
-- **Barlow Condensed** (600/700/800) : titres, eyebrows, navigation, boutons, chiffres-clés. Capitales pour h1/h2, eyebrows, boutons.
+- **Poppins** (600) : titres h1–h3, police du logo ; en capitales ; h2 en #DB5913, h1 blanc sur l’en-tête orange. Ancienne police des titres archivée : `ARCHIVE-TITRES-BARLOW.md`.
+- **Barlow Condensed** (600/700/800) : eyebrows, navigation, boutons, chiffres-clés, en capitales.
 - **Barlow** (400/500/600) : texte courant, formulaires, légendes.
 - Repli : `sans-serif` générique uniquement.
 
 | Rôle | Police | Taille | Graisse | Interlignage | Casse / approche |
 |---|---|---|---|---|---|
-| Display (h1) | Barlow Condensed | `clamp(2.75rem, 7vw, 6rem)` | 800 | .92 | MAJ, -0.01em |
-| Headline (h2) | Barlow Condensed | `clamp(2rem, 4.5vw, 3.75rem)` | 800 | .95 | MAJ |
-| Title (h3) | Barlow Condensed | `clamp(1.375rem, 2vw, 1.75rem)` | 700 | 1.05 | MAJ, .01em |
+| Display (h1) | Poppins | `clamp(1.75rem, 3.6vw, 3rem)` | 600 | 1.08 | MAJ, blanc sur en-tête orange |
+| Headline (h2) | Poppins | `clamp(1.5rem, 2.3vw, 2rem)` | 600 | 1.12 | MAJ, #DB5913 |
+| Title (h3) | Poppins | `clamp(1.0625rem, 1.2vw, 1.25rem)` | 600 | 1.25 | MAJ, encre |
 | Figure (chiffres) | Barlow Condensed | `clamp(2.5rem, 5vw, 4.5rem)` | 800 | .9 | — |
 | Lead | Barlow | `clamp(1.0625rem, 1.4vw, 1.25rem)` | 400 | 1.55 | max 60ch |
 | Body | Barlow | 1.0625rem (17px) | 400 | 1.6 | max 68ch |

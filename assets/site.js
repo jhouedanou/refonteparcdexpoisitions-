@@ -2,14 +2,15 @@
 (function () {
   // Textes générés par le script, selon la langue de la page
   var EN = document.documentElement.lang === 'en';
+  var calmMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var T = EN ? {
     pause: 'Pause the slideshow', play: 'Resume the slideshow', thousands: ',',
-    logosPause: 'Pause scrolling', logosPlay: 'Resume scrolling',
+    logosPause: 'Pause scrolling', logosPlay: 'Resume scrolling', morePhotos: 'Show more photos',
     recap: { type: 'Event type', espace: 'Venue', dates: 'Dates', none: 'To be confirmed', to: ' to ' },
     location: 'Abidjan Exhibition Center, Boulevard de l’aéroport, Abidjan'
   } : {
     pause: 'Mettre le diaporama en pause', play: 'Relancer le diaporama', thousands: '\u00a0',
-    logosPause: 'Mettre le défilement en pause', logosPlay: 'Relancer le défilement',
+    logosPause: 'Mettre le défilement en pause', logosPlay: 'Relancer le défilement', morePhotos: 'Afficher plus de photos',
     recap: { type: 'Type d’événement', espace: 'Espace', dates: 'Dates', none: 'À préciser', to: ' au ' },
     location: 'Parc des Expositions d’Abidjan, Boulevard de l’aéroport, Abidjan'
   };
@@ -73,6 +74,7 @@
       status.textContent = shown + ' ' + noun + (shown > 1 ? 's' : '');
     }
     if (empty) empty.hidden = shown !== 0;
+    target.dispatchEvent(new CustomEvent('filtered'));
   };
   groups.forEach(function (group) {
     group.addEventListener('click', function (e) {
@@ -113,7 +115,7 @@
     });
   }
 
-  // ---------- En-tête transparent de l'accueil : fond blanc dès qu'on défile ou que le menu est ouvert ----------
+  // ---------- En-tête transparent (toutes les pages) : fond blanc dès qu'on défile ou que le menu est ouvert ----------
   var overlay = document.querySelector('.topbar--overlay');
   if (overlay) {
     var menuBtn = overlay.querySelector('.menu-toggle');
@@ -124,6 +126,48 @@
     window.addEventListener('scroll', syncHeader, { passive: true });
     if (menuBtn) new MutationObserver(syncHeader).observe(menuBtn, { attributes: true, attributeFilter: ['aria-expanded'] });
     syncHeader();
+  }
+
+  // ---------- Apparition au défilement (très discrète) ----------
+  // Fondu + montée de 12 px, une seule fois, uniquement pour ce qui est encore sous la ligne de flottaison au chargement
+  // (rien ne clignote au-dessus du pli). Un bloc dépassé d'un coup (touche Fin, ancre) est révélé aussi : on teste
+  // « haut du bloc au-dessus de 92 % de l'écran » plutôt qu'une intersection. Rien avec « réduire les animations ».
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var ITEMS = '.figure, .space, .service, .event, .tl-item, .gallery__item, .wall__tile, .destination-grid > *, .commitments > *, .support__list > *';
+    var targets = [];
+    document.querySelectorAll('main section:not(.hero):not(.page-hero) > .wrap > *').forEach(function (block) {
+      var items = block.matches(ITEMS) ? [] : block.querySelectorAll(ITEMS);
+      if (items.length) items.forEach(function (it) { targets.push(it); });
+      else targets.push(block);
+    });
+    var pending = [];
+    var line = function () { return window.innerHeight * 0.92; };
+    targets.forEach(function (el) {
+      if (el.getBoundingClientRect().top < line()) return;   // déjà visible au chargement
+      var sibs = Array.prototype.filter.call(el.parentElement.children, function (c) { return targets.indexOf(c) > -1; });
+      el.style.setProperty('--reveal-delay', Math.min(sibs.indexOf(el) % 4, 3) * 70 + 'ms');
+      el.classList.add('reveal');
+      pending.push(el);
+    });
+    var ticking = false;
+    var check = function () {
+      ticking = false;
+      pending = pending.filter(function (el) {
+        var r = el.getBoundingClientRect();
+        if (r.top >= line() || (!r.width && !r.height)) return true;   // encore sous le pli, ou masqué par un filtre
+        el.classList.add('is-in');
+        // On rend ensuite la main aux transitions propres de l'élément (survols)
+        window.setTimeout(function () { el.classList.remove('reveal', 'is-in'); el.style.removeProperty('--reveal-delay'); }, 700 + (parseInt(el.style.getPropertyValue('--reveal-delay'), 10) || 0));
+        return false;
+      });
+      if (!pending.length) { window.removeEventListener('scroll', onRevealScroll); window.removeEventListener('resize', onRevealScroll); }
+    };
+    var onRevealScroll = function () { if (!ticking) { ticking = true; window.requestAnimationFrame(check); } };
+    if (pending.length) {
+      window.addEventListener('scroll', onRevealScroll, { passive: true });
+      window.addEventListener('resize', onRevealScroll, { passive: true });
+      document.addEventListener('click', function () { window.setTimeout(onRevealScroll, 50); });   // filtres qui affichent d'autres cartes
+    }
   }
 
   // ---------- Retour en haut : visible après un écran de défilement ----------
@@ -359,6 +403,63 @@
     document.addEventListener('visibilitychange', function () { if (document.hidden) lStop(); else lStart(); });
     lStart();
   }
+
+  // ---------- Galeries : masonry + chargement par lots de 6 (au défilement, ou bouton « Afficher plus ») ----------
+  // Grille à rangées de 2 px : chaque photo s'étend sur le nombre de rangées correspondant à son format (attributs
+  // width/height), placée dans l'ordre, de gauche à droite : les photos déjà vues ne bougent pas quand un lot arrive.
+  // Les photos du lot suivant sont en display:none, donc leurs images ne sont pas téléchargées avant d'être affichées.
+  var BATCH = 6;
+  document.querySelectorAll('.gallery, .photo-grid').forEach(function (grid) {
+    var items = Array.prototype.slice.call(grid.querySelectorAll('.gallery__item'));
+    var more = document.createElement('button');
+    more.type = 'button';
+    more.className = 'btn btn--secondary gallery-more';
+    grid.insertAdjacentElement('afterend', more);
+    var limit = BATCH;
+    var layout = function () {
+      var gap = parseFloat(window.getComputedStyle(grid).columnGap) || 8;
+      items.forEach(function (it) {
+        if (it.hidden || it.classList.contains('is-deferred')) return;
+        var img = it.querySelector('img');
+        var ratio = (+img.getAttribute('height') || 3) / (+img.getAttribute('width') || 4);
+        it.style.gridRowEnd = 'span ' + Math.ceil((it.getBoundingClientRect().width * ratio + gap) / 2);
+      });
+    };
+    var render = function (fresh) {
+      var visible = items.filter(function (it) { return !it.hidden; });
+      visible.forEach(function (it, i) {
+        var deferred = i >= limit;
+        var appearing = fresh && !deferred && it.classList.contains('is-deferred');
+        it.classList.toggle('is-deferred', deferred);
+        if (appearing && !calmMotion) {
+          it.classList.add('reveal');
+          window.requestAnimationFrame(function () { window.requestAnimationFrame(function () { it.classList.add('is-in'); }); });
+          window.setTimeout(function () { it.classList.remove('reveal', 'is-in'); }, 700);
+        }
+      });
+      var rest = visible.length - Math.min(limit, visible.length);
+      more.hidden = rest <= 0;
+      more.textContent = T.morePhotos + ' (' + rest + ')';
+      layout();
+    };
+    var loadMore = function () { limit += BATCH; render(true); };
+    more.addEventListener('click', loadMore);
+    // Au défilement : lot suivant quand le bouton approche du bas de l'écran (jamais au chargement)
+    var scrolled = false;
+    window.addEventListener('scroll', function () {
+      if (scrolled || more.hidden) return;
+      scrolled = true;
+      window.requestAnimationFrame(function () {
+        scrolled = false;
+        if (!more.hidden && more.getBoundingClientRect().top < window.innerHeight + 120) loadMore();
+      });
+    }, { passive: true });
+    grid.addEventListener('filtered', function () { limit = BATCH; render(false); });
+    var resizeT = null;
+    window.addEventListener('resize', function () { window.clearTimeout(resizeT); resizeT = window.setTimeout(layout, 120); });
+    grid.classList.add('is-masonry');
+    render(false);
+  });
 
   // ---------- Visionneuse de photos (galeries des espaces, photothèque) ----------
   var lightbox = document.getElementById('lightbox');

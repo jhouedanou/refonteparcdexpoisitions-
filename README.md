@@ -70,7 +70,9 @@ Les pistes précédentes (`design/maquette-accueil.html` et `design/proposition-
 Les dix pages et `styles.css` ont été refondus (textes et structure conservés) :
 
 - Système de design : [`DESIGN.md`](DESIGN.md) (format impeccable) et [`design-system/pea/MASTER.md`](design-system/pea/MASTER.md). L'état d'avant refonte est archivé dans `design-system/pea/DESIGN-avant-refonte.md`.
-- Polices Google Fonts : Barlow Condensed (titres) et Barlow (texte).
+- Page d’accueil : `index.html` (l’ancienne adresse `accueil.html` redirige vers elle) ; la planche des sous-pages est désormais `planches.html`.
+- Polices Google Fonts : Poppins 600 en capitales (titres, police du logo, #DB5913), Barlow Condensed (labels, boutons, chiffres) et Barlow (texte). Ancienne police des titres archivée dans `design-system/pea/ARCHIVE-TITRES-BARLOW.md`.
+- Accueil : carrousel « Ils nous ont fait confiance » ; ajouter un logo dans `images/logos/`, puis relancer `tools/optimiser-images.py` et l’ajouter à la liste `LOGOS` de `tools/pages/generer.py`. Pages intérieures : en-tête orange logo avec photo fondue, choisie dans `PAGE_BG` ; en-tête du site transparent sur toutes les pages, blanc au défilement.
 - Logo officiel : `assets/logo-pea.webp` (en-tête, pied de page) ; favicon `assets/favicon.svg` (arche du logo).
 - Visite virtuelle Matterport intégrée sur `visite-virtuelle.html` : chargée au clic sur « Lancer la visite 360° ».
 - Comportements (menu mobile, filtres, visite) : `assets/site.js`.

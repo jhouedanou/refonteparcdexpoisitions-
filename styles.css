@@ -2,7 +2,9 @@
    Parc des Expositions d’Abidjan
    Direction B « Signalétique & architecture »
    Référence : design-system/pea/MASTER.md
-   Polices : Google Fonts (Barlow Condensed + Barlow), chargées dans chaque page.
+   Polices : Google Fonts — Poppins 600 (titres, police du logo), Barlow Condensed (labels,
+   boutons, chiffres) et Barlow (texte), chargées dans chaque page.
+   Ancienne police des titres sauvegardée : design-system/pea/ARCHIVE-TITRES-BARLOW.md
    ========================================================================== */
 
 /* ---------- Tokens ---------- */
@@ -27,10 +29,15 @@
   /* Typographie */
   --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
   --font-body: "Barlow", sans-serif;
-  --fs-h1: clamp(2.25rem, 5vw, 4.25rem);
-  --fs-hero: clamp(2.75rem, 7vw, 6rem);
-  --fs-h2: clamp(1.75rem, 3.2vw, 2.75rem);
-  --fs-h3: clamp(1.25rem, 1.6vw, 1.5rem);
+  /* Titres : police du logo (Poppins 600, #DB5913). Barlow Condensed 800 en capitales archivée. */
+  --font-title: "Poppins", "Helvetica Neue", Arial, sans-serif;
+  --title-weight: 600;
+  --title-case: uppercase;
+  --title-color: #db5913;
+  --fs-h1: clamp(1.75rem, 3.6vw, 3rem);
+  --fs-hero: clamp(2rem, 4.6vw, 4rem);
+  --fs-h2: clamp(1.5rem, 2.3vw, 2rem);         /* ≥ 24 px : seuil « grand texte » de l’orange #db5913 */
+  --fs-h3: clamp(1.0625rem, 1.2vw, 1.25rem);
   --fs-figure: clamp(1.75rem, 2.4vw + .5rem, 2.5rem);
   --fs-lead: clamp(1.0625rem, 1.4vw, 1.25rem);
   --fs-body: 1.0625rem;
@@ -73,18 +80,23 @@ button, input, select, textarea { font: inherit; color: inherit; }
 [hidden] { display: none !important; }
 
 h1, h2, h3 {
-  font-family: var(--font-display);
-  font-weight: 800;
-  text-transform: uppercase;
-  color: inherit;
+  font-family: var(--font-title);
+  font-weight: var(--title-weight);
+  text-transform: var(--title-case);
+  color: var(--title-color);
+  letter-spacing: .005em;
   overflow-wrap: break-word;
   hyphens: manual;
   text-wrap: balance;
 }
-h1 { font-size: var(--fs-h1); line-height: .92; letter-spacing: -.005em; margin: 0 0 var(--s-5); }
-h2 { font-size: var(--fs-h2); line-height: .95; margin: 0 0 var(--s-5); }
-h3 { font-size: var(--fs-h3); line-height: 1.05; font-weight: 700; letter-spacing: .01em; margin: 0 0 var(--s-2); hyphens: manual; }
-.t3 { font-size: var(--fs-h3); line-height: 1.05; font-weight: 700; letter-spacing: .01em; margin: 0 0 var(--s-2); hyphens: manual; }
+h1 { font-size: var(--fs-h1); line-height: 1.08; letter-spacing: 0; margin: 0 0 var(--s-5); }
+h2 { font-size: var(--fs-h2); line-height: 1.12; margin: 0 0 var(--s-5); }
+/* h3 (≤ 21 px, sous le seuil « grand texte ») : encre pour garder ≥ 4,5:1 ; h1/h2 orange logo ≥ 3:1 */
+h3 { color: inherit; }
+/* Sur photo (héros), les titres restent blancs */
+.hero :is(h1, h2) { color: inherit; }
+h3 { font-size: var(--fs-h3); line-height: 1.25; letter-spacing: .01em; margin: 0 0 var(--s-2); }
+.t3 { color: inherit; font-family: var(--font-title); font-size: var(--fs-h3); line-height: 1.25; font-weight: var(--title-weight); text-transform: var(--title-case); letter-spacing: .01em; margin: 0 0 var(--s-2); }
 p { margin: 0 0 var(--s-4); color: var(--muted); max-width: 60ch; }
 .lead { font-size: var(--fs-lead); line-height: 1.55; max-width: 60ch; }
 
@@ -427,7 +439,7 @@ a.event:focus-visible { outline-offset: -3px; }
   .agenda { grid-template-columns: 1.35fr 1fr; }
   .event:first-child { grid-row: span 2; }
   .event:first-child .event__thumb { aspect-ratio: auto; min-height: 360px; }
-  .event:first-child :is(h2, h3) { font-size: var(--fs-h2); line-height: .95; }
+  .event:first-child :is(h2, h3) { font-size: var(--fs-h2); line-height: 1.15; }
   .event:first-child .event__body { padding: var(--s-6); }
 }
 
@@ -494,33 +506,28 @@ a.event:focus-visible { outline-offset: -3px; }
 .subnav a:hover { color: var(--ink); }
 .subnav a[aria-current="true"] { color: var(--ink); border-bottom-color: var(--orange); }
 
-/* ---------- Galeries (pages espaces) : toutes les photos du dossier, 1 grande + vignettes ---------- */
-.gallery { display: grid; gap: 4px; grid-template-columns: 1fr 1fr; grid-auto-flow: dense; }
-.gallery__item { position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; background: var(--paper-2); }
-.gallery__item:first-child { grid-column: 1 / -1; aspect-ratio: 16 / 10; }
-.gallery__item img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .4s var(--ease); }
+/* ---------- Galeries (pages espaces, photothèque) : masonry, photos entières dans leur format ---------- */
+/* Sans JS : grille simple. Avec JS (assets/site.js) : rangées de 2 px, chaque photo s’étend selon son format,
+   6 photos puis lots de 6 au défilement ou via « Afficher plus de photos ». */
+.gallery, .photo-grid { display: grid; gap: 8px; grid-template-columns: 1fr 1fr; align-items: start; }
+@media (min-width: 768px) { .gallery, .photo-grid { grid-template-columns: repeat(3, 1fr); } }
+.gallery__item { position: relative; display: block; overflow: hidden; background: var(--paper-2); }
+.gallery__item img { width: 100%; height: auto; transition: transform .4s var(--ease); }
 .gallery__item:hover img { transform: scale(1.03); }
 .gallery__item:focus-visible { outline-offset: -3px; }
-@media (min-width: 768px) {
-  .gallery { grid-template-columns: repeat(4, 1fr); }
-  .gallery__item:first-child { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
-}
+.is-masonry { grid-auto-rows: 2px; row-gap: 0; align-items: stretch; }
+.is-masonry .gallery__item { margin-bottom: 8px; }
+.is-masonry .gallery__item img { height: 100%; object-fit: cover; }
+.gallery__item.is-deferred { display: none; }
+.gallery-more { display: flex; margin: var(--s-5) auto 0; }
+.gallery-more[hidden] { display: none; }
 
 /* Série « destination » (Qui sommes-nous) : visuels carrés à légende incrustée, jamais recadrés */
 .destination-grid { display: grid; gap: 4px; grid-template-columns: 1fr 1fr; }
 .destination-grid .gallery__item { aspect-ratio: 1; }
-.destination-grid .gallery__item img { object-fit: contain; background: var(--ink); }
+.destination-grid .gallery__item img { height: 100%; object-fit: contain; background: var(--ink); }
 @media (min-width: 1024px) { .destination-grid { grid-template-columns: repeat(4, 1fr); } }
 
-/* ---------- Photothèque ---------- */
-.photo-grid { display: grid; gap: 4px; grid-template-columns: 1fr 1fr; grid-auto-flow: dense; }
-.photo-grid .gallery__item { aspect-ratio: 1; }
-.photo-grid .gallery__item:first-child { grid-column: 1 / -1; aspect-ratio: 16 / 10; }
-@media (min-width: 768px) {
-  .photo-grid { grid-template-columns: repeat(4, 1fr); }
-  .photo-grid .gallery__item:first-child { grid-column: auto; aspect-ratio: 1; }
-  .photo-grid .gallery__item:nth-child(5n + 1) { grid-column: span 2; grid-row: span 2; }
-}
 
 /* ---------- Visionneuse ---------- */
 .lightbox { width: 100%; max-width: none; height: 100%; max-height: none; margin: 0; padding: 0; border: 0; background: rgba(17, 18, 23, .96); color: var(--white); }
@@ -599,13 +606,27 @@ a.event:focus-visible { outline-offset: -3px; }
 @media (min-width: 768px) { .hub__links { grid-template-columns: 1fr 1fr; } }
 
 /* ---------- En-tête de page : image d’arrière-plan subtile (voile blanc 94 % : textes ≥ 4,5:1 même sur un pixel noir) ---------- */
-.page-hero--bg { position: relative; isolation: isolate; overflow: hidden; }
-.page-hero--bg::before { content: ""; position: absolute; inset: 0; z-index: -2; background: var(--page-bg) center / cover no-repeat; }
-.page-hero--bg::after { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(255, 255, 255, .94); }
+/* En-tête de page orange logo : photo désaturée en produit (ne fait que foncer l’orange), voile encre 14 %.
+   Pire cas (zone blanche de la photo) : #bf4f14 → texte blanc 4,85:1 ; partout ailleurs plus sombre. */
+.page-hero--bg { position: relative; isolation: isolate; overflow: hidden; background: var(--title-color); color: var(--white); border-bottom: 0; }
+.page-hero--bg::before { content: ""; position: absolute; inset: 0; z-index: -2; background: var(--page-bg) center / cover no-repeat; filter: grayscale(1) contrast(1.1); mix-blend-mode: multiply; opacity: .6; }
+.page-hero--bg::after { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(17, 18, 23, .14); }
+.page-hero--bg :is(h1, h2), .page-hero--bg p, .page-hero--bg .lead { color: var(--white); }
+.page-hero--bg .eyebrow { color: var(--white); border-left-color: var(--white); }
+.page-hero--bg .breadcrumbs, .page-hero--bg .breadcrumbs li + li::before, .page-hero--bg .breadcrumbs [aria-current] { color: var(--white); }
+.page-hero--bg .breadcrumbs a { text-decoration-color: rgba(255, 255, 255, .55); }
+.page-hero--bg .breadcrumbs a:hover { text-decoration-color: var(--white); }
+.page-hero--bg .filter-row__label { color: var(--white); }
+.page-hero--bg .chip { border-color: var(--white); color: var(--white); }
+.page-hero--bg .chip:hover { background: var(--ink); border-color: var(--ink); color: var(--white); }
+.page-hero--bg .chip[aria-pressed="true"] { background: var(--white); border-color: var(--white); color: var(--ink); }
+.page-hero--bg :focus-visible { outline-color: var(--white); }
+/* Avec JS, l’en-tête de page remonte sous la barre utilitaire et l’en-tête transparents */
+.js .page-hero--bg { margin-top: calc(-1 * (44px + var(--header-h) + 4px)); padding-top: calc(44px + var(--header-h) + 4px + clamp(24px, 4vw, 48px)); }
 
 /* ---------- En-têtes compacts (fiches, agenda, contact, visite) ---------- */
 .page-hero--compact { padding-block: clamp(24px, 4vw, 48px) clamp(32px, 4vw, 56px); }
-.page-hero--compact h1 { font-size: clamp(2rem, 4vw, 3.25rem); }
+.page-hero--compact h1 { font-size: clamp(1.625rem, 3vw, 2.5rem); }
 .page-hero--compact .breadcrumbs { margin-bottom: var(--s-6); }
 .section--tight { padding-top: clamp(40px, 5vw, 64px); }
 
@@ -850,14 +871,25 @@ button.link-arrow { padding: 0; border: 0; background: none; cursor: pointer; }
 .embed-facade { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: var(--s-4); padding: var(--s-5); text-align: center; background: var(--paper-2) var(--arch-mute) center 78% / 60% auto no-repeat; }
 .embed-facade p { margin: 0; color: var(--ink); }
 
-/* ---------- En-tête transparent sur l’accueil (avec JS) : blanc dès qu’on défile ---------- */
-.js .utility--overlay { position: relative; z-index: 31; background: transparent; }
+/* ---------- En-tête transparent sur toutes les pages (avec JS) : blanc dès qu’on défile ---------- */
+.js .utility--overlay { position: relative; z-index: 31; background: rgba(17, 18, 23, .32); }  /* léger fond noir translucide */
 .js .topbar--overlay { transition: background-color .3s var(--ease), border-color .3s var(--ease); }
 .js .topbar--overlay:not(.is-solid) { background: transparent; border-bottom-color: transparent; }
 .js .topbar--overlay:not(.is-solid) .nav a { color: var(--white); }
 .js .topbar--overlay:not(.is-solid) .nav a[aria-current] { color: var(--orange); }
 .js .topbar--overlay:not(.is-solid) .menu-toggle { background: transparent; color: var(--white); border-color: var(--white); }
 .js .topbar--overlay:not(.is-solid) :focus-visible { outline-color: var(--orange); }
+/* Sur l’en-tête orange des pages intérieures : logo, page active, devis et langues passent en blanc / encre */
+.js .topbar--on-orange:not(.is-solid) .brand img { filter: brightness(0) invert(1); }
+.js .topbar--on-orange:not(.is-solid) .nav a[aria-current] { color: var(--white); }
+.js .topbar--on-orange:not(.is-solid) .nav a::after { background: var(--white); }
+.js .topbar--on-orange:not(.is-solid) .topbar__cta { background: var(--ink); color: var(--white); }
+.js .topbar--on-orange:not(.is-solid) .topbar__cta:hover { background: var(--white); color: var(--ink); }
+.js .topbar--on-orange:not(.is-solid) :focus-visible { outline-color: var(--white); }
+.js .utility--on-orange .lang-switch a { color: var(--white); }
+.js .utility--on-orange .lang-switch a[aria-current] { box-shadow: inset 0 -3px 0 var(--white); }
+.js .utility--on-orange :is(.utility__tel, .social a):hover { color: var(--ink); }
+.js .utility--on-orange :focus-visible { outline-color: var(--white); }
 @media (min-width: 70em) { .js .topbar--overlay:not(.is-solid) .nav a:hover { color: var(--white); } }
 /* Le héros remonte sous la barre utilitaire et l’en-tête ; un voile sombre en haut garde le texte blanc lisible */
 .js .hero--under-header { margin-top: calc(-1 * (44px + var(--header-h) + 4px)); }
@@ -894,7 +926,7 @@ button.link-arrow { padding: 0; border: 0; background: none; cursor: pointer; }
 @media (min-width: 1024px) { .hero--slider::before { background: linear-gradient(90deg, rgba(17, 18, 23, .97) 0%, rgba(17, 18, 23, .9) 42%, rgba(17, 18, 23, .2) 100%); } }
 .hero--slider .hero__inner { padding-block: clamp(28px, 4vw, 56px) calc(clamp(20px, 3vw, 36px) + 60px); }
 .hero--slider .arch { width: min(100%, 280px); margin-bottom: var(--s-4); }
-.hero--slider h1 { font-size: clamp(2.25rem, 4.8vw, 4.25rem); margin-bottom: var(--s-4); }
+.hero--slider h1 { font-size: clamp(1.75rem, 3.5vw, 3rem); margin-bottom: var(--s-4); }
 .hero--slider .actions { margin-top: var(--s-5); }
 /* Signalétique stricte : la teinte de l’image ne colore que l’indicateur actif et la molette ; boutons et titre restent dans la charte */
 .hero--slider .slider__dot[aria-current="true"]::after { background: var(--slide-accent, var(--orange)); }
@@ -948,9 +980,10 @@ button.link-arrow { padding: 0; border: 0; background: none; cursor: pointer; }
 .logos__item {
   flex: 0 0 calc((100% - var(--s-3)) / 2); scroll-snap-align: start;
   display: grid; place-items: center; aspect-ratio: 3 / 2; padding: var(--s-4);
-  background: var(--paper); border: 1px solid var(--line);
+  background: var(--white); border: 1px solid var(--line);
 }
-.logos__item img { width: auto; height: auto; max-width: 100%; max-height: 72px; object-fit: contain; filter: grayscale(1); opacity: .7; transition: filter .3s var(--ease), opacity .3s var(--ease); }
+.logos__item--dark { background: var(--ink); border-color: var(--ink); }
+.logos__item img { width: auto; height: auto; max-width: 82%; max-height: 64%; object-fit: contain; filter: grayscale(1); opacity: .75; transition: filter .3s var(--ease), opacity .3s var(--ease); }
 .logos__item:hover img { filter: none; opacity: 1; }
 @media (hover: none) { .logos__item img { filter: none; opacity: 1; } }
 @media (min-width: 600px) { .logos__item { flex-basis: calc((100% - 2 * var(--s-3)) / 3); } }
@@ -1013,3 +1046,9 @@ button.link-arrow { padding: 0; border: 0; background: none; cursor: pointer; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
   .slider__slide { transition: opacity 1.4s ease !important; }
 }
+
+/* ---------- Apparition au défilement (assets/site.js) : fondu + 12 px, 0,6 s, décalage ≤ 210 ms ---------- */
+.reveal { opacity: 0; transform: translateY(12px); transition: opacity .6s var(--ease), transform .6s var(--ease); transition-delay: var(--reveal-delay, 0ms); }
+.reveal.is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+@media print { .reveal { opacity: 1 !important; transform: none !important; } }
