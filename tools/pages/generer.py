@@ -36,7 +36,7 @@ def header(active):
     cta_cur = ' aria-current="page"' if active == "contact-devis.html" else ""
     return f"""<body>
 <a class="skip" href="#contenu">Aller au contenu</a>
-<div class="utility">
+<div class="utility{' utility--overlay' if active == 'accueil.html' else ''}">
   <div class="wrap utility__inner">
     {TEL.replace('class="wa-link"', 'class="wa-link utility__tel"')}
     <div class="utility__end">
@@ -49,7 +49,7 @@ def header(active):
     </div>
   </div>
 </div>
-<header class="topbar">
+<header class="topbar{' topbar--overlay' if active == 'accueil.html' else ''}">
   <div class="wrap topbar__inner">
     <a class="brand" href="accueil.html"><img src="assets/logo-pea.webp" alt="Parc des Expositions d’Abidjan — accueil" width="394" height="210"></a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-principale"><span class="menu-toggle__bars" aria-hidden="true"></span>Menu</button>
@@ -232,7 +232,7 @@ def slide_accent(name):
 
 
 SPACE_URL = {"A": "hall-exposition.html", "B": "le-dome.html", "C": "parvis-esplanades.html"}
-SPACE_IMG = {"A": "espaces/hall/interieur", "B": "espaces/dome/exterieur", "C": "espaces/parvis/vue-aerienne"}
+SPACE_IMG = {"A": "espaces/hall/interieur", "B": "espaces/parvis/dome-sous-le-nuage", "C": "espaces/parvis/salon-plein-air-aerien"}
 
 
 def space(letter, title, sub, media=None, ink=False, h="h3", usage=""):
@@ -411,9 +411,25 @@ SLIDER_DOTS = "".join(
     f'<li><button type="button" class="slider__dot" data-slide="{i}" aria-label="Afficher l’image {i + 1} sur {len(SLIDES)}"'
     f'{" aria-current=" + chr(34) + "true" + chr(34) if i == 0 else ""}></button></li>' for i in range(len(SLIDES)))
 
+LOGOS = [  # images/logos -> assets/img/logos (tools/optimiser-images.py)
+    ("ardci", "ARDCI — Assemblée des Régions et Districts de Côte d’Ivoire"),
+    ("uvicoci", "UVICOCI — Union des Villes et Communes de Côte d’Ivoire"),
+    ("cnfci", "CNFCI — Commission Nationale des Frontières de la Côte d’Ivoire"),
+    ("abidjan-border-forum", "Abidjan Border Forum"),
+    ("sirexe", "SIREXE 2026 — African Mining, Oil, Gas and Energy Exhibition"),
+    ("conseil-cafe-cacao", "Le Conseil du Café-Cacao"),
+    ("gibtp", "GIBTP — Groupement Ivoirien du Bâtiment et des Travaux Publics"),
+    ("sara-2025", "SARA 2025, 7e édition"),
+    ("ordre-architectes", "Ordre des Architectes de Côte d’Ivoire"),
+    ("sila", "SILA — Salon International du Livre d’Abidjan"),
+]
+LOGO_ITEMS = "".join(f'<li class="logos__item">{img("logos/" + n, a)}</li>' for n, a in LOGOS)
+CHEV_L = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg>'
+CHEV_R = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg>'
+
 # ---------------------------------------------------------------- Accueil
 PAGES["accueil.html"] = ("Accueil — Parc des Expositions d’Abidjan", f"""
-<section class="hero hero--slider" data-slider style="--slide-accent: {slide_accent(SLIDES[0])[0]}; --slide-accent-hover: {slide_accent(SLIDES[0])[1]}; --slide-title: {slide_accent(SLIDES[0])[2]}">
+<section class="hero hero--slider hero--under-header" data-slider style="--slide-accent: {slide_accent(SLIDES[0])[0]}; --slide-accent-hover: {slide_accent(SLIDES[0])[1]}; --slide-title: {slide_accent(SLIDES[0])[2]}">
   <div class="slider" aria-hidden="true">
 {SLIDES_HTML}
   </div>
@@ -530,9 +546,48 @@ PAGES["accueil.html"] = ("Accueil — Parc des Expositions d’Abidjan", f"""
     </div>
   </div>
 </section>
+
+<section class="section section--white" aria-labelledby="refs-title">
+  <div class="wrap">
+    <div class="logos-head">
+      <div><p class="eyebrow">Références</p><h2 id="refs-title">Ils nous ont fait confiance</h2></div>
+      <div class="logos-controls" role="group" aria-label="Défilement des logos">
+        <button class="logos__btn" type="button" data-logos-prev aria-label="Logos précédents">{CHEV_L}</button>
+        <button class="logos__btn logos__toggle" type="button" aria-pressed="false" aria-label="Mettre le défilement en pause"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="slider__icon-pause"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="slider__icon-play"><path d="M8 5v14l11-7z"/></svg></button>
+        <button class="logos__btn" type="button" data-logos-next aria-label="Logos suivants">{CHEV_R}</button>
+      </div>
+    </div>
+    <div class="logos" data-logos aria-roledescription="carrousel" aria-label="Logos des organisateurs">
+      <ul class="logos__track" role="list">{LOGO_ITEMS}</ul>
+    </div>
+  </div>
+</section>
 """)
 
 # ---------------------------------------------------------------- Qui sommes-nous
+LIGHTBOX = """
+<dialog class="lightbox" id="lightbox" aria-label="Visionneuse de photos">
+  <figure class="lightbox__figure"><img class="lightbox__img" src="data:," alt=""><figcaption class="lightbox__caption"></figcaption></figure>
+  <p class="lightbox__count" aria-live="polite"></p>
+  <button class="lightbox__btn lightbox__close" type="button" aria-label="Fermer la visionneuse"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <button class="lightbox__btn lightbox__prev" type="button" aria-label="Photo précédente"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <button class="lightbox__btn lightbox__next" type="button" aria-label="Photo suivante"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg></button>
+</dialog>"""
+
+
+def gallery_item(name, alt, sizes, extra="", lazy=True):
+    large = f"assets/img/{name}-1600.webp"
+    return f'<a class="gallery__item" href="{large}" data-lightbox-item data-caption="{alt}"{extra}>{img(name, alt, sizes, lazy=lazy)}</a>'
+
+
+DESTINATION = [  # visuels de la série « destination » (légende incrustée reprise en texte alternatif)
+    ("destination/infrastructures", "Une ville aux infrastructures modernes : vue aérienne d’Abidjan, du stade et du port"),
+    ("destination/aerien", "Plus d’une vingtaine de compagnies aériennes desservent Abidjan : l’aéroport vu du ciel"),
+    ("destination/hotellerie", "Une offre hôtelière variée : un hôtel du Plateau au crépuscule"),
+    ("pages/destination-abidjan", "Une vie culturelle dynamique : Abidjan de nuit, le pont et la lagune illuminés"),
+]
+DESTINATION_ITEMS = "".join(gallery_item(n, a, "(min-width: 1024px) 25vw, 50vw") for n, a in DESTINATION)
+
 PAGES["qui-sommes-nous.html"] = ("Qui sommes-nous ? — Parc des Expositions d’Abidjan", page_hero(
     crumbs(A, ("Qui sommes-nous ?", None)), "Le Parc",
     "Un équipement majeur au service des grands événements.",
@@ -555,10 +610,13 @@ PAGES["qui-sommes-nous.html"] = ("Qui sommes-nous ? — Parc des Expositions d�
 </section>
 
 <section class="section" id="destination">
-  <div class="wrap intro">
+  <div class="wrap">
+  <div class="intro">
     <div><p class="eyebrow">Une destination</p><h2>Abidjan, ville d’affaires et d’expériences.</h2></div>
     {note("Cette section valorise l’accessibilité, l’hôtellerie, le dynamisme économique, culturel et touristique de la Côte d’Ivoire afin de soutenir la visibilité internationale du Parc.")}
     <p>Accessibilité, offre hôtelière, dynamisme économique, culturel et touristique : la Côte d’Ivoire réunit tout ce qu’il faut pour accueillir vos participants venus de la région et du monde entier.</p>
+  </div>
+    <div class="destination-grid block-gap" data-lightbox>{DESTINATION_ITEMS}</div>
   </div>
 </section>
 
@@ -570,6 +628,7 @@ PAGES["qui-sommes-nous.html"] = ("Qui sommes-nous ? — Parc des Expositions d�
     <p class="lead">Le Parc s’appuie sur l’expertise de GL events et ses standards d’exploitation pour accompagner les organisateurs à chaque étape, de la conception à l’accueil du public.</p>
   </div>
 </section>
+{LIGHTBOX}
 """)
 
 # ---------------------------------------------------------------- Nos espaces
@@ -634,19 +693,38 @@ PAGES["nos-espaces.html"] = ("Nos espaces — Parc des Expositions d’Abidjan",
 """)
 
 # ---------------------------------------------------------------- Fiche espace
-LIGHTBOX = """
-<dialog class="lightbox" id="lightbox" aria-label="Visionneuse de photos">
-  <figure class="lightbox__figure"><img class="lightbox__img" src="data:," alt=""><figcaption class="lightbox__caption"></figcaption></figure>
-  <p class="lightbox__count" aria-live="polite"></p>
-  <button class="lightbox__btn lightbox__close" type="button" aria-label="Fermer la visionneuse"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-  <button class="lightbox__btn lightbox__prev" type="button" aria-label="Photo précédente"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg></button>
-  <button class="lightbox__btn lightbox__next" type="button" aria-label="Photo suivante"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg></button>
-</dialog>"""
+# Textes alternatifs des photos (assets/img/<groupe>/<nom>) ; une photo absente de cette table reçoit un texte générique
+ALTS = {
+    "interieur": "Intérieur du Hall d’Exposition, vide, sous sa charpente métallique",
+    "interieur-portes": "Portes de chargement numérotées du Hall d’Exposition",
+    "galerie-couverte": "Galerie couverte longeant le Hall d’Exposition",
+    "salon-vue-plongeante": "Allées d’un salon vues d’en haut, entre les stands",
+    "stands-connect": "Stands régionaux du salon Connect Côte d’Ivoire",
+    "panel-connect": "Panel du salon Connect Côte d’Ivoire sur la grande scène, stands au premier plan",
+    "spectacle-ramatoulaye": "Spectacle de DJ Ramatoulaye devant le public assis",
+    "spectacle-scene": "Spectacle sur scène, costumes et décor illuminé",
+    "entree-c": "Entrée C du Dôme, façade cuivrée",
+    "auditorium": "Auditorium du Dôme équipé de sièges orange face à la scène",
+    "dome-sous-le-nuage": "Le Dôme vu depuis le parvis sous un ciel nuageux",
+    "parvis-dome": "Le parvis devant le Dôme",
+    "vue-aerienne": "Vue aérienne des ombrières des esplanades",
+    "allee-couverte": "Allée couverte menant au Dôme",
+    "parking-couvert": "Parking couvert sous les ombrières",
+    "engins-devant-le-dome": "Engins de chantier exposés sur le parvis devant le Dôme",
+    "salon-plein-air-aerien": "Vue aérienne d’un salon en plein air sur l’esplanade",
+}
 
 
-def gallery_item(name, alt, sizes, extra=""):
-    large = f"assets/img/{name}-1600.webp"
-    return f'<a class="gallery__item" href="{large}" data-lightbox-item data-caption="{alt}"{extra}>{img(name, alt, sizes)}</a>'
+def folder_photos(group, featured, label):
+    """Toutes les photos d’un groupe (une par nom), image vedette en premier."""
+    names = sorted({f.name[: -len("-1600.webp")] for f in (ROOT / "assets/img" / group).glob("*-1600.webp")})
+    names.sort(key=lambda n: n != featured)
+    out = []
+    for n in names:
+        if n not in ALTS:
+            print(f"  ATTENTION : texte alternatif manquant pour {group}/{n}")
+        out.append((f"{group}/{n}", ALTS.get(n, f"Photo — {label}")))
+    return out
 
 
 SPACES = [
@@ -657,9 +735,7 @@ SPACES = [
          note_txt="La fiche espace concentre l’information commerciale et technique : usages possibles, capacité, configuration, prestations associées et documents à télécharger.",
          text="Avec 6 500 m² d’un seul tenant et 17 m libres sous plafond, le Hall d’Exposition peut être divisé en 2 ou 3 espaces d’exposition distincts pour accueillir salons, expositions et grands événements d’entreprise.",
          usages=["Salon professionnel", "Exposition", "Lancement", "Convention"], equip=None,
-         photos=[("espaces/hall/interieur", "Intérieur du Hall d’Exposition, vide, sous sa charpente métallique"),
-                 ("espaces/hall/interieur-portes", "Portes de chargement numérotées du Hall d’Exposition"),
-                 ("espaces/hall/galerie-couverte", "Galerie couverte longeant le Hall d’Exposition")],
+         photos=folder_photos("espaces/hall", "interieur", "Hall d’Exposition"),
          doc=("assets/fiche-technique-hall-exposition.pdf", "Télécharger la fiche technique", True)),
     dict(file="le-dome.html", title="Le Dôme", letter="B", code="dome",
          lead="Le Convention Center du Parc : une salle de 5 000 m² équipée pour les conférences, les événements institutionnels, les salons et les concerts.",
@@ -668,9 +744,7 @@ SPACES = [
          text="Avec 5 000 m² exploitables, le Dôme accueille jusqu’à 5 023 personnes assises et 9 588 debout, avec une infrastructure technique pensée pour les événements professionnels comme pour le grand public.",
          usages=["Conférence internationale", "Événement institutionnel", "Salon & exposition", "Concert & spectacle"],
          equip=["96 enceintes", "365 projecteurs", "240 m² d’écran LED"],
-         photos=[("espaces/dome/exterieur", "Le Dôme et son toit en forme d’arche sous un ciel bleu"),
-                 ("espaces/dome/entree-c", "Entrée C du Dôme, façade cuivrée"),
-                 ("espaces/dome/auditorium", "Auditorium du Dôme équipé de sièges orange face à la scène")],
+         photos=folder_photos("espaces/dome", "panel-connect", "Le Dôme"),
          doc=(None, None, False)),
     dict(file="parvis-esplanades.html", title="Parvis & Esplanades", letter="C", code="parvis",
          lead="67 000 m² d’espaces extérieurs pour les expositions et les événements en plein air.",
@@ -678,10 +752,7 @@ SPACES = [
          h2="De grands espaces extérieurs, à l’échelle de vos projets.", note_txt=None,
          text="Le Parvis et les esplanades Est et Nord-Est totalisent 67 000 m² pour les expositions extérieures, les formats outdoor et les événements grand public.",
          usages=["Exposition extérieure", "Format outdoor", "Événement grand public", "Concert"], equip=None,
-         photos=[("espaces/parvis/parvis-dome", "Le parvis devant le Dôme"),
-                 ("espaces/parvis/vue-aerienne", "Vue aérienne des ombrières des esplanades"),
-                 ("espaces/parvis/allee-couverte", "Allée couverte menant au Dôme"),
-                 ("espaces/parvis/parking-couvert", "Parking couvert sous les ombrières")],
+         photos=folder_photos("espaces/parvis", "dome-sous-le-nuage", "Parvis & Esplanades"),
          doc=(None, None, False)),
 ]
 
@@ -689,7 +760,7 @@ SPACES = [
 def space_page(sp):
     figs = "".join(f'<li class="figure{" figure--ink" if i == 0 else ""}"><strong>{v}</strong>{l}</li>' for i, (v, l) in enumerate(sp["figures"]))
     n = len(sp["photos"])
-    items = "".join(gallery_item(name, alt, "(min-width: 768px) 60vw, 100vw" if i == 0 else "(min-width: 768px) 30vw, 50vw")
+    items = "".join(gallery_item(name, alt, "(min-width: 768px) 50vw, 100vw" if i == 0 else "(min-width: 768px) 25vw, 50vw", lazy=i != 0)
                     for i, (name, alt) in enumerate(sp["photos"]))
     usages = "".join(f"<li>{u}</li>" for u in sp["usages"])
     equip = ""
@@ -714,7 +785,7 @@ def space_page(sp):
       <a href="#caracteristiques">Caractéristiques</a><a href="#galerie">Galerie</a><a href="#presentation">Présentation</a>{subnav_equip}<a href="#services-associes">Services associés</a><a href="#documents">Documents</a>
     </nav>
     <ul class="figures figures--3" id="caracteristiques" role="list">{figs}</ul>
-    <div class="gallery gallery--{n} block-gap" id="galerie" data-lightbox>{items}</div>
+    <div class="gallery block-gap" id="galerie" data-lightbox>{items}</div>
   </div>
 </section>
 
@@ -1126,7 +1197,7 @@ import json as _json
 
 EN_DICT = _json.loads((ROOT / "tools/i18n/en.json").read_text(encoding="utf-8"))
 _SKIP = re.compile(r"<(script|style)\b.*?</\1>|<!--.*?-->", re.S)
-_ATTR = re.compile(r'\b(alt|aria-label|title|placeholder|data-caption|data-tour-title|data-embed-title)="([^"]*)"')
+_ATTR = re.compile(r'\b(alt|aria-label|aria-roledescription|title|placeholder|data-caption|data-tour-title|data-embed-title)="([^"]*)"')
 _TEXT = re.compile(r">([^<]+)<")
 
 
@@ -1190,9 +1261,32 @@ def with_lang_links(page, src, lang):
     return src.replace("</head>", alt, 1)
 
 
+# Image d’arrière-plan subtile de l’en-tête de chaque page (voile blanc à 94 %)
+PAGE_BG = {
+    "qui-sommes-nous.html": "slider/journee-internationale",
+    "nos-espaces.html": "espaces/hall/salon-vue-plongeante",
+    "hall-exposition.html": "espaces/hall/interieur",
+    "le-dome.html": "espaces/parvis/dome-sous-le-nuage",
+    "parvis-esplanades.html": "espaces/parvis/salon-plein-air-aerien",
+    "nos-services.html": "phototheque/salon-stand",
+    "phototheque.html": "phototheque/dome-lumieres",
+    "agenda.html": "slider/concert-foule",
+    "contact-devis.html": "pages/parlez-nous",
+    "visite-virtuelle.html": "espaces/parvis/vue-aerienne",
+    "informations-legales.html": "espaces/hall/galerie-couverte",
+}
+
+
+def with_page_bg(name, src):
+    bg = PAGE_BG.get(name)
+    if not bg:
+        return src
+    return src.replace('<section class="page-hero', f'<section style="--page-bg: url(assets/img/{bg}-1600.webp)" class="page-hero page-hero--bg', 1)
+
+
 (ROOT / "en").mkdir(exist_ok=True)
 for name, (title, body) in PAGES.items():
-    fr_html = head(title) + "\n" + header(name) + body + FOOTER
+    fr_html = with_page_bg(name, head(title) + "\n" + header(name) + body + FOOTER)
     (ROOT / name).write_text(with_lang_links(name, fr_html, "fr"), encoding="utf-8")
     en_html = to_english(name, fr_html.replace("__FR__", "../" + name).replace("__EN__", name))
     (ROOT / "en" / name).write_text(with_lang_links(name, en_html, "en"), encoding="utf-8")

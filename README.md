@@ -93,6 +93,8 @@ Les dix pages et `styles.css` ont été refondus (textes et structure conservés
 
 Les pages HTML (FR à la racine, EN dans `en/`) sont générées ; ne pas les modifier à la main.
 
+Photos : les dossiers `images/Hall d’Exposition`, `images/dome`, `images/parvis&esplanades` et `images/abidjan` sont **pilotés** — toute image déposée dans le dossier apparaît dans la galerie de la page correspondante après les étapes 1 et 3 (ajouter son texte alternatif dans `ALTS` de `tools/pages/generer.py`, sinon un texte générique est utilisé et signalé). Une photo retirée ou déplacée disparaît de la page à la régénération.
+
 1. `python3 tools/optimiser-images.py --agenda` — convertit `images/` en WebP dans `assets/img/` (et télécharge les visuels de l’agenda).
 2. `python3 tools/i18n/en.py` — régénère `tools/i18n/en.json` après modification des traductions ; `python3 tools/i18n/extraire.py` liste les chaînes françaises.
 3. `python3 tools/pages/generer.py` — écrit toutes les pages FR et EN (contenus, événements, diaporama et calcul des teintes dans ce fichier).

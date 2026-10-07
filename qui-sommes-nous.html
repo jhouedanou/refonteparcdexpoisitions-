@@ -51,7 +51,7 @@
   </div>
 </header>
 <main class="page" id="contenu" tabindex="-1">
-<section class="page-hero">
+<section style="--page-bg: url(assets/img/slider/journee-internationale-1600.webp)" class="page-hero page-hero--bg">
   <div class="wrap">
     <nav class="breadcrumbs" aria-label="Fil d’Ariane"><ol role="list"><li><a href="accueil.html">Accueil</a></li><li><span aria-current="page">Qui sommes-nous ?</span></li></ol></nav>
     <p class="eyebrow">Le Parc</p>
@@ -77,10 +77,13 @@
 </section>
 
 <section class="section" id="destination">
-  <div class="wrap intro">
+  <div class="wrap">
+  <div class="intro">
     <div><p class="eyebrow">Une destination</p><h2>Abidjan, ville d’affaires et d’expériences.</h2></div>
     <!-- Note de maquette (texte d’origine) : Cette section valorise l’accessibilité, l’hôtellerie, le dynamisme économique, culturel et touristique de la Côte d’Ivoire afin de soutenir la visibilité internationale du Parc. -->
     <p>Accessibilité, offre hôtelière, dynamisme économique, culturel et touristique : la Côte d’Ivoire réunit tout ce qu’il faut pour accueillir vos participants venus de la région et du monde entier.</p>
+  </div>
+    <div class="destination-grid block-gap" data-lightbox><a class="gallery__item" href="assets/img/destination/infrastructures-1600.webp" data-lightbox-item data-caption="Une ville aux infrastructures modernes : vue aérienne d’Abidjan, du stade et du port"><img src="assets/img/destination/infrastructures-1600.webp" srcset="assets/img/destination/infrastructures-800.webp 800w, assets/img/destination/infrastructures-1600.webp 1080w" sizes="(min-width: 1024px) 25vw, 50vw" alt="Une ville aux infrastructures modernes : vue aérienne d’Abidjan, du stade et du port" width="1080" height="1080" loading="lazy" decoding="async"></a><a class="gallery__item" href="assets/img/destination/aerien-1600.webp" data-lightbox-item data-caption="Plus d’une vingtaine de compagnies aériennes desservent Abidjan : l’aéroport vu du ciel"><img src="assets/img/destination/aerien-1600.webp" srcset="assets/img/destination/aerien-800.webp 800w, assets/img/destination/aerien-1600.webp 1080w" sizes="(min-width: 1024px) 25vw, 50vw" alt="Plus d’une vingtaine de compagnies aériennes desservent Abidjan : l’aéroport vu du ciel" width="1080" height="1080" loading="lazy" decoding="async"></a><a class="gallery__item" href="assets/img/destination/hotellerie-1600.webp" data-lightbox-item data-caption="Une offre hôtelière variée : un hôtel du Plateau au crépuscule"><img src="assets/img/destination/hotellerie-1600.webp" srcset="assets/img/destination/hotellerie-800.webp 800w, assets/img/destination/hotellerie-1600.webp 1080w" sizes="(min-width: 1024px) 25vw, 50vw" alt="Une offre hôtelière variée : un hôtel du Plateau au crépuscule" width="1080" height="1080" loading="lazy" decoding="async"></a><a class="gallery__item" href="assets/img/pages/destination-abidjan-1600.webp" data-lightbox-item data-caption="Une vie culturelle dynamique : Abidjan de nuit, le pont et la lagune illuminés"><img src="assets/img/pages/destination-abidjan-1600.webp" srcset="assets/img/pages/destination-abidjan-800.webp 800w, assets/img/pages/destination-abidjan-1600.webp 1080w" sizes="(min-width: 1024px) 25vw, 50vw" alt="Une vie culturelle dynamique : Abidjan de nuit, le pont et la lagune illuminés" width="1080" height="1080" loading="lazy" decoding="async"></a></div>
   </div>
 </section>
 
@@ -92,6 +95,14 @@
     <p class="lead">Le Parc s’appuie sur l’expertise de GL events et ses standards d’exploitation pour accompagner les organisateurs à chaque étape, de la conception à l’accueil du public.</p>
   </div>
 </section>
+
+<dialog class="lightbox" id="lightbox" aria-label="Visionneuse de photos">
+  <figure class="lightbox__figure"><img class="lightbox__img" src="data:," alt=""><figcaption class="lightbox__caption"></figcaption></figure>
+  <p class="lightbox__count" aria-live="polite"></p>
+  <button class="lightbox__btn lightbox__close" type="button" aria-label="Fermer la visionneuse"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <button class="lightbox__btn lightbox__prev" type="button" aria-label="Photo précédente"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <button class="lightbox__btn lightbox__next" type="button" aria-label="Photo suivante"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg></button>
+</dialog>
 </main>
 <footer class="footer">
   <div class="wrap footer__grid">

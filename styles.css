@@ -494,19 +494,23 @@ a.event:focus-visible { outline-offset: -3px; }
 .subnav a:hover { color: var(--ink); }
 .subnav a[aria-current="true"] { color: var(--ink); border-bottom-color: var(--orange); }
 
-/* ---------- Galeries (pages espaces) ---------- */
-.gallery { display: grid; gap: 4px; grid-template-columns: 1fr 1fr; }
+/* ---------- Galeries (pages espaces) : toutes les photos du dossier, 1 grande + vignettes ---------- */
+.gallery { display: grid; gap: 4px; grid-template-columns: 1fr 1fr; grid-auto-flow: dense; }
 .gallery__item { position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; background: var(--paper-2); }
 .gallery__item:first-child { grid-column: 1 / -1; aspect-ratio: 16 / 10; }
 .gallery__item img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .4s var(--ease); }
 .gallery__item:hover img { transform: scale(1.03); }
 .gallery__item:focus-visible { outline-offset: -3px; }
 @media (min-width: 768px) {
-  .gallery--3 { grid-template-columns: 2fr 1fr; }
-  .gallery--4 { grid-template-columns: 2fr 1fr 1fr; }
-  .gallery__item:first-child { grid-column: auto; grid-row: span 2; aspect-ratio: auto; min-height: 420px; }
-  .gallery--4 .gallery__item:last-child { grid-column: span 2; }
+  .gallery { grid-template-columns: repeat(4, 1fr); }
+  .gallery__item:first-child { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
 }
+
+/* Série « destination » (Qui sommes-nous) : visuels carrés à légende incrustée, jamais recadrés */
+.destination-grid { display: grid; gap: 4px; grid-template-columns: 1fr 1fr; }
+.destination-grid .gallery__item { aspect-ratio: 1; }
+.destination-grid .gallery__item img { object-fit: contain; background: var(--ink); }
+@media (min-width: 1024px) { .destination-grid { grid-template-columns: repeat(4, 1fr); } }
 
 /* ---------- Photothèque ---------- */
 .photo-grid { display: grid; gap: 4px; grid-template-columns: 1fr 1fr; grid-auto-flow: dense; }
@@ -593,6 +597,11 @@ a.event:focus-visible { outline-offset: -3px; }
 .hub__links a:hover { color: var(--orange-action); }
 .hub__links a:hover .i { transform: translateX(4px); }
 @media (min-width: 768px) { .hub__links { grid-template-columns: 1fr 1fr; } }
+
+/* ---------- En-tête de page : image d’arrière-plan subtile (voile blanc 94 % : textes ≥ 4,5:1 même sur un pixel noir) ---------- */
+.page-hero--bg { position: relative; isolation: isolate; overflow: hidden; }
+.page-hero--bg::before { content: ""; position: absolute; inset: 0; z-index: -2; background: var(--page-bg) center / cover no-repeat; }
+.page-hero--bg::after { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(255, 255, 255, .94); }
 
 /* ---------- En-têtes compacts (fiches, agenda, contact, visite) ---------- */
 .page-hero--compact { padding-block: clamp(24px, 4vw, 48px) clamp(32px, 4vw, 56px); }
@@ -702,7 +711,9 @@ a.event:focus-visible { outline-offset: -3px; }
 .lang-switch a[aria-current] { color: var(--white); box-shadow: inset 0 -3px 0 var(--orange); }
 .social { display: flex; gap: var(--s-1); }
 .social--menu { display: none; }
-@media (max-width: 767px) { .utility .social { display: none; } .social--menu { display: flex; margin-top: var(--s-5); } }
+/* Réseaux sociaux dans le menu : mobile uniquement (spécificité > .nav ul) */
+.nav .social--menu { display: none; }
+@media (max-width: 767px) { .utility .social { display: none; } .nav .social--menu { display: flex; margin-top: var(--s-5); } }
 .nav .social--menu a { display: grid; place-items: center; width: 44px; min-height: 44px; border-bottom: 0; }
 .social a { display: grid; place-items: center; width: 44px; height: 44px; color: var(--white); }
 .social a:hover { color: var(--orange); }
@@ -839,6 +850,20 @@ button.link-arrow { padding: 0; border: 0; background: none; cursor: pointer; }
 .embed-facade { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: var(--s-4); padding: var(--s-5); text-align: center; background: var(--paper-2) var(--arch-mute) center 78% / 60% auto no-repeat; }
 .embed-facade p { margin: 0; color: var(--ink); }
 
+/* ---------- En-tête transparent sur l’accueil (avec JS) : blanc dès qu’on défile ---------- */
+.js .utility--overlay { position: relative; z-index: 31; background: transparent; }
+.js .topbar--overlay { transition: background-color .3s var(--ease), border-color .3s var(--ease); }
+.js .topbar--overlay:not(.is-solid) { background: transparent; border-bottom-color: transparent; }
+.js .topbar--overlay:not(.is-solid) .nav a { color: var(--white); }
+.js .topbar--overlay:not(.is-solid) .nav a[aria-current] { color: var(--orange); }
+.js .topbar--overlay:not(.is-solid) .menu-toggle { background: transparent; color: var(--white); border-color: var(--white); }
+.js .topbar--overlay:not(.is-solid) :focus-visible { outline-color: var(--orange); }
+@media (min-width: 70em) { .js .topbar--overlay:not(.is-solid) .nav a:hover { color: var(--white); } }
+/* Le héros remonte sous la barre utilitaire et l’en-tête ; un voile sombre en haut garde le texte blanc lisible */
+.js .hero--under-header { margin-top: calc(-1 * (44px + var(--header-h) + 4px)); }
+.js .hero--under-header .hero__inner { padding-top: calc(44px + var(--header-h) + clamp(16px, 3vw, 40px)); }
+.js .hero--under-header::after { content: ""; position: absolute; inset: 0 0 auto; height: 260px; z-index: -1; background: linear-gradient(180deg, rgba(17, 18, 23, .82) 0, rgba(17, 18, 23, .62) 140px, rgba(17, 18, 23, 0) 260px); pointer-events: none; }
+
 /* ---------- Diaporama Ken Burns (héros de l’accueil) ---------- */
 .slider { position: absolute; inset: 0; z-index: -2; overflow: hidden; background: var(--ink); }
 .slider__slide { position: absolute; inset: 0; margin: 0; opacity: 0; transition: opacity 1.4s ease; }
@@ -907,6 +932,30 @@ button.link-arrow { padding: 0; border: 0; background: none; cursor: pointer; }
   .page-hero--media .wrap > .lead { grid-column: 1; margin-top: var(--s-5); padding-bottom: 0; }
   .page-hero--media .wrap > .page-hero__media { grid-column: 2; grid-row: 1 / span 5; margin: 0; aspect-ratio: 4 / 3; }
 }
+
+/* ---------- Références : carrousel de logos (5 par page sur grand écran) ---------- */
+.logos-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--s-4); margin-bottom: var(--s-6); }
+.logos-head h2 { margin: 0; }
+.logos-controls { display: flex; gap: var(--s-2); }
+.logos__btn { display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 1px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; transition: background-color .2s var(--ease), color .2s var(--ease); }
+.logos__btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.25; }
+.logos__toggle svg { width: 18px; height: 18px; fill: currentColor; stroke: none; }
+.logos__toggle[aria-pressed="true"] .slider__icon-pause { display: none; }
+.logos__toggle[aria-pressed="true"] .slider__icon-play { display: block; }
+.logos__btn:hover { background: var(--ink); color: var(--white); }
+.logos__track { display: flex; gap: var(--s-3); margin: 0; padding: 0; list-style: none; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; }
+.logos__track::-webkit-scrollbar { display: none; }
+.logos__item {
+  flex: 0 0 calc((100% - var(--s-3)) / 2); scroll-snap-align: start;
+  display: grid; place-items: center; aspect-ratio: 3 / 2; padding: var(--s-4);
+  background: var(--paper); border: 1px solid var(--line);
+}
+.logos__item img { width: auto; height: auto; max-width: 100%; max-height: 72px; object-fit: contain; filter: grayscale(1); opacity: .7; transition: filter .3s var(--ease), opacity .3s var(--ease); }
+.logos__item:hover img { filter: none; opacity: 1; }
+@media (hover: none) { .logos__item img { filter: none; opacity: 1; } }
+@media (min-width: 600px) { .logos__item { flex-basis: calc((100% - 2 * var(--s-3)) / 3); } }
+@media (min-width: 1024px) { .logos__item { flex-basis: calc((100% - 4 * var(--s-3)) / 5); } }
+@media (prefers-reduced-motion: reduce) { .logos__track { scroll-behavior: auto; } }
 
 /* ---------- Mur d’actualité hybride (accueil) ---------- */
 .wall { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }

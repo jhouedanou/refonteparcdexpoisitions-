@@ -32,19 +32,6 @@ IMAGES = {
     "slider/parcdesexpositionsabidjan_1790069500_3991714735372770409_72260507174.jpg": "slider/salon-vue-plongeante",
     "slider/parcdesexpositionsabidjan_1790965811_3999233523482918667_72260507174.jpg": "slider/spectacle-scene",
     "slider/parcdesexpositionsabidjan_1790965811_3999233525059974799_72260507174.jpg": "slider/percussions",
-    # Hall d'exposition
-    "Hall d’Exposition/477772975_122107041890753259_2650153596900344098_n.jpg": "espaces/hall/interieur",
-    "Hall d’Exposition/490211711_122121974858753259_6208286369568576854_n.jpg": "espaces/hall/interieur-portes",
-    "Hall d’Exposition/476914515_122107042250753259_8728577235295915139_n.jpg": "espaces/hall/galerie-couverte",
-    # Le Dôme (dome/490211711… est la même photo que le Hall : non reprise)
-    "dome/577673239_122157497864753259_8398378410935615261_n.jpg": "espaces/dome/exterieur",
-    "dome/490001281_122121974888753259_3576997020463302622_n.jpg": "espaces/dome/entree-c",
-    "dome/sous.jpg": "espaces/dome/auditorium",
-    # Parvis & esplanades
-    "parvis&esplanades/479554843_122107042028753259_7643480473486413329_n.jpg": "espaces/parvis/parvis-dome",
-    "parvis&esplanades/565122750_122155092344753259_3487546577889466909_n.jpg": "espaces/parvis/vue-aerienne",
-    "parvis&esplanades/565128525_122155092314753259_4792798698496201383_n.jpg": "espaces/parvis/allee-couverte",
-    "parvis&esplanades/632365899_122168427080753259_271381240387927254_n.jpg": "espaces/parvis/parking-couvert",
     # Photothèque
     "phototeque/547366462_122151155276753259_44992948776841260_n.jpg": "phototheque/salon-stand",
     "phototeque/549765867_122151155306753259_3873749959226310186_n.jpg": "phototheque/salon-auto",
@@ -69,6 +56,86 @@ IMAGES = {
     "abidjan.jpg": "pages/destination-abidjan",  # visuel carré avec texte incrusté en bas : recadrer sur le haut
     "parleznousvotreprojet.jpg": "pages/parlez-nous",
 }
+
+# Dossiers pilotés : TOUTES leurs images sont converties (ajouter une photo = la déposer dans le dossier).
+# Le nom de sortie vient de NOMS (par nom de fichier, quel que soit le dossier), sinon « photo-<identifiant> ».
+DOSSIERS = {
+    "Hall d’Exposition": "espaces/hall",
+    "dome": "espaces/dome",
+    "parvis&esplanades": "espaces/parvis",
+    "abidjan": "destination",
+}
+NOMS = {
+    "477772975_122107041890753259_2650153596900344098_n.jpg": "interieur",
+    "490211711_122121974858753259_6208286369568576854_n.jpg": "interieur-portes",
+    "476914515_122107042250753259_8728577235295915139_n.jpg": "galerie-couverte",
+    "parcdesexpositionsabidjan_1790069500_3991714735372770409_72260507174.jpg": "salon-vue-plongeante",
+    "parcdesexpositionsabidjan_1790965811_3999233523323538066_72260507174.jpg": "stands-connect",
+    "490001281_122121974888753259_3576997020463302622_n.jpg": "entree-c",
+    "sous.jpg": "auditorium",
+    "parcdesexpositionsabidjan_1790101809_3991985760953252531_72260507174.jpg": "spectacle-ramatoulaye",
+    "parcdesexpositionsabidjan_1790965811_3999233523482918667_72260507174.jpg": "spectacle-scene",
+    "parcdesexpositionsabidjan_1790965811_3999233527912086219_72260507174.jpg": "panel-connect",
+    "577673239_122157497864753259_8398378410935615261_n.jpg": "dome-sous-le-nuage",
+    "479554843_122107042028753259_7643480473486413329_n.jpg": "parvis-dome",
+    "565122750_122155092344753259_3487546577889466909_n.jpg": "vue-aerienne",
+    "565128525_122155092314753259_4792798698496201383_n.jpg": "allee-couverte",
+    "632365899_122168427080753259_271381240387927254_n.jpg": "parking-couvert",
+    "parcdesexpositionsabidjan_1790069500_3991714735590910548_72260507174.jpg": "engins-devant-le-dome",
+    "parcdesexpositionsabidjan_1790069500_3991714735960020700_72260507174.jpg": "salon-plein-air-aerien",
+    "parcdesexpositionsabidjan_1789669811_3988361898169273366_72260507174.jpg": "infrastructures",
+    "parcdesexpositionsabidjan_1789669811_3988361898446149406_72260507174.jpg": "aerien",
+    "parcdesexpositionsabidjan_1789669811_3988361899058494058_72260507174.jpg": "hotellerie",
+}
+EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp"}
+
+
+def nom_auto(fichier):
+    if fichier.name in NOMS:
+        return NOMS[fichier.name]
+    nombres = re.findall(r"\d{6,}", fichier.stem)
+    return "photo-" + (nombres[1] if len(nombres) > 1 else nombres[0] if nombres else re.sub(r"[^a-z0-9]+", "-", fichier.stem.lower()))
+
+
+def convert_folders():
+    before = after = 0
+    for dossier, groupe in DOSSIERS.items():
+        src_dir, out_dir = SRC / dossier, OUT / groupe
+        if not src_dir.is_dir():
+            print(f"  dossier absent : images/{dossier}")
+            continue
+        # sorties régénérées à chaque passage : pas d'image orpheline quand une photo est retirée ou déplacée
+        if out_dir.is_dir():
+            for old in out_dir.glob("*.webp"):
+                old.unlink()
+        for src in sorted(p for p in src_dir.iterdir() if p.suffix.lower() in EXTENSIONS):
+            name = nom_auto(src)
+            before += src.stat().st_size
+            for w in WIDTHS:
+                dest = out_dir / f"{name}-{w}.webp"
+                cwebp(src, dest, w)
+                after += dest.stat().st_size
+            print(f"  {dossier}/{src.name} -> assets/img/{groupe}/{name}-{{1600,800}}.webp")
+    print(f"Dossiers pilotés : {ko(before)} -> {ko(after)}")
+
+
+# Logos des références (images/logos) : une seule largeur, transparence conservée
+LOGOS_NOMS = {"images.png": "sara-2025"}
+
+
+def convert_logos():
+    src_dir, out_dir = SRC / "logos", OUT / "logos"
+    if not src_dir.is_dir():
+        return
+    if out_dir.is_dir():
+        for old in out_dir.glob("*.webp"):
+            old.unlink()
+    for src in sorted(p for p in src_dir.iterdir() if p.suffix.lower() in EXTENSIONS):
+        name = LOGOS_NOMS.get(src.name, re.sub(r"[^a-z0-9]+", "-", src.stem.lower()).strip("-"))
+        dest = out_dir / f"{name}-800.webp"
+        cwebp(src, dest, 400)
+        print(f"  logos/{src.name} -> assets/img/logos/{name}-800.webp")
+
 
 # Événements de l'agenda : slug de la fiche sur parcdesexpositionsabidjan.com
 AGENDA = [
@@ -149,5 +216,7 @@ def download_agenda():
 
 if __name__ == "__main__":
     convert_images()
+    convert_folders()
+    convert_logos()
     if "--agenda" in sys.argv:
         download_agenda()

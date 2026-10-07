@@ -4,10 +4,12 @@
   var EN = document.documentElement.lang === 'en';
   var T = EN ? {
     pause: 'Pause the slideshow', play: 'Resume the slideshow', thousands: ',',
+    logosPause: 'Pause scrolling', logosPlay: 'Resume scrolling',
     recap: { type: 'Event type', espace: 'Venue', dates: 'Dates', none: 'To be confirmed', to: ' to ' },
     location: 'Abidjan Exhibition Center, Boulevard de l’aéroport, Abidjan'
   } : {
     pause: 'Mettre le diaporama en pause', play: 'Relancer le diaporama', thousands: '\u00a0',
+    logosPause: 'Mettre le défilement en pause', logosPlay: 'Relancer le défilement',
     recap: { type: 'Type d’événement', espace: 'Espace', dates: 'Dates', none: 'À préciser', to: ' au ' },
     location: 'Parc des Expositions d’Abidjan, Boulevard de l’aéroport, Abidjan'
   };
@@ -109,6 +111,19 @@
       stage.replaceChildren(frame);
       frame.focus();
     });
+  }
+
+  // ---------- En-tête transparent de l'accueil : fond blanc dès qu'on défile ou que le menu est ouvert ----------
+  var overlay = document.querySelector('.topbar--overlay');
+  if (overlay) {
+    var menuBtn = overlay.querySelector('.menu-toggle');
+    var syncHeader = function () {
+      var open = menuBtn && menuBtn.getAttribute('aria-expanded') === 'true';
+      overlay.classList.toggle('is-solid', window.scrollY > 8 || open);
+    };
+    window.addEventListener('scroll', syncHeader, { passive: true });
+    if (menuBtn) new MutationObserver(syncHeader).observe(menuBtn, { attributes: true, attributeFilter: ['aria-expanded'] });
+    syncHeader();
   }
 
   // ---------- Retour en haut : visible après un écran de défilement ----------
@@ -308,6 +323,41 @@
     // Onglet masqué : on suspend, puis on reprend au retour
     document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else start(); });
     setPaused(userPaused);
+  }
+
+  // ---------- Références : carrousel de logos (page suivante toutes les 5 s, Pause, flèches) ----------
+  var logos = document.querySelector('[data-logos]');
+  if (logos) {
+    var track = logos.querySelector('.logos__track');
+    var zone = logos.closest('section');
+    var lToggle = zone.querySelector('.logos__toggle');
+    var smooth = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    var lTimer = null;
+    var lPaused = false;
+    var turn = function (dir) {
+      var max = track.scrollWidth - track.clientWidth;
+      var x = track.scrollLeft + dir * track.clientWidth;
+      if (dir > 0 && track.scrollLeft >= max - 4) x = 0;          // fin : retour au début
+      if (dir < 0 && track.scrollLeft <= 4) x = max;               // début : vers la fin
+      track.scrollTo({ left: x, behavior: smooth });
+    };
+    var lStop = function () { window.clearInterval(lTimer); lTimer = null; };
+    var lStart = function () { if (!lTimer && !lPaused && !document.hidden) lTimer = window.setInterval(function () { turn(1); }, 5000); };
+    zone.querySelector('[data-logos-prev]').addEventListener('click', function () { turn(-1); lStop(); lStart(); });
+    zone.querySelector('[data-logos-next]').addEventListener('click', function () { turn(1); lStop(); lStart(); });
+    lToggle.addEventListener('click', function () {
+      lPaused = !lPaused;
+      lToggle.setAttribute('aria-pressed', String(lPaused));
+      lToggle.setAttribute('aria-label', lPaused ? T.logosPlay : T.logosPause);
+      if (lPaused) lStop(); else lStart();
+    });
+    // Pause temporaire au survol des logos et quand le focus est dans la section
+    logos.addEventListener('mouseenter', lStop);
+    logos.addEventListener('mouseleave', lStart);
+    zone.addEventListener('focusin', lStop);
+    zone.addEventListener('focusout', function (e) { if (!zone.contains(e.relatedTarget)) lStart(); });
+    document.addEventListener('visibilitychange', function () { if (document.hidden) lStop(); else lStart(); });
+    lStart();
   }
 
   // ---------- Visionneuse de photos (galeries des espaces, photothèque) ----------
