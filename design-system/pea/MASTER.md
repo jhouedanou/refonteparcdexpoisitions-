@@ -103,3 +103,34 @@ Interdits : dégradés violets, dégradés « placeholder » gris-vert, ombres p
 - Pilules et rayons > 4px (rupture avec la direction).
 - Placeholder gris-vert ou rayures en dégradé : utiliser l'aplat `--paper-2` (#EBE8E1) avec l'arche du logo en ton sourd (#C4C0B7).
 - Césure automatique dans les titres (`hyphens: manual`).
+
+## 9. Arche — motif et composants
+
+Planche de référence (règles, variantes, propositions) : [L'arche du Parc](https://claude.ai/artifact/3NKB1kd9hXu4pcyu4AbF8W). Choix retenus le 7 octobre 2026 : en-tête **E2** (ajusté : photo sous filtre orange, arche à la couleur de la section suivante), usages **2, 3, 6, 7, 10, 11, 12**.
+
+### Règles
+- Deux tracés exacts du logo, `viewBox="16 -1 360 68"` : l'arche (`M20 61C70 54 120 25.5 150 12…Z`) et la base (`M36 64.8C100 54 150 47 200 47…Z`).
+- **Jamais étirée** : mise à l'échelle uniforme uniquement. Toute boîte qui porte l'arche a le même rapport largeur / hauteur (`aspect-ratio: 360 / 62.5` pour la silhouette, `332 / 28` pour la base) ; elle peut être recadrée par un bord, jamais déformée.
+- Les deux traits à partir de 56 px de large ; en dessous (icônes, puces, repères), la **silhouette pleine du dôme**.
+- Couleurs : orange `#F36A00` sur encre ou papier, blanc sur l'orange, encre ou papier quand l'arche découpe une section.
+
+### Tokens (`styles.css`, `:root`)
+| Token | Contenu | Usage |
+|---|---|---|
+| `--arch` / `--arch-mute` | les deux traits, orange / gris `#C4C0B7` | filigranes, fonds d'attente |
+| `--placeholder` | papier `#EBE8E1` + `--arch-mute` à 56 % | image en attente (11) |
+| `--arch-dome` | silhouette pleine, 360 × 62,5 (masque) | en-têtes de page, bas de section, cartes, accueil |
+| `--arch-base-line` | trait de base, 332 × 28 (masque, épaissi de 5 unités) | page active du menu (6) |
+
+### Composants retenus
+- **En-tête des pages intérieures** (`.page-hero--bg`, issu de E2 puis ajusté) : la photo de la page (`PAGE_BG` dans `tools/pages/generer.py`) en fond, désaturée et fondue en produit à 60 % dans l'orange `#BF4F14` (texte blanc ≥ 4,85:1). En bas à droite, la silhouette exacte de l'arche (`width: clamp(560px, 64vw, 1100px)`, coupée par le bord droit) prend la couleur de la section suivante (`--arch-next` : blanc, encre ou papier, via `:has`), qui monte ainsi dans l'en-tête. Texte à 52 % à gauche. Sous 1024 px : arche sous le texte (`150vw`).
+- **2. Bas de section en arche** : une section sombre suivie d'une section claire se termine par la silhouette de la section suivante, centrée (`min(100%, 1000px)`), à plat. Accueil : la section suivante monte dans le diaporama (`.hero__arch`, dès 1024 px), la souris de défilement s'y loge.
+- **3. Cartes « espaces »** : le bandeau du nom porte la silhouette ; au repos seul le sommet dépasse (`translateY(72%)`), au survol ou au focus l'arche monte dans la photo.
+- **6. Page active du menu** : soulignée par le trait de base (masque `--arch-base-line`), qui se déploie au survol.
+- **7. Chiffres clés** : l'arche se trace au-dessus du chiffre à son apparition et à chaque survol (`.figure__arch`, ajouté par `assets/site.js`).
+- **10. Chargement** : l'arche et sa base se tracent en boucle (`.arch-loader`, `role="status"`) pendant le chargement de la carte, du fil Facebook et de la visite 360°, et lors du passage d'une page à l'autre (voile papier `.page-loader`, affiché après 150 ms).
+- **11. Image en attente** : `--placeholder` sur galeries, carte, mur d'actualités, encadré contact.
+- **12. Retour en haut** : icône = silhouette du dôme.
+- **Parallaxe** : la photo du diaporama de l'accueil (14 % du défilement) et celle de l'en-tête des pages (18 %) descendent plus lentement que la page, dans une marge prévue en CSS (`--plx`, `assets/site.js`) : jamais de vide visible.
+- **Diaporama** : plus de couleur par image ; indicateur actif et molette en orange.
+- Animations (3, 7, 10) et parallaxe figées si « réduire les animations » est activé.

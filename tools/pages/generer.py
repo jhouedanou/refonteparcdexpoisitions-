@@ -101,7 +101,7 @@ FOOTER = f"""</main>
     </nav>
   </div>
 </footer>
-<a class="to-top" href="#contenu" aria-label="Retour en haut de page"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a>
+<a class="to-top" href="#contenu" aria-label="Retour en haut de page"><svg viewBox="16 -1 360 62.5" aria-hidden="true" focusable="false"><path d="M20 61C70 54 120 25.5 150 12C164 5.7 182 0 196 0C210 0 228 5.7 242 12C272 25.5 322 54 372 61Z"/></svg></a>
 <section class="cookie-banner" id="cookie-consent" aria-labelledby="consent-title" hidden>
   <div class="wrap consent__inner">
     <div class="consent__text">
@@ -187,48 +187,6 @@ def img(name, alt="", sizes="100vw", cls="", lazy=True, priority=False):
     c = f' class="{cls}"' if cls else ""
     return f'<img{c} src="{src}"{srcset} alt="{alt}" width="{w}" height="{h}"{load}>'
 
-
-import collections
-import colorsys
-
-
-def _lum(rgb):
-    f = lambda x: (x / 255) / 12.92 if x / 255 <= .03928 else ((x / 255 + .055) / 1.055) ** 2.4
-    return .2126 * f(rgb[0]) + .7152 * f(rgb[1]) + .0722 * f(rgb[2])
-
-
-@functools.lru_cache(None)
-def slide_accent(name):
-    """Couleur des boutons pour une image du diaporama : teinte dominante de l'image (hors noirs, blancs et gris),
-    portée à la luminosité la plus haute qui garde un contraste >= 4,6:1 avec le texte blanc. Renvoie (normal, survol)."""
-    raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", str(ROOT / f"assets/img/{name}-800.webp"), "-vf", "scale=48:48",
-                          "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], capture_output=True, check=True).stdout
-    buckets = collections.defaultdict(list)
-    for i in range(0, len(raw), 3):
-        r, g, b = raw[i], raw[i + 1], raw[i + 2]
-        _, l, sat = colorsys.rgb_to_hls(r / 255, g / 255, b / 255)
-        if .12 <= l <= .9 and sat >= .25:
-            buckets[(r // 32, g // 32, b // 32)].append((r, g, b))
-    best = max(buckets.values(), key=len)
-    dom = tuple(sum(c[k] for c in best) // len(best) for k in range(3))
-    h, _, sat = colorsys.rgb_to_hls(*(c / 255 for c in dom))
-    if 255 / 360 <= h <= 330 / 360:  # pas de violet : ramené au bleu
-        h = 225 / 360
-    sat = max(sat, .6)
-    lo, hi = 0.0, 1.0
-    for _ in range(30):
-        mid = (lo + hi) / 2
-        c = tuple(round(x * 255) for x in colorsys.hls_to_rgb(h, mid, sat))
-        lo, hi = (mid, hi) if 1.05 / (_lum(c) + .05) >= 4.6 else (lo, mid)
-    hexa = lambda light: "#%02x%02x%02x" % tuple(round(x * 255) for x in colorsys.hls_to_rgb(h, light, sat))
-    # Titre : teinte claire de la même couleur, la plus saturée possible avec un contraste >= 7:1 sur l'encre du héros
-    ink = _lum((17, 18, 23))
-    t_lo, t_hi = lo, 1.0
-    for _ in range(30):
-        mid = (t_lo + t_hi) / 2
-        c = tuple(round(x * 255) for x in colorsys.hls_to_rgb(h, mid, sat))
-        t_lo, t_hi = (t_lo, mid) if (_lum(c) + .05) / (ink + .05) >= 7 else (mid, t_hi)
-    return hexa(lo), hexa(max(lo - .08, .03)), hexa(t_hi)
 
 
 SPACE_URL = {"A": "hall-exposition.html", "B": "le-dome.html", "C": "parvis-esplanades.html"}
@@ -405,10 +363,10 @@ IG_POSTS = "".join(
 SLIDES = ["slider/dome-rendu", "slider/salon-vue-plongeante", "slider/concert-foule", "slider/percussions",
           "slider/concert-scene", "slider/salon-rencontres", "slider/spectacle-scene", "slider/journee-internationale"]
 SLIDES_HTML = "\n".join(
-    f'    <figure class="slider__slide{" is-active" if i == 0 else ""}" data-accent="{slide_accent(n)[0]}" data-accent-hover="{slide_accent(n)[1]}" data-accent-title="{slide_accent(n)[2]}">'
+    f'    <figure class="slider__slide{" is-active" if i == 0 else ""}">'
     f'{img(n, sizes="100vw", priority=i == 0, lazy=i != 0)}</figure>' for i, n in enumerate(SLIDES))
 SLIDER_DOTS = "".join(
-    f'<li><button type="button" class="slider__dot" data-slide="{i}" aria-label="Afficher l’image {i + 1} sur {len(SLIDES)}"'
+    f'<li><button type="button" class="ctrl__seg slider__dot" data-slide="{i}" aria-label="Afficher l’image {i + 1} sur {len(SLIDES)}"'
     f'{" aria-current=" + chr(34) + "true" + chr(34) if i == 0 else ""}></button></li>' for i in range(len(SLIDES)))
 
 LOGOS = [  # images/logos -> assets/img/logos (tools/optimiser-images.py)
@@ -430,14 +388,18 @@ CHEV_R = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d=
 
 # ---------------------------------------------------------------- Accueil
 PAGES["index.html"] = ("Accueil — Parc des Expositions d’Abidjan", f"""
-<section class="hero hero--slider hero--under-header" data-slider style="--slide-accent: {slide_accent(SLIDES[0])[0]}; --slide-accent-hover: {slide_accent(SLIDES[0])[1]}; --slide-title: {slide_accent(SLIDES[0])[2]}">
+<section class="hero hero--slider hero--under-header" data-slider>
   <div class="slider" aria-hidden="true">
 {SLIDES_HTML}
   </div>
+  <span class="hero__arch" aria-hidden="true"></span>
   <a class="scroll-cue" href="#decouvrir" aria-label="Aller à la section suivante"><span class="scroll-cue__mouse" aria-hidden="true"></span></a>
-  <div class="slider__controls" role="group" aria-label="Diaporama">
-    <button type="button" class="slider__toggle" aria-pressed="false" aria-label="Mettre le diaporama en pause"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="slider__icon-pause"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="slider__icon-play"><path d="M8 5v14l11-7z"/></svg></button>
-    <ol class="slider__dots" role="list">{SLIDER_DOTS}</ol>
+  <div class="ctrl ctrl--on-photo slider__controls" role="group" aria-label="Diaporama">
+    <p class="ctrl__count" aria-hidden="true"><span data-ctrl-current>01</span> / {len(SLIDES):02d}</p>
+    <ol class="ctrl__track" role="list">{SLIDER_DOTS}</ol>
+    <button type="button" class="ctrl__btn" data-slide-prev aria-label="Image précédente">{CHEV_L}</button>
+    <button type="button" class="ctrl__btn slider__toggle" aria-pressed="false" aria-label="Mettre le diaporama en pause"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="slider__icon-pause"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="slider__icon-play"><path d="M8 5v14l11-7z"/></svg></button>
+    <button type="button" class="ctrl__btn" data-slide-next aria-label="Image suivante">{CHEV_R}</button>
   </div>
   <div class="wrap hero__inner">
     {ARCH.format(cls="arch")}
@@ -552,10 +514,12 @@ PAGES["index.html"] = ("Accueil — Parc des Expositions d’Abidjan", f"""
   <div class="wrap">
     <div class="logos-head">
       <div><p class="eyebrow">Références</p><h2 id="refs-title">Ils nous ont fait confiance</h2></div>
-      <div class="logos-controls" role="group" aria-label="Défilement des logos">
-        <button class="logos__btn" type="button" data-logos-prev aria-label="Logos précédents">{CHEV_L}</button>
-        <button class="logos__btn logos__toggle" type="button" aria-pressed="false" aria-label="Mettre le défilement en pause"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="slider__icon-pause"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="slider__icon-play"><path d="M8 5v14l11-7z"/></svg></button>
-        <button class="logos__btn" type="button" data-logos-next aria-label="Logos suivants">{CHEV_R}</button>
+      <div class="ctrl logos-controls" role="group" aria-label="Défilement des logos">
+        <p class="ctrl__count" aria-hidden="true"><span data-ctrl-current>1</span> / <span data-ctrl-total>2</span></p>
+        <ol class="ctrl__track" role="list" data-logos-pages></ol>
+        <button class="ctrl__btn" type="button" data-logos-prev aria-label="Logos précédents">{CHEV_L}</button>
+        <button class="ctrl__btn logos__toggle" type="button" aria-pressed="false" aria-label="Mettre le défilement en pause"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="slider__icon-pause"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="slider__icon-play"><path d="M8 5v14l11-7z"/></svg></button>
+        <button class="ctrl__btn" type="button" data-logos-next aria-label="Logos suivants">{CHEV_R}</button>
       </div>
     </div>
     <div class="logos" data-logos aria-roledescription="carrousel" aria-label="Logos des organisateurs">
@@ -1264,7 +1228,7 @@ def with_lang_links(page, src, lang):
     return src.replace("</head>", alt, 1)
 
 
-# Image de l’en-tête de chaque page : photo désaturée fondue (produit) dans l’orange du logo ; l’en-tête transparent s’y pose
+# Image de l’en-tête de chaque page : photo dans la silhouette exacte de l’arche du logo (variante E2 « dôme posé »)
 PAGE_BG = {
     "qui-sommes-nous.html": "slider/dome-rendu",
     "nos-espaces.html": "espaces/hall/salon-vue-plongeante",
@@ -1273,7 +1237,7 @@ PAGE_BG = {
     "parvis-esplanades.html": "espaces/parvis/salon-plein-air-aerien",
     "nos-services.html": "phototheque/salon-stand",
     "phototheque.html": "phototheque/dome-lumieres",
-    "agenda.html": "slider/concert-foule",
+    "agenda.html": "slider/concert-scene",
     "contact-devis.html": "pages/parlez-nous",
     "visite-virtuelle.html": "espaces/parvis/vue-aerienne",
     "informations-legales.html": "espaces/hall/galerie-couverte",

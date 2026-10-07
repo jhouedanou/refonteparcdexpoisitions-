@@ -382,6 +382,8 @@ EN = {
 "SARA 2025, 7e édition": "SARA 2025, 7th edition",
 "Votre projet": "Your project", "Un espace vous intéresse ?": "Interested in a venue?",
 "Indiquez l’espace, vos dates et votre jauge : notre équipe commerciale vous recontacte avec une proposition adaptée.": "Tell us the venue, your dates and expected attendance: our sales team will get back to you with a tailored proposal.",
+"Image précédente": "Previous image",
+"Image suivante": "Next image",
 }
 pathlib.Path(__file__).with_name("en.json").write_text(json.dumps(EN, ensure_ascii=False, indent=1), encoding="utf-8")
 print(len(EN), "entrées")

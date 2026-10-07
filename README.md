@@ -99,6 +99,6 @@ Photos : les dossiers `images/Hall d’Exposition`, `images/dome`, `images/parvi
 
 1. `python3 tools/optimiser-images.py --agenda` — convertit `images/` en WebP dans `assets/img/` (et télécharge les visuels de l’agenda).
 2. `python3 tools/i18n/en.py` — régénère `tools/i18n/en.json` après modification des traductions ; `python3 tools/i18n/extraire.py` liste les chaînes françaises.
-3. `python3 tools/pages/generer.py` — écrit toutes les pages FR et EN (contenus, événements, diaporama et calcul des teintes dans ce fichier).
+3. `python3 tools/pages/generer.py` — écrit toutes les pages FR et EN (contenus, événements, diaporama dans ce fichier).
 
 Prérequis : Python 3, `cwebp`, `ffmpeg`, `sips` (macOS). Styles : `styles.css` ; comportements : `assets/site.js`.

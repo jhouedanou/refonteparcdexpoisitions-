@@ -3,14 +3,46 @@
   // Textes générés par le script, selon la langue de la page
   var EN = document.documentElement.lang === 'en';
   var calmMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Arche du logo, tracée au trait (lignes médianes des deux formes, viewBox 16 -1 360 68)
+  var ARCH_LINE = 'M20 61.2C70 54.2 120 28 150 14.7C164 8.3 182 3.2 196 3.2C210 3.2 228 8.3 242 14.7C272 28 322 54.2 372 61.2';
+  var BASE_LINE = 'M36 65C100 55.5 150 48.7 200 48.7C250 48.7 300 55.5 364 65';
+  var archSvg = function (cls, lines) {
+    var ns = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('viewBox', '16 -1 360 68');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.setAttribute('focusable', 'false');
+    if (cls) svg.setAttribute('class', cls);
+    lines.forEach(function (l) {
+      var path = document.createElementNS(ns, 'path');
+      path.setAttribute('d', l[0]);
+      if (l[1]) path.setAttribute('stroke-width', l[1]);
+      svg.appendChild(path);
+    });
+    return svg;
+  };
+  // Indicateur de chargement : l'arche et sa base se tracent en boucle
+  var archLoader = function () {
+    var box = document.createElement('div');
+    box.className = 'arch-loader';
+    box.setAttribute('role', 'status');
+    box.setAttribute('aria-label', T.loading);
+    box.appendChild(archSvg('', [[ARCH_LINE, '10'], [BASE_LINE, '5']]));
+    return box;
+  };
+  var withLoader = function (container, frame) {
+    var loader = archLoader();
+    container.appendChild(loader);
+    frame.addEventListener('load', function () { loader.remove(); });
+  };
   var T = EN ? {
     pause: 'Pause the slideshow', play: 'Resume the slideshow', thousands: ',',
-    logosPause: 'Pause scrolling', logosPlay: 'Resume scrolling', morePhotos: 'Show more photos',
+    logosPause: 'Pause scrolling', logosPlay: 'Resume scrolling', morePhotos: 'Show more photos', loading: 'Loading…', logosPage: 'Show logo page {n} of {t}',
     recap: { type: 'Event type', espace: 'Venue', dates: 'Dates', none: 'To be confirmed', to: ' to ' },
     location: 'Abidjan Exhibition Center, Boulevard de l’aéroport, Abidjan'
   } : {
     pause: 'Mettre le diaporama en pause', play: 'Relancer le diaporama', thousands: '\u00a0',
-    logosPause: 'Mettre le défilement en pause', logosPlay: 'Relancer le défilement', morePhotos: 'Afficher plus de photos',
+    logosPause: 'Mettre le défilement en pause', logosPlay: 'Relancer le défilement', morePhotos: 'Afficher plus de photos', loading: 'Chargement…', logosPage: 'Afficher la page de logos {n} sur {t}',
     recap: { type: 'Type d’événement', espace: 'Espace', dates: 'Dates', none: 'À préciser', to: ' au ' },
     location: 'Parc des Expositions d’Abidjan, Boulevard de l’aéroport, Abidjan'
   };
@@ -111,6 +143,7 @@
       frame.setAttribute('allowfullscreen', '');
       stage.classList.add('is-live');
       stage.replaceChildren(frame);
+      withLoader(stage, frame);
       frame.focus();
     });
   }
@@ -170,6 +203,48 @@
     }
   }
 
+  // ---------- Passage d'une page à l'autre : l'arche se trace pendant le chargement ----------
+  // Liens internes vers une page du site uniquement (pas d'ancre, de PDF, de lien externe, de nouvel onglet,
+  // ni de clic déjà pris en charge, comme la visionneuse). Le voile n'apparaît qu'après 150 ms (pas de flash).
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = e.target.closest('a[href]');
+    if (!a || a.target === '_blank' || a.hasAttribute('download')) return;
+    var url = new URL(a.href, window.location.href);
+    if (url.origin !== window.location.origin || !/(\.html|\/)$/.test(url.pathname)) return;
+    if (url.pathname === window.location.pathname && url.search === window.location.search) return;
+    if (document.querySelector('.page-loader')) return;
+    var veil = document.createElement('div');
+    veil.className = 'page-loader';
+    veil.appendChild(archLoader());
+    document.body.appendChild(veil);
+  });
+  // Retour arrière (cache du navigateur) : la page revient sans le voile
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted) document.querySelectorAll('.page-loader').forEach(function (v) { v.remove(); });
+  });
+
+  // ---------- Parallaxe légère : diaporama de l'accueil et photos d'en-tête de page ----------
+  // La photo descend plus lentement que la page (14 à 18 % du défilement), dans la marge prévue en CSS (--plx).
+  var plxTargets = [];
+  var plxSlider = document.querySelector('.hero--slider .slider');
+  if (plxSlider) plxTargets.push({ el: plxSlider, box: plxSlider.closest('.hero'), k: 0.14 });
+  var plxHeader = document.querySelector('.page-hero--bg');
+  if (plxHeader) plxTargets.push({ el: plxHeader, box: plxHeader, k: 0.18 });
+  if (plxTargets.length && !calmMotion) {
+    var plxTick = false;
+    var plx = function () {
+      plxTick = false;
+      plxTargets.forEach(function (t) {
+        var r = t.box.getBoundingClientRect();
+        if (r.bottom < 0) return;
+        t.el.style.setProperty('--plx', (Math.min(Math.max(-r.top, 0), r.height) * t.k).toFixed(1) + 'px');
+      });
+    };
+    window.addEventListener('scroll', function () { if (!plxTick) { plxTick = true; window.requestAnimationFrame(plx); } }, { passive: true });
+    plx();
+  }
+
   // ---------- Retour en haut : visible après un écran de défilement ----------
   var toTop = document.querySelector('.to-top');
   if (toTop) {
@@ -197,6 +272,7 @@
     frame.referrerPolicy = 'no-referrer-when-downgrade';
     frame.setAttribute('allowfullscreen', '');
     box.replaceChildren(frame);
+    withLoader(box, frame);
   };
   var applyConsent = function (value) {
     if (value === 'accepted') document.querySelectorAll('[data-embed-src]').forEach(loadEmbed);
@@ -326,33 +402,66 @@
     counters.forEach(function (el) { el.textContent = '0'; io.observe(el); });
   }
 
+  // ---------- Chiffres clés : l'arche se trace au-dessus du chiffre (à l'apparition, puis au survol) ----------
+  var figs = document.querySelectorAll('.figures:not(.figures--facts) .figure');
+  figs.forEach(function (fig) {
+    var arch = archSvg('figure__arch', [[ARCH_LINE]]);
+    fig.classList.add('figure--arch');
+    fig.prepend(arch);
+    if (calmMotion) return;
+    fig.addEventListener('mouseenter', function () {
+      var path = arch.firstChild;
+      path.style.transition = 'none';
+      arch.classList.remove('is-drawn');
+      path.getBoundingClientRect();
+      path.style.transition = '';
+      arch.classList.add('is-drawn');
+    });
+  });
+  if (figs.length && !calmMotion && 'IntersectionObserver' in window) {
+    var archIo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        archIo.unobserve(entry.target);
+        entry.target.querySelector('.figure__arch').classList.add('is-drawn');
+      });
+    }, { threshold: 0.6 });
+    figs.forEach(function (fig) { archIo.observe(fig); });
+  } else {
+    figs.forEach(function (fig) { fig.querySelector('.figure__arch').classList.add('is-drawn'); });
+  }
+
   // ---------- Diaporama Ken Burns de l'accueil ----------
+  // Contrôle de défilement (.ctrl) : la fin du remplissage du segment actif fait passer à l'image suivante, donc la
+  // barre et le diaporama restent synchrones (pause comprise). Mouvement réduit : minuterie de 7 s.
   var hero = document.querySelector('[data-slider]');
   if (hero) {
     var slides = hero.querySelectorAll('.slider__slide');
-    var dots = hero.querySelectorAll('.slider__dot');
+    var segs = hero.querySelectorAll('.ctrl__seg');
+    var sCtrl = hero.querySelector('.ctrl');
+    var sCount = hero.querySelector('[data-ctrl-current]');
     var toggleBtn = hero.querySelector('.slider__toggle');
     var index = 0;
     var timer = null;
     var userPaused = false; // défilement automatique ; le bouton Pause permet de l'arrêter (WCAG 2.2.2)
+    var pad = function (n) { return (n < 10 ? '0' : '') + n; };
     var show = function (i) {
+      if (i === index) return;
       slides[index].classList.remove('is-active');
       slides[index].classList.add('was-active');
       var prev = slides[index];
       window.setTimeout(function () { prev.classList.remove('was-active'); }, 1500);
-      dots[index].removeAttribute('aria-current');
+      segs[index].removeAttribute('aria-current');
       index = (i + slides.length) % slides.length;
       var img = slides[index].querySelector('img');
       if (img && img.loading === 'lazy') img.loading = 'eager';
       slides[index].classList.add('is-active');
-      // Couleur des boutons accordée à l'image (attributs calculés à la génération)
-      hero.style.setProperty('--slide-accent', slides[index].getAttribute('data-accent'));
-      hero.style.setProperty('--slide-accent-hover', slides[index].getAttribute('data-accent-hover'));
-      hero.style.setProperty('--slide-title', slides[index].getAttribute('data-accent-title'));
-      dots[index].setAttribute('aria-current', 'true');
+      segs[index].setAttribute('aria-current', 'true');
+      if (sCount) sCount.textContent = pad(index + 1);
     };
     var stop = function () { window.clearInterval(timer); timer = null; };
-    var start = function () { if (!timer && !userPaused) timer = window.setInterval(function () { show(index + 1); }, 7000); };
+    var start = function () { if (calmMotion && !timer && !userPaused) timer = window.setInterval(function () { show(index + 1); }, 7000); };
+    var restart = function () { stop(); start(); };
     var setPaused = function (paused) {
       userPaused = paused;
       hero.classList.toggle('is-paused', paused);
@@ -361,47 +470,92 @@
       if (paused) stop(); else start();
     };
     toggleBtn.addEventListener('click', function () { setPaused(!userPaused); });
-    dots.forEach(function (dot) {
-      dot.addEventListener('click', function () { show(Number(dot.getAttribute('data-slide'))); stop(); start(); });
+    segs.forEach(function (seg) {
+      seg.addEventListener('click', function () { show(Number(seg.getAttribute('data-slide'))); restart(); });
     });
-    // Onglet masqué : on suspend, puis on reprend au retour
+    hero.querySelector('[data-slide-prev]').addEventListener('click', function () { show(index - 1); restart(); });
+    hero.querySelector('[data-slide-next]').addEventListener('click', function () { show(index + 1); restart(); });
+    sCtrl.addEventListener('animationend', function (e) {
+      if (e.target.classList.contains('ctrl__seg') && e.target.getAttribute('aria-current') === 'true' && !userPaused) show(index + 1);
+    });
+    // Onglet masqué : on suspend (la barre CSS est aussi figée par le navigateur), puis on reprend au retour
     document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else start(); });
     setPaused(userPaused);
   }
 
-  // ---------- Références : carrousel de logos (page suivante toutes les 5 s, Pause, flèches) ----------
+  // ---------- Références : carrousel de logos (même contrôle, une page toutes les 5 s) ----------
   var logos = document.querySelector('[data-logos]');
   if (logos) {
     var track = logos.querySelector('.logos__track');
     var zone = logos.closest('section');
+    var lCtrl = zone.querySelector('.ctrl');
+    var lPagesBox = lCtrl.querySelector('[data-logos-pages]');
+    var lCur = lCtrl.querySelector('[data-ctrl-current]');
+    var lTot = lCtrl.querySelector('[data-ctrl-total]');
     var lToggle = zone.querySelector('.logos__toggle');
-    var smooth = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    var smooth = calmMotion ? 'auto' : 'smooth';
     var lTimer = null;
-    var lPaused = false;
-    var turn = function (dir) {
+    var hold = { user: false, hover: false, focus: false };
+    var pageCount = function () { return Math.max(1, Math.round(track.scrollWidth / track.clientWidth)); };
+    var pageNow = function () { return Math.min(pageCount() - 1, Math.round(track.scrollLeft / track.clientWidth)); };
+    var goPage = function (p) {
       var max = track.scrollWidth - track.clientWidth;
-      var x = track.scrollLeft + dir * track.clientWidth;
-      if (dir > 0 && track.scrollLeft >= max - 4) x = 0;          // fin : retour au début
-      if (dir < 0 && track.scrollLeft <= 4) x = max;               // début : vers la fin
-      track.scrollTo({ left: x, behavior: smooth });
+      track.scrollTo({ left: Math.min(p * track.clientWidth, max), behavior: smooth });
     };
-    var lStop = function () { window.clearInterval(lTimer); lTimer = null; };
-    var lStart = function () { if (!lTimer && !lPaused && !document.hidden) lTimer = window.setInterval(function () { turn(1); }, 5000); };
-    zone.querySelector('[data-logos-prev]').addEventListener('click', function () { turn(-1); lStop(); lStart(); });
-    zone.querySelector('[data-logos-next]').addEventListener('click', function () { turn(1); lStop(); lStart(); });
+    var turn = function (dir) {
+      var n = pageCount();
+      goPage((pageNow() + dir + n) % n);
+    };
+    var lSegs = [];
+    var buildSegs = function () {
+      var n = pageCount();
+      if (lSegs.length === n) return;
+      lPagesBox.replaceChildren();
+      lSegs = [];
+      for (var i = 0; i < n; i++) {
+        var li = document.createElement('li');
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'ctrl__seg';
+        b.setAttribute('aria-label', T.logosPage.replace('{n}', i + 1).replace('{t}', n));
+        (function (p) { b.addEventListener('click', function () { goPage(p); }); })(i);
+        li.appendChild(b); lPagesBox.appendChild(li); lSegs.push(b);
+      }
+      lTot.textContent = n;
+    };
+    var sync = function () {
+      buildSegs();
+      var p = pageNow();
+      lSegs.forEach(function (b, i) { if (i === p) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); });
+      lCur.textContent = p + 1;
+    };
+    var apply = function () {
+      var paused = hold.user || hold.hover || hold.focus;
+      lCtrl.classList.toggle('is-paused', paused);
+      window.clearInterval(lTimer); lTimer = null;
+      if (calmMotion && !paused) lTimer = window.setInterval(function () { turn(1); }, 5000);
+    };
+    zone.querySelector('[data-logos-prev]').addEventListener('click', function () { turn(-1); });
+    zone.querySelector('[data-logos-next]').addEventListener('click', function () { turn(1); });
     lToggle.addEventListener('click', function () {
-      lPaused = !lPaused;
-      lToggle.setAttribute('aria-pressed', String(lPaused));
-      lToggle.setAttribute('aria-label', lPaused ? T.logosPlay : T.logosPause);
-      if (lPaused) lStop(); else lStart();
+      hold.user = !hold.user;
+      lToggle.setAttribute('aria-pressed', String(hold.user));
+      lToggle.setAttribute('aria-label', hold.user ? T.logosPlay : T.logosPause);
+      apply();
     });
-    // Pause temporaire au survol des logos et quand le focus est dans la section
-    logos.addEventListener('mouseenter', lStop);
-    logos.addEventListener('mouseleave', lStart);
-    zone.addEventListener('focusin', lStop);
-    zone.addEventListener('focusout', function (e) { if (!zone.contains(e.relatedTarget)) lStart(); });
-    document.addEventListener('visibilitychange', function () { if (document.hidden) lStop(); else lStart(); });
-    lStart();
+    lCtrl.addEventListener('animationend', function (e) {
+      if (e.target.classList.contains('ctrl__seg') && e.target.getAttribute('aria-current') === 'true') turn(1);
+    });
+    // Pause au survol des logos et quand le focus est dans la section ; page courante mise à jour en fin de défilement
+    logos.addEventListener('mouseenter', function () { hold.hover = true; apply(); });
+    logos.addEventListener('mouseleave', function () { hold.hover = false; apply(); });
+    zone.addEventListener('focusin', function () { hold.focus = true; apply(); });
+    zone.addEventListener('focusout', function (e) { if (!zone.contains(e.relatedTarget)) { hold.focus = false; apply(); } });
+    var syncT = null;
+    track.addEventListener('scroll', function () { window.clearTimeout(syncT); syncT = window.setTimeout(sync, 140); }, { passive: true });
+    window.addEventListener('resize', function () { window.clearTimeout(syncT); syncT = window.setTimeout(sync, 140); });
+    sync();
+    apply();
   }
 
   // ---------- Galeries : masonry + chargement par lots de 6 (au défilement, ou bouton « Afficher plus ») ----------
