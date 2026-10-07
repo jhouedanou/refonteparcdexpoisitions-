@@ -2,132 +2,226 @@
 
 Oct 1, 2026 · @Social Media
 
-Nous proposons une refonte en 5 phases sur 6 semaines, sur le socle Drupal 10 existant, avec une mise en ligne prioritaire de la homepage, du formulaire de devis et de la version anglaise dès la fin de la semaine 4.
+Nous proposons de refondre le site du Parc des Expositions d'Abidjan en 6 semaines, en conservant l'outil de gestion actuel. La page d'accueil, le formulaire de devis et la version anglaise seront en ligne dès la fin de la semaine 4. Le site complet suivra fin de semaine 6.
 
 ## Contexte et compréhension du besoin
 
-Le site actuel ([parcdesexpositionsabidjan.com](https://www.parcdesexpositionsabidjan.com/fr)) tourne sous Drupal 10 avec le thème Bento. Il présente les espaces mais ne répond pas à la question centrale du cahier des charges : « Pourquoi organiser mon événement au PEA ? ».
+Le site actuel ([parcdesexpositionsabidjan.com](https://www.parcdesexpositionsabidjan.com/fr)) présente les espaces, mais il ne répond pas à la question centrale du cahier des charges : « Pourquoi organiser mon événement au Parc des Expositions ? ».
 
-Le site doit devenir un outil commercial : générer des demandes de devis, porter l'image premium et internationale du PEA, et se positionner sur les requêtes MICE d'Abidjan et d'Afrique de l'Ouest.
+Le site doit devenir un outil commercial. Il doit :
 
-Contraintes retenues :
+- générer des demandes de devis ;
+- porter l'image haut de gamme et internationale du Parc ;
+- ressortir dans Google quand un organisateur cherche un lieu pour un salon, un congrès ou un événement d'entreprise à Abidjan ou en Afrique de l'Ouest.
 
-- Drupal 10 conservé ; le thème Bento est remplacé par un thème enfant ou un thème sur mesure (Twig + SDC), pour éviter de reconstruire le back-office.
-- Bilingue FR/EN avec URLs traduites (déjà en place, à fiabiliser).
-- Priorité 1 : homepage, formulaire de devis, SEO, CTA commerciaux, version anglaise.
+Nos engagements :
 
-Maquette (accueil desktop et mobile, page espace, formulaire de devis) : [PEA – Maquette refonte homepage](https://claude.ai/artifact/Fiqri2r85JgrshEa6c2EZu).
+- **Pas de reconstruction.** Le site reste sur Drupal, l'outil que vos équipes utilisent déjà. Seule l'apparence change : vos habitudes de mise à jour sont conservées.
+- **Deux langues.** Le français et l'anglais au même niveau ; la version anglaise existe déjà et sera fiabilisée.
+- **Les priorités d'abord.** Page d'accueil, formulaire de devis, visibilité dans Google, boutons « Demander un devis » et version anglaise.
 
-## Audit SEO de l'existant
+Une maquette du site complet est déjà prête, en français et en anglais : **[pae-orpin.vercel.app](https://pae-orpin.vercel.app/)**. Elle est présentée en détail, avec des captures d'écran, dans la section [La maquette](#la-maquette).
 
-Le site est techniquement sain (Drupal 10, canonicals, URLs traduites, images WebP) mais quasi invisible sur les mots-clés du cahier des charges : sur « salle événementielle Abidjan centre de conférence », les premiers résultats sont la presse, GL events et des annuaires, pas le site du PEA. Constats relevés le 1er octobre 2026 sur la homepage et la page espaces :
+## Ce que nous avons constaté
 
-| Constat | Impact | Amélioration proposée |
+Le site actuel est techniquement solide, mais presque invisible dans Google. Sur une recherche comme « salle événementielle Abidjan centre de conférence », les premiers résultats sont la presse, GL events et des annuaires, pas le site du Parc. Constats relevés le 1er octobre 2026 :
+
+| Constat | Importance | Ce que nous proposons |
 | --- | --- | --- |
-| Title homepage « Page d'accueil \| Parc des Expositions d'Abidjan » | Fort | Title ciblé : « Parc des Expositions d'Abidjan – Convention center & salons en Côte d'Ivoire » |
-| Aucune meta description détectée | Fort | Meta description unique par page via Metatag, rédigée FR et EN |
-| H1 « Bienvenue au Parc des Expositions d'Abidjan », sans mot-clé métier | Fort | H1 orienté requête : convention center, salons, congrès, Abidjan |
-| Chiffres clés affichés « 0 m² », « 0 places » dans le HTML (compteurs JS) | Fort | Valeurs réelles en HTML, animation en amélioration progressive |
-| Contenu très court, 3 espaces sur une seule page | Fort | Une page par espace (Dôme, Hall, Parvis), une page par type d'événement, une page par service |
-| Pas de page services, photothèque ni contact/devis dans le menu | Fort | Arborescence du CDC en 6 rubriques, CTA devis sur chaque page |
-| Logo avec alt « Imported image » | Moyen | Alts descriptifs, convention de nommage des médias |
-| Plan du site en PDF seul | Moyen | Fiches techniques en HTML indexable + PDF téléchargeable |
-| Pas d'Open Graph sur la homepage | Moyen | OG/Twitter Cards sur toutes les pages |
-| Données structurées non visibles | Moyen | Schema.org : EventVenue, Place, Event (agenda), FAQPage, Organization, BreadcrumbList |
-| Concurrence de gl-events.com sur la marque (page « Abidjan Exhibition Centre ») | Moyen | Coordination avec GL events : lien vers le site PEA, cohérence des contenus |
+| Le titre de la page d'accueil dans Google (« Page d'accueil \| Parc des Expositions d'Abidjan ») ne dit pas ce que propose le Parc | Forte | Un titre qui reprend les mots recherchés : convention center, salons, Abidjan, Côte d'Ivoire |
+| Aucun texte de présentation sous le lien dans Google | Forte | Un court texte d'accroche pour chaque page, en français et en anglais |
+| Le grand titre de l'accueil (« Bienvenue au Parc des Expositions d'Abidjan ») ne parle pas d'événements | Forte | Un titre qui dit le métier du Parc : salons, congrès, événements |
+| Les chiffres clés apparaissent comme « 0 m² » et « 0 places » pour Google | Forte | Les vrais chiffres visibles par tous, l'animation en plus |
+| Peu de contenu : les 3 espaces partagent une seule page | Forte | Une page par espace, par type d'événement et par service |
+| Services, photothèque et devis absents du menu | Forte | Un menu en 6 rubriques, conforme au cahier des charges, et un bouton « Demander un devis » sur chaque page |
+| Images sans description (le logo s'appelle « Imported image ») | Moyenne | Une description pour chaque image, utile pour Google et pour l'accessibilité |
+| Plan du Parc disponible seulement en PDF | Moyenne | Des fiches techniques lisibles en ligne, en plus du PDF à télécharger |
+| Liens partagés sur les réseaux sociaux sans image ni description | Moyenne | Un visuel et un texte prévus pour chaque partage |
+| Google ne sait pas que le Parc est un lieu d'événements | Moyenne | Des informations lisibles par Google (lieu, événements, questions fréquentes) pour des résultats plus riches |
+| Le site de GL events ressort avant celui du Parc sur son propre nom | Moyenne | Coordination avec GL events : lien vers le site du Parc et contenus cohérents |
 
-Points à vérifier en phase d'audit (accès Search Console et serveur requis) : robots.txt, sitemap XML, hreflang FR/EN, Core Web Vitals, profil Google Business, backlinks, pages indexées.
+D'autres points seront vérifiés une fois les accès obtenus : pages connues de Google, vitesse sur mobile, fiche Google Business, sites qui renvoient vers le Parc.
 
-Améliorations structurantes :
+Pour aller plus loin :
 
-- **Pages d'atterrissage par intention** : « Salon professionnel Abidjan », « Congrès Abidjan », « Événement corporate », « Concert », avec leurs équivalents EN (« Exhibition center Abidjan », « Conference venue Abidjan », « MICE West Africa »).
-- **Agenda indexable** : une page par événement avec Schema Event, source de trafic récurrent.
-- **Contenus destination** : venir à Abidjan, hôtels, visas, pour capter la recherche internationale.
-- **Netlinking local** : CCI, ministères, offices du tourisme, organisateurs hébergés (SARA, MIVA, Archibat).
-- **Suivi** : Search Console, GA4, événements de conversion sur devis, appel et WhatsApp.
+- **Des pages pour chaque type de recherche** : « Salon professionnel Abidjan », « Congrès Abidjan », « Événement d'entreprise », « Concert », et leurs équivalents en anglais pour les organisateurs internationaux.
+- **Un agenda qui attire du monde** : une page par événement, qui ramène régulièrement de nouveaux visiteurs.
+- **Venir à Abidjan** : accès, hôtels, visas, pour les organisateurs et participants venus de l'étranger.
+- **Des liens depuis les partenaires** : chambres de commerce, ministères, offices du tourisme, organisateurs accueillis (SARA, MIVA, Archibat).
+- **Des résultats mesurés** : nombre de demandes de devis, d'appels et de messages WhatsApp générés par le site.
 
-## Benchmark des sites de référence
+## Les sites qui nous inspirent
 
-Les quatre références partagent trois choix que nous reprenons : l'image avant le texte, un accès direct aux espaces par capacité, et un CTA commercial toujours visible.
+Ces quatre références partagent trois choix que nous reprenons : l'image avant le texte, un accès direct aux espaces selon leur capacité, et un bouton « Demander un devis » toujours visible.
 
-| Site | Ce qu'on retient pour le PEA |
+| Site | Ce que nous retenons pour le Parc |
 | --- | --- |
-| [GL events](https://www.gl-events.com/fr) | Cohérence avec le groupe exploitant, fiches lieux normalisées (capacités, plans) |
-| [The Seed](https://www.theseed.com.tr/en/home-page/) | Référence principale : pages lieux épurées, photo plein cadre, capacités par configuration, CTA devis sur chaque page |
-| [Hungexpo](https://hungexpo.hu/) | Parc d'expositions comparable : halls, agenda des salons, location d'espaces |
-| [Metropolitan Santiago](https://metropolitansantiago.cl/en/) | Convention center : recherche d'espace par type et capacité, version anglaise au même niveau |
+| [GL events](https://www.gl-events.com/fr) | Cohérence avec le groupe exploitant ; des fiches lieux claires (capacités, plans) |
+| [The Seed](https://www.theseed.com.tr/en/home-page/) | Notre référence principale : pages épurées, grandes photos, capacités selon la configuration, devis sur chaque page |
+| [Hungexpo](https://hungexpo.hu/) | Un parc d'expositions comparable : halls, agenda des salons, location d'espaces |
+| [Metropolitan Santiago](https://metropolitansantiago.cl/en/) | Recherche d'un espace par type et capacité ; version anglaise aussi complète que l'originale |
 
-Traduction dans la maquette : photo plein cadre en ouverture, les 6 rubriques du cahier des charges dans l'ordre sur l'accueil, une page par espace sur le modèle de The Seed (chiffres clés, capacités par configuration, équipements, visite 360°, galerie, autres espaces), formulaire de devis en 3 étapes, barre d'appel fixe sur mobile.
+Dans la maquette, cela donne :
 
-## Proposition
+- un diaporama de grandes photos en ouverture ;
+- les rubriques du cahier des charges dès l'accueil ;
+- une page par espace sur le modèle de The Seed ;
+- un comparatif des 3 espaces ;
+- un formulaire de devis complet ;
+- le numéro WhatsApp toujours visible en haut de page.
 
-### Arborescence
+## Notre proposition
 
-1. Qui sommes-nous ? (PEA, GL events, RSE, chiffres)
-2. Nos espaces : Dôme, Hall, Parvis & esplanades, visite virtuelle, comparateur de capacités, fiches techniques
+### Organisation du site
+
+1. Qui sommes-nous ? (le Parc, GL events, engagements, chiffres clés)
+2. Nos espaces : Dôme, Hall, Parvis & esplanades, visite virtuelle, comparatif des capacités, fiches techniques
 3. Nos services : audiovisuel, restauration, mobilier, sécurité, nettoyage, hébergement
 4. Photothèque (photos, vidéos, kit presse)
-5. Agenda (page par événement)
-6. Contact / Réserver / Demander un service (devis en 3 étapes, accès, FAQ)
+5. Agenda (une page par événement)
+6. Contact / Réserver / Demander un service (devis, accès, questions fréquentes)
 
-Plus des pages d'atterrissage SEO par type d'événement et une page destination Abidjan.
+S'y ajoutent des pages dédiées à chaque type d'événement et une page « Venir à Abidjan ».
 
 ### Design
 
-Direction inspirée de The Seed : fond blanc, grandes photos plein cadre, typographie Poppins (celle du logo), palette issue du logo du PEA : orange PEA #DA5914 pour le logo et les grands chiffres, orange foncé #B8470C pour les boutons et liens (contraste AA), brun nuit #2B1D16 pour les titres et bandeaux sombres, gris chaud #F5F2EF pour les fonds. Design system livré sous forme de composants Drupal (SDC) réutilisables par l'équipe.
+Le design s'inspire de The Seed et de l'architecture du Parc :
 
-### Technique Drupal 10
+- fond blanc et grandes photos ;
+- l'arche du logo reprise en motif ;
+- les titres dans la police du logo (Poppins) ;
+- une palette tirée du logo : l'orange du Parc, un noir profond et un blanc chaud.
 
-- Thème enfant de Bento avec composants SDC pour les nouveaux blocs, sans reconstruire le thème de zéro.
-- Modules : Metatag, Schema.org Metatag, Simple XML Sitemap, Redirect, Pathauto, Webform (devis + CRM/e-mail), Content Translation, Image styles WebP/AVIF, Responsive Image.
-- Formulaire de devis : Webform multi-étapes, envoi au service commercial, export CSV, connecteur CRM si disponible, anti-spam (Antibot/Honeypot).
-- Performance : cache, lazy-loading, CDN, objectif Core Web Vitals « bon » sur mobile.
-- Visite virtuelle : intégration d'une solution 360° existante ou à produire (hors périmètre si non fournie).
+Les éléments de design sont livrés sous forme de blocs réutilisables : l'équipe du Parc pourra créer de nouvelles pages sans faire appel à un développeur.
 
-### SEO
+### Ce qui se passe en coulisses
 
-Architecture sémantique sur les 18 mots-clés du CDC, une page cible par groupe de mots-clés, plan de redirections 301 exhaustif, balisage Schema.org, hreflang, suivi des positions mensuel pendant 3 mois après la mise en ligne.
+- **Le site garde son outil de gestion.** Pas de reconstruction, seulement des briques standard et éprouvées, donc un site simple à maintenir.
+- **Un formulaire de devis qui arrive au bon endroit.** Les demandes sont envoyées directement au service commercial, avec un export possible et une protection contre les faux messages.
+- **Un site rapide, même sur mobile.** Les images sont allégées et se chargent au fur et à mesure.
+- **La visite virtuelle 360°.** Elle est intégrée au site si le Parc en dispose.
 
-## Livrables par phase
+### Visibilité dans Google
 
-| Phase | Semaines | Livrables | Validation client |
+- Une page dédiée à chaque grande famille de recherches. Le cahier des charges cite 18 mots-clés.
+- Les anciennes adresses du site sont redirigées vers les nouvelles : aucun visiteur ni aucune position dans Google n'est perdu.
+- La version anglaise est correctement signalée à Google.
+- Les positions sont suivies chaque mois pendant 3 mois après la mise en ligne.
+
+## La maquette
+
+La maquette est en ligne : **[pae-orpin.vercel.app](https://pae-orpin.vercel.app/)**, version anglaise sur [/en/](https://pae-orpin.vercel.app/en/).
+
+Elle couvre toutes les rubriques proposées, en français et en anglais, avec les textes, photos et événements réels du Parc. C'est une démonstration : le formulaire n'envoie pas encore de vraies demandes. Elle servira de modèle pour le site final.
+
+| Rubrique | Pages |
+| --- | --- |
+| Accueil | [Accueil](https://pae-orpin.vercel.app/) |
+| Qui sommes-nous ? | [Le Parc, GL events, la destination Abidjan](https://pae-orpin.vercel.app/qui-sommes-nous.html) |
+| Nos espaces | [Vue d'ensemble et comparatif](https://pae-orpin.vercel.app/nos-espaces.html), [Hall d'exposition](https://pae-orpin.vercel.app/hall-exposition.html), [Le Dôme](https://pae-orpin.vercel.app/le-dome.html), [Parvis & esplanades](https://pae-orpin.vercel.app/parvis-esplanades.html), [Visite virtuelle 360°](https://pae-orpin.vercel.app/visite-virtuelle.html) |
+| Nos services | [Services](https://pae-orpin.vercel.app/nos-services.html) |
+| Photothèque | [Photothèque](https://pae-orpin.vercel.app/phototheque.html) |
+| Agenda | [Frise des événements](https://pae-orpin.vercel.app/agenda.html), [Fiche événement](https://pae-orpin.vercel.app/fiche-evenement.html) |
+| Contact / devis | [Formulaire de devis, accès, carte](https://pae-orpin.vercel.app/contact-devis.html) |
+| Pied de page | [Informations légales et cookies](https://pae-orpin.vercel.app/informations-legales.html) |
+
+Ce que la maquette montre :
+
+- **Une réponse claire à « Pourquoi le Parc des Expositions ? »** dès l'accueil. On y trouve de grandes photos, puis les chiffres clés, enfin visibles par Google. Suivent l'accès aux trois espaces, l'agenda, les actualités Facebook, Instagram et LinkedIn, les organisateurs qui ont fait confiance au Parc et un bouton « Demander un devis ».
+- **Une page par espace.** Chacune présente les chiffres clés, des photos, une présentation, les équipements, les services associés, les documents à télécharger et une demande de devis où l'espace est déjà choisi. La page « Nos espaces » compare les trois.
+- **Un agenda en frise chronologique.** Il reprend les 20 événements à venir, relevés sur le site actuel. On peut les trier par type et ouvrir le détail de chacun, avec le lien de réservation et l'ajout à son agenda.
+- **Un formulaire de devis complet.** Les erreurs de saisie sont signalées, et un récapitulatif de la demande s'affiche à l'envoi. Le numéro du Parc ouvre WhatsApp en un clic, sur toutes les pages.
+- **La visite virtuelle 360° intégrée.**
+- **Un site accessible à tous.** Les textes sont bien lisibles (contrastes conformes aux normes d'accessibilité) et le site se parcourt aussi au clavier. Il a été vérifié sur mobile, tablette et ordinateur, en français et en anglais.
+- **Un site conforme et rapide.** Un bandeau cookies demande l'accord des visiteurs avant d'afficher Google Maps, Facebook ou la visite virtuelle. Les photos sont allégées et s'affichent au fur et à mesure, ce qui garde les pages rapides, même en 4G.
+
+### Captures d'écran
+
+**Accueil sur ordinateur.** Les grandes photos ouvrent la page ; le bouton « Demander un devis » reste toujours visible.
+
+![Accueil sur ordinateur](captures/accueil-ordinateur.jpg)
+
+**Accueil, page complète.**
+
+![Accueil, page complète](captures/accueil-page-complete.jpg)
+
+**Version anglaise et accueil sur mobile.**
+
+![Home page in English](captures/accueil-anglais.jpg)
+
+![Accueil sur mobile](captures/accueil-mobile.jpg)
+
+**Nos espaces.** Chaque espace mène à sa page dédiée ; un comparatif des trois espaces suit en dessous.
+
+![Nos espaces](captures/nos-espaces.jpg)
+
+**Page espace : Le Dôme.** Chiffres clés, photos, présentation et demande de devis avec l'espace déjà choisi.
+
+![Le Dôme](captures/le-dome.jpg)
+
+![Le Dôme sur mobile](captures/le-dome-mobile.jpg)
+
+**Nos services.**
+
+![Nos services](captures/nos-services.jpg)
+
+**Agenda.** Les événements à venir, triables par type.
+
+![Agenda](captures/agenda.jpg)
+
+**Photothèque.** Les photos se trient par espace et par type d'événement.
+
+![Photothèque](captures/phototheque.jpg)
+
+**Contact et devis.** Le formulaire de devis, avec à côté les coordonnées du Parc et la photo du totem d'accueil.
+
+![Contact et devis](captures/contact-devis.jpg)
+
+![Contact et devis sur mobile](captures/contact-devis-mobile.jpg)
+
+**Visite virtuelle 360°.**
+
+![Visite virtuelle](captures/visite-virtuelle.jpg)
+
+## Ce que vous recevez, étape par étape
+
+| Étape | Semaines | Ce que vous recevez | Ce que vous validez |
 | --- | --- | --- | --- |
-| 1. Audit express | S1 (3 j) | Audits UX, technique, SEO, contenus ; plan de mots-clés et mapping URL | Note d'audit |
-| 2. Design | S1 à S2 | Maquettes Priorité 1 (déjà prêtes), puis pages espace, service, agenda, page SEO ; design system | Maquettes finales |
-| 3. Développement & contenus | S2 à S5 | Thème enfant Drupal, Webform devis, contenus FR/EN, fiches techniques | Recette sur préprod |
-| 4. Tests | S4 (Priorité 1), S5 (site complet) | Tests desktop, mobile, navigateurs, formulaires, SEO, vitesse | PV de recette |
-| 5. Mise en ligne | S6 | Migration, redirections 301, sauvegarde, mise en production, formation | PV de mise en ligne |
+| 1. Audit express | S1 (3 jours) | Bilan du site actuel (facilité d'usage, technique, visibilité dans Google, contenus) et liste des mots-clés à viser | Note d'audit |
+| 2. Design | S1 à S2 | Maquette de toutes les rubriques (déjà prête, en français et en anglais), ajustée selon vos retours ; pages par type d'événement ; guide de style | Maquettes finales |
+| 3. Construction et contenus | S2 à S5 | Nouveau design installé sur le site, formulaire de devis, contenus en français et en anglais, fiches techniques | Validation sur un site de test |
+| 4. Tests | S4 (priorités), S5 (site complet) | Vérifications sur mobile, tablette et ordinateur, formulaires, visibilité dans Google, vitesse | Procès-verbal de validation |
+| 5. Mise en ligne | S6 | Mise en ligne, redirection des anciennes adresses, sauvegarde, formation de votre équipe | Procès-verbal de mise en ligne |
 
-Après mise en ligne : 3 mois de suivi SEO (rapport mensuel de positions et de demandes de devis).
+Après la mise en ligne : 3 mois de suivi, avec un rapport mensuel sur la visibilité dans Google et les demandes de devis reçues.
 
 ## Planning
 
-&#91;embedded content: planning · 6 semaines, 1 jalon Priorité 1\]
+| Étape | S1 | S2 | S3 | S4 | S5 | S6 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1. Audit express | ■ |  |  |  |  |  |
+| 2. Design | ■ | ■ |  |  |  |  |
+| 3. Construction et contenus |  | ■ | ■ | ■ | ■ |  |
+| 4. Tests |  |  |  | ■ Priorités | ■ Site complet |  |
+| 5. Mise en ligne |  |  |  | ◆ Priorités en ligne |  | ◆ Site complet en ligne |
 
-La Priorité 1 passe en ligne fin S4, le site complet fin S6, puis 3 mois de suivi SEO. Tenir 6 semaines suppose les leviers suivants :
+Les priorités sont en ligne fin S4, le site complet fin S6, puis viennent 3 mois de suivi. Pour tenir 6 semaines :
 
-- **Équipe** : 2 personnes à plein temps (1 développeur Drupal, 1 designer-intégrateur SEO), design et développement en parallèle dès S2.
-- **Technique** : thème enfant de Bento plutôt que thème sur mesure ; modules contrib uniquement, aucun module custom.
-- **Périmètre** : 6 pages d'atterrissage SEO au lancement, les autres après ; visite 360° en lien externe ; photothèque sur la médiathèque existante.
-- **Client** : un décideur unique, validation sous 48 h, contenus et traductions EN livrés fin S2 au plus tard.
+- **Une équipe dédiée** : 2 personnes à plein temps (un développeur et un designer spécialiste du référencement), qui travaillent en parallèle dès la semaine 2.
+- **Pas de reconstruction** : nous habillons le site existant avec des briques standard.
+- **Un périmètre maîtrisé** : 6 pages par type d'événement au lancement, les autres ensuite ; visite 360° par lien externe ; photothèque construite à partir des médias déjà en ligne.
+- **Côté Parc** : un interlocuteur unique pour les décisions, des validations sous 48 h, et les textes et traductions anglaises livrés au plus tard fin S2.
 
-Risque principal : un retard de contenus ou de validation décale la mise en ligne d'autant, sans marge.
+Point de vigilance : un retard dans la livraison des contenus ou dans les validations décale d'autant la mise en ligne.
 
 ## Conditions
 
-Prestation réalisée à titre gracieux (pro bono) : aucun montant n'est facturé au PEA. Charge estimée, pour information : environ 55 jours-homme sur 6 semaines.
+Prestation réalisée à titre gracieux (pro bono) : aucun montant n'est facturé au Parc. Charge estimée, pour information : environ 55 jours de travail sur 6 semaines.
 
-Hypothèses :
+Ce que nous supposons :
 
-- Textes, traductions EN, photos et vidéos fournis par le PEA ; rédaction SEO et traduction hors périmètre.
-- Visite virtuelle 360° fournie par le PEA.
-- Accès fournis dès S1 : serveur, Drupal admin, Search Console, Analytics, DNS.
-- Hébergement, licences et connecteur CRM hors périmètre.
-- Deux allers-retours de corrections par livrable.
-
-Questions ouvertes :
-
-- [ ] Date de démarrage (S1) et décideur unique côté PEA ?
-- [ ] Un CRM est-il utilisé par le service commercial ?
-- [ ] Validation de la charte (logo, couleurs) par GL events requise ?
-- [ ] Visite virtuelle existante ?
+- Textes, traductions anglaises, photos et vidéos fournis par le Parc ; la rédaction et la traduction ne sont pas comprises.
+- Visite virtuelle 360° fournie par le Parc.
+- Accès au site et aux outils de statistiques fournis dès la première semaine.
+- Hébergement, licences et raccordement à un éventuel logiciel de gestion commerciale non compris.
+- Deux séries de corrections par livrable.

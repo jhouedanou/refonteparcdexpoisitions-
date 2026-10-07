@@ -1076,19 +1076,21 @@ FORM = f"""    <div class="form-col">
       </div>
     </div>"""
 
+# Photo du totem : dans l’encadré « Nous contacter » (et non plus dans l’en-tête)
+CONTACT_TOTEM = img("pages/contact-signaletique", "Totem de signalétique du Parc des Expositions d’Abidjan devant le Dôme", "(min-width: 1024px) 340px, 100vw")
 PAGES["contact-devis.html"] = ("Contact & Devis — Parc des Expositions d’Abidjan", page_hero(
     crumbs(A, ("Contact", None), ("Devis", None)),
     "Contact",
     "Parlez-nous de votre projet.",
     "Décrivez votre événement : notre équipe commerciale vous recontacte avec une proposition adaptée.",
     compact=True,
-    media='\n    <figure class="page-hero__media">' + img("pages/contact-signaletique", "Totem de signalétique du Parc des Expositions d’Abidjan devant le Dôme", "(min-width: 1024px) 40vw, 100vw", lazy=False) + "</figure>",
     lead_note=note("Le formulaire devient un véritable outil de qualification commerciale.")) + f"""
 
 <section class="section section--white section--tight">
   <div class="wrap with-aside">
 {FORM}
     <aside class="aside-box" id="nous-contacter" aria-labelledby="aside-contact">
+      <figure class="aside-box__media">{CONTACT_TOTEM}</figure>
       <p class="eyebrow">Parc des Expositions d’Abidjan</p>
       <h2 class="t3" id="aside-contact">Nous contacter</h2>
       <p>{TEL}</p>

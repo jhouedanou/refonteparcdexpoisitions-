@@ -24,25 +24,25 @@ colors:
 typography:
   hero:
     fontFamily: "Poppins, sans-serif"
-    fontSize: "clamp(1.75rem, 3.5vw, 3rem)"
+    fontSize: "clamp(2rem, 4vw, 3.5rem)"
     fontWeight: 600
-    lineHeight: 1.08
+    lineHeight: 1.1
   display:
     fontFamily: "Poppins, sans-serif"
-    fontSize: "clamp(1.75rem, 3.6vw, 3rem)"
+    fontSize: "clamp(2rem, 4.2vw, 3.5rem)"
     fontWeight: 600
-    lineHeight: 1.08
+    lineHeight: 1.1
   headline:
     fontFamily: "Poppins, sans-serif"
-    fontSize: "clamp(1.5rem, 2.3vw, 2rem)"
+    fontSize: "clamp(1.5rem, 2.6vw, 2.25rem)"
     fontWeight: 600
-    lineHeight: 1.12
+    lineHeight: 1.15
   title:
     fontFamily: "Poppins, sans-serif"
-    fontSize: "clamp(1.0625rem, 1.2vw, 1.25rem)"
+    fontSize: "clamp(1.125rem, 1.3vw, 1.3125rem)"
     fontWeight: 600
-    lineHeight: 1.25
-    letterSpacing: "0.01em"
+    lineHeight: 1.3
+    letterSpacing: "-0.01em"
   figure:
     fontFamily: "Barlow Condensed, Arial Narrow, sans-serif"
     fontSize: "clamp(2rem, 3vw + .75rem, 3rem)"
@@ -173,17 +173,17 @@ Chaque image du diaporama fournit une teinte dominante calculée à la générat
 
 ## Typography
 
-**Title Font :** Poppins 600 (Google Fonts), la police du logo, couleur #DB5913, en capitales
+**Title Font :** Poppins 600 (Google Fonts), la police du logo, couleur #DB5913, casse normale
 **Signage Font :** Barlow Condensed (Google Fonts) : labels, boutons, dates, chiffres-clés
 **Body Font :** Barlow (Google Fonts), repli `sans-serif`
 
 **Character :** les titres parlent avec la voix du logo (géométrique, arrondie, orange) ; la grotesque condensée reste la couche de signalétique (labels, boutons, chiffres) ; Barlow assure la lecture. L'ancienne police des titres (Barlow Condensed 800 en capitales) est archivée dans `design-system/pea/ARCHIVE-TITRES-BARLOW.md`.
 
 ### Hierarchy
-- **Hero** (Poppins 600 MAJ, clamp 28→48 px, lh 1.08) : titre du diaporama de l’accueil, en blanc (sur photo).
-- **Display** (Poppins 600 MAJ, clamp 28→48 px, lh 1.08) : h1 de page, blanc sur l’en-tête orange ; 26→40 px dans les en-têtes compacts.
-- **Headline** (Poppins 600 MAJ, clamp 24→32 px, lh 1.12, #DB5913) : h2 de section (≥ 24 px : grand texte, 3,85:1 sur blanc, 4,87:1 sur encre).
-- **Title** (Poppins 600 MAJ, clamp 17→20 px, lh 1.25, encre ou blanc) : titres de cartes, de services et d'encarts ; pas d'orange à cette taille (3,85:1 < 4,5:1). La classe `.t3` applique ce style à un h2 pour garder une hiérarchie correcte.
+- **Hero** (Poppins 600, clamp 32→56 px, lh 1.1) : titre du diaporama de l’accueil, en blanc (sur photo).
+- **Display** (Poppins 600, clamp 32→56 px, lh 1.1) : h1 de page, blanc sur l’en-tête orange ; 30→44 px dans les en-têtes compacts.
+- **Headline** (Poppins 600, clamp 24→36 px, lh 1.15, #DB5913) : h2 de section (≥ 24 px : grand texte, 3,85:1 sur blanc, 4,87:1 sur encre).
+- **Title** (Poppins 600, clamp 18→21 px, lh 1.3, encre ou blanc) : titres de cartes, de services et d'encarts ; pas d'orange à cette taille (3,85:1 < 4,5:1). La classe `.t3` applique ce style à un h2 pour garder une hiérarchie correcte.
 - **Figure** (800, clamp 32→48 px) : chiffres-clés, jamais plus grands que les titres de section.
 - **Lead** (400, 17→20 px, lh 1.55, 60ch max) : chapô.
 - **Body** (400, 17 px, lh 1.6, 68ch max) : texte courant.
@@ -191,7 +191,7 @@ Chaque image du diaporama fournit une teinte dominante calculée à la générat
 
 ### Named Rules
 **La règle du trait.** Les eyebrows portent un simple trait orange de 2 px en bordure gauche ; aucun carré ni pseudo-élément décoratif.
-**La règle des capitales.** Titres (Poppins), labels et boutons (Barlow Condensed) en capitales ; le texte courant reste en casse normale.
+**La règle des capitales.** Seuls les labels et boutons (Barlow Condensed) sont en capitales ; titres (Poppins) et texte courant restent en casse normale (les titres en capitales ont été essayés puis écartés).
 **La règle du titre logo.** h1 et h2 prennent la police et l'orange du logo (Poppins 600, #DB5913) ; sur photo ils restent blancs, et les petits titres (h3) restent encre.
 **La règle du sur-titre discret.** Le sur-titre orange (carré de 10 px) n'apparaît que dans les héros et le bloc d'appel à l'action. Dans le corps des pages, il passe en ardoise avec un tiret de 16 px.
 

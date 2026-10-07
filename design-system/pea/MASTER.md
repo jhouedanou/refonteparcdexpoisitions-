@@ -44,16 +44,16 @@ Interdits : dégradés violets, dégradés « placeholder » gris-vert, ombres p
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Barlow+Condensed:wght@600;700;800&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 ```
 
-- **Poppins** (600) : titres h1–h3, police du logo ; en capitales ; h2 en #DB5913, h1 blanc sur l’en-tête orange. Ancienne police des titres archivée : `ARCHIVE-TITRES-BARLOW.md`.
+- **Poppins** (600) : titres h1–h3, police du logo ; casse normale ; h2 en #DB5913, h1 blanc sur l’en-tête orange. Ancienne police des titres archivée : `ARCHIVE-TITRES-BARLOW.md`.
 - **Barlow Condensed** (600/700/800) : eyebrows, navigation, boutons, chiffres-clés, en capitales.
 - **Barlow** (400/500/600) : texte courant, formulaires, légendes.
 - Repli : `sans-serif` générique uniquement.
 
 | Rôle | Police | Taille | Graisse | Interlignage | Casse / approche |
 |---|---|---|---|---|---|
-| Display (h1) | Poppins | `clamp(1.75rem, 3.6vw, 3rem)` | 600 | 1.08 | MAJ, blanc sur en-tête orange |
-| Headline (h2) | Poppins | `clamp(1.5rem, 2.3vw, 2rem)` | 600 | 1.12 | MAJ, #DB5913 |
-| Title (h3) | Poppins | `clamp(1.0625rem, 1.2vw, 1.25rem)` | 600 | 1.25 | MAJ, encre |
+| Display (h1) | Poppins | `clamp(2rem, 4.2vw, 3.5rem)` | 600 | 1.1 | casse normale, blanc sur en-tête orange |
+| Headline (h2) | Poppins | `clamp(1.5rem, 2.6vw, 2.25rem)` | 600 | 1.15 | casse normale, #DB5913 |
+| Title (h3) | Poppins | `clamp(1.125rem, 1.3vw, 1.3125rem)` | 600 | 1.3 | casse normale, encre |
 | Figure (chiffres) | Barlow Condensed | `clamp(2.5rem, 5vw, 4.5rem)` | 800 | .9 | — |
 | Lead | Barlow | `clamp(1.0625rem, 1.4vw, 1.25rem)` | 400 | 1.55 | max 60ch |
 | Body | Barlow | 1.0625rem (17px) | 400 | 1.6 | max 68ch |
