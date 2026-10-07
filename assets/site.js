@@ -689,6 +689,9 @@
   var params = new URLSearchParams(window.location.search);
   var espace = document.getElementById('espace');
   if (espace && params.get('espace')) espace.value = params.get('espace');
+  // … et du type d'événement : contact-devis.html?type=salon (pages par type d'événement)
+  var typeSel = document.getElementById('type');
+  if (typeSel && params.get('type')) typeSel.value = params.get('type');
 
   // La date de fin ne peut pas précéder la date de début
   var debut = document.getElementById('date-debut');

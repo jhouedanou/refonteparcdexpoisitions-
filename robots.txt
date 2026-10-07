@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /planches.html
+Disallow: /en/planches.html
+
+Sitemap: https://pae-orpin.vercel.app/sitemap.xml

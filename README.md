@@ -102,3 +102,17 @@ Photos : les dossiers `images/Hall d’Exposition`, `images/dome`, `images/parvi
 3. `python3 tools/pages/generer.py` — écrit toutes les pages FR et EN (contenus, événements, diaporama dans ce fichier).
 
 Prérequis : Python 3, `cwebp`, `ffmpeg`, `sips` (macOS). Styles : `styles.css` ; comportements : `assets/site.js`.
+
+## Référencement (maquette)
+
+- `tools/pages/referencement.py` (exécuté par `generer.py`) :
+  - pour chaque page, en français et en anglais : titre Google ciblé, `meta description`, adresse canonique, `hreflang` absolus (avec `x-default`), balises Open Graph et Twitter (image de partage) ;
+  - données structurées Schema.org en JSON-LD : Organization et EventVenue (le Parc), EventVenue (chaque espace), Event (chaque événement), ItemList (agenda), FAQPage (« Venir à Abidjan »), BreadcrumbList (toutes les pages intérieures) ;
+  - `sitemap.xml` (avec alternatives de langue) et `robots.txt`.
+- Nouvelles pages :
+  - 4 pages par type d'événement : `salons-professionnels.html`, `congres-conferences.html`, `evenements-entreprise.html`, `concerts-spectacles.html` ; leur bouton de devis pré-remplit le type (`contact-devis.html?type=…`) ;
+  - `venir-a-abidjan.html` (accès, hébergement, visas, infos pratiques, FAQ) ;
+  - une page par événement de l'agenda : `evenement-<identifiant>.html`. L'ancienne `fiche-evenement.html` redirige vers `evenement-auto-expo.html`.
+- **À la mise en ligne** :
+  - remplacer `SITE` (adresse de la maquette) par le domaine du Parc dans `referencement.py` ;
+  - faire valider les formalités de visa décrites sur « Venir à Abidjan ».

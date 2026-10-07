@@ -1216,3 +1216,29 @@ body:has(main > section:last-of-type.section--ink) .footer { --arch-prev: var(--
   mask: linear-gradient(#000 0 0), var(--arch-dome) 50% calc(100% + 2px) / var(--arch-w) 100% no-repeat;
   mask-composite: exclude;
 }
+
+/* ---------- Référencement : pages par type d’événement, « Venir à Abidjan », pages événement ---------- */
+.reasons { display: grid; gap: var(--s-6); margin: 0; padding: 0; list-style: none; }
+@media (min-width: 768px) { .reasons { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.reasons li { padding-top: var(--s-4); border-top: 2px solid var(--orange); }
+.reasons h3, .reasons h2 { margin-bottom: var(--s-3); }
+.reasons p { color: var(--muted); }
+.type-links { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2) var(--s-4); }
+.type-links__label { margin: 0; font: 700 var(--fs-label)/1.2 var(--font-display); text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+.type-links ul { display: flex; flex-wrap: wrap; gap: var(--s-2); margin: 0; padding: 0; list-style: none; }
+.chip--link { display: inline-flex; align-items: center; text-decoration: none; }
+.chip--link:hover { background: var(--ink); color: var(--white); }
+.faq__list { display: grid; gap: 0; border-top: 1px solid var(--ink); }
+.faq__item { border-bottom: 1px solid var(--line); }
+.faq__item summary { display: flex; justify-content: space-between; align-items: center; gap: var(--s-4); min-height: 56px; padding: var(--s-3) 0; cursor: pointer; font: 600 1.125rem/1.35 var(--font-title); color: var(--ink); list-style: none; }
+.faq__item summary::-webkit-details-marker { display: none; }
+.faq__item summary::after { content: "+"; flex: none; font: 700 1.5rem/1 var(--font-display); color: var(--orange-action); }
+.faq__item[open] summary::after { content: "–"; }
+.faq__item p { margin: 0 0 var(--s-5); }
+.practical { display: grid; gap: var(--s-4); }
+@media (min-width: 768px) { .practical { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.tl-card__title a { color: inherit; text-decoration: none; }
+.tl-card__title a:hover { text-decoration: underline; text-decoration-color: var(--orange-action); text-underline-offset: 4px; }
+
+/* Deux espaces seulement (pages par type d’événement) : deux colonnes égales */
+@media (min-width: 768px) { .spaces--2 { grid-template-columns: 1fr 1fr; } .spaces--2 .space:first-child { grid-row: auto; min-height: 420px; } .spaces--2 .space { min-height: 420px; } }

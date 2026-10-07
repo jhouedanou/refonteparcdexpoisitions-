@@ -20,7 +20,7 @@ TEL = f'<a class="wa-link" href="{WA_URL}" target="_blank" rel="noopener" aria-l
 MAPS_PLACE = ("https://www.google.com/maps/place/Abidjan+Exhibition+Center/@5.2634735,-3.9491417,17z/"
               "data=!3m1!4b1!4m6!3m5!1s0xfc1ef58a482d019:0x8268f3aea9d9066d!8m2!3d5.2634735!4d-3.9465668!16s%2Fg%2F11h9jwm292")
 SECTION_OF = {"hall-exposition.html": "nos-espaces.html", "le-dome.html": "nos-espaces.html", "parvis-esplanades.html": "nos-espaces.html", "visite-virtuelle.html": "nos-espaces.html",
-              "fiche-evenement.html": "agenda.html"}
+              "venir-a-abidjan.html": "qui-sommes-nous.html"}
 
 
 def note(original):
@@ -97,10 +97,11 @@ FOOTER = f"""</main>
     </div>
     <nav class="footer__nav" aria-label="Liens du pied de page">
       <ul role="list">
-        <li><a href="nos-espaces.html">Espaces</a></li>
-        <li><a href="nos-services.html">Services</a></li>
-        <li><a href="qui-sommes-nous.html#destination">Destination</a></li>
-        <li><a href="qui-sommes-nous.html#expertise">Expertise</a></li>
+        <li><a href="salons-professionnels.html">Salons</a></li>
+        <li><a href="congres-conferences.html">Congrès</a></li>
+        <li><a href="evenements-entreprise.html">Entreprises</a></li>
+        <li><a href="concerts-spectacles.html">Concerts</a></li>
+        <li><a href="venir-a-abidjan.html">Venir à Abidjan</a></li>
       </ul>
     </nav>
     <a class="footer__partner" href="https://www.gl-events.com/" target="_blank" rel="noopener" aria-label="GL events, expertise internationale (nouvel onglet)">
@@ -236,6 +237,16 @@ def results(target, text, empty):
             f'<p class="empty" data-empty-for="{target}" hidden>{empty}</p>')
 
 
+TYPE_PAGES = [("salons-professionnels.html", "Salons professionnels"), ("congres-conferences.html", "Congrès et conférences"),
+              ("evenements-entreprise.html", "Événements d’entreprise"), ("concerts-spectacles.html", "Concerts et spectacles")]
+
+
+def type_links(current=None, title="Par type d’événement"):
+    items = "".join(f'<li><a class="chip chip--link" href="{h}">{t}</a></li>' for h, t in TYPE_PAGES if h != current)
+    return f'<nav class="type-links block-gap" aria-label="{title}"><p class="type-links__label">{title}</p><ul role="list">{items}</ul></nav>'
+
+
+TYPE_LINKS = type_links()
 PLAN_PDF = "https://www.parcdesexpositionsabidjan.com/sites/default/files/assets/fichier/dervin/2025-02/plan-commercial-pea.pdf"
 A = "Accueil", "index.html"
 PAGES = {}
@@ -286,7 +297,7 @@ FB_PLUGIN = ("https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.f
              "&amp;tabs=timeline&amp;width=500&amp;height=620&amp;small_header=true&amp;adapt_container_width=true"
              "&amp;hide_cover=true&amp;show_facepile=false&amp;locale=fr_FR")
 DETAILS = {
-    "auto-expo": dict(desc="Le salon de l’industrie automobile réunit plus de 15 nations participantes et 900 acheteurs professionnels, avec des rencontres B2B et des panels sectoriels.", site="https://ivorycoastautoexpo.com/", fiche="fiche-evenement.html"),
+    "auto-expo": dict(desc="Le salon de l’industrie automobile réunit plus de 15 nations participantes et 900 acheteurs professionnels, avec des rencontres B2B et des panels sectoriels.", site="https://ivorycoastautoexpo.com/"),
     "horeca-expo": dict(desc="Le rendez-vous des marques internationales de l’hôtellerie, de la restauration et des cafés, avec des rencontres B2B avec des acheteurs qualifiés et des conférences professionnelles.", site="https://ivorycoasthorecaexpo.com/"),
     "agrofood-plastprintpack-west-africa-0": dict(desc="Plus de 150 exposants venus de 25 pays présentent leurs produits et solutions pour le marché ivoirien et ouest-africain. Troisième édition des salons Agrofood, Plastprintpack et Afrik’embal à Abidjan.", org="Fairtrade Messe"),
     "food-expo-0": dict(desc="Les acteurs de l’agroalimentaire, de l’agriculture et de l’emballage : plus de 150 marques, 15 pays participants, plus de 25 conférences et 5 200 visiteurs professionnels attendus.", site="https://ivorycoastfoodexpo.com/"),
@@ -355,15 +366,14 @@ def timeline():
             links.append(f'<a class="btn btn--primary btn--sm" href="{resa}" target="_blank" rel="noopener" aria-label="{resa_label} : {title} (nouvel onglet)">{resa_label} {EXT}</a>')
         if det.get("site"):
             links.append(f'<a class="link-arrow" href="{det["site"]}" target="_blank" rel="noopener" aria-label="Site officiel : {title} (nouvel onglet)">Site officiel {EXT}</a>')
-        if det.get("fiche"):
-            links.append(f'<a class="link-arrow" href="{det["fiche"]}">Fiche complète {ARROW}</a>')
+        links.append(f'<a class="link-arrow" href="evenement-{slug_}.html">Page de l’événement {ARROW}</a>')
         reserve = links[0] if resa else ""
         out.append(f"""      <li class="tl-item" id="{slug_}" data-type="{tags}" data-start="{iso1}" data-end="{iso2}">
         <p class="tl-date"><time datetime="{iso1}" class="tl-date__day">{d1:02d}</time><span class="tl-date__rest">{rest}</span></p>
         <div class="tl-card">
           <div class="tl-card__media">{img(f"agenda/{slug_}")}</div>
           <p class="tl-card__type">{kind}<span class="tl-card__next" hidden> · Prochainement</span></p>
-          <h3 class="tl-card__title">{title}</h3>
+          <h3 class="tl-card__title"><a href="evenement-{slug_}.html">{title}</a></h3>
           <p class="tl-card__when">{when_long(start, end)}</p>
           <div class="tl-card__more" data-event-more>
             <p class="ev-desc">{det.get("desc", "")}</p>
@@ -423,7 +433,7 @@ PAGES["index.html"] = ("Accueil — Parc des Expositions d’Abidjan", f"""
   <div class="wrap hero__inner">
     {ARCH.format(cls="arch")}
     <p class="eyebrow">Abidjan · Côte d’Ivoire</p>
-    <h1>Le lieu des grands rendez-vous.</h1>
+    <h1>Salons, congrès et grands événements à Abidjan.</h1>
     <p class="lead">Des espaces modulables, des services complets et une destination au cœur de l’Afrique de l’Ouest.</p>
     <div class="actions"><a class="btn btn--primary" href="nos-espaces.html">Découvrir nos espaces {ARROW}</a><a class="btn btn--secondary" href="contact-devis.html">Demander un devis</a></div>
   </div>
@@ -464,7 +474,7 @@ PAGES["index.html"] = ("Accueil — Parc des Expositions d’Abidjan", f"""
       <h2>Votre événement commence à Abidjan.</h2>
       {note("Accessibilité, hôtellerie, vie économique et rayonnement régional : la destination devient un argument commercial à part entière.")}
       <p>Accessibilité, hôtellerie, vie économique et rayonnement régional : Abidjan offre à vos participants une destination à la hauteur de votre événement.</p>
-      <a class="btn btn--secondary" href="qui-sommes-nous.html#destination">Découvrir la destination {ARROW}</a>
+      <a class="btn btn--secondary" href="venir-a-abidjan.html">Venir à Abidjan {ARROW}</a>
     </div>
   </div>
 </section>
@@ -473,9 +483,9 @@ PAGES["index.html"] = ("Accueil — Parc des Expositions d’Abidjan", f"""
   <div class="wrap">
     <div class="section__head"><p class="eyebrow">Agenda</p><h2>Prochainement au Parc</h2></div>
     <div class="agenda">
-{event("8–10 oct. 2026", "Auto Expo", "Salon de l’industrie automobile", href="agenda.html#auto-expo", image="auto-expo")}
-{event("11 oct. 2026", "Concert TAYC", "Concert", href="agenda.html#concert-tayc", image="concert-tayc")}
-{event("15–16 oct. 2026", "Brands Licensing Africa", "Salon des licences de marques", href="agenda.html#brands-licensing-africa", image="brands-licensing-africa")}
+{event("8–10 oct. 2026", "Auto Expo", "Salon de l’industrie automobile", href="evenement-auto-expo.html", image="auto-expo")}
+{event("11 oct. 2026", "Concert TAYC", "Concert", href="evenement-concert-tayc.html", image="concert-tayc")}
+{event("15–16 oct. 2026", "Brands Licensing Africa", "Salon des licences de marques", href="evenement-brands-licensing-africa.html", image="brands-licensing-africa")}
     </div>
     <p class="section__more"><a class="link-arrow" href="agenda.html">Voir tout l’agenda {ARROW}</a></p>
   </div>
@@ -601,6 +611,7 @@ PAGES["qui-sommes-nous.html"] = ("Qui sommes-nous ? — Parc des Expositions d�
     <p>Accessibilité, offre hôtelière, dynamisme économique, culturel et touristique : la Côte d’Ivoire réunit tout ce qu’il faut pour accueillir vos participants venus de la région et du monde entier.</p>
   </div>
     <div class="destination-grid block-gap" data-lightbox>{DESTINATION_ITEMS}</div>
+    <p class="section__more"><a class="link-arrow" href="venir-a-abidjan.html">Accès, hôtels, visas : venir à Abidjan {ARROW}</a></p>
   </div>
 </section>
 
@@ -632,6 +643,7 @@ PAGES["nos-espaces.html"] = ("Nos espaces — Parc des Expositions d’Abidjan",
 {space("B", "Le Dôme", "5 000 m² · 5 023 assis · 9 588 debout", ink=True, h="h2", usage="congres conference convention concert")}
 {space("C", "Parvis & Esplanades", "67 000 m² d’espaces extérieurs", h="h2", usage="concert salon")}
     </div>
+    {TYPE_LINKS}
   </div>
 </section>
 
@@ -950,43 +962,6 @@ PAGES["agenda.html"] = ("Agenda — Parc des Expositions d’Abidjan", page_hero
 """)
 
 # ---------------------------------------------------------------- Fiche événement
-PAGES["fiche-evenement.html"] = ("Événement — Parc des Expositions d’Abidjan", f"""
-<section class="hero hero--small hero--under-header">
-  <div class="hero__img" aria-hidden="true">{img("agenda/auto-expo", priority=True, lazy=False)}</div>
-  <div class="wrap hero__inner">
-    {crumbs(A, ("Agenda", "agenda.html"), ("Auto Expo", None), ink=True)}
-    {note("Agenda · Exemple de gabarit")}
-    <p class="eyebrow">Agenda · Salon</p>
-    <h1>Auto Expo</h1>
-    {note("Un gabarit événement optimisé pour la lisibilité, le partage social et le référencement.")}
-    <p class="lead">Dates, lieu, programme et informations pratiques : tout pour préparer votre venue.</p>
-  </div>
-</section>
-
-<section class="section section--white">
-  <div class="wrap with-aside">
-    <div>
-      <ul class="figures figures--3 figures--facts" role="list">
-        <li class="figure"><span class="figure__label">Date</span><strong>8–10 oct. 2026</strong></li>
-        <li class="figure"><span class="figure__label">Lieu</span><strong>Parc des Expositions</strong></li>
-        <li class="figure"><span class="figure__label">Public</span><strong>Professionnels</strong></li>
-      </ul>
-      <h2 class="block-gap">À propos de l’événement</h2>
-      {note("Zone administrable Drupal pour la présentation, le programme, les liens utiles, l’organisateur et les informations pratiques.")}
-      <p>Le salon de l’industrie automobile réunit plus de 15 nations participantes et 900 acheteurs professionnels, avec des rencontres B2B et des panels sectoriels pour développer vos relations commerciales à l’international.</p>
-      <p><a class="link-arrow" href="https://ivorycoastautoexpo.com/" target="_blank" rel="noopener" aria-label="Site officiel de l’événement (nouvel onglet)">Site officiel de l’événement {EXT}</a></p>
-      <div class="media block-gap">{img("phototheque/salon-auto", "Véhicules exposés lors d’un salon automobile", "(min-width: 1024px) 60vw, 100vw")}</div>
-    </div>
-    <aside class="aside-box" aria-labelledby="aside-event">
-      <p class="eyebrow">Informations</p>
-      <h3 id="aside-event">Préparez votre visite</h3>
-      <p>Accès, horaires, transport, parking et informations visiteurs.</p>
-      <a class="btn btn--primary btn--block" href="contact-devis.html#nous-contacter">Contacter le Parc {ARROW}</a>
-    </aside>
-  </div>
-</section>
-""")
-
 # ---------------------------------------------------------------- Contact & devis
 REQ = ' <span class="req" aria-hidden="true">*</span>'
 OPT = ' <span class="opt">(facultatif)</span>'
@@ -1243,7 +1218,9 @@ def to_english(page, src):
 def with_lang_links(page, src, lang):
     fr, en = (page, f"en/{page}") if lang == "fr" else (f"../{page}", page)
     src = src.replace("__FR__", fr).replace("__EN__", en)
-    alt = f'<link rel="alternate" hreflang="fr" href="{fr}">\n<link rel="alternate" hreflang="en" href="{en}">\n</head>'
+    fr_abs, en_abs = page_url(page, "fr"), page_url(page, "en")
+    alt = (f'<link rel="alternate" hreflang="fr" href="{fr_abs}">\n<link rel="alternate" hreflang="en" href="{en_abs}">\n'
+           f'<link rel="alternate" hreflang="x-default" href="{fr_abs}">\n</head>')
     return src.replace("</head>", alt, 1)
 
 
@@ -1270,21 +1247,27 @@ def with_page_bg(name, src):
     return src.replace('<section class="page-hero', f'<section style="--page-bg: url(assets/img/{bg}-1600.webp)" class="page-hero page-hero--bg', 1)
 
 
+# Référencement (balises, données structurées, sitemap) et nouvelles pages : tools/pages/referencement.py
+exec(pathlib.Path(__file__).with_name("referencement.py").read_text(encoding="utf-8"))
+
 (ROOT / "en").mkdir(exist_ok=True)
 for name, (title, body) in PAGES.items():
     fr_html = with_page_bg(name, head(title) + "\n" + header(name) + body + FOOTER)
-    (ROOT / name).write_text(with_lang_links(name, fr_html, "fr"), encoding="utf-8")
     en_html = to_english(name, fr_html.replace("__FR__", "../" + name).replace("__EN__", name))
-    (ROOT / "en" / name).write_text(with_lang_links(name, en_html, "en"), encoding="utf-8")
+    (ROOT / name).write_text(with_lang_links(name, apply_seo(name, fr_html, "fr"), "fr"), encoding="utf-8")
+    (ROOT / "en" / name).write_text(with_lang_links(name, apply_seo(name, en_html, "en"), "en"), encoding="utf-8")
     print("écrit", name, "+ en/" + name)
+write_sitemap()
 
 # ---------------------------------------------------------------- Planche d’index (inchangée sur le fond)
 LINKS = [("index.html", "Accueil"), ("qui-sommes-nous.html", "Qui Sommes Nous"), ("nos-espaces.html", "Nos Espaces"),
          ("hall-exposition.html", "Hall Exposition"), ("le-dome.html", "Le Dome"), ("parvis-esplanades.html", "Parvis Esplanades"), ("nos-services.html", "Nos Services"), ("phototheque.html", "Phototheque"),
-         ("agenda.html", "Agenda"), ("fiche-evenement.html", "Fiche Evenement"), ("contact-devis.html", "Contact Devis"),
+         ("agenda.html", "Agenda"), ("evenement-auto-expo.html", "Page événement (Auto Expo)"), ("contact-devis.html", "Contact Devis"),
+         ("salons-professionnels.html", "Salons professionnels"), ("congres-conferences.html", "Congrès et conférences"),
+         ("evenements-entreprise.html", "Événements d’entreprise"), ("concerts-spectacles.html", "Concerts et spectacles"), ("venir-a-abidjan.html", "Venir à Abidjan"),
          ("visite-virtuelle.html", "Visite Virtuelle"), ("informations-legales.html", "Informations Legales")]
 links = "\n".join(f'      <li><a href="{h}">{t} {ARROW}</a></li>' for h, t in LINKS)
-index = head("Parc des Expositions d’Abidjan — Planche HTML") + f"""
+index = head("Parc des Expositions d’Abidjan — Planche HTML").replace("</head>", '<meta name="robots" content="noindex">\n</head>') + f"""
 <body>
 <main class="hub" id="contenu">
   <div class="wrap">
@@ -1319,4 +1302,8 @@ REDIRECT = """<!doctype html>
 """
 (ROOT / "accueil.html").write_text(REDIRECT.format(lang="fr", label="Accueil du Parc des Expositions d’Abidjan"), encoding="utf-8")
 (ROOT / "en" / "accueil.html").write_text(REDIRECT.format(lang="en", label="Abidjan Exhibition Center home page"), encoding="utf-8")
+# Ancienne fiche événement (gabarit) : remplacée par une page par événement
+_to_auto = lambda t: t.replace("index.html", "evenement-auto-expo.html")
+(ROOT / "fiche-evenement.html").write_text(_to_auto(REDIRECT.format(lang="fr", label="Auto Expo au Parc des Expositions d’Abidjan")), encoding="utf-8")
+(ROOT / "en" / "fiche-evenement.html").write_text(_to_auto(REDIRECT.format(lang="en", label="Auto Expo at the Abidjan Exhibition Center")), encoding="utf-8")
 print("écrit accueil.html (redirection)")
