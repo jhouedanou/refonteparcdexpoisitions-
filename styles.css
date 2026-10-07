@@ -1242,3 +1242,42 @@ body:has(main > section:last-of-type.section--ink) .footer { --arch-prev: var(--
 
 /* Deux espaces seulement (pages par type d’événement) : deux colonnes égales */
 @media (min-width: 768px) { .spaces--2 { grid-template-columns: 1fr 1fr; } .spaces--2 .space:first-child { grid-row: auto; min-height: 420px; } .spaces--2 .space { min-height: 420px; } }
+
+/* ---------- Sous-menu « Nos espaces » (bouton + panneau encre, angles vifs, filet orange) ---------- */
+.nav__subtoggle { display: none; }
+.nav .nav__sub { display: block; margin: 0 0 var(--s-3); padding: 0 0 0 var(--s-4); list-style: none; border-left: 2px solid var(--orange); }
+.nav .nav__sub a { min-height: 52px; flex-direction: column; align-items: flex-start; justify-content: center; gap: 2px; border-bottom: 0; font-size: 1.125rem; }
+.nav__sub-desc { font: 400 13px/1.3 var(--font-body); text-transform: none; letter-spacing: 0; color: var(--muted-dark); }
+.nav .nav__sub a[aria-current] .nav__sub-title { color: var(--orange); }
+@media (min-width: 70em) {
+  .nav__item--sub { position: relative; display: flex; align-items: center; }
+  .nav__subtoggle { display: grid; place-items: center; width: 44px; height: 44px; margin: 0 -14px 0 -10px; padding: 0; border: 0; background: none; color: inherit; cursor: pointer; }
+  .nav__subtoggle svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; transition: transform .2s var(--ease); }
+  .nav__subtoggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+  .js .topbar--overlay:not(.is-solid) .nav__subtoggle { color: var(--white); }
+  .nav .nav__sub {
+    position: absolute; top: 100%; left: -20px; z-index: 5; display: none; min-width: 300px; margin: 0; padding: var(--s-2) 0;
+    border-left: 0; border-top: 3px solid var(--orange); background: var(--ink);
+  }
+  .nav .nav__item--sub:hover .nav__sub, .nav .nav__subtoggle[aria-expanded="true"] + .nav__sub { display: block; }
+  .nav .nav__sub a { min-height: 0; padding: var(--s-3) var(--s-5); color: var(--white); font-size: 15px; letter-spacing: .08em; }
+  .nav .nav__sub a::after { content: none; }
+  .nav .nav__sub a:hover { background: var(--ink-2); color: var(--white); }
+  .nav .nav__sub a:hover .nav__sub-title { color: var(--orange); }
+  .js .topbar--overlay:not(.is-solid) .nav .nav__sub a { color: var(--white); }
+  .nav__sub :focus-visible { outline: 2px solid var(--orange); outline-offset: -2px; }
+}
+
+/* ---------- WhatsApp dans l’en-tête fixe : visible dès que l’en-tête devient blanc (défilement) ---------- */
+.brand { margin-right: 0; }
+.topbar__wa {
+  display: inline-flex; align-items: center; gap: var(--s-2); min-width: 44px; min-height: 44px; margin-right: auto; margin-left: var(--s-3);
+  color: var(--ink); font: 600 14px/1 var(--font-body); letter-spacing: .02em; text-decoration: none; white-space: nowrap;
+  visibility: hidden; opacity: 0; transition: opacity .25s var(--ease), visibility .25s;
+}
+.topbar__wa .i--wa { width: 22px; height: 22px; flex: none; }
+.topbar__wa-num { display: none; }
+.topbar__wa:hover { color: var(--orange-action); }
+.js .topbar--overlay.is-solid .topbar__wa { visibility: visible; opacity: 1; }
+@media (min-width: 1280px) { .topbar__wa-num { display: inline; } }
+@media (prefers-reduced-motion: reduce) { .topbar__wa { transition: none; } }

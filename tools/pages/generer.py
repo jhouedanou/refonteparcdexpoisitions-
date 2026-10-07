@@ -28,10 +28,25 @@ def note(original):
     return f"<!-- Note de maquette (texte d’origine) : {original} -->"
 
 
+SUB_ESPACES = [("hall-exposition.html", "Hall d’Exposition", "6 500 m² · 17 m sous plafond"),
+               ("le-dome.html", "Le Dôme", "5 000 m² · 5 023 assis · 9 588 debout"),
+               ("parvis-esplanades.html", "Parvis & Esplanades", "67 000 m² d’espaces extérieurs"),
+               ("visite-virtuelle.html", "Visite virtuelle 360°", "Explorer le Parc à distance")]
+
+
 def header(active):
     items = []
     for href, label in NAV:
         cur = ' aria-current="page"' if href == active else (' aria-current="true"' if SECTION_OF.get(active) == href else "")
+        if href == "nos-espaces.html":
+            subs = "".join(
+                f'<li><a href="{h}"{" aria-current=" + chr(34) + "page" + chr(34) if h == active else ""}><span class="nav__sub-title">{t_}</span><span class="nav__sub-desc">{d}</span></a></li>'
+                for h, t_, d in SUB_ESPACES)
+            items.append(f'      <li class="nav__item--sub"><a href="{href}"{cur}>{label}</a>'
+                         f'<button class="nav__subtoggle" type="button" aria-expanded="false" aria-controls="sub-espaces" aria-label="Sous-menu Nos espaces">'
+                         f'<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></button>'
+                         f'<ul class="nav__sub" id="sub-espaces" role="list">{subs}</ul></li>')
+            continue
         items.append(f'      <li><a href="{href}"{cur}>{label}</a></li>')
     cta_cur = ' aria-current="page"' if active == "contact-devis.html" else ""
     return f"""<body>
@@ -63,6 +78,7 @@ def header(active):
         <li><a href="{LI_URL}" target="_blank" rel="noopener" aria-label="LinkedIn du Parc des Expositions (nouvel onglet)">{LI_ICON}</a></li>
       </ul>
     </nav>
+    <a class="topbar__wa" href="{WA_URL}" target="_blank" rel="noopener" aria-label="WhatsApp : +225 27 21 71 09 97 (nouvel onglet)">{WA_ICON}<span class="topbar__wa-num">+225 27 21 71 09 97</span></a>
     <a class="btn btn--primary topbar__cta" href="contact-devis.html"{cta_cur}><span><span class="hide-sm">Demander un </span>devis</span></a>
   </div>
 </header>

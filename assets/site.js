@@ -272,6 +272,18 @@
     });
   }
 
+  // ---------- Sous-menu « Nos espaces » : bouton (clavier, tactile), survol (souris), Échap pour fermer ----------
+  document.querySelectorAll('.nav__subtoggle').forEach(function (btn) {
+    var item = btn.closest('.nav__item--sub');
+    var setSub = function (open) { btn.setAttribute('aria-expanded', String(open)); };
+    btn.addEventListener('click', function () { setSub(btn.getAttribute('aria-expanded') !== 'true'); });
+    item.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') { setSub(false); btn.focus(); }
+    });
+    item.addEventListener('focusout', function (e) { if (!item.contains(e.relatedTarget)) setSub(false); });
+    document.addEventListener('click', function (e) { if (!item.contains(e.target)) setSub(false); });
+  });
+
   // ---------- Retour en haut : visible après un écran de défilement ----------
   var toTop = document.querySelector('.to-top');
   if (toTop) {

@@ -30,6 +30,7 @@ for fr, en in [
     ("Par type d’événement", "By event type"), ("Salons professionnels", "Trade shows"),
     ("Congrès et conférences", "Congresses and conferences"), ("Événements d’entreprise", "Corporate events"),
     ("Concerts et spectacles", "Concerts and shows"), ("Autres types d’événements", "Other event types"),
+    ("Sous-menu Nos espaces", "Our venues submenu"), ("Explorer le Parc à distance", "Explore the venue remotely"), ("Visite virtuelle 360°", "360° virtual tour"),
 ]:
     t(fr, en)
 
