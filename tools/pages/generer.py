@@ -71,6 +71,25 @@ def header(active):
 
 FOOTER = f"""</main>
 <footer class="footer">
+  <!-- Note de maquette : inscription simulée ; à brancher sur l’outil d’e-mailing du Parc (Brevo, Mailchimp…) via Drupal -->
+  <div class="wrap newsletter" id="newsletter">
+    <div class="newsletter__intro">
+      <p class="newsletter__label">Newsletter</p>
+      <h2 class="newsletter__title">Les prochains événements du Parc, dans votre boîte mail</h2>
+      <p>Une lettre par mois : salons, congrès et concerts à venir. Désinscription en un clic.</p>
+    </div>
+    <form class="newsletter__form" data-newsletter novalidate>
+      <label class="newsletter__field-label" for="nl-email">Votre adresse e-mail</label>
+      <div class="newsletter__row">
+        <input id="nl-email" name="email" type="email" autocomplete="email" required placeholder="nom@exemple.com" aria-describedby="nl-email-error">
+        <button class="btn btn--primary" type="submit">S’inscrire</button>
+      </div>
+      <p class="newsletter__error" id="nl-email-error" hidden>Indiquez une adresse e-mail valide, par exemple nom@exemple.com.</p>
+      <label class="check newsletter__consent"><input id="nl-consent" type="checkbox" required aria-describedby="nl-consent-error"><span>J’accepte de recevoir la newsletter du Parc. Voir la <a href="informations-legales.html#confidentialite">politique de confidentialité</a>.</span></label>
+      <p class="newsletter__error" id="nl-consent-error" hidden>Cochez la case pour confirmer votre inscription.</p>
+    </form>
+    <p class="newsletter__ok" role="status" tabindex="-1" hidden></p>
+  </div>
   <div class="wrap footer__grid">
     <div class="footer__brand">
       <img src="assets/logo-pea.webp" alt="" width="394" height="210" loading="lazy">
@@ -82,13 +101,13 @@ FOOTER = f"""</main>
         <li><a href="nos-services.html">Services</a></li>
         <li><a href="qui-sommes-nous.html#destination">Destination</a></li>
         <li><a href="qui-sommes-nous.html#expertise">Expertise</a></li>
-        <li class="footer__lang"><a href="__FR__" hreflang="fr" lang="fr" aria-current="true">FR</a> / <a href="__EN__" hreflang="en" lang="en">EN</a></li>
       </ul>
     </nav>
     <a class="footer__partner" href="https://www.gl-events.com/" target="_blank" rel="noopener" aria-label="GL events, expertise internationale (nouvel onglet)">
       <span class="footer__partner-logo"><img src="assets/logo-gl-events.png" alt="GL events" width="225" height="225" loading="lazy"></span>
       <span class="footer__partner-text">Expertise internationale</span>
     </a>
+    <div class="footer__bottom">
     <nav class="footer__legal" aria-label="Informations légales">
       <ul role="list">
         <li><a href="informations-legales.html#mentions-legales">Mentions légales</a></li>
@@ -99,6 +118,8 @@ FOOTER = f"""</main>
         <li><button type="button" class="footer__cookies" data-consent-open>Gérer les cookies</button></li>
       </ul>
     </nav>
+    <p class="footer__credit">Design par <a href="https://bigfive.solutions/" target="_blank" rel="noopener" aria-label="Big Five, design du site (nouvel onglet)">Big Five</a></p>
+    </div>
   </div>
 </footer>
 <a class="to-top" href="#contenu" aria-label="Retour en haut de page"><svg viewBox="16 -1 360 62.5" aria-hidden="true" focusable="false"><path d="M20 61C70 54 120 25.5 150 12C164 5.7 182 0 196 0C210 0 228 5.7 242 12C272 25.5 322 54 372 61Z"/></svg></a>
@@ -365,9 +386,7 @@ SLIDES = ["slider/dome-rendu", "slider/salon-vue-plongeante", "slider/concert-fo
 SLIDES_HTML = "\n".join(
     f'    <figure class="slider__slide{" is-active" if i == 0 else ""}">'
     f'{img(n, sizes="100vw", priority=i == 0, lazy=i != 0)}</figure>' for i, n in enumerate(SLIDES))
-SLIDER_DOTS = "".join(
-    f'<li><button type="button" class="ctrl__seg slider__dot" data-slide="{i}" aria-label="Afficher l’image {i + 1} sur {len(SLIDES)}"'
-    f'{" aria-current=" + chr(34) + "true" + chr(34) if i == 0 else ""}></button></li>' for i in range(len(SLIDES)))
+SLIDER_DOTS = "".join(f'<li><span class="ctrl__seg"{" aria-current=" + chr(34) + "true" + chr(34) if i == 0 else ""}></span></li>' for i in range(len(SLIDES)))
 
 LOGOS = [  # images/logos -> assets/img/logos (tools/optimiser-images.py)
     ("ardci", "ARDCI — Assemblée des Régions et Districts de Côte d’Ivoire"),
@@ -395,8 +414,8 @@ PAGES["index.html"] = ("Accueil — Parc des Expositions d’Abidjan", f"""
   <span class="hero__arch" aria-hidden="true"></span>
   <a class="scroll-cue" href="#decouvrir" aria-label="Aller à la section suivante"><span class="scroll-cue__mouse" aria-hidden="true"></span></a>
   <div class="ctrl ctrl--on-photo slider__controls" role="group" aria-label="Diaporama">
-    <p class="ctrl__count" aria-hidden="true"><span data-ctrl-current>01</span> / {len(SLIDES):02d}</p>
-    <ol class="ctrl__track" role="list">{SLIDER_DOTS}</ol>
+    <p class="ctrl__count"><span class="sr-only">Image </span><span data-ctrl-current>01</span> / {len(SLIDES):02d}</p>
+    <ol class="ctrl__track" role="list" aria-hidden="true">{SLIDER_DOTS}</ol>
     <button type="button" class="ctrl__btn" data-slide-prev aria-label="Image précédente">{CHEV_L}</button>
     <button type="button" class="ctrl__btn slider__toggle" aria-pressed="false" aria-label="Mettre le diaporama en pause"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="slider__icon-pause"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="slider__icon-play"><path d="M8 5v14l11-7z"/></svg></button>
     <button type="button" class="ctrl__btn" data-slide-next aria-label="Image suivante">{CHEV_R}</button>
@@ -515,8 +534,8 @@ PAGES["index.html"] = ("Accueil — Parc des Expositions d’Abidjan", f"""
     <div class="logos-head">
       <div><p class="eyebrow">Références</p><h2 id="refs-title">Ils nous ont fait confiance</h2></div>
       <div class="ctrl logos-controls" role="group" aria-label="Défilement des logos">
-        <p class="ctrl__count" aria-hidden="true"><span data-ctrl-current>1</span> / <span data-ctrl-total>2</span></p>
-        <ol class="ctrl__track" role="list" data-logos-pages></ol>
+        <p class="ctrl__count"><span class="sr-only">Page </span><span data-ctrl-current>1</span> / <span data-ctrl-total>2</span></p>
+        <ol class="ctrl__track" role="list" aria-hidden="true" data-logos-pages></ol>
         <button class="ctrl__btn" type="button" data-logos-prev aria-label="Logos précédents">{CHEV_L}</button>
         <button class="ctrl__btn logos__toggle" type="button" aria-pressed="false" aria-label="Mettre le défilement en pause"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="slider__icon-pause"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="slider__icon-play"><path d="M8 5v14l11-7z"/></svg></button>
         <button class="ctrl__btn" type="button" data-logos-next aria-label="Logos suivants">{CHEV_R}</button>

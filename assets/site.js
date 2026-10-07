@@ -37,12 +37,12 @@
   };
   var T = EN ? {
     pause: 'Pause the slideshow', play: 'Resume the slideshow', thousands: ',',
-    logosPause: 'Pause scrolling', logosPlay: 'Resume scrolling', morePhotos: 'Show more photos', loading: 'Loading…', logosPage: 'Show logo page {n} of {t}',
+    logosPause: 'Pause scrolling', logosPlay: 'Resume scrolling', morePhotos: 'Show more photos', loading: 'Loading…', newsletterOk: 'Thank you! Upcoming events will be sent to {email}.',
     recap: { type: 'Event type', espace: 'Venue', dates: 'Dates', none: 'To be confirmed', to: ' to ' },
     location: 'Abidjan Exhibition Center, Boulevard de l’aéroport, Abidjan'
   } : {
     pause: 'Mettre le diaporama en pause', play: 'Relancer le diaporama', thousands: '\u00a0',
-    logosPause: 'Mettre le défilement en pause', logosPlay: 'Relancer le défilement', morePhotos: 'Afficher plus de photos', loading: 'Chargement…', logosPage: 'Afficher la page de logos {n} sur {t}',
+    logosPause: 'Mettre le défilement en pause', logosPlay: 'Relancer le défilement', morePhotos: 'Afficher plus de photos', loading: 'Chargement…', newsletterOk: 'Merci, c’est noté ! Les prochains événements arriveront à {email}.',
     recap: { type: 'Type d’événement', espace: 'Espace', dates: 'Dates', none: 'À préciser', to: ' au ' },
     location: 'Parc des Expositions d’Abidjan, Boulevard de l’aéroport, Abidjan'
   };
@@ -245,6 +245,33 @@
     plx();
   }
 
+  // ---------- Newsletter (pied de page) : inscription simulée, avec validation ----------
+  var nl = document.querySelector('[data-newsletter]');
+  if (nl) {
+    var nlEmail = nl.querySelector('#nl-email');
+    var nlConsent = nl.querySelector('#nl-consent');
+    var nlOk = nl.parentElement.querySelector('.newsletter__ok');
+    var nlFlag = function (input, bad) {
+      input.setAttribute('aria-invalid', String(bad));
+      document.getElementById(input.getAttribute('aria-describedby')).hidden = !bad;
+    };
+    nlEmail.addEventListener('blur', function () { if (nlEmail.value) nlFlag(nlEmail, !nlEmail.checkValidity()); });
+    nlConsent.addEventListener('change', function () { if (nlConsent.checked) nlFlag(nlConsent, false); });
+    nl.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var badEmail = !nlEmail.value || !nlEmail.checkValidity();
+      nlFlag(nlEmail, badEmail);
+      nlFlag(nlConsent, !nlConsent.checked);
+      if (badEmail) { nlEmail.focus(); return; }
+      if (!nlConsent.checked) { nlConsent.focus(); return; }
+      // Maquette : aucune donnée n'est envoyée. À brancher sur l'outil d'e-mailing du Parc.
+      nlOk.textContent = T.newsletterOk.replace('{email}', nlEmail.value.trim());
+      nl.hidden = true;
+      nlOk.hidden = false;
+      nlOk.focus();
+    });
+  }
+
   // ---------- Retour en haut : visible après un écran de défilement ----------
   var toTop = document.querySelector('.to-top');
   if (toTop) {
@@ -432,7 +459,8 @@
   }
 
   // ---------- Diaporama Ken Burns de l'accueil ----------
-  // Contrôle de défilement (.ctrl) : la fin du remplissage du segment actif fait passer à l'image suivante, donc la
+  // Contrôle de défilement (.ctrl) : segments décoratifs (navigation par Précédent / Suivant, 44 px) ; la fin du
+  // remplissage du segment actif fait passer à l'image suivante, donc la
   // barre et le diaporama restent synchrones (pause comprise). Mouvement réduit : minuterie de 7 s.
   var hero = document.querySelector('[data-slider]');
   if (hero) {
@@ -470,9 +498,6 @@
       if (paused) stop(); else start();
     };
     toggleBtn.addEventListener('click', function () { setPaused(!userPaused); });
-    segs.forEach(function (seg) {
-      seg.addEventListener('click', function () { show(Number(seg.getAttribute('data-slide'))); restart(); });
-    });
     hero.querySelector('[data-slide-prev]').addEventListener('click', function () { show(index - 1); restart(); });
     hero.querySelector('[data-slide-next]').addEventListener('click', function () { show(index + 1); restart(); });
     sCtrl.addEventListener('animationend', function (e) {
@@ -514,11 +539,8 @@
       lSegs = [];
       for (var i = 0; i < n; i++) {
         var li = document.createElement('li');
-        var b = document.createElement('button');
-        b.type = 'button';
+        var b = document.createElement('span');
         b.className = 'ctrl__seg';
-        b.setAttribute('aria-label', T.logosPage.replace('{n}', i + 1).replace('{t}', n));
-        (function (p) { b.addEventListener('click', function () { goPage(p); }); })(i);
         li.appendChild(b); lPagesBox.appendChild(li); lSegs.push(b);
       }
       lTot.textContent = n;

@@ -107,6 +107,25 @@
 </section>
 </main>
 <footer class="footer">
+  <!-- Note de maquette : inscription simulée ; à brancher sur l’outil d’e-mailing du Parc (Brevo, Mailchimp…) via Drupal -->
+  <div class="wrap newsletter" id="newsletter">
+    <div class="newsletter__intro">
+      <p class="newsletter__label">Newsletter</p>
+      <h2 class="newsletter__title">Upcoming events at the venue, straight to your inbox</h2>
+      <p>One email a month: upcoming trade shows, congresses and concerts. Unsubscribe in one click.</p>
+    </div>
+    <form class="newsletter__form" data-newsletter novalidate>
+      <label class="newsletter__field-label" for="nl-email">Your email address</label>
+      <div class="newsletter__row">
+        <input id="nl-email" name="email" type="email" autocomplete="email" required placeholder="name@example.com" aria-describedby="nl-email-error">
+        <button class="btn btn--primary" type="submit">Subscribe</button>
+      </div>
+      <p class="newsletter__error" id="nl-email-error" hidden>Enter a valid email address, for example name@example.com.</p>
+      <label class="check newsletter__consent"><input id="nl-consent" type="checkbox" required aria-describedby="nl-consent-error"><span>I agree to receive the venue’s newsletter. See the <a href="informations-legales.html#confidentialite">privacy policy</a>.</span></label>
+      <p class="newsletter__error" id="nl-consent-error" hidden>Tick the box to confirm your subscription.</p>
+    </form>
+    <p class="newsletter__ok" role="status" tabindex="-1" hidden></p>
+  </div>
   <div class="wrap footer__grid">
     <div class="footer__brand">
       <img src="../assets/logo-pea.webp" alt="" width="394" height="210" loading="lazy">
@@ -118,13 +137,13 @@
         <li><a href="nos-services.html">Services</a></li>
         <li><a href="qui-sommes-nous.html#destination">Destination</a></li>
         <li><a href="qui-sommes-nous.html#expertise">Expertise</a></li>
-        <li class="footer__lang"><a href="../informations-legales.html" hreflang="fr" lang="fr">FR</a> / <a href="informations-legales.html" hreflang="en" lang="en" aria-current="true">EN</a></li>
       </ul>
     </nav>
     <a class="footer__partner" href="https://www.gl-events.com/" target="_blank" rel="noopener" aria-label="GL events, international expertise (new tab)">
       <span class="footer__partner-logo"><img src="../assets/logo-gl-events.png" alt="GL events" width="225" height="225" loading="lazy"></span>
       <span class="footer__partner-text">International expertise</span>
     </a>
+    <div class="footer__bottom">
     <nav class="footer__legal" aria-label="Legal information">
       <ul role="list">
         <li><a href="informations-legales.html#mentions-legales">Legal notice</a></li>
@@ -135,6 +154,8 @@
         <li><button type="button" class="footer__cookies" data-consent-open>Manage cookies</button></li>
       </ul>
     </nav>
+    <p class="footer__credit">Design by <a href="https://bigfive.solutions/" target="_blank" rel="noopener" aria-label="Big Five, website design (new tab)">Big Five</a></p>
+    </div>
   </div>
 </footer>
 <a class="to-top" href="#contenu" aria-label="Back to top"><svg viewBox="16 -1 360 62.5" aria-hidden="true" focusable="false"><path d="M20 61C70 54 120 25.5 150 12C164 5.7 182 0 196 0C210 0 228 5.7 242 12C272 25.5 322 54 372 61Z"/></svg></a>

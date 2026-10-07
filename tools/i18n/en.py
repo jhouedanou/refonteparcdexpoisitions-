@@ -384,6 +384,18 @@ EN = {
 "Indiquez l’espace, vos dates et votre jauge : notre équipe commerciale vous recontacte avec une proposition adaptée.": "Tell us the venue, your dates and expected attendance: our sales team will get back to you with a tailored proposal.",
 "Image précédente": "Previous image",
 "Image suivante": "Next image",
+"Newsletter": "Newsletter",
+"Les prochains événements du Parc, dans votre boîte mail": "Upcoming events at the venue, straight to your inbox",
+"Une lettre par mois : salons, congrès et concerts à venir. Désinscription en un clic.": "One email a month: upcoming trade shows, congresses and concerts. Unsubscribe in one click.",
+"Votre adresse e-mail": "Your email address",
+"nom@exemple.com": "name@example.com",
+"S’inscrire": "Subscribe",
+"Indiquez une adresse e-mail valide, par exemple nom@exemple.com.": "Enter a valid email address, for example name@example.com.",
+"J’accepte de recevoir la newsletter du Parc. Voir la": "I agree to receive the venue’s newsletter. See the",
+"politique de confidentialité": "privacy policy",
+"Cochez la case pour confirmer votre inscription.": "Tick the box to confirm your subscription.",
+"Design par": "Design by",
+"Big Five, design du site (nouvel onglet)": "Big Five, website design (new tab)",
 }
 pathlib.Path(__file__).with_name("en.json").write_text(json.dumps(EN, ensure_ascii=False, indent=1), encoding="utf-8")
 print(len(EN), "entrées")
