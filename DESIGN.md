@@ -282,7 +282,7 @@ Le détail des composants (specs Bento et état) est dans `design-system/pea/CON
   - photo désaturée, fondue dans l’orange action ; arche à la couleur de la section suivante ;
   - pages événement : `meta` (« Tout l’agenda », date, type) et `addons` (Réserver, badge du lieu) ; l’affiche passe dans le contenu.
 - **Block/Hero** :
-  - diaporama des photos officielles, contenu de 768 px au plus ;
+  - diaporama composé uniquement des 8 photos officielles (Dôme, Hall, parvis), contenu de 768 px au plus ;
   - sur-titre « Le plus grand parc exposition d’Afrique de l’Ouest », l’accroche de la charte (à valider par le client) ;
   - boutons primaire et « invert » ;
   - Carousel : puces de 10 px, boutons de 56 px.
@@ -297,7 +297,7 @@ Le détail des composants (specs Bento et état) est dans `design-system/pea/CON
 - **Footer** :
   - bloc Newsletter crème juste avant ;
   - trois colonnes : le Parc (logo Négatif, coordonnées), « Nos espaces », « Votre événement » ;
-  - barre légale : logo GL events en gris, © 2026, liens légaux, crédit Big Five.
+  - barre légale : logo GL events en couleurs d’origine (choix du 6 novembre 2026), © 2026, liens légaux, crédit Big Five.
 - **Filtres** : boutons à bascule à contour noir de 2 px ; orange action une fois pressés.
 
 ## Correspondance Bento DS
@@ -316,6 +316,35 @@ Le détail des composants (specs Bento et état) est dans `design-system/pea/CON
 | Form/Field · Newsletter form · Contact details · Block/Map | `.field`, `.newsletter-block`, `.contact-details`, `.footer__contact`, `.access__map` |
 | Item list · Block/Icons text · Table | `.services`, `.reasons`, `.compare` |
 | Footer | `.footer` |
+
+## Photos
+
+Hors photothèque, chaque photo du Parc vient du dossier officiel du client (`docs/retourclient/images/`, un dossier par lieu). Elles sont converties par `python3 tools/optimiser-images.py` vers `assets/img/officiel/<lieu>/` :
+- `hall` ;
+- `dome-exterieur` ;
+- `dome-salle` ;
+- `dome-salon-vip` ;
+- `esplanades` (dossier à remplir).
+
+Déposer une photo dans un dossier suffit pour qu’elle rejoigne la galerie de l’espace correspondant. Les TIF sont convertis automatiquement en JPG à côté de l’original.
+
+Restent hors de ce dossier :
+- la photothèque (photos d’événements) ;
+- la série « destination Abidjan » (ville, aéroport, hôtels) ;
+- les affiches de l’agenda ;
+- le mur Instagram.
+
+## Espacements
+
+Tout padding, marge verticale et gap est un token de l’échelle Bento : 4 · 8 · 12 · 16 · 20 · 24 · 32 · 40 · 48 · 64, plus 96 · 128 pour la mise en page. Les marges de sections sont en paliers, sans valeur fluide :
+- sections : 48, puis 64 à partir de 768 px, puis 96 à partir de 1280 px ;
+- en-tête de page : 64, puis 96, puis 128.
+
+Le script contrôle aussi l’écart rendu entre chaque paire de sous-éléments voisins : il doit être sur l’échelle, jamais négatif, et jamais nul entre deux blocs de texte. Deux exceptions sont documentées :
+- les réserves de l’arche ;
+- l’espace libre d’alignement (liens de cartes alignés en bas).
+
+Rapport page par page : `design-system/pea/RAPPORT-INTEGRATION.md`.
 
 ## Do's and Don'ts
 

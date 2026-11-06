@@ -14,6 +14,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import unicodedata
 import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -121,48 +122,61 @@ def convert_folders():
 
 
 # Photos officielles fournies par le client (docs/retourclient/images, non versionné : 1 Go, vidéo > 100 Mo).
-# Écrites APRÈS les dossiers pilotés (qui vident leurs sorties) pour rejoindre les galeries des pages espaces.
-# Les TIF et les très grandes images passent d'abord par sips (JPEG 3200 px) : cwebp ne lit pas le TIFF partout.
+# Organisation du client (6 novembre 2026) : un dossier par lieu. TOUTES les photos d’un dossier sont converties
+# (déposer une photo dans un dossier suffit) vers assets/img/officiel/<groupe>/<nom>-{1600,800}.webp.
+# Les TIF sont d’abord convertis en JPG à côté de l’original (sips, qualité 92) ; un TIF qui a déjà son JPG est ignoré.
+# Les doublons « … - Copie » sont ignorés. Nom de sortie : NOMS_OFFICIELS, sinon nom de fichier normalisé.
 OFFICIELLES_SRC = ROOT / "docs" / "retourclient" / "images"
-OFFICIELLES = {
-    "Hall 1 bis.jpg": "espaces/hall/officiel-hall-drapeaux",
-    "_DSF6401.jpg": "espaces/hall/officiel-hall-portes",
-    "_DSF6404.jpg": "espaces/hall/officiel-hall-perspective",
-    "IMG_3429.JPG": "espaces/dome/officiel-dome-ciel",
-    "IMG_3415.JPG": "espaces/dome/officiel-dome-aerien",
-    "IMG_3413.JPG": "espaces/dome/officiel-dome-toiture",
-    "6C2A7053.jpg": "espaces/dome/officiel-dome-salle",
-    "6C2A7050.jpg": "espaces/dome/officiel-dome-fauteuils",
-    "_DSF6430.tif": "espaces/dome/officiel-dome-parterre",
-    "_DSF6437.tif": "espaces/dome/officiel-dome-gradins",
-    "Dôme Panorama.tif": "espaces/parvis/officiel-dome-panorama",
-    "_DSF6457.tif": "pages/foyer-galerie",
-    "_DSF6458.tif": "pages/foyer-banc",
-    "_DSF6459.tif": "pages/foyer-oeuvre",
-    "_DSF6460.tif": "pages/foyer-accueil",
+DOSSIERS_OFFICIELS = {
+    "hall exposition": "officiel/hall",
+    "dome": "officiel/dome-exterieur",
+    "dome/salle": "officiel/dome-salle",
+    "dome/salon vip": "officiel/dome-salon-vip",
+    "espalanafes": "officiel/esplanades",
 }
+NOMS_OFFICIELS = {
+    "Hall 1 bis": "hall-drapeaux", "_DSF6401": "hall-portes", "_DSF6404": "hall-perspective",
+    "IMG_3429": "dome-ciel", "IMG_3415": "dome-aerien", "IMG_3413": "dome-toiture", "Dôme Panorama": "dome-panorama",
+    "6C2A7053": "salle-pleniere", "6C2A7050": "salle-fauteuils", "_DSF6430": "salle-parterre", "_DSF6437": "salle-gradins",
+    "_DSF6457": "salon-vip-galerie", "_DSF6458": "salon-vip-banc", "_DSF6459": "salon-vip-oeuvre", "_DSF6460": "salon-vip-accueil",
+}
+
+
+def tif_en_jpg():
+    """Convertit chaque TIF officiel en JPG (même dossier, même nom) s’il n’a pas déjà son JPG."""
+    for tif in sorted(OFFICIELLES_SRC.rglob("*.tif")):
+        jpg = tif.with_suffix(".jpg")
+        if not jpg.exists():
+            subprocess.run(["sips", "-s", "format", "jpeg", "-s", "formatOptions", "92", str(tif), "--out", str(jpg)], check=True, capture_output=True)
+            print(f"  TIF -> JPG : {jpg.relative_to(OFFICIELLES_SRC)}")
 
 
 def convert_officielles():
     if not OFFICIELLES_SRC.is_dir():
         print("  photos officielles absentes : docs/retourclient/images")
         return
+    tif_en_jpg()
     before = after = 0
     with tempfile.TemporaryDirectory() as tmp:
-        for name, target in OFFICIELLES.items():
-            src = OFFICIELLES_SRC / name
-            if not src.exists():
-                print(f"  absent : docs/retourclient/images/{name}")
+        for dossier, groupe in DOSSIERS_OFFICIELS.items():
+            src_dir, out_dir = OFFICIELLES_SRC / dossier, OUT / groupe
+            if not src_dir.is_dir():
+                print(f"  dossier absent : {dossier}")
                 continue
-            before += src.stat().st_size
-            mid = pathlib.Path(tmp) / (pathlib.Path(target).name + ".jpg")
-            subprocess.run(["sips", "-s", "format", "jpeg", "-s", "formatOptions", "92", "-Z", "3200",
-                            str(src), "--out", str(mid)], check=True, capture_output=True)
-            for w in WIDTHS:
-                dest = OUT / f"{target}-{w}.webp"
-                cwebp(mid, dest, w)
-                after += dest.stat().st_size
-            print(f"  officielle {name} -> assets/img/{target}-{{1600,800}}.webp")
+            if out_dir.is_dir():
+                for old in out_dir.glob("*.webp"):
+                    old.unlink()
+            for src in sorted(p for p in src_dir.iterdir() if p.suffix.lower() in {".jpg", ".jpeg", ".png"} and "copie" not in p.stem.lower()):
+                stem = unicodedata.normalize("NFC", src.stem)  # noms de fichiers macOS en NFD (« Dôme »)
+                name = NOMS_OFFICIELS.get(stem, re.sub(r"[^a-z0-9]+", "-", unicodedata.normalize("NFKD", stem).encode("ascii", "ignore").decode().lower()).strip("-"))
+                before += src.stat().st_size
+                mid = pathlib.Path(tmp) / f"{name}.jpg"
+                subprocess.run(["sips", "-s", "format", "jpeg", "-s", "formatOptions", "92", "-Z", "3200", str(src), "--out", str(mid)], check=True, capture_output=True)
+                for w in WIDTHS:
+                    dest = out_dir / f"{name}-{w}.webp"
+                    cwebp(mid, dest, w)
+                    after += dest.stat().st_size
+                print(f"  officielle {dossier}/{src.name} -> assets/img/{groupe}/{name}-{{1600,800}}.webp")
     print(f"Photos officielles : {ko(before)} -> {ko(after)}")
 
 

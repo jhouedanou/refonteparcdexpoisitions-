@@ -424,6 +424,12 @@ EN = {
 "© 2026 Parc des Expositions d’Abidjan · GL events": "© 2026 Abidjan Exhibition Center · GL events",
 "Votre événement": "Your event",
 "Visite virtuelle 360°": "360° virtual tour",
+"La galerie boisée du salon VIP du Dôme": "The wood-panelled gallery of the Dome’s VIP lounge",
+"Le salon VIP du Dôme : banc et appliques murales": "The Dome’s VIP lounge: bench and wall lights",
+"Le salon VIP du Dôme et son œuvre d’art": "The Dome’s VIP lounge and its artwork",
+"La banque d’accueil du salon VIP du Dôme": "The reception desk of the Dome’s VIP lounge",
+"La salle plénière du Dôme, fauteuils face à la scène": "The Dome’s plenary hall, seats facing the stage",
+"Le Hall d’Exposition, sol béton et charpente pavoisée, prêt à être aménagé": "The Exhibition Hall, concrete floor and flag-hung frame, ready to be fitted out",
 }
 pathlib.Path(__file__).with_name("en.json").write_text(json.dumps(EN, ensure_ascii=False, indent=1), encoding="utf-8")
 print(len(EN), "entrées")

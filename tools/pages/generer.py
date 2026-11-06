@@ -253,7 +253,7 @@ def img(name, alt="", sizes="100vw", cls="", lazy=True, priority=False):
 
 
 SPACE_URL = {"A": "hall-exposition.html", "B": "le-dome.html", "C": "parvis-esplanades.html"}
-SPACE_IMG = {"A": "espaces/hall/officiel-hall-drapeaux", "B": "espaces/dome/officiel-dome-ciel", "C": "espaces/parvis/officiel-dome-panorama"}
+SPACE_IMG = {"A": "officiel/hall/hall-drapeaux", "B": "officiel/dome-exterieur/dome-ciel", "C": "officiel/dome-exterieur/dome-panorama"}
 
 
 def space(letter, title, sub, media=None, ink=False, h="h3", usage=""):
@@ -434,8 +434,10 @@ IG_POSTS = "".join(
     for code, alt in IG_ITEMS)
 
 # Diaporama de l'accueil : ordre d'affichage (images produites par tools/optimiser-images.py)
-SLIDES = ["espaces/dome/officiel-dome-ciel", "slider/salon-vue-plongeante", "espaces/dome/officiel-dome-salle", "slider/concert-foule",
-          "espaces/hall/officiel-hall-drapeaux", "slider/concert-scene", "espaces/dome/officiel-dome-aerien", "slider/journee-internationale"]
+# Uniquement des photos officielles du client (docs/retourclient/images) : Dôme, Hall, parvis
+SLIDES = ["officiel/dome-exterieur/dome-ciel", "officiel/hall/hall-drapeaux", "officiel/dome-salle/salle-pleniere",
+          "officiel/dome-exterieur/dome-aerien", "officiel/dome-exterieur/dome-panorama", "officiel/dome-salle/salle-gradins",
+          "officiel/hall/hall-perspective", "officiel/dome-salle/salle-parterre"]
 SLIDES_HTML = "\n".join(
     f'    <figure class="slider__slide{" is-active" if i == 0 else ""}">'
     f'{img(n, sizes="100vw", priority=i == 0, lazy=i != 0)}</figure>' for i, n in enumerate(SLIDES))
@@ -657,7 +659,7 @@ PAGES["qui-sommes-nous.html"] = ("Qui sommes-nous ? — Parc des Expositions d�
 
 <section class="section section--white">
   <div class="wrap split">
-    <div class="media">{img("slider/journee-internationale", "Grand événement institutionnel dans le Dôme", "(min-width: 1024px) 50vw, 100vw")}</div>
+    <div class="media">{img("officiel/dome-salle/salle-pleniere", "La salle plénière du Dôme, fauteuils face à la scène", "(min-width: 1024px) 50vw, 100vw")}</div>
     <div>
       <p class="eyebrow">Notre ambition</p>
       <h2>Faire d’Abidjan un point de rencontre régional.</h2>
@@ -775,19 +777,40 @@ ALTS = {
     "parking-couvert": "Parking couvert sous les ombrières",
     "engins-devant-le-dome": "Engins de chantier exposés sur le parvis devant le Dôme",
     "salon-plein-air-aerien": "Vue aérienne d’un salon en plein air sur l’esplanade",
-    # Photos officielles (docs/retourclient/images, novembre 2026)
-    "officiel-hall-drapeaux": "Le Hall d’Exposition vide, pavoisé des drapeaux des nations sous sa charpente noire",
-    "officiel-hall-portes": "Grand volume du Hall d’Exposition et ses portes de chargement",
-    "officiel-hall-perspective": "Perspective du Hall d’Exposition, sol béton et charpente pavoisée",
-    "officiel-dome-ciel": "La coupole du Dôme sous un ciel bleu",
-    "officiel-dome-aerien": "Le Dôme vu du ciel, au milieu des esplanades",
-    "officiel-dome-toiture": "La toiture ondulée du Dôme, vue de près",
-    "officiel-dome-salle": "La salle plénière du Dôme : fauteuils face à la scène",
-    "officiel-dome-fauteuils": "Rangées de fauteuils de la salle du Dôme",
-    "officiel-dome-parterre": "Le parterre du Dôme dégagé, sous la charpente en bois",
-    "officiel-dome-gradins": "Gradins et parterre de la salle du Dôme",
-    "officiel-dome-panorama": "Le Dôme et son parvis, vus depuis l’esplanade",
+    # Photos officielles (docs/retourclient/images, organisation du client du 6 novembre 2026)
+    "hall-drapeaux": "Le Hall d’Exposition vide, pavoisé des drapeaux des nations sous sa charpente noire",
+    "hall-portes": "Grand volume du Hall d’Exposition et ses portes de chargement",
+    "hall-perspective": "Perspective du Hall d’Exposition, sol béton et charpente pavoisée",
+    "dome-ciel": "La coupole du Dôme sous un ciel bleu",
+    "dome-aerien": "Le Dôme vu du ciel, au milieu des esplanades",
+    "dome-toiture": "La toiture ondulée du Dôme, vue de près",
+    "dome-panorama": "Le Dôme et son parvis, vus depuis l’esplanade",
+    "salle-pleniere": "La salle plénière du Dôme : fauteuils face à la scène",
+    "salle-fauteuils": "Rangées de fauteuils de la salle du Dôme",
+    "salle-parterre": "Le parterre du Dôme dégagé, sous la charpente en bois",
+    "salle-gradins": "Gradins et parterre de la salle du Dôme",
+    "salon-vip-galerie": "La galerie boisée du salon VIP du Dôme",
+    "salon-vip-banc": "Le salon VIP du Dôme : banc et appliques murales",
+    "salon-vip-oeuvre": "Le salon VIP du Dôme et son œuvre d’art",
+    "salon-vip-accueil": "La banque d’accueil du salon VIP du Dôme",
 }
+
+
+def official_photos(groups, featured, label, extra=()):
+    """Photos officielles du client (assets/img/officiel/…, tools/optimiser-images.py) : tous les dossiers indiqués,
+    plus des photos isolées (extra), image vedette en premier. Le dossier « esplanades » se remplit tout seul."""
+    names = []
+    for group in groups:
+        names += sorted(f"{group}/{f.name[: -len('-1600.webp')]}" for f in (ROOT / "assets/img" / group).glob("*-1600.webp"))
+    names += [e for e in extra if e not in names]
+    names.sort(key=lambda n: n.rsplit("/", 1)[1] != featured)
+    out = []
+    for n in names:
+        key = n.rsplit("/", 1)[1]
+        if key not in ALTS:
+            print(f"  ATTENTION : texte alternatif manquant pour {n}")
+        out.append((n, ALTS.get(key, f"Photo — {label}")))
+    return out
 
 
 def folder_photos(group, featured, label):
@@ -810,7 +833,7 @@ SPACES = [
          note_txt="La fiche espace concentre l’information commerciale et technique : usages possibles, capacité, configuration, prestations associées et documents à télécharger.",
          text="Avec 6 500 m² d’un seul tenant et 17 m libres sous plafond, le Hall d’Exposition peut être divisé en 2 ou 3 espaces d’exposition distincts pour accueillir salons, expositions et grands événements d’entreprise.",
          usages=["Salon professionnel", "Exposition", "Lancement", "Convention"], equip=None,
-         photos=folder_photos("espaces/hall", "officiel-hall-drapeaux", "Hall d’Exposition"),
+         photos=official_photos(["officiel/hall"], "hall-drapeaux", "Hall d’Exposition"),
          doc=("assets/fiche-technique-hall-exposition.pdf", "Télécharger la fiche technique", True)),
     dict(file="le-dome.html", title="Le Dôme", letter="B", code="dome",
          lead="Le Convention Center du Parc : une salle de 5 000 m² équipée pour les conférences, les événements institutionnels, les salons et les concerts.",
@@ -819,7 +842,7 @@ SPACES = [
          text="Avec 5 000 m² exploitables, le Dôme accueille jusqu’à 5 023 personnes assises et 9 588 debout, avec une infrastructure technique pensée pour les événements professionnels comme pour le grand public.",
          usages=["Conférence internationale", "Événement institutionnel", "Salon & exposition", "Concert & spectacle"],
          equip=["96 enceintes", "365 projecteurs", "240 m² d’écran LED"],
-         photos=folder_photos("espaces/dome", "officiel-dome-salle", "Le Dôme"),
+         photos=official_photos(["officiel/dome-salle", "officiel/dome-exterieur", "officiel/dome-salon-vip"], "salle-pleniere", "Le Dôme"),
          doc=(None, None, False)),
     dict(file="parvis-esplanades.html", title="Parvis & Esplanades", letter="C", code="parvis",
          lead="67 000 m² d’espaces extérieurs pour les expositions et les événements en plein air.",
@@ -827,7 +850,8 @@ SPACES = [
          h2="De grands espaces extérieurs, à l’échelle de vos projets.", note_txt=None,
          text="Le Parvis et les esplanades Est et Nord-Est totalisent 67 000 m² pour les expositions extérieures, les formats outdoor et les événements grand public.",
          usages=["Exposition extérieure", "Format outdoor", "Événement grand public", "Concert"], equip=None,
-         photos=folder_photos("espaces/parvis", "officiel-dome-panorama", "Parvis & Esplanades"),
+         photos=official_photos(["officiel/esplanades"], "dome-panorama", "Parvis & Esplanades",
+                                extra=["officiel/dome-exterieur/dome-panorama", "officiel/dome-exterieur/dome-aerien"]),
          doc=(None, None, False)),
 ]
 
@@ -958,7 +982,7 @@ PAGES["nos-services.html"] = ("Nos services — Parc des Expositions d’Abidjan
 
 <section class="section">
   <div class="wrap split">
-    <div class="media">{img("phototheque/salon-stand", "Stand d’exposant aménagé lors d’un salon", "(min-width: 1024px) 50vw, 100vw")}</div>
+    <div class="media">{img("officiel/hall/hall-perspective", "Le Hall d’Exposition, sol béton et charpente pavoisée, prêt à être aménagé", "(min-width: 1024px) 50vw, 100vw")}</div>
     <div>
       <p class="eyebrow">Sur mesure</p>
       <h2>Composez les services adaptés à votre événement.</h2>
@@ -972,10 +996,10 @@ PAGES["nos-services.html"] = ("Nos services — Parc des Expositions d’Abidjan
 
 # ---------------------------------------------------------------- Photothèque
 PHOTOS = [  # (fichier, espace, type, texte alternatif) — espaces et types déduits des photos, à confirmer
-    ("espaces/dome/officiel-dome-ciel", "dome", "lieux", "La coupole du Dôme sous un ciel bleu"),
-    ("espaces/hall/officiel-hall-drapeaux", "hall", "lieux", "Le Hall d’Exposition pavoisé des drapeaux des nations"),
-    ("espaces/dome/officiel-dome-salle", "dome", "lieux", "La salle plénière du Dôme"),
-    ("pages/foyer-oeuvre", "dome", "lieux", "Foyer boisé du Parc, œuvre d’art au mur"),
+    ("officiel/dome-exterieur/dome-ciel", "dome", "lieux", "La coupole du Dôme sous un ciel bleu"),
+    ("officiel/hall/hall-drapeaux", "hall", "lieux", "Le Hall d’Exposition pavoisé des drapeaux des nations"),
+    ("officiel/dome-salle/salle-pleniere", "dome", "lieux", "La salle plénière du Dôme"),
+    ("officiel/dome-salon-vip/salon-vip-oeuvre", "dome", "lieux", "Le salon VIP du Dôme et son œuvre d’art"),
     ("phototheque/salon-stand", "hall", "salons", "Stand d’exposant lors d’un salon professionnel"),
     ("phototheque/dome-lumieres", "dome", "concerts", "Public sous les lumières bleues du Dôme"),
     ("phototheque/salon-auto", "hall", "salons", "Véhicules exposés lors d’un salon automobile"),
@@ -1117,7 +1141,7 @@ FORM = f"""    <div class="form-col">
     </div>"""
 
 # Photo du totem : dans l’encadré « Nous contacter » (et non plus dans l’en-tête)
-CONTACT_TOTEM = img("pages/contact-signaletique", "Totem de signalétique du Parc des Expositions d’Abidjan devant le Dôme", "(min-width: 1024px) 340px, 100vw")
+CONTACT_TOTEM = img("officiel/dome-salon-vip/salon-vip-accueil", "La banque d’accueil du salon VIP du Dôme", "(min-width: 1024px) 340px, 100vw")
 PAGES["contact-devis.html"] = ("Contact & Devis — Parc des Expositions d’Abidjan", page_hero(
     crumbs(A, ("Contact", None), ("Devis", None)),
     "Contact",
@@ -1307,17 +1331,17 @@ def with_lang_links(page, src, lang):
 
 # Image de l’en-tête de chaque page : photo dans la silhouette exacte de l’arche du logo (variante E2 « dôme posé »)
 PAGE_BG = {
-    "qui-sommes-nous.html": "espaces/dome/officiel-dome-aerien",
-    "nos-espaces.html": "espaces/hall/salon-vue-plongeante",
-    "hall-exposition.html": "espaces/hall/officiel-hall-perspective",
-    "le-dome.html": "espaces/dome/officiel-dome-toiture",
-    "parvis-esplanades.html": "espaces/parvis/officiel-dome-panorama",
-    "nos-services.html": "phototheque/salon-stand",
+    "qui-sommes-nous.html": "officiel/dome-exterieur/dome-ciel",
+    "nos-espaces.html": "officiel/dome-exterieur/dome-aerien",
+    "hall-exposition.html": "officiel/hall/hall-perspective",
+    "le-dome.html": "officiel/dome-exterieur/dome-toiture",
+    "parvis-esplanades.html": "officiel/dome-exterieur/dome-panorama",
+    "nos-services.html": "officiel/hall/hall-portes",
     "phototheque.html": "phototheque/dome-lumieres",
-    "agenda.html": "slider/concert-scene",
-    "contact-devis.html": "pages/foyer-accueil",
-    "visite-virtuelle.html": "espaces/parvis/vue-aerienne",
-    "informations-legales.html": "pages/foyer-galerie",
+    "agenda.html": "officiel/dome-salle/salle-gradins",
+    "contact-devis.html": "officiel/dome-salle/salle-fauteuils",
+    "visite-virtuelle.html": "officiel/dome-salle/salle-parterre",
+    "informations-legales.html": "officiel/dome-salon-vip/salon-vip-galerie",
 }
 
 

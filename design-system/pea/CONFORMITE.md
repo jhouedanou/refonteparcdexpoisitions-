@@ -1,22 +1,27 @@
 # Conformité : charte graphique PEA + Bento DS
 
-Dernier contrôle : 6 novembre 2026, commande `node tools/verif/conformite.mjs`. Le script ouvre chaque page dans Chrome headless, en mouvement réduit pour que les blocs apparaissant au défilement soient visibles, puis contrôle les styles **calculés**.
+Dernier contrôle : 6 novembre 2026, commande `node tools/verif/conformite.mjs`. Le script ouvre chaque page dans Chrome headless, en mouvement réduit pour que les blocs apparaissant au défilement soient visibles, et contrôle les styles **calculés**. Rapport détaillé page par page : `RAPPORT-INTEGRATION.md`, généré par `python3 tools/verif/rapport.py`.
 
 | Contrôle | Pages | Largeurs | Écarts | Éléments contrôlés |
 |---|---|---|---|---|
-| Pages représentatives (avec captures) | 8, dont l’accueil EN | 375, 768, 1024, 1440 | **0** | — |
-| Toutes les pages FR | 37 | 375, 1440 | **0** | 5 987 textes, 878 titres, 458 boutons |
+| Toutes les pages FR + 3 pages EN | 40 | 375, 768, 1024, 1440 | **0** | 13 380 textes, 2 004 titres, 1 092 boutons, 13 484 écarts entre sous-éléments |
 
-À titre de comparaison, l’état du commit `c714ec6`, avant ce passage, comptait **3 529 écarts** :
-- 1 982 graisses hors kit web ;
-- 400 titres en 600 ;
-- 368 composants Bento absents ;
-- 232 fonds noirs ;
-- 172 boutons hors spec ;
-- 159 contrastes ;
-- 32 chargements de police ;
-- 6 rayons ;
-- 6 couleurs de titre.
+À titre de comparaison :
+- l’état du commit `c714ec6` comptait **3 529 écarts** : 1 982 graisses hors kit web, 400 titres en 600, 368 composants Bento absents, 232 fonds noirs, 172 boutons hors spec, 159 contrastes, 32 chargements de police, 6 rayons et 6 couleurs de titre ;
+- le premier contrôle des espacements a relevé **220 écarts**. Après tri des faux positifs (espace libre d’alignement, cellules de tableau), il restait 13 vrais défauts, tous corrigés :
+  - héros 136 → 128 px ;
+  - arche des chiffres-clés 30 → 32 px ;
+  - dates de l’agenda 6 → 8 px ;
+  - titre et date des cartes d’agenda collés ;
+  - réserve de 50vw de la photo du CTA sur mobile ;
+  - infos pratiques collées aux raisons, à cause d’un conflit de cascade qui touchait aussi les fiches événement ;
+  - cases à cocher sans gap ;
+  - liste RSE étirée à 1024 px ;
+  - meta d’en-tête irrégulière ;
+  - étiquette PDF à 6 px ;
+  - marges de section fluides ;
+  - gap des encarts à 12 px au lieu de 16 ;
+  - padding de l’en-tête de page et du CTA hors token Bento.
 
 Hors périmètre : `planches.html`, une planche d’index interne sans en-tête ni pied de page. `accueil.html` et `fiche-evenement.html` sont de simples redirections.
 
@@ -34,6 +39,8 @@ Hors périmètre : `planches.html`, une planche d’index interne sans en-tête 
 | Contraste | WCAG 2.2 AA | ≥ 4,5:1, ou ≥ 3:1 pour le grand texte, pour chaque texte visible sur son fond réel |
 | Composants présents | Bento | `data-bento` attendu par page (Topbar, Site header, Menu, Footer, Newsletter form, puis selon la page) |
 | Pas de débordement | — | `scrollWidth` ≤ largeur de fenêtre |
+| Échelle d’espacement | Bento `space/*` | chaque padding, marge verticale et gap calculé ∈ {4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 96, 128} (1–3 px tolérés pour les filets) ; marges `auto` et réserves de l’arche exclues |
+| Écarts entre sous-éléments | Bento `space/*` | écart rendu entre voisins (même colonne ou même ligne) : sur l’échelle en flux de blocs, ≥ gap en flex / grille, jamais négatif, jamais < 4 px posés entre deux blocs de texte |
 | Logo jamais déformé | charte p. 5 | rapport largeur/hauteur affiché = rapport du fichier (± 2 %) |
 
 États vérifiés à la main dans Chrome headless (`interact`) :
@@ -87,7 +94,7 @@ Hors périmètre : `planches.html`, une planche d’index interne sans en-tête 
 | Mots-clés et chiffres mis en avant en orange (p. 16) | chiffres-clés en orange | ✅ |
 | Logo Positif / Négatif / Monochrome (p. 4) | Positif dans l’en-tête ; Négatif sur l’en-tête orange, dans le pied de page et le favicon | ✅ (fichiers vectoriels à fournir) |
 | Ne pas modifier les couleurs ni déformer le logo (p. 5) | contrôle automatique du rapport | ✅ |
-| Logo GL events en signature (p. 17–18) | gris, dans la barre légale | ✅ |
+| Logo GL events en signature (p. 17–18) | couleurs d’origine, dans la barre légale (choix de l’utilisateur ; le kit web le montre en gris) | ✅ |
 | Accroche « Le plus grand parc exposition d’Afrique de l’Ouest » (p. 16, 19) | sur-titre du héros (FR et EN) | ✅ à valider par le client |
 
 ## 4. Écarts assumés avec Bento
@@ -109,4 +116,5 @@ Hors périmètre : `planches.html`, une planche d’index interne sans en-tête 
 2. Logo : fournir les versions Négatif et Monochrome en SVG. Le site les obtient aujourd’hui par filtre CSS sur le PNG positif.
 3. Accroche « Le plus grand parc exposition d’Afrique de l’Ouest » utilisée en sur-titre du héros : à confirmer.
 4. La vidéo de présentation n’a pas de sous-titres.
-5. `6C2A7050 - Copie.jpg` est un doublon de `6C2A7050.jpg`.
+5. `6C2A7050 - Copie.jpg` est un doublon de `6C2A7050.jpg` (ignoré par la conversion).
+6. Le dossier `espalanafes` est vide : la galerie du Parvis & Esplanades n’a que 2 photos du Dôme vu du parvis. Les photos déposées dans ce dossier rejoindront la galerie à la prochaine conversion.

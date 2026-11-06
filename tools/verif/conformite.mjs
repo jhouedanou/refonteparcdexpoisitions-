@@ -153,6 +153,110 @@ function audit(expected) {
   // 9. Débordement horizontal
   if (document.documentElement.scrollWidth > innerWidth + 1) add("debordement", null, `${document.documentElement.scrollWidth}px > ${innerWidth}px`);
 
+  // 11. Espacements : échelle Bento (space/1…16 = 4 · 8 · 12 · 16 · 20 · 24 · 32 · 40 · 48 · 64) + mise en page 96 · 128.
+  //     Contrôle 1 — chaque padding, marge verticale et gap CALCULÉ est sur l’échelle (1–3 px tolérés : filets, décalages de bordure).
+  //     Contrôle 2 — l’écart RENDU entre deux sous-éléments voisins (bas de l’un → haut du suivant, ou bord à bord sur une ligne)
+  //     est sur l’échelle, jamais négatif (chevauchement) et jamais nul entre deux blocs de texte (texte collé).
+  //     Exceptions documentées : réserves de l’arche du logo (hauteur proportionnelle à la largeur), voir ARCHE ci-dessous.
+  const SCALE = [0, 1, 2, 3, 4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 96, 128];
+  const onScale = (v) => SCALE.some((s) => Math.abs(Math.abs(v) - s) < 0.6);
+  const ARCHE = { // élément → côtés dont la valeur dépend de l’arche (calc sur la largeur)
+    ".page-hero--bg": ["paddingBottom"], ".footer": ["paddingTop"], ".figure--arch": [],
+    ".section--brun, .section--vert, .section--brun-fonce": ["paddingBottom"], ".hero__arch": [] };
+  // Marge « auto » (alignement, pas un token) : la valeur calculée ne change pas si on force « auto »
+  const isAuto = (el, side) => { if (!side.startsWith("margin")) return false; const prop = side === "marginTop" ? "margin-top" : "margin-bottom";
+    const before = getComputedStyle(el)[side], keep = el.style.getPropertyValue(prop), prio = el.style.getPropertyPriority(prop);
+    el.style.setProperty(prop, "auto", "important"); const same = getComputedStyle(el)[side] === before;
+    el.style.removeProperty(prop); if (keep) el.style.setProperty(prop, keep, prio); return same; };
+  const exempt = (el, side) => Object.entries(ARCHE).some(([sel, sides]) => el.matches(sel) && sides.includes(side));
+  const spaced = all.filter((el) => visible(el) && !srOnly(el) && !el.closest(".slider, .lightbox, dialog:not([open]), .cookie-banner"));
+  for (const el of spaced) {
+    const cs = getComputedStyle(el);
+    if (cs.display === "inline" || cs.display === "contents") continue;
+    for (const side of ["paddingTop", "paddingRight", "paddingBottom", "paddingLeft", "marginTop", "marginBottom"]) {
+      const v = parseFloat(cs[side]) || 0;
+      if (v && !onScale(v) && !exempt(el, side) && !isAuto(el, side)) add("espacement.hors-echelle", el, `${side} ${+v.toFixed(2)}px`);
+    }
+    if (/flex|grid/.test(cs.display)) for (const g of ["rowGap", "columnGap"]) {
+      const v = parseFloat(cs[g]); if (v && !onScale(v)) add("espacement.hors-echelle", el, `${g} ${+v.toFixed(2)}px`);
+    }
+  }
+  // Distance réelle entre deux textes : bas de la dernière ligne de A → haut de la première ligne de B (boîtes de glyphes)
+  const textRects = (el) => { const r = document.createRange(); r.selectNodeContents(el); return [...r.getClientRects()].filter((q) => q.width > 0 && q.height > 0); };
+  const textGap = (a, b) => { const ra = textRects(a), rb = textRects(b); if (!ra.length || !rb.length) return null;
+    return Math.min(...rb.map((q) => q.top)) - Math.max(...ra.map((q) => q.bottom)); };
+  const hasText = (el) => (el.textContent || "").trim().length > 0 && !el.querySelector("img, svg:not(.i), video, iframe");
+  const gapStats = {};
+  for (const parent of spaced) {
+    const ps = getComputedStyle(parent);
+    const flow = /flex|grid/.test(ps.display) ? "flex" : "bloc";
+    const kids = [...parent.children].filter((k) => {
+      if (!visible(k) || srOnly(k)) return false;
+      const ks = getComputedStyle(k);
+      return !["absolute", "fixed"].includes(ks.position) && ks.display !== "inline" && ks.float === "none" && !k.matches("br, script, style, template, dialog");
+    });
+    for (let i = 1; i < kids.length; i++) {
+      const A = kids[i - 1], B = kids[i], a = A.getBoundingClientRect(), b = B.getBoundingClientRect();
+      let g, axis;
+      const overlapX = Math.min(a.right, b.right) - Math.max(a.left, b.left) > 1;   // l’un au-dessus de l’autre (même colonne)
+      if (b.top >= a.bottom - 1 && overlapX) { g = b.top - a.bottom; axis = "vertical"; }
+      else if (b.left >= a.right - 1 && Math.min(a.bottom, b.bottom) > Math.max(a.top, b.top)) { g = b.left - a.right; axis = "horizontal"; }
+      else continue; // colonnes différentes ou retour à la ligne : pas des voisins visuels
+      g = Math.round(g * 100) / 100;
+      const key = `${axis} ${Math.round(g)}`; gapStats[key] = (gapStats[key] || 0) + 1;
+      const where = `${describe(A)} → ${describe(B)}`;
+      const minGap = axis === "vertical" ? (parseFloat(ps.rowGap) || 0) : (parseFloat(ps.columnGap) || 0);
+      if (g < -1) add("espacement.chevauchement", parent, `${axis} ${g}px : ${where}`);
+      // Flux de blocs : l’écart vient des marges (tokens) → il doit être sur l’échelle.
+      // Flex / grille : l’écart vient du gap (contrôlé ci-dessus) ; le surplus est de l’espace libre d’alignement (space-between, margin auto) → seul le minimum est exigé.
+      else if (flow === "bloc" && axis === "vertical" && !onScale(g)) add("espacement.ecart-hors-echelle", parent, `${axis} ${g}px : ${where}`);
+      else if (flow === "flex" && minGap && g < minGap - 1) add("espacement.ecart-sous-gap", parent, `${axis} ${g}px < gap ${minGap}px : ${where}`);
+      else if (flow === "flex" && axis === "vertical" && !onScale(g)) (V.libres ||= []).push(`${Math.round(g)}px (gap ${minGap}) dans ${describe(parent)} : ${where}`);
+      // Texte collé : deux blocs de texte voisins sans espacement posé (marge, gap ou padding < 4 px) — listes et tableaux exclus
+      if (axis === "vertical" && hasText(A) && hasText(B) && !A.matches("li, tr, td, th, thead, tbody, dt, dd, option, summary") && !parent.matches("ul, ol, dl, table, tbody, thead, tr")) {
+        const as = getComputedStyle(A), bs = getComputedStyle(B);
+        const eff = g + (parseFloat(as.paddingBottom) || 0) + (parseFloat(bs.paddingTop) || 0) + (parseFloat(as.borderBottomWidth) ? 4 : 0) + (parseFloat(bs.borderTopWidth) ? 4 : 0);
+        if (eff < 4) add("espacement.texte-colle", parent, `${Math.round(eff * 10) / 10}px posés entre : ${where}`);
+      }
+    }
+  }
+  V.gaps = gapStats;
+
+  // Relevé détaillé par composant Bento (pour le rapport d’intégration) : première occurrence visible de chaque composant
+  const px = (v) => Math.round(parseFloat(v) * 10) / 10;
+  const box = (el) => { const cs = getComputedStyle(el), r = el.getBoundingClientRect();
+    return { w: Math.round(r.width), h: Math.round(r.height), padding: [cs.paddingTop, cs.paddingRight, cs.paddingBottom, cs.paddingLeft].map(px).join(" "),
+      gap: /flex|grid/.test(cs.display) ? `${px(cs.rowGap) || 0} / ${px(cs.columnGap) || 0}` : "—", fond: (() => { const b = parse(cs.backgroundColor); return b && b.a > 0.05 ? hex(b) : "transparent"; })(),
+      texte: hex(parse(cs.color)), police: `${cs.fontFamily.split(",")[0].replace(/["']/g, "")} ${cs.fontWeight} ${px(cs.fontSize)}px`,
+      bordure: parseFloat(cs.borderTopWidth) ? `${px(cs.borderTopWidth)}px ${hex(parse(cs.borderTopColor))}` : "—", rayon: px(cs.borderTopLeftRadius) };
+  };
+  const releve = {};
+  for (const el of document.querySelectorAll("[data-bento]")) {
+    const name = el.dataset.bento; const r = (releve[name] ||= { nombre: 0, visibles: 0 }); r.nombre++;
+    if (!visible(el) && !el.matches("dialog")) continue; r.visibles++;
+    if (r.mesure) continue;
+    r.mesure = box(el);
+    const inner = [...el.children].filter((k) => visible(k) && !srOnly(k) && !["absolute", "fixed"].includes(getComputedStyle(k).position)).slice(0, 6);
+    r.enfants = inner.map((k) => `${describe(k).split(" « ")[0]} ${Math.round(k.getBoundingClientRect().height)}px`);
+    const gs = [];
+    for (let i = 1; i < inner.length; i++) { const a = inner[i - 1].getBoundingClientRect(), b = inner[i].getBoundingClientRect();
+      gs.push(b.top >= a.bottom - 1 ? Math.round(b.top - a.bottom) : Math.round(b.left - a.right)); }
+    r.ecarts = gs;
+  }
+  // Titres par niveau, sections et leurs fonds, contraste minimal
+  const titresSet = {}; for (const h of document.querySelectorAll(".title")) { const l = [...h.classList].find((x) => /^title--l\d$/.test(x)); if (l && visible(h) && !srOnly(h)) { const cs = getComputedStyle(h);
+    const t = (titresSet[l] ||= { taille: `${px(cs.fontSize)}px ${cs.fontWeight}`, couleurs: new Set(), nombre: 0 }); t.couleurs.add(hex(parse(cs.color))); t.nombre++; } }
+  const titres = Object.fromEntries(Object.entries(titresSet).map(([k, v]) => [k, `${v.taille} × ${v.nombre} (${[...v.couleurs].join(", ")})`]));
+  const sections = [...document.querySelectorAll("body > section, body > footer, body > div.utility, body > header, main > section")].filter(visible).map((s) => {
+    const cs = getComputedStyle(s); const t = s.querySelector(".title"); const b = parse(cs.backgroundColor);
+    const nom = s.dataset.bento && !t ? s.dataset.bento : (t ? t.textContent.trim().slice(0, 48) : describe(s).split(" « ")[0]);
+    return { section: s.matches(".utility") ? "Topbar" : s.matches(".topbar") ? "Site header" : s.matches(".footer") ? "Footer" : nom, fond: b && b.a > 0 ? hex(b) : "transparent", padding: `${px(cs.paddingTop)} / ${px(cs.paddingBottom)}`, hauteur: Math.round(s.getBoundingClientRect().height), composants: [...new Set([...s.querySelectorAll("[data-bento]")].map((e) => e.dataset.bento).concat(s.dataset.bento ? [s.dataset.bento] : []))] };
+  });
+  let minRatio = 99;
+  for (const el of textEls) { if (srOnly(el)) continue; const bg = background(el); if (bg.image) continue; const cs = getComputedStyle(el); const f = parse(cs.color); if (!f) continue;
+    const r = ratio(blend({ ...f, a: f.a * parseFloat(cs.opacity) }, bg.color), bg.color); if (r < minRatio) minRatio = r; }
+  V.releve = { composants: releve, titres, sections, contrasteMin: Math.round(minRatio * 100) / 100, titrePage: document.title };
+
   // Couverture : nombre d’éléments réellement contrôlés (preuve que l’audit a porté sur la page)
   V.stats = { textes: textEls.length, titres: document.querySelectorAll("h1, h2, h3, h4").length, boutons: document.querySelectorAll(".btn").length,
     composants: [...new Set([...document.querySelectorAll("[data-bento]")].map((e) => e.dataset.bento))].length };
@@ -163,7 +267,7 @@ function audit(expected) {
     const r = img.getBoundingClientRect(), a = r.width / r.height, n = img.naturalWidth / img.naturalHeight;
     if (Math.abs(a / n - 1) > 0.02) add("logo.deforme", img, `${a.toFixed(3)} vs ${n.toFixed(3)}`);
   }
-  return { violations: V, stats: V.stats };
+  return { violations: V, stats: V.stats, gaps: V.gaps, releve: V.releve, libres: V.libres || [] };
 }
 
 // ---------------------------------------------------------------- Pilotage de Chrome (DevTools Protocol)
@@ -212,7 +316,7 @@ async function main() {
       if (hidden) v.push({ rule: "audit.masques", el: "", detail: `${hidden} éléments à opacité nulle non contrôlés` });
       if (!st || st.textes < 20) v.push({ rule: "audit.couverture", el: "", detail: `seulement ${st ? st.textes : 0} textes contrôlés : page mal chargée ?` });
       total += v.length;
-      report.push({ page, width, stats: st, violations: v });
+      report.push({ page, width, stats: st, violations: v, gaps: res.gaps, releve: res.releve, libres: res.libres });
       if (SHOTS) {
         const metrics = await send("Page.getLayoutMetrics");
         const h = Math.min(Math.ceil(metrics.cssContentSize.height), 16000);
