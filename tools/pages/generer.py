@@ -28,6 +28,8 @@ def note(original):
     return f"<!-- Note de maquette (texte d’origine) : {original} -->"
 
 
+PIN_ICON = ('<svg class="i i--pin" viewBox="0 0 24 24" aria-hidden="true" focusable="false">'
+            '<path d="M12 21s-6.5-6.1-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 14.9 12 21 12 21z"/><circle cx="12" cy="9.8" r="2.3"/></svg>')
 SUB_ESPACES = [("hall-exposition.html", "Hall d’Exposition", "6 500 m² · 17 m sous plafond"),
                ("le-dome.html", "Le Dôme", "5 000 m² · 5 023 assis · 9 588 debout"),
                ("parvis-esplanades.html", "Parvis & Esplanades", "67 000 m² d’espaces extérieurs"),
@@ -51,9 +53,12 @@ def header(active):
     cta_cur = ' aria-current="page"' if active == "contact-devis.html" else ""
     return f"""<body>
 <a class="skip" href="#contenu">Aller au contenu</a>
-<div class="utility utility--overlay{' utility--on-orange' if active in PAGE_BG else ''}">
+<div class="utility" data-bento="Topbar">
   <div class="wrap utility__inner">
-    {TEL.replace('class="wa-link"', 'class="wa-link utility__tel"')}
+    <ul class="utility__items" role="list">
+      <li class="utility__item">{TEL.replace('class="wa-link"', 'class="wa-link utility__tel"')}</li>
+      <li class="utility__item utility__item--place">{PIN_ICON}<span>Abidjan, Côte d’Ivoire</span></li>
+    </ul>
     <div class="utility__end">
     <nav class="lang-switch" aria-label="Langue"><a href="__FR__" hreflang="fr" lang="fr" aria-current="true">FR</a><a href="__EN__" hreflang="en" lang="en">EN</a></nav>
     <ul class="social" role="list" aria-label="Réseaux sociaux">
@@ -64,11 +69,11 @@ def header(active):
     </div>
   </div>
 </div>
-<header class="topbar topbar--overlay{' topbar--on-orange' if active in PAGE_BG else ''}">
+<header class="topbar topbar--overlay" data-bento="Site header">
   <div class="wrap topbar__inner">
     <a class="brand" href="index.html"><img src="assets/logo-pea.webp" alt="Parc des Expositions d’Abidjan — accueil" width="394" height="210"></a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-principale"><span class="menu-toggle__bars" aria-hidden="true"></span>Menu</button>
-    <nav class="nav" id="nav-principale" aria-label="Navigation principale">
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-principale"><span class="menu-toggle__bars" aria-hidden="true"></span><span class="sr-only">Menu</span></button>
+    <nav class="nav" id="nav-principale" aria-label="Navigation principale" data-bento="Menu">
       <ul>
 {chr(10).join(items)}
       </ul>
@@ -79,19 +84,19 @@ def header(active):
       </ul>
     </nav>
     <a class="topbar__wa" href="{WA_URL}" target="_blank" rel="noopener" aria-label="WhatsApp : +225 27 21 71 09 97 (nouvel onglet)">{WA_ICON}<span class="topbar__wa-num">+225 27 21 71 09 97</span></a>
-    <a class="btn btn--primary topbar__cta" href="contact-devis.html"{cta_cur}><span><span class="hide-sm">Demander un </span>devis</span></a>
+    <a class="btn btn--primary topbar__cta" href="contact-devis.html"{cta_cur}><span class="hide-sm">Demander un devis</span><span class="show-sm">Devis</span></a>
   </div>
 </header>
 <main class="page" id="contenu" tabindex="-1">"""
 
 
 FOOTER = f"""</main>
-<footer class="footer">
-  <!-- Note de maquette : inscription simulée ; à brancher sur l’outil d’e-mailing du Parc (Brevo, Mailchimp…) via Drupal -->
-  <div class="wrap newsletter" id="newsletter">
+<!-- Note de maquette : inscription simulée ; à brancher sur l’outil d’e-mailing du Parc (Brevo, Mailchimp…) via Drupal -->
+<section class="newsletter-block" id="newsletter" aria-labelledby="nl-title" data-bento="Newsletter form">
+  <div class="wrap newsletter">
     <div class="newsletter__intro">
-      <p class="newsletter__label">Newsletter</p>
-      <h2 class="newsletter__title">Les prochains événements du Parc, dans votre boîte mail</h2>
+      <p class="eyebrow">Newsletter</p>
+      <h2 class="newsletter__title" id="nl-title">Les prochains événements du Parc, dans votre boîte mail</h2>
       <p>Une lettre par mois : salons, congrès et concerts à venir. Désinscription en un clic.</p>
     </div>
     <form class="newsletter__form" data-newsletter novalidate>
@@ -106,49 +111,68 @@ FOOTER = f"""</main>
     </form>
     <p class="newsletter__ok" role="status" tabindex="-1" hidden></p>
   </div>
-  <div class="wrap footer__grid">
-    <div class="footer__brand">
-      <img src="assets/logo-pea.webp" alt="" width="394" height="210" loading="lazy">
-      <p><b>Parc des Expositions d’Abidjan</b><br>Boulevard de l’aéroport · Abidjan · Côte d’Ivoire<br>{TEL}</p>
+</section>
+<footer class="footer" data-bento="Footer">
+  <div class="wrap footer__columns">
+    <div class="footer__col footer__col--brand">
+      <img class="footer__logo" src="assets/logo-pea.webp" alt="Parc des Expositions d’Abidjan" width="394" height="210" loading="lazy">
+      <address class="footer__contact" data-bento="Contact details">
+        <span>Boulevard de l’aéroport<br>Abidjan · Côte d’Ivoire</span>
+        {TEL}
+      </address>
     </div>
-    <nav class="footer__nav" aria-label="Liens du pied de page">
-      <ul role="list">
+    <nav class="footer__col" aria-labelledby="ft-espaces">
+      <h2 class="footer__title" id="ft-espaces">Nos espaces</h2>
+      <ul class="footer__menu" role="list">
+        <li><a href="hall-exposition.html">Hall d’Exposition</a></li>
+        <li><a href="le-dome.html">Le Dôme</a></li>
+        <li><a href="parvis-esplanades.html">Parvis & Esplanades</a></li>
+        <li><a href="visite-virtuelle.html">Visite virtuelle 360°</a></li>
+        <li><a href="nos-services.html">Nos services</a></li>
+      </ul>
+    </nav>
+    <nav class="footer__col" aria-labelledby="ft-evenement">
+      <h2 class="footer__title" id="ft-evenement">Votre événement</h2>
+      <ul class="footer__menu" role="list">
         <li><a href="salons-professionnels.html">Salons</a></li>
         <li><a href="congres-conferences.html">Congrès</a></li>
         <li><a href="evenements-entreprise.html">Entreprises</a></li>
         <li><a href="concerts-spectacles.html">Concerts</a></li>
         <li><a href="venir-a-abidjan.html">Venir à Abidjan</a></li>
+        <li><a href="contact-devis.html">Demander un devis</a></li>
       </ul>
     </nav>
-    <a class="footer__partner" href="https://www.gl-events.com/" target="_blank" rel="noopener" aria-label="GL events, expertise internationale (nouvel onglet)">
-      <span class="footer__partner-logo"><img src="assets/logo-gl-events.png" alt="GL events" width="225" height="225" loading="lazy"></span>
-      <span class="footer__partner-text">Expertise internationale</span>
-    </a>
-    <div class="footer__bottom">
-    <nav class="footer__legal" aria-label="Informations légales">
-      <ul role="list">
-        <li><a href="informations-legales.html#mentions-legales">Mentions légales</a></li>
-        <li><a href="informations-legales.html#cookies">Politique cookies</a></li>
-        <li><a href="informations-legales.html#confidentialite">Politique de confidentialité</a></li>
-        <li><a href="informations-legales.html#cgu">CGU</a></li>
-        <li><a href="informations-legales.html#ethique">Éthique et conformité</a></li>
-        <li><button type="button" class="footer__cookies" data-consent-open>Gérer les cookies</button></li>
-      </ul>
-    </nav>
-    <p class="footer__credit">Design par <a href="https://bigfive.solutions/" target="_blank" rel="noopener" aria-label="Big Five, design du site (nouvel onglet)">Big Five</a></p>
+  </div>
+  <div class="wrap footer__legal-wrap">
+    <div class="footer__legal-bar">
+      <a class="footer__partner" href="https://www.gl-events.com/" target="_blank" rel="noopener" aria-label="GL events, expertise internationale (nouvel onglet)">
+        <span class="footer__partner-logo"><img src="assets/logo-gl-events.png" alt="GL events" width="225" height="225" loading="lazy"></span>
+      </a>
+      <p class="footer__copyright">© 2026 Parc des Expositions d’Abidjan · GL events</p>
+      <nav class="footer__legal" aria-label="Informations légales">
+        <ul role="list">
+          <li><a href="informations-legales.html#mentions-legales">Mentions légales</a></li>
+          <li><a href="informations-legales.html#cookies">Politique cookies</a></li>
+          <li><a href="informations-legales.html#confidentialite">Politique de confidentialité</a></li>
+          <li><a href="informations-legales.html#cgu">CGU</a></li>
+          <li><a href="informations-legales.html#ethique">Éthique et conformité</a></li>
+          <li><button type="button" class="footer__cookies" data-consent-open>Gérer les cookies</button></li>
+        </ul>
+      </nav>
+      <p class="footer__credit">Design par <a href="https://bigfive.solutions/" target="_blank" rel="noopener" aria-label="Big Five, design du site (nouvel onglet)">Big Five</a></p>
     </div>
   </div>
 </footer>
 <a class="to-top" href="#contenu" aria-label="Retour en haut de page"><svg viewBox="16 -1 360 62.5" aria-hidden="true" focusable="false"><path d="M20 61C70 54 120 25.5 150 12C164 5.7 182 0 196 0C210 0 228 5.7 242 12C272 25.5 322 54 372 61Z"/></svg></a>
-<section class="cookie-banner" id="cookie-consent" aria-labelledby="consent-title" hidden>
+<section class="cookie-banner" data-bento="Modal" id="cookie-consent" aria-labelledby="consent-title" hidden>
   <div class="wrap consent__inner">
     <div class="consent__text">
       <h2 class="consent__title" id="consent-title">Cookies et contenus tiers</h2>
       <p>Ce site mémorise uniquement votre choix. Avec votre accord, la carte Google Maps, le fil Facebook et la visite virtuelle Matterport sont chargés et peuvent déposer leurs propres cookies. <a href="informations-legales.html#cookies">En savoir plus</a></p>
     </div>
     <div class="consent__actions">
-      <button class="btn btn--secondary" type="button" data-consent="refused">Tout refuser</button>
-      <button class="btn btn--secondary" type="button" data-consent="accepted">Tout accepter</button>
+      <button class="btn btn--invert btn--outline" type="button" data-consent="refused">Tout refuser</button>
+      <button class="btn btn--invert btn--outline" type="button" data-consent="accepted">Tout accepter</button>
     </div>
   </div>
 </section>
@@ -166,8 +190,7 @@ def crumbs(*parts, ink=False):
             lis.append(f'<li><a href="{href}">{label}</a></li>')
         else:
             lis.append(f'<li><span>{label}</span></li>')
-    cls = "breadcrumbs breadcrumbs--ink" if ink else "breadcrumbs"
-    return f'<nav class="{cls}" aria-label="Fil d’Ariane"><ol role="list">{"".join(lis)}</ol></nav>'
+    return f'<nav class="breadcrumbs" aria-label="Fil d’Ariane" data-bento="Breadcrumb"><ol role="list">{"".join(lis)}</ol></nav>'
 
 
 def slug(t):
@@ -189,16 +212,18 @@ def filters(label, items, target, key, row_label=None):
     return group
 
 
-def page_hero(crumb, eyebrow, h1, lead, extra="", compact=False, lead_note="", media=""):
+def page_hero(crumb, eyebrow, h1, lead, extra="", compact=False, lead_note="", media="", meta="", addons=""):
+    """Composant Bento « Page header » (Background=image, Color=primary) : meta · titre · summary · addons."""
     cls = ("page-hero page-hero--compact" if compact else "page-hero") + (" page-hero--media" if media else "")
+    meta_html = f'\n    <div class="page-hero__meta">{meta}</div>' if meta else f'\n    <p class="eyebrow">{eyebrow}</p>'
+    addons_html = f'\n    <div class="page-hero__addons">{addons}</div>' if addons else ""
     return f"""
-<section class="{cls}">
+<section class="{cls}" data-bento="Page header">
   <div class="wrap">
-    {crumb}
-    <p class="eyebrow">{eyebrow}</p>
+    {crumb}{meta_html}
     <h1>{h1}</h1>
     {lead_note}
-    <p class="lead">{lead}</p>{extra}{media}
+    <p class="lead">{lead}</p>{extra}{addons_html}{media}
   </div>
 </section>"""
 
@@ -228,23 +253,25 @@ def img(name, alt="", sizes="100vw", cls="", lazy=True, priority=False):
 
 
 SPACE_URL = {"A": "hall-exposition.html", "B": "le-dome.html", "C": "parvis-esplanades.html"}
-SPACE_IMG = {"A": "espaces/hall/interieur", "B": "espaces/parvis/dome-sous-le-nuage", "C": "espaces/parvis/salon-plein-air-aerien"}
+SPACE_IMG = {"A": "officiel/hall/hall-drapeaux", "B": "officiel/dome-exterieur/dome-ciel", "C": "officiel/dome-exterieur/dome-panorama"}
 
 
 def space(letter, title, sub, media=None, ink=False, h="h3", usage=""):
+    """Composant Bento « Card » (vertical, landscape) : image + badge, titre, description, lien."""
     data = f' data-usage="{usage}"' if usage else ""
-    return f"""      <a class="space{' space--ink' if ink else ''}" href="{SPACE_URL[letter]}"{data}>
-        <div class="space__media">{img(SPACE_IMG[letter], sizes="(min-width: 768px) 50vw, 100vw")}</div>
-        <div class="space__plate"><span class="space__letter" aria-hidden="true">{letter}</span><div><{h}{' class="t3"' if h == "h2" else ""}>{title}</{h}><p>{sub}</p></div>{ARROW}</div>
+    return f"""      <a class="card card--space" href="{SPACE_URL[letter]}"{data} data-bento="Card">
+        <div class="card__media">{img(SPACE_IMG[letter], sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw")}<span class="badge badge--primary card__badge">Espace {letter}</span></div>
+        <div class="card__content"><{h} class="card__title{' t3' if h == "h2" else ''}">{title}</{h}><p class="card__desc">{sub}</p><span class="card__link">Découvrir {ARROW}</span></div>
       </a>"""
 
 
 def event(date, title, place, h="h3", types="", href="fiche-evenement.html", image=None):
+    """Composant Bento « Card » (vertical, poster) : affiche + badge de date, titre, lieu, lien."""
     data = f' data-type="{types}"' if types else ""
-    thumb = img(f"agenda/{image}") if image else ""
-    return f"""      <a class="event" href="{href}"{data}>
-        <div class="event__thumb">{thumb}</div>
-        <div class="event__body"><span class="date">{date}</span><{h}{' class="t3"' if h == "h2" else ""}>{title}</{h}><p>{place}</p></div>
+    thumb = img(f"agenda/{image}", sizes="(min-width: 1024px) 33vw, 100vw") if image else ""
+    return f"""      <a class="card card--event" href="{href}"{data} data-bento="Card">
+        <div class="card__media card__media--poster">{thumb}<span class="badge card__badge">{date}</span></div>
+        <div class="card__content"><{h} class="card__title{' t3' if h == "h2" else ''}">{title}</{h}><p class="card__desc">{place}</p><span class="card__link">Voir l’événement {ARROW}</span></div>
       </a>"""
 
 
@@ -386,9 +413,9 @@ def timeline():
         reserve = links[0] if resa else ""
         out.append(f"""      <li class="tl-item" id="{slug_}" data-type="{tags}" data-start="{iso1}" data-end="{iso2}">
         <p class="tl-date"><time datetime="{iso1}" class="tl-date__day">{d1:02d}</time><span class="tl-date__rest">{rest}</span></p>
-        <div class="tl-card">
+        <div class="tl-card" data-bento="Card">
           <div class="tl-card__media">{img(f"agenda/{slug_}")}</div>
-          <p class="tl-card__type">{kind}<span class="tl-card__next" hidden> · Prochainement</span></p>
+          <p class="tl-card__type badge">{kind}<span class="tl-card__next" hidden> · Prochainement</span></p>
           <h3 class="tl-card__title"><a href="evenement-{slug_}.html">{title}</a></h3>
           <p class="tl-card__when">{when_long(start, end)}</p>
           <div class="tl-card__more" data-event-more>
@@ -396,7 +423,7 @@ def timeline():
             <dl class="ev-facts">{facts_html}</dl>
             <div class="ev-links">{"".join(links)}</div>
           </div>
-          <div class="tl-card__actions"><button class="link-arrow" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : {title}">Détails {ARROW}</button></div>
+          <div class="tl-card__actions"><button class="btn btn--primary btn--sm" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : {title}">Détails {ARROW}</button></div>
         </div>
       </li>""")
     return "\n".join(out)
@@ -407,8 +434,10 @@ IG_POSTS = "".join(
     for code, alt in IG_ITEMS)
 
 # Diaporama de l'accueil : ordre d'affichage (images produites par tools/optimiser-images.py)
-SLIDES = ["slider/dome-rendu", "slider/salon-vue-plongeante", "slider/concert-foule", "slider/percussions",
-          "slider/concert-scene", "slider/salon-rencontres", "slider/spectacle-scene", "slider/journee-internationale"]
+# Uniquement des photos officielles du client (docs/retourclient/images) : Dôme, Hall, parvis
+SLIDES = ["officiel/dome-exterieur/dome-ciel", "officiel/hall/hall-drapeaux", "officiel/dome-salle/salle-pleniere",
+          "officiel/dome-exterieur/dome-aerien", "officiel/dome-exterieur/dome-panorama", "officiel/dome-salle/salle-gradins",
+          "officiel/hall/hall-perspective", "officiel/dome-salle/salle-parterre"]
 SLIDES_HTML = "\n".join(
     f'    <figure class="slider__slide{" is-active" if i == 0 else ""}">'
     f'{img(n, sizes="100vw", priority=i == 0, lazy=i != 0)}</figure>' for i, n in enumerate(SLIDES))
@@ -427,19 +456,43 @@ LOGOS = [  # images/logos -> assets/img/logos (tools/optimiser-images.py)
     ("sila", "SILA — Salon International du Livre d’Abidjan"),
 ]
 LOGOS_SOMBRES = {"abidjan-border-forum"}
-LOGO_ITEMS = "".join(f'<li class="logos__item{" logos__item--dark" if n in LOGOS_SOMBRES else ""}">{img("logos/" + n, a)}</li>' for n, a in LOGOS)
+LOGO_ITEMS = "".join(f'<li class="logos__item{" logos__item--dark" if n in LOGOS_SOMBRES else ""}">{img("logos/" + n, a, sizes="200px")}</li>' for n, a in LOGOS)
 CHEV_L = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg>'
 CHEV_R = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg>'
 
+# ---------------------------------------------------------------- Vidéo de présentation (composant Bento « Block/Video »)
+# Façade (affiche + bouton) : la vidéo n'est chargée qu'au clic (assets/site.js). Sans JS, le lien ouvre le MP4.
+# Source : docs/retourclient/images/Vidéo présentation PEA FRANÇAIS.mp4 (4K HEVC, 333 Mo) recompressée en H.264 1080p / 720p.
+PLAY_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5v14l11-7z"/></svg>'
+
+
+def video_block(heading_id, h="h2"):
+    return f"""
+<section class="section section--brun video-block" aria-labelledby="{heading_id}" data-bento="Block/Video">
+  <div class="wrap">
+    <div class="section__head"><p class="eyebrow">Le Parc en vidéo</p><{h} id="{heading_id}">Découvrez le Parc en 1 min 37.</{h}></div>
+    <div class="video" data-video>
+      <a class="video__facade" href="assets/video/presentation-pea-1080.mp4" data-video-hd="assets/video/presentation-pea-1080.mp4" data-video-sd="assets/video/presentation-pea-720.mp4" data-video-title="Vidéo de présentation du Parc des Expositions d’Abidjan">
+        {img("video/presentation-poster", "", "(min-width: 1320px) 1320px, 100vw")}
+        <span class="video__play" aria-hidden="true">{PLAY_ICON}</span>
+        <span class="sr-only">Voir la vidéo de présentation (1 min 37, en français)</span>
+      </a>
+    </div>
+    <p class="video__meta">1 min 37 · en français</p>
+  </div>
+</section>
+"""
+
+
 # ---------------------------------------------------------------- Accueil
 PAGES["index.html"] = ("Accueil — Parc des Expositions d’Abidjan", f"""
-<section class="hero hero--slider hero--under-header" data-slider>
+<section class="hero hero--slider hero--under-header" data-slider data-bento="Block/Hero">
   <div class="slider" aria-hidden="true">
 {SLIDES_HTML}
   </div>
   <span class="hero__arch" aria-hidden="true"></span>
-  <a class="scroll-cue" href="#decouvrir" aria-label="Aller à la section suivante"><span class="scroll-cue__mouse" aria-hidden="true"></span></a>
-  <div class="ctrl ctrl--on-photo slider__controls" role="group" aria-label="Diaporama">
+  <a class="scroll-cue" href="#decouvrir" aria-label="Aller à la section suivante"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></a>
+  <div class="ctrl ctrl--on-photo slider__controls" role="group" aria-label="Diaporama" data-bento="Carousel">
     <p class="ctrl__count"><span class="sr-only">Image </span><span data-ctrl-current>01</span> / {len(SLIDES):02d}</p>
     <ol class="ctrl__track" role="list" aria-hidden="true">{SLIDER_DOTS}</ol>
     <button type="button" class="ctrl__btn" data-slide-prev aria-label="Image précédente">{CHEV_L}</button>
@@ -448,10 +501,10 @@ PAGES["index.html"] = ("Accueil — Parc des Expositions d’Abidjan", f"""
   </div>
   <div class="wrap hero__inner">
     {ARCH.format(cls="arch")}
-    <p class="eyebrow">Abidjan · Côte d’Ivoire</p>
+    <p class="eyebrow">Le plus grand parc exposition d’Afrique de l’Ouest</p>
     <h1>Salons, congrès et grands événements à Abidjan.</h1>
     <p class="lead">Des espaces modulables, des services complets et une destination au cœur de l’Afrique de l’Ouest.</p>
-    <div class="actions"><a class="btn btn--primary" href="nos-espaces.html">Découvrir nos espaces {ARROW}</a><a class="btn btn--secondary" href="contact-devis.html">Demander un devis</a></div>
+    <div class="actions"><a class="btn btn--primary" href="nos-espaces.html">Découvrir nos espaces {ARROW}</a><a class="btn btn--invert" href="contact-devis.html">Demander un devis</a></div>
   </div>
 </section>
 
@@ -462,19 +515,19 @@ PAGES["index.html"] = ("Accueil — Parc des Expositions d’Abidjan", f"""
       {note("Le site doit répondre immédiatement à une question : pourquoi organiser son événement au Parc des Expositions d’Abidjan ? La réponse s’articule autour de quatre piliers : espaces, services, destination et expertise.")}
       <p>Pourquoi organiser votre événement au Parc des Expositions d’Abidjan ? Pour quatre raisons : des espaces à grande échelle, des services intégrés, une destination attractive et une expertise internationale.</p>
     </div>
-    <ul class="figures figures--4 figures--interactive" role="list">
+    <ul class="figures figures--4 figures--light" role="list" data-bento="Block/Key figures">
       <li class="figure"><strong><span class="sr-only">6 500 m²</span><span aria-hidden="true"><span data-count="6500">6 500</span> m²</span></strong>Hall d’exposition</li>
       <li class="figure"><strong><span class="sr-only">5 000 m²</span><span aria-hidden="true"><span data-count="5000">5 000</span> m²</span></strong>Le Dôme</li>
       <li class="figure"><strong><span class="sr-only">67 000 m²</span><span aria-hidden="true"><span data-count="67000">67 000</span> m²</span></strong>Parvis & esplanades</li>
-      <li class="figure"><strong><span class="sr-only">360°</span><span aria-hidden="true"><span data-count="360">360</span>°</span></strong><a class="btn btn--secondary btn--sm" href="visite-virtuelle.html#visite">Visiter le Parc {ARROW}</a></li>
+      <li class="figure"><strong><span class="sr-only">360°</span><span aria-hidden="true"><span data-count="360">360</span>°</span></strong><a class="btn btn--tertiary btn--sm" href="visite-virtuelle.html#visite">Visiter le Parc {ARROW}</a></li>
     </ul>
   </div>
 </section>
-
+{video_block("video-titre")}
 <section class="section section--white">
   <div class="wrap">
     <div class="section__head"><p class="eyebrow">Nos espaces</p><h2>À chaque projet, son espace.</h2></div>
-    <div class="spaces">
+    <div class="collection collection--3" data-bento="Collection">
 {space("A", "Hall d’Exposition", "Salons · expositions · corporate")}
 {space("B", "Le Dôme", "Conventions · conférences · concerts", ink=True)}
 {space("C", "Parvis & Esplanades", "Formats outdoor · grands publics")}
@@ -484,7 +537,7 @@ PAGES["index.html"] = ("Accueil — Parc des Expositions d’Abidjan", f"""
 
 <section class="section">
   <div class="wrap split">
-    <div class="media media--top">{img("pages/destination-abidjan", "Abidjan de nuit : le pont et la lagune illuminés", "(min-width: 1024px) 50vw, 100vw")}<span class="plaque">Abidjan, destination MICE</span></div>
+    <div class="media media--top">{img("pages/destination-abidjan", "Abidjan de nuit : le pont et la lagune illuminés", "(min-width: 1024px) 50vw, 100vw")}<span class="badge badge--primary media__badge">Abidjan, destination MICE</span></div>
     <div>
       <p class="eyebrow">Une destination</p>
       <h2>Votre événement commence à Abidjan.</h2>
@@ -498,7 +551,7 @@ PAGES["index.html"] = ("Accueil — Parc des Expositions d’Abidjan", f"""
 <section class="section section--white">
   <div class="wrap">
     <div class="section__head"><p class="eyebrow">Agenda</p><h2>Prochainement au Parc</h2></div>
-    <div class="agenda">
+    <div class="collection collection--3" data-bento="Collection">
 {event("8–10 oct. 2026", "Auto Expo", "Salon de l’industrie automobile", href="evenement-auto-expo.html", image="auto-expo")}
 {event("11 oct. 2026", "Concert TAYC", "Concert", href="evenement-concert-tayc.html", image="concert-tayc")}
 {event("15–16 oct. 2026", "Brands Licensing Africa", "Salon des licences de marques", href="evenement-brands-licensing-africa.html", image="brands-licensing-africa")}
@@ -512,8 +565,8 @@ PAGES["index.html"] = ("Accueil — Parc des Expositions d’Abidjan", f"""
 <section class="section section--white" aria-labelledby="mur-titre">
   <div class="wrap">
     <div class="section__head"><p class="eyebrow">Actualités</p><h2 id="mur-titre">Le Parc en direct</h2></div>
-    <div class="wall">
-      <article class="wall__tile wall__tile--fb" aria-labelledby="mur-fb">
+    <div class="wall" data-bento="Collection">
+      <article class="card wall__tile wall__tile--fb" data-bento="Card" aria-labelledby="mur-fb">
         <header class="wall__head">{FB_ICON}<h3 class="wall__name t3" id="mur-fb">Facebook</h3><a class="wall__handle" href="{FB_URL}" target="_blank" rel="noopener" aria-label="Suivre le Parc sur Facebook (nouvel onglet)">Suivre {EXT}</a></header>
         <div class="wall__embed" data-embed-src="{FB_PLUGIN}" data-embed-title="Publications Facebook du Parc des Expositions d’Abidjan">
           <div class="embed-facade">
@@ -522,16 +575,16 @@ PAGES["index.html"] = ("Accueil — Parc des Expositions d’Abidjan", f"""
           </div>
         </div>
       </article>
-      <article class="wall__tile wall__tile--ig" aria-labelledby="mur-ig">
+      <article class="card wall__tile wall__tile--ig" data-bento="Card" aria-labelledby="mur-ig">
         <header class="wall__head">{IG_ICON}<h3 class="wall__name t3" id="mur-ig">Instagram</h3><a class="wall__handle" href="{IG_URL}" target="_blank" rel="noopener" aria-label="Suivre parcdesexpositionsabidjan sur Instagram (nouvel onglet)">@parcdesexpositionsabidjan {EXT}</a></header>
         <ul class="wall__grid" role="list">{IG_POSTS}</ul>
       </article>
-      <article class="wall__tile wall__tile--li" aria-labelledby="mur-li">
+      <article class="card wall__tile wall__tile--li" data-bento="Card" aria-labelledby="mur-li">
         <header class="wall__head">{LI_ICON}<h3 class="wall__name t3" id="mur-li">LinkedIn</h3></header>
         <p>Salons, partenariats et actualités professionnelles du Parc des Expositions d’Abidjan.</p>
         <a class="btn btn--secondary" href="{LI_URL}" target="_blank" rel="noopener" aria-label="Suivre le Parc sur LinkedIn (nouvel onglet)">Suivre sur LinkedIn {EXT}</a>
       </article>
-      <article class="wall__tile wall__tile--next" aria-labelledby="mur-next">
+      <article class="card wall__tile wall__tile--next" data-bento="Card" aria-labelledby="mur-next">
         <p class="wall__kicker">Prochainement au Parc</p>
         <h3 class="t3" id="mur-next">Auto Expo</h3>
         <p class="wall__date">8–10 oct. 2026</p>
@@ -544,7 +597,7 @@ PAGES["index.html"] = ("Accueil — Parc des Expositions d’Abidjan", f"""
 
 <section class="section">
   <div class="wrap">
-    <div class="cta cta--photo">
+    <div class="cta cta--photo" data-bento="Cta">
       <div class="cta__img" aria-hidden="true"></div>
       <p class="eyebrow">Votre prochain événement</p>
       <h2>Parlez-nous de votre projet.</h2>
@@ -555,11 +608,11 @@ PAGES["index.html"] = ("Accueil — Parc des Expositions d’Abidjan", f"""
   </div>
 </section>
 
-<section class="section section--white" aria-labelledby="refs-title">
+<section class="section section--white" aria-labelledby="refs-title" data-bento="Block/Partners">
   <div class="wrap">
     <div class="logos-head">
       <div><p class="eyebrow">Références</p><h2 id="refs-title">Ils nous ont fait confiance</h2></div>
-      <div class="ctrl logos-controls" role="group" aria-label="Défilement des logos">
+      <div class="ctrl logos-controls" role="group" aria-label="Défilement des logos" data-bento="Carousel">
         <p class="ctrl__count"><span class="sr-only">Page </span><span data-ctrl-current>1</span> / <span data-ctrl-total>2</span></p>
         <ol class="ctrl__track" role="list" aria-hidden="true" data-logos-pages></ol>
         <button class="ctrl__btn" type="button" data-logos-prev aria-label="Logos précédents">{CHEV_L}</button>
@@ -576,7 +629,7 @@ PAGES["index.html"] = ("Accueil — Parc des Expositions d’Abidjan", f"""
 
 # ---------------------------------------------------------------- Qui sommes-nous
 LIGHTBOX = """
-<dialog class="lightbox" id="lightbox" aria-label="Visionneuse de photos">
+<dialog class="lightbox" id="lightbox" aria-label="Visionneuse de photos" data-bento="Modal">
   <figure class="lightbox__figure"><img class="lightbox__img" src="data:," alt=""><figcaption class="lightbox__caption"></figcaption></figure>
   <p class="lightbox__count" aria-live="polite"></p>
   <button class="lightbox__btn lightbox__close" type="button" aria-label="Fermer la visionneuse"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
@@ -606,19 +659,19 @@ PAGES["qui-sommes-nous.html"] = ("Qui sommes-nous ? — Parc des Expositions d�
 
 <section class="section section--white">
   <div class="wrap split">
-    <div class="media">{img("slider/journee-internationale", "Grand événement institutionnel dans le Dôme", "(min-width: 1024px) 50vw, 100vw")}</div>
+    <div class="media">{img("officiel/dome-salle/salle-pleniere", "La salle plénière du Dôme, fauteuils face à la scène", "(min-width: 1024px) 50vw, 100vw")}</div>
     <div>
       <p class="eyebrow">Notre ambition</p>
       <h2>Faire d’Abidjan un point de rencontre régional.</h2>
       <p>Le Parc des Expositions d’Abidjan accueille salons, expositions, conventions, conférences, concerts et grands rendez-vous professionnels.</p>
-      <ul class="figures figures--tight" role="list">
+      <ul class="figures figures--tight" role="list" data-bento="Block/Key figures">
         <li class="figure"><strong>3</strong>grands univers d’espaces</li>
-        <li class="figure figure--ink"><strong>GL events</strong>expertise internationale</li>
+        <li class="figure"><strong>GL events</strong>expertise internationale</li>
       </ul>
     </div>
   </div>
 </section>
-
+{video_block("video-titre")}
 <section class="section" id="destination">
   <div class="wrap">
   <div class="intro">
@@ -626,12 +679,12 @@ PAGES["qui-sommes-nous.html"] = ("Qui sommes-nous ? — Parc des Expositions d�
     {note("Cette section valorise l’accessibilité, l’hôtellerie, le dynamisme économique, culturel et touristique de la Côte d’Ivoire afin de soutenir la visibilité internationale du Parc.")}
     <p>Accessibilité, offre hôtelière, dynamisme économique, culturel et touristique : la Côte d’Ivoire réunit tout ce qu’il faut pour accueillir vos participants venus de la région et du monde entier.</p>
   </div>
-    <div class="destination-grid block-gap" data-lightbox>{DESTINATION_ITEMS}</div>
+    <div class="destination-grid block-gap" data-lightbox data-bento="Image gallery">{DESTINATION_ITEMS}</div>
     <p class="section__more"><a class="link-arrow" href="venir-a-abidjan.html">Accès, hôtels, visas : venir à Abidjan {ARROW}</a></p>
   </div>
 </section>
 
-<section class="section section--ink" id="expertise">
+<section class="section section--brun-fonce" id="expertise">
   <div class="wrap">
     <p class="eyebrow">Expertise</p>
     <h2>Un savoir-faire événementiel international.</h2>
@@ -654,7 +707,7 @@ PAGES["nos-espaces.html"] = ("Nos espaces — Parc des Expositions d’Abidjan",
   <div class="wrap">
     {results("espaces", "3 espaces", "Aucun espace ne correspond à cet usage. Parlez-nous de votre projet : nous étudions chaque configuration.")}
     <!-- Usages par espace (déduits des légendes de l’accueil) : à confirmer et administrer dans Drupal -->
-    <div class="spaces" id="espaces">
+    <div class="collection collection--3" id="espaces" data-bento="Collection">
 {space("A", "Hall d’Exposition", "6 500 m² · 17 m sous plafond", h="h2", usage="salon corporate")}
 {space("B", "Le Dôme", "5 000 m² · 5 023 assis · 9 588 debout", ink=True, h="h2", usage="congres conference convention concert")}
 {space("C", "Parvis & Esplanades", "67 000 m² d’espaces extérieurs", h="h2", usage="concert salon")}
@@ -686,15 +739,15 @@ PAGES["nos-espaces.html"] = ("Nos espaces — Parc des Expositions d’Abidjan",
       <h2>Explorez les espaces avant votre visite.</h2>
       {note("Un accès direct à la visite 360° depuis la page Espaces permet d’accélérer la qualification commerciale.")}
       <p>Parcourez le Parc en 360° pour imaginer votre configuration avant même de vous déplacer.</p>
-      <a class="btn btn--secondary" href="visite-virtuelle.html#visite">Lancer la visite virtuelle {ARROW}</a>
+      <a class="btn btn--tertiary" href="visite-virtuelle.html#visite">Lancer la visite virtuelle {ARROW}</a>
     </div>
-    <a class="media media--arch media--link" href="visite-virtuelle.html#visite" aria-label="Lancer la visite virtuelle"><span class="plaque">360°</span></a>
+    <a class="media media--arch media--link" href="visite-virtuelle.html#visite" aria-label="Lancer la visite virtuelle"><span class="badge badge--primary media__badge">360°</span></a>
   </div>
 </section>
 
 <section class="section">
   <div class="wrap">
-    <div class="cta">
+    <div class="cta" data-bento="Cta">
       <p class="eyebrow">Votre projet</p>
       <h2>Un espace vous intéresse ?</h2>
       <p>Indiquez l’espace, vos dates et votre jauge : notre équipe commerciale vous recontacte avec une proposition adaptée.</p>
@@ -724,7 +777,40 @@ ALTS = {
     "parking-couvert": "Parking couvert sous les ombrières",
     "engins-devant-le-dome": "Engins de chantier exposés sur le parvis devant le Dôme",
     "salon-plein-air-aerien": "Vue aérienne d’un salon en plein air sur l’esplanade",
+    # Photos officielles (docs/retourclient/images, organisation du client du 6 novembre 2026)
+    "hall-drapeaux": "Le Hall d’Exposition vide, pavoisé des drapeaux des nations sous sa charpente noire",
+    "hall-portes": "Grand volume du Hall d’Exposition et ses portes de chargement",
+    "hall-perspective": "Perspective du Hall d’Exposition, sol béton et charpente pavoisée",
+    "dome-ciel": "La coupole du Dôme sous un ciel bleu",
+    "dome-aerien": "Le Dôme vu du ciel, au milieu des esplanades",
+    "dome-toiture": "La toiture ondulée du Dôme, vue de près",
+    "dome-panorama": "Le Dôme et son parvis, vus depuis l’esplanade",
+    "salle-pleniere": "La salle plénière du Dôme : fauteuils face à la scène",
+    "salle-fauteuils": "Rangées de fauteuils de la salle du Dôme",
+    "salle-parterre": "Le parterre du Dôme dégagé, sous la charpente en bois",
+    "salle-gradins": "Gradins et parterre de la salle du Dôme",
+    "salon-vip-galerie": "La galerie boisée du salon VIP du Dôme",
+    "salon-vip-banc": "Le salon VIP du Dôme : banc et appliques murales",
+    "salon-vip-oeuvre": "Le salon VIP du Dôme et son œuvre d’art",
+    "salon-vip-accueil": "La banque d’accueil du salon VIP du Dôme",
 }
+
+
+def official_photos(groups, featured, label, extra=()):
+    """Photos officielles du client (assets/img/officiel/…, tools/optimiser-images.py) : tous les dossiers indiqués,
+    plus des photos isolées (extra), image vedette en premier. Le dossier « esplanades » se remplit tout seul."""
+    names = []
+    for group in groups:
+        names += sorted(f"{group}/{f.name[: -len('-1600.webp')]}" for f in (ROOT / "assets/img" / group).glob("*-1600.webp"))
+    names += [e for e in extra if e not in names]
+    names.sort(key=lambda n: n.rsplit("/", 1)[1] != featured)
+    out = []
+    for n in names:
+        key = n.rsplit("/", 1)[1]
+        if key not in ALTS:
+            print(f"  ATTENTION : texte alternatif manquant pour {n}")
+        out.append((n, ALTS.get(key, f"Photo — {label}")))
+    return out
 
 
 def folder_photos(group, featured, label):
@@ -747,7 +833,7 @@ SPACES = [
          note_txt="La fiche espace concentre l’information commerciale et technique : usages possibles, capacité, configuration, prestations associées et documents à télécharger.",
          text="Avec 6 500 m² d’un seul tenant et 17 m libres sous plafond, le Hall d’Exposition peut être divisé en 2 ou 3 espaces d’exposition distincts pour accueillir salons, expositions et grands événements d’entreprise.",
          usages=["Salon professionnel", "Exposition", "Lancement", "Convention"], equip=None,
-         photos=folder_photos("espaces/hall", "interieur", "Hall d’Exposition"),
+         photos=official_photos(["officiel/hall"], "hall-drapeaux", "Hall d’Exposition"),
          doc=("assets/fiche-technique-hall-exposition.pdf", "Télécharger la fiche technique", True)),
     dict(file="le-dome.html", title="Le Dôme", letter="B", code="dome",
          lead="Le Convention Center du Parc : une salle de 5 000 m² équipée pour les conférences, les événements institutionnels, les salons et les concerts.",
@@ -756,7 +842,7 @@ SPACES = [
          text="Avec 5 000 m² exploitables, le Dôme accueille jusqu’à 5 023 personnes assises et 9 588 debout, avec une infrastructure technique pensée pour les événements professionnels comme pour le grand public.",
          usages=["Conférence internationale", "Événement institutionnel", "Salon & exposition", "Concert & spectacle"],
          equip=["96 enceintes", "365 projecteurs", "240 m² d’écran LED"],
-         photos=folder_photos("espaces/dome", "panel-connect", "Le Dôme"),
+         photos=official_photos(["officiel/dome-salle", "officiel/dome-exterieur", "officiel/dome-salon-vip"], "salle-pleniere", "Le Dôme"),
          doc=(None, None, False)),
     dict(file="parvis-esplanades.html", title="Parvis & Esplanades", letter="C", code="parvis",
          lead="67 000 m² d’espaces extérieurs pour les expositions et les événements en plein air.",
@@ -764,20 +850,21 @@ SPACES = [
          h2="De grands espaces extérieurs, à l’échelle de vos projets.", note_txt=None,
          text="Le Parvis et les esplanades Est et Nord-Est totalisent 67 000 m² pour les expositions extérieures, les formats outdoor et les événements grand public.",
          usages=["Exposition extérieure", "Format outdoor", "Événement grand public", "Concert"], equip=None,
-         photos=folder_photos("espaces/parvis", "dome-sous-le-nuage", "Parvis & Esplanades"),
+         photos=official_photos(["officiel/esplanades"], "dome-panorama", "Parvis & Esplanades",
+                                extra=["officiel/dome-exterieur/dome-panorama", "officiel/dome-exterieur/dome-aerien"]),
          doc=(None, None, False)),
 ]
 
 
 def space_page(sp):
-    figs = "".join(f'<li class="figure{" figure--ink" if i == 0 else ""}"><strong>{v}</strong>{l}</li>' for i, (v, l) in enumerate(sp["figures"]))
+    figs = "".join(f'<li class="figure"><strong>{v}</strong>{l}</li>' for v, l in sp["figures"])
     n = len(sp["photos"])
     items = "".join(gallery_item(name, alt, "(min-width: 768px) 33vw, 50vw", lazy=i > 2)
                     for i, (name, alt) in enumerate(sp["photos"]))
-    usages = "".join(f"<li>{u}</li>" for u in sp["usages"])
+    usages = "".join(f'<li class="badge badge--outline">{u}</li>' for u in sp["usages"])
     equip = ""
     if sp["equip"]:
-        equip_items = "".join(f"<li>{e}</li>" for e in sp["equip"])
+        equip_items = "".join(f'<li class="badge">{e}</li>' for e in sp["equip"])
         equip = ("\n      <h3 class=\"block-gap\" id=\"equipements\">Équipements</h3>"
                  f"\n      <ul class=\"tags\" role=\"list\">{equip_items}</ul>")
     doc_url, doc_label, local = sp["doc"]
@@ -793,11 +880,11 @@ def space_page(sp):
 
 <section class="section section--white section--tight">
   <div class="wrap">
-    <nav class="subnav" aria-label="Sections de la fiche">
+    <nav class="subnav" aria-label="Sections de la fiche" data-bento="Tabs">
       <a href="#caracteristiques">Caractéristiques</a><a href="#galerie">Galerie</a><a href="#presentation">Présentation</a>{subnav_equip}<a href="#services-associes">Services associés</a><a href="#documents">Documents</a>
     </nav>
-    <ul class="figures figures--3" id="caracteristiques" role="list">{figs}</ul>
-    <div class="gallery block-gap" id="galerie" data-lightbox>{items}</div>
+    <ul class="figures figures--3" id="caracteristiques" role="list" data-bento="Block/Key figures">{figs}</ul>
+    <div class="gallery block-gap" id="galerie" data-lightbox data-bento="Image gallery">{items}</div>
   </div>
 </section>
 
@@ -812,7 +899,7 @@ def space_page(sp):
       <h3 class="block-gap" id="services-associes">Services associés</h3>
       <p>Audiovisuel · mobilier · restauration · sécurité · accueil · nettoyage · logistique.</p>
     </div>
-    <aside class="aside-box" id="documents" aria-labelledby="aside-espace">
+    <aside class="aside-box card" id="documents" aria-labelledby="aside-espace" data-bento="Card">
       <p class="eyebrow">Organiser ici</p>
       <h3 id="aside-espace">Votre projet {"au" if sp["code"] == "dome" else ("dans le" if sp["code"] == "hall" else "sur le")} {sp["title"].replace("Le ", "").replace("Hall d’Exposition", "Hall")} ?</h3>
       <p>Accédez au formulaire de devis avec l’espace pré-sélectionné.</p>
@@ -848,9 +935,9 @@ PAGES["nos-services.html"] = ("Nos services — Parc des Expositions d’Abidjan
     "Au-delà des espaces, le Parc réunit chez un seul interlocuteur les prestations nécessaires à votre événement.",
     lead_note=note("Une présentation claire des prestations pour transformer le Parc en solution complète, pas seulement en location d’espace.")) + f"""
 
-<section class="section section--ink">
+<section class="section section--vert">
   <div class="wrap">
-    <ul class="services" role="list">
+    <ul class="services" role="list" data-bento="Item list">
 {service_items}
     </ul>
   </div>
@@ -864,7 +951,7 @@ PAGES["nos-services.html"] = ("Nos services — Parc des Expositions d’Abidjan
       <h2>Une équipe à vos côtés, de la préparation au jour J.</h2>
       <p class="lead">Nos équipes accompagnent et conseillent au quotidien les organisateurs dans la réalisation de leur événement, en mettant à disposition les espaces et l’ensemble des prestations nécessaires à son bon déroulement : restauration, matériel audiovisuel, mobilier, sécurité, nettoyage… Sur site, elles coordonnent l’ensemble des prestations d’accueil.</p>
     </div>
-    <section class="support__building" aria-labelledby="batiment">
+    <section class="support__building" aria-labelledby="batiment" data-bento="Card">
       <h3 id="batiment">Bâtiment administratif</h3>
       <p>Un accueil disponible 24h/24 et des équipements au service de votre événement.</p>
       <ul class="support__list" role="list">
@@ -895,7 +982,7 @@ PAGES["nos-services.html"] = ("Nos services — Parc des Expositions d’Abidjan
 
 <section class="section">
   <div class="wrap split">
-    <div class="media">{img("phototheque/salon-stand", "Stand d’exposant aménagé lors d’un salon", "(min-width: 1024px) 50vw, 100vw")}</div>
+    <div class="media">{img("officiel/hall/hall-perspective", "Le Hall d’Exposition, sol béton et charpente pavoisée, prêt à être aménagé", "(min-width: 1024px) 50vw, 100vw")}</div>
     <div>
       <p class="eyebrow">Sur mesure</p>
       <h2>Composez les services adaptés à votre événement.</h2>
@@ -909,6 +996,10 @@ PAGES["nos-services.html"] = ("Nos services — Parc des Expositions d’Abidjan
 
 # ---------------------------------------------------------------- Photothèque
 PHOTOS = [  # (fichier, espace, type, texte alternatif) — espaces et types déduits des photos, à confirmer
+    ("officiel/dome-exterieur/dome-ciel", "dome", "lieux", "La coupole du Dôme sous un ciel bleu"),
+    ("officiel/hall/hall-drapeaux", "hall", "lieux", "Le Hall d’Exposition pavoisé des drapeaux des nations"),
+    ("officiel/dome-salle/salle-pleniere", "dome", "lieux", "La salle plénière du Dôme"),
+    ("officiel/dome-salon-vip/salon-vip-oeuvre", "dome", "lieux", "Le salon VIP du Dôme et son œuvre d’art"),
     ("phototheque/salon-stand", "hall", "salons", "Stand d’exposant lors d’un salon professionnel"),
     ("phototheque/dome-lumieres", "dome", "concerts", "Public sous les lumières bleues du Dôme"),
     ("phototheque/salon-auto", "hall", "salons", "Véhicules exposés lors d’un salon automobile"),
@@ -929,7 +1020,7 @@ PAGES["phototheque.html"] = ("Photothèque — Parc des Expositions d’Abidjan"
     "Parcourez les espaces et les événements accueillis au Parc, par lieu ou par type d’événement.",
     "\n    <div class=\"filter-rows\">"
     + filters("Filtrer par espace", ["Tous", "Hall", "Dôme"], "photos", "espace", row_label="Espace")
-    + filters("Filtrer par type d’événement", ["Tous", "Salons", "Concerts", "Sport"], "photos", "type", row_label="Type")
+    + filters("Filtrer par type d’événement", ["Tous", "Lieux", "Salons", "Concerts", "Sport"], "photos", "type", row_label="Type")
     + "</div>",
     lead_note=note("Une galerie immersive organisée par espace et par type d’événement, pensée autant pour l’inspiration que pour la preuve commerciale.")) + f"""
 
@@ -937,7 +1028,7 @@ PAGES["phototheque.html"] = ("Photothèque — Parc des Expositions d’Abidjan"
   <div class="wrap">
     {results("photos", f"{len(PHOTOS)} photos", "Aucune photo pour cette combinaison. Essayez un autre espace ou un autre type d’événement.")}
     <!-- Espaces et types des photos déduits des images : à confirmer par le Parc -->
-    <div class="photo-grid" id="photos" data-lightbox>{photo_items}</div>
+    <div class="photo-grid" id="photos" data-lightbox data-bento="Image gallery">{photo_items}</div>
   </div>
 </section>
 {LIGHTBOX}
@@ -956,15 +1047,14 @@ PAGES["agenda.html"] = ("Agenda — Parc des Expositions d’Abidjan", page_hero
   <div class="wrap">
     {results("evenements", f"{len(EVENTS)} événements", "Aucun événement à venir dans cette catégorie pour le moment.")}
     <!-- Événements relevés le 7 octobre 2026 sur parcdesexpositionsabidjan.com/fr/liste-des-agendas (types déduits des intitulés) -->
-    <ol class="timeline" id="evenements" role="list">
+    <ol class="timeline" id="evenements" role="list" data-bento="Block/Agenda list">
 {timeline()}
     </ol>
-    <dialog class="event-dialog" id="event-dialog" aria-labelledby="event-dialog-title">
+    <dialog class="event-dialog" id="event-dialog" aria-labelledby="event-dialog-title" data-bento="Modal">
       <button class="event-dialog__close" type="button" aria-label="Fermer la fenêtre"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
       <img class="event-dialog__img" src="data:," alt="" width="800" height="450" hidden>
       <div class="event-dialog__head">
-        {ARCH.format(cls="event-dialog__arch")}
-        <p class="event-dialog__type"></p>
+        <p class="event-dialog__type badge badge--primary"></p>
         <h2 class="event-dialog__title" id="event-dialog-title"></h2>
         <p class="event-dialog__when"></p>
       </div>
@@ -1046,12 +1136,12 @@ FORM = f"""    <div class="form-col">
         <h2 class="t3">Demande envoyée</h2>
         <p>Merci. Notre équipe commerciale étudie votre projet et vous recontacte dans les meilleurs délais.</p>
         <dl class="ev-facts form-success__recap" data-recap></dl>
-        <a class="btn btn--secondary" href="nos-espaces.html">Découvrir nos espaces {ARROW}</a>
+        <a class="btn btn--invert" href="nos-espaces.html">Découvrir nos espaces {ARROW}</a>
       </div>
     </div>"""
 
 # Photo du totem : dans l’encadré « Nous contacter » (et non plus dans l’en-tête)
-CONTACT_TOTEM = img("pages/contact-signaletique", "Totem de signalétique du Parc des Expositions d’Abidjan devant le Dôme", "(min-width: 1024px) 340px, 100vw")
+CONTACT_TOTEM = img("officiel/dome-salon-vip/salon-vip-accueil", "La banque d’accueil du salon VIP du Dôme", "(min-width: 1024px) 340px, 100vw")
 PAGES["contact-devis.html"] = ("Contact & Devis — Parc des Expositions d’Abidjan", page_hero(
     crumbs(A, ("Contact", None), ("Devis", None)),
     "Contact",
@@ -1063,12 +1153,11 @@ PAGES["contact-devis.html"] = ("Contact & Devis — Parc des Expositions d’Abi
 <section class="section section--white section--tight">
   <div class="wrap with-aside">
 {FORM}
-    <aside class="aside-box" id="nous-contacter" aria-labelledby="aside-contact">
+    <aside class="aside-box card" id="nous-contacter" aria-labelledby="aside-contact" data-bento="Card">
       <figure class="aside-box__media">{CONTACT_TOTEM}</figure>
       <p class="eyebrow">Parc des Expositions d’Abidjan</p>
       <h2 class="t3" id="aside-contact">Nous contacter</h2>
-      <p>{TEL}</p>
-      <p>Boulevard de l’aéroport<br>Abidjan · Côte d’Ivoire</p>
+      <address class="contact-details" data-bento="Contact details"><span>{TEL}</span><span>Boulevard de l’aéroport<br>Abidjan · Côte d’Ivoire</span></address>
       {note("Les soumissions peuvent être enregistrées dans Drupal et routées vers l’équipe commerciale.")}
     </aside>
   </div>
@@ -1086,7 +1175,7 @@ PAGES["contact-devis.html"] = ("Contact & Devis — Parc des Expositions d’Abi
         <a class="btn btn--secondary" href="{MAPS_PLACE}" target="_blank" rel="noopener" aria-label="Ouvrir dans Google Maps (nouvel onglet)">Ouvrir dans Google Maps {EXT}</a>
       </div>
     </div>
-    <div class="access__map" data-embed-src="https://maps.google.com/maps?q=5.2634735,-3.9465668&amp;hl=fr&amp;z=16&amp;output=embed" data-embed-title="Carte : localisation du Parc des Expositions d’Abidjan">
+    <div class="access__map" data-bento="Block/Map" data-embed-src="https://maps.google.com/maps?q=5.2634735,-3.9465668&amp;hl=fr&amp;z=16&amp;output=embed" data-embed-title="Carte : localisation du Parc des Expositions d’Abidjan">
       <div class="embed-facade">
         <p>La carte est fournie par Google Maps, qui peut déposer des cookies.</p>
         <button class="btn btn--secondary" type="button" data-embed-load>Afficher la carte</button>
@@ -1107,10 +1196,10 @@ PAGES["visite-virtuelle.html"] = ("Visite virtuelle — Parc des Expositions d�
 
 <section class="section section--white section--tight">
   <div class="wrap">
-    <div class="tour" id="visite">
+    <div class="tour" id="visite" data-bento="Block/Video">
       <a class="tour__launch" href="https://my.matterport.com/show/?m=aNcgwUfY8uk" target="_blank" rel="noopener" data-tour-src="https://my.matterport.com/show/?m=aNcgwUfY8uk&amp;play=1" data-tour-title="Visite virtuelle 360° du Parc des Expositions d’Abidjan">{PLAY}<span>Lancer <br>la visite <br>360°</span></a>
     </div>
-    <div class="tour__legend"><p class="filter-row__label" id="tour-espaces">Espaces visitables</p><ul class="tags" role="list" aria-labelledby="tour-espaces"><li>Hall d’Exposition</li><li>Le Dôme</li><li>Parvis</li><li>Esplanades</li></ul></div>
+    <div class="tour__legend"><p class="filter-row__label" id="tour-espaces">Espaces visitables</p><ul class="tags" role="list" aria-labelledby="tour-espaces"><li class="badge badge--outline">Hall d’Exposition</li><li class="badge badge--outline">Le Dôme</li><li class="badge badge--outline">Parvis</li><li class="badge badge--outline">Esplanades</li></ul></div>
   </div>
 </section>
 """)
@@ -1242,17 +1331,17 @@ def with_lang_links(page, src, lang):
 
 # Image de l’en-tête de chaque page : photo dans la silhouette exacte de l’arche du logo (variante E2 « dôme posé »)
 PAGE_BG = {
-    "qui-sommes-nous.html": "slider/dome-rendu",
-    "nos-espaces.html": "espaces/hall/salon-vue-plongeante",
-    "hall-exposition.html": "espaces/hall/interieur",
-    "le-dome.html": "espaces/parvis/dome-sous-le-nuage",
-    "parvis-esplanades.html": "espaces/parvis/salon-plein-air-aerien",
-    "nos-services.html": "phototheque/salon-stand",
+    "qui-sommes-nous.html": "officiel/dome-exterieur/dome-ciel",
+    "nos-espaces.html": "officiel/dome-exterieur/dome-aerien",
+    "hall-exposition.html": "officiel/hall/hall-perspective",
+    "le-dome.html": "officiel/dome-exterieur/dome-toiture",
+    "parvis-esplanades.html": "officiel/dome-exterieur/dome-panorama",
+    "nos-services.html": "officiel/hall/hall-portes",
     "phototheque.html": "phototheque/dome-lumieres",
-    "agenda.html": "slider/concert-scene",
-    "contact-devis.html": "pages/parlez-nous",
-    "visite-virtuelle.html": "espaces/parvis/vue-aerienne",
-    "informations-legales.html": "espaces/hall/galerie-couverte",
+    "agenda.html": "officiel/dome-salle/salle-gradins",
+    "contact-devis.html": "officiel/dome-salle/salle-fauteuils",
+    "visite-virtuelle.html": "officiel/dome-salle/salle-parterre",
+    "informations-legales.html": "officiel/dome-salon-vip/salon-vip-galerie",
 }
 
 
@@ -1266,9 +1355,41 @@ def with_page_bg(name, src):
 # Référencement (balises, données structurées, sitemap) et nouvelles pages : tools/pages/referencement.py
 exec(pathlib.Path(__file__).with_name("referencement.py").read_text(encoding="utf-8"))
 
+# ---------------------------------------------------------------- Composants Bento : marquage explicite
+# Chaque composant porte data-bento="<nom Figma>" (contrôlé par tools/verif/conformite.mjs). Les titres reçoivent
+# la classe du composant « Title » selon leur niveau VISUEL (pas seulement la balise) :
+#   h1 → L1 (48 px) · h2 → L2 (30 px) · h2.t3 / h3 → L4 (20 px, cartes et encarts) · intertitres d’agenda → L3 (24 px)
+TITLE_LEVEL_BY_CLASS = {"timeline__month-title": 3, "newsletter__title": 3, "event-dialog__title": 2, "footer__title": 5,
+                        "consent__title": 5, "card__title": 4, "t3": 4}
+
+
+def _title_level(tag, classes):
+    for k, v in TITLE_LEVEL_BY_CLASS.items():
+        if k in classes:
+            return v
+    return {"h1": 1, "h2": 2, "h3": 4, "h4": 5}[tag]
+
+
+def bentoize(src):
+    def heading(m):
+        tag, attrs = m.group(1), m.group(2) or ""
+        cm = re.search(r'class="([^"]*)"', attrs)
+        classes = cm.group(1).split() if cm else []
+        lvl = _title_level(tag, classes)
+        new = " ".join(dict.fromkeys(classes + ["title", f"title--l{lvl}"]))
+        attrs = attrs.replace(cm.group(0), f'class="{new}"') if cm else f' class="{new}"' + attrs
+        return f'<{tag}{attrs} data-bento="Title">'
+    src = re.sub(r'<(h[1-4])(\s[^>]*)?>', heading, src)
+    def mark(cls, name):
+        return lambda s: re.sub(r'(<[a-z]+ [^>]*class="(?:[^"]* )?' + cls + r'(?: [^"]*)?")(?![^>]*data-bento)', r'\1 data-bento="' + name + '"', s)
+    for cls, name in (("btn", "Button"), ("badge", "Badge"), ("field", "Form/Field"), ("link-arrow", "Link")):
+        src = mark(cls, name)(src)
+    return src
+
+
 (ROOT / "en").mkdir(exist_ok=True)
 for name, (title, body) in PAGES.items():
-    fr_html = with_page_bg(name, head(title) + "\n" + header(name) + body + FOOTER)
+    fr_html = bentoize(with_page_bg(name, head(title) + "\n" + header(name) + body + FOOTER))
     en_html = to_english(name, fr_html.replace("__FR__", "../" + name).replace("__EN__", name))
     (ROOT / name).write_text(with_lang_links(name, apply_seo(name, fr_html, "fr"), "fr"), encoding="utf-8")
     (ROOT / "en" / name).write_text(with_lang_links(name, apply_seo(name, en_html, "en"), "en"), encoding="utf-8")
@@ -1288,7 +1409,7 @@ index = head("Parc des Expositions d’Abidjan — Planche HTML").replace("</hea
 <main class="hub" id="contenu">
   <div class="wrap">
     <img src="assets/logo-pea.webp" alt="Parc des Expositions d’Abidjan" width="394" height="210" class="hub__logo">
-    <p class="eyebrow">Parc des Expositions d’Abidjan · Proposition 1 · The Seed-inspired</p>
+    <p class="eyebrow">Parc des Expositions d’Abidjan · Charte officielle + Bento DS</p>
     <h1>Planches HTML — sous-pages</h1>
     <p class="lead">Chaque page ci-dessous correspond à une planche distincte et réutilise le même socle CSS.</p>
     <ul class="hub__links" role="list">
@@ -1299,6 +1420,7 @@ index = head("Parc des Expositions d’Abidjan — Planche HTML").replace("</hea
 </body>
 </html>
 """
+index = bentoize(index)
 (ROOT / "planches.html").write_text(with_lang_links("planches.html", index, "fr"), encoding="utf-8")
 (ROOT / "en" / "planches.html").write_text(with_lang_links("planches.html", to_english("planches.html", index), "en"), encoding="utf-8")
 print("écrit planches.html")

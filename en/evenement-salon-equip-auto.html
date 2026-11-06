@@ -8,7 +8,7 @@
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&amp;family=Barlow+Condensed:wght@600;700;800&amp;family=Barlow:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../styles.css">
 <script src="../assets/site.js" defer></script>
 <meta name="description" content="Salon Equip Auto at the Abidjan Exhibition Center, 26–28 November 2026. International show for the automotive, mobility and industrial vehicle sectors…">
@@ -89,9 +89,12 @@
 </head>
 <body>
 <a class="skip" href="#contenu">Skip to content</a>
-<div class="utility utility--overlay">
+<div class="utility" data-bento="Topbar">
   <div class="wrap utility__inner">
-    <a class="wa-link utility__tel" href="https://wa.me/2252721710997?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20le%20Parc%20des%20Expositions%20d%E2%80%99Abidjan." target="_blank" rel="noopener" aria-label="WhatsApp: +225 27 21 71 09 97 (new tab)"><svg class="i i--wa" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.2 20.8l4.5-1.2A8.8 8.8 0 1 0 12 3.2z"/><path class="i--wa-handset" d="M9.1 7.6c-.3 0-.7.1-.9.5-.4.6-.6 1.4-.3 2.3.6 1.9 2.5 4 4.6 4.8.9.3 1.7.2 2.3-.2.4-.3.6-.7.5-1l-.2-.5-1.6-.8c-.3-.1-.5 0-.7.2l-.5.6c-1-.4-2-1.4-2.4-2.4l.6-.5c.2-.2.3-.4.2-.7l-.7-1.6c-.1-.3-.4-.4-.6-.4z"/></svg>+225 27 21 71 09 97</a>
+    <ul class="utility__items" role="list">
+      <li class="utility__item"><a class="wa-link utility__tel" href="https://wa.me/2252721710997?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20le%20Parc%20des%20Expositions%20d%E2%80%99Abidjan." target="_blank" rel="noopener" aria-label="WhatsApp: +225 27 21 71 09 97 (new tab)"><svg class="i i--wa" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.2 20.8l4.5-1.2A8.8 8.8 0 1 0 12 3.2z"/><path class="i--wa-handset" d="M9.1 7.6c-.3 0-.7.1-.9.5-.4.6-.6 1.4-.3 2.3.6 1.9 2.5 4 4.6 4.8.9.3 1.7.2 2.3-.2.4-.3.6-.7.5-1l-.2-.5-1.6-.8c-.3-.1-.5 0-.7.2l-.5.6c-1-.4-2-1.4-2.4-2.4l.6-.5c.2-.2.3-.4.2-.7l-.7-1.6c-.1-.3-.4-.4-.6-.4z"/></svg>+225 27 21 71 09 97</a></li>
+      <li class="utility__item utility__item--place"><svg class="i i--pin" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s-6.5-6.1-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 14.9 12 21 12 21z"/><circle cx="12" cy="9.8" r="2.3"/></svg><span>Abidjan, Côte d’Ivoire</span></li>
+    </ul>
     <div class="utility__end">
     <nav class="lang-switch" aria-label="Language"><a href="../evenement-salon-equip-auto.html" hreflang="fr" lang="fr">FR</a><a href="evenement-salon-equip-auto.html" hreflang="en" lang="en" aria-current="true">EN</a></nav>
     <ul class="social" role="list" aria-label="Social media">
@@ -102,11 +105,11 @@
     </div>
   </div>
 </div>
-<header class="topbar topbar--overlay">
+<header class="topbar topbar--overlay" data-bento="Site header">
   <div class="wrap topbar__inner">
     <a class="brand" href="index.html"><img src="../assets/logo-pea.webp" alt="Abidjan Exhibition Center — home" width="394" height="210"></a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-principale"><span class="menu-toggle__bars" aria-hidden="true"></span>Menu</button>
-    <nav class="nav" id="nav-principale" aria-label="Main navigation">
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-principale"><span class="menu-toggle__bars" aria-hidden="true"></span><span class="sr-only">Menu</span></button>
+    <nav class="nav" id="nav-principale" aria-label="Main navigation" data-bento="Menu">
       <ul>
       <li><a href="qui-sommes-nous.html">About us</a></li>
       <li class="nav__item--sub"><a href="nos-espaces.html">Our venues</a><button class="nav__subtoggle" type="button" aria-expanded="false" aria-controls="sub-espaces" aria-label="Our venues submenu"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></button><ul class="nav__sub" id="sub-espaces" role="list"><li><a href="hall-exposition.html"><span class="nav__sub-title">Exhibition Hall</span><span class="nav__sub-desc">6,500 m² · 17 m ceiling height</span></a></li><li><a href="le-dome.html"><span class="nav__sub-title">The Dome</span><span class="nav__sub-desc">5,000 m² · 5,023 seated · 9,588 standing</span></a></li><li><a href="parvis-esplanades.html"><span class="nav__sub-title">Forecourt &amp; Esplanades</span><span class="nav__sub-desc">67,000 m² of outdoor space</span></a></li><li><a href="visite-virtuelle.html"><span class="nav__sub-title">360° virtual tour</span><span class="nav__sub-desc">Explore the venue remotely</span></a></li></ul></li>
@@ -121,72 +124,74 @@
       </ul>
     </nav>
     <a class="topbar__wa" href="https://wa.me/2252721710997?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20le%20Parc%20des%20Expositions%20d%E2%80%99Abidjan." target="_blank" rel="noopener" aria-label="WhatsApp: +225 27 21 71 09 97 (new tab)"><svg class="i i--wa" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.2 20.8l4.5-1.2A8.8 8.8 0 1 0 12 3.2z"/><path class="i--wa-handset" d="M9.1 7.6c-.3 0-.7.1-.9.5-.4.6-.6 1.4-.3 2.3.6 1.9 2.5 4 4.6 4.8.9.3 1.7.2 2.3-.2.4-.3.6-.7.5-1l-.2-.5-1.6-.8c-.3-.1-.5 0-.7.2l-.5.6c-1-.4-2-1.4-2.4-2.4l.6-.5c.2-.2.3-.4.2-.7l-.7-1.6c-.1-.3-.4-.4-.6-.4z"/></svg><span class="topbar__wa-num">+225 27 21 71 09 97</span></a>
-    <a class="btn btn--primary topbar__cta" href="contact-devis.html"><span><span class="hide-sm">Request a </span>quote</span></a>
+    <a class="btn btn--primary topbar__cta" data-bento="Button" href="contact-devis.html"><span class="hide-sm">Request a quote</span><span class="show-sm">Quote</span></a>
   </div>
 </header>
 <main class="page" id="contenu" tabindex="-1">
-<section class="hero hero--small hero--under-header">
-  <div class="hero__img" aria-hidden="true"><img src="../assets/img/agenda/salon-equip-auto-800.webp" alt="" width="800" height="420" fetchpriority="high"></div>
-  <div class="wrap hero__inner">
-    <nav class="breadcrumbs breadcrumbs--ink" aria-label="Breadcrumb"><ol role="list"><li><a href="index.html">Home</a></li><li><a href="agenda.html">Events</a></li><li><span aria-current="page">Salon Equip Auto</span></li></ol></nav>
-    <p class="eyebrow">Events · Trade show</p>
-    <h1>Salon Equip Auto</h1>
-    <p class="lead">26–28 November 2026</p>
+<section style="--page-bg: url(../assets/img/officiel/hall/hall-drapeaux-1600.webp)" class="page-hero page-hero--bg page-hero--compact" data-bento="Page header">
+  <div class="wrap">
+    <nav class="breadcrumbs" aria-label="Breadcrumb" data-bento="Breadcrumb"><ol role="list"><li><a href="index.html">Home</a></li><li><a href="agenda.html">Events</a></li><li><span aria-current="page">Salon Equip Auto</span></li></ol></nav>
+    <div class="page-hero__meta"><a class="page-hero__back" href="agenda.html"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg>All events</a><span class="page-hero__date">26–28 November 2026</span><span class="page-hero__category">Trade show</span></div>
+    <h1 class="title title--l1" data-bento="Title">Salon Equip Auto</h1>
+    
+    <p class="lead">International show for the automotive, mobility and industrial vehicle sectors: passenger cars, trucks, transport, agricultural and construction machinery.…</p>
+    <div class="page-hero__addons"><span class="badge" data-bento="Badge">Abidjan Exhibition Center</span></div>
   </div>
 </section>
 
 <section class="section section--white">
   <div class="wrap with-aside">
     <div>
-      <h2>About the event</h2>
+      <figure class="ev-poster"><img src="../assets/img/agenda/salon-equip-auto-800.webp" alt="Poster: Salon Equip Auto" width="800" height="420" loading="lazy" decoding="async"></figure>
+      <h2 class="title title--l2" data-bento="Title">About the event</h2>
       <p class="lead">International show for the automotive, mobility and industrial vehicle sectors: passenger cars, trucks, transport, agricultural and construction machinery. First edition: over 150 exhibitors and around 10,000 visitors expected.</p>
       <dl class="ev-facts block-gap"><div><dt>Date</dt><dd>26–28 November 2026</dd></div><div><dt>Venue</dt><dd>Abidjan Exhibition Center</dd></div><div><dt>Type</dt><dd>Trade show</dd></div><div><dt>Organizer</dt><dd>EQUIP’AUTO SAS, with Interlinks Auto</dd></div></dl>
       <div class="ev-links block-gap"></div>
       <!-- Note de maquette (texte d’origine) : Zone administrable Drupal : présentation, programme, organisateur, informations pratiques. -->
     </div>
-    <aside class="aside-box" aria-labelledby="aside-salon-equip-auto">
+    <aside class="aside-box card" aria-labelledby="aside-salon-equip-auto" data-bento="Card">
       <p class="eyebrow">Organizers</p>
-      <h2 class="t3" id="aside-salon-equip-auto">Your event at the venue?</h2>
+      <h2 class="t3 title title--l4" id="aside-salon-equip-auto" data-bento="Title">Your event at the venue?</h2>
       <p>Trade shows, congresses, concerts: tell us about your project.</p>
-      <a class="btn btn--primary btn--block" href="contact-devis.html">Request a quote <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn--primary btn--block" data-bento="Button" href="contact-devis.html">Request a quote <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
     </aside>
   </div>
 </section>
 
 <section class="section">
   <div class="wrap">
-    <div class="section__head"><p class="eyebrow">Events</p><h2>Next at the venue</h2></div>
-    <div class="agenda">
-      <a class="event" href="evenement-concert-kiff-no-beat.html">
-        <div class="event__thumb"><img src="../assets/img/agenda/concert-kiff-no-beat-800.webp" alt="" width="800" height="1001" loading="lazy" decoding="async"></div>
-        <div class="event__body"><span class="date">28 nov. 2026</span><h3>Concert Kiff No Beat</h3><p>Concert</p></div>
+    <div class="section__head"><p class="eyebrow">Events</p><h2 class="title title--l2" data-bento="Title">Next at the venue</h2></div>
+    <div class="collection collection--3" data-bento="Collection">
+      <a class="card card--event" href="evenement-concert-kiff-no-beat.html" data-bento="Card">
+        <div class="card__media card__media--poster"><img src="../assets/img/agenda/concert-kiff-no-beat-800.webp" alt="" width="800" height="1001" loading="lazy" decoding="async"><span class="badge card__badge" data-bento="Badge">28 nov. 2026</span></div>
+        <div class="card__content"><h3 class="card__title title title--l4" data-bento="Title">Concert Kiff No Beat</h3><p class="card__desc">Concert</p><span class="card__link">View the event <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></div>
       </a>
-      <a class="event" href="evenement-concert-25-ans-de-carriere-de-moliere.html">
-        <div class="event__thumb"><img src="../assets/img/agenda/concert-25-ans-de-carriere-de-moliere-800.webp" alt="" width="800" height="638" loading="lazy" decoding="async"></div>
-        <div class="event__body"><span class="date">5 déc. 2026</span><h3>Molière 25-year career concert</h3><p>Concert</p></div>
+      <a class="card card--event" href="evenement-concert-25-ans-de-carriere-de-moliere.html" data-bento="Card">
+        <div class="card__media card__media--poster"><img src="../assets/img/agenda/concert-25-ans-de-carriere-de-moliere-800.webp" alt="" width="800" height="638" loading="lazy" decoding="async"><span class="badge card__badge" data-bento="Badge">5 déc. 2026</span></div>
+        <div class="card__content"><h3 class="card__title title title--l4" data-bento="Title">Molière 25-year career concert</h3><p class="card__desc">Concert</p><span class="card__link">View the event <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></div>
       </a>
-      <a class="event" href="evenement-concert-serge-beynaud-0.html">
-        <div class="event__thumb"><img src="../assets/img/agenda/concert-serge-beynaud-0-800.webp" alt="" width="800" height="787" loading="lazy" decoding="async"></div>
-        <div class="event__body"><span class="date">5 déc. 2026</span><h3>Concert Serge Beynaud</h3><p>Venue esplanade</p></div>
+      <a class="card card--event" href="evenement-concert-serge-beynaud-0.html" data-bento="Card">
+        <div class="card__media card__media--poster"><img src="../assets/img/agenda/concert-serge-beynaud-0-800.webp" alt="" width="800" height="787" loading="lazy" decoding="async"><span class="badge card__badge" data-bento="Badge">5 déc. 2026</span></div>
+        <div class="card__content"><h3 class="card__title title title--l4" data-bento="Title">Concert Serge Beynaud</h3><p class="card__desc">Venue esplanade</p><span class="card__link">View the event <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></div>
       </a>
     </div>
-    <p class="section__more"><a class="link-arrow" href="agenda.html">See the full events calendar <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></p>
+    <p class="section__more"><a class="link-arrow" data-bento="Link" href="agenda.html">See the full events calendar <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></p>
   </div>
 </section>
 </main>
-<footer class="footer">
-  <!-- Note de maquette : inscription simulée ; à brancher sur l’outil d’e-mailing du Parc (Brevo, Mailchimp…) via Drupal -->
-  <div class="wrap newsletter" id="newsletter">
+<!-- Note de maquette : inscription simulée ; à brancher sur l’outil d’e-mailing du Parc (Brevo, Mailchimp…) via Drupal -->
+<section class="newsletter-block" id="newsletter" aria-labelledby="nl-title" data-bento="Newsletter form">
+  <div class="wrap newsletter">
     <div class="newsletter__intro">
-      <p class="newsletter__label">Newsletter</p>
-      <h2 class="newsletter__title">Upcoming events at the venue, straight to your inbox</h2>
+      <p class="eyebrow">Newsletter</p>
+      <h2 class="newsletter__title title title--l3" id="nl-title" data-bento="Title">Upcoming events at the venue, straight to your inbox</h2>
       <p>One email a month: upcoming trade shows, congresses and concerts. Unsubscribe in one click.</p>
     </div>
     <form class="newsletter__form" data-newsletter novalidate>
       <label class="newsletter__field-label" for="nl-email">Your email address</label>
       <div class="newsletter__row">
         <input id="nl-email" name="email" type="email" autocomplete="email" required placeholder="name@example.com" aria-describedby="nl-email-error">
-        <button class="btn btn--primary" type="submit">Subscribe</button>
+        <button class="btn btn--primary" data-bento="Button" type="submit">Subscribe</button>
       </div>
       <p class="newsletter__error" id="nl-email-error" hidden>Enter a valid email address, for example name@example.com.</p>
       <label class="check newsletter__consent"><input id="nl-consent" type="checkbox" required aria-describedby="nl-consent-error"><span>I agree to receive the venue’s newsletter. See the <a href="informations-legales.html#confidentialite">privacy policy</a>.</span></label>
@@ -194,49 +199,68 @@
     </form>
     <p class="newsletter__ok" role="status" tabindex="-1" hidden></p>
   </div>
-  <div class="wrap footer__grid">
-    <div class="footer__brand">
-      <img src="../assets/logo-pea.webp" alt="" width="394" height="210" loading="lazy">
-      <p><b>Abidjan Exhibition Center</b><br>Boulevard de l’aéroport · Abidjan · Côte d’Ivoire<br><a class="wa-link" href="https://wa.me/2252721710997?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20le%20Parc%20des%20Expositions%20d%E2%80%99Abidjan." target="_blank" rel="noopener" aria-label="WhatsApp: +225 27 21 71 09 97 (new tab)"><svg class="i i--wa" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.2 20.8l4.5-1.2A8.8 8.8 0 1 0 12 3.2z"/><path class="i--wa-handset" d="M9.1 7.6c-.3 0-.7.1-.9.5-.4.6-.6 1.4-.3 2.3.6 1.9 2.5 4 4.6 4.8.9.3 1.7.2 2.3-.2.4-.3.6-.7.5-1l-.2-.5-1.6-.8c-.3-.1-.5 0-.7.2l-.5.6c-1-.4-2-1.4-2.4-2.4l.6-.5c.2-.2.3-.4.2-.7l-.7-1.6c-.1-.3-.4-.4-.6-.4z"/></svg>+225 27 21 71 09 97</a></p>
+</section>
+<footer class="footer" data-bento="Footer">
+  <div class="wrap footer__columns">
+    <div class="footer__col footer__col--brand">
+      <img class="footer__logo" src="../assets/logo-pea.webp" alt="Abidjan Exhibition Center" width="394" height="210" loading="lazy">
+      <address class="footer__contact" data-bento="Contact details">
+        <span>Boulevard de l’aéroport<br>Abidjan · Côte d’Ivoire</span>
+        <a class="wa-link" href="https://wa.me/2252721710997?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20le%20Parc%20des%20Expositions%20d%E2%80%99Abidjan." target="_blank" rel="noopener" aria-label="WhatsApp: +225 27 21 71 09 97 (new tab)"><svg class="i i--wa" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.2 20.8l4.5-1.2A8.8 8.8 0 1 0 12 3.2z"/><path class="i--wa-handset" d="M9.1 7.6c-.3 0-.7.1-.9.5-.4.6-.6 1.4-.3 2.3.6 1.9 2.5 4 4.6 4.8.9.3 1.7.2 2.3-.2.4-.3.6-.7.5-1l-.2-.5-1.6-.8c-.3-.1-.5 0-.7.2l-.5.6c-1-.4-2-1.4-2.4-2.4l.6-.5c.2-.2.3-.4.2-.7l-.7-1.6c-.1-.3-.4-.4-.6-.4z"/></svg>+225 27 21 71 09 97</a>
+      </address>
     </div>
-    <nav class="footer__nav" aria-label="Footer links">
-      <ul role="list">
+    <nav class="footer__col" aria-labelledby="ft-espaces">
+      <h2 class="footer__title title title--l5" id="ft-espaces" data-bento="Title">Our venues</h2>
+      <ul class="footer__menu" role="list">
+        <li><a href="hall-exposition.html">Exhibition Hall</a></li>
+        <li><a href="le-dome.html">The Dome</a></li>
+        <li><a href="parvis-esplanades.html">Forecourt &amp; Esplanades</a></li>
+        <li><a href="visite-virtuelle.html">360° virtual tour</a></li>
+        <li><a href="nos-services.html">Our services</a></li>
+      </ul>
+    </nav>
+    <nav class="footer__col" aria-labelledby="ft-evenement">
+      <h2 class="footer__title title title--l5" id="ft-evenement" data-bento="Title">Your event</h2>
+      <ul class="footer__menu" role="list">
         <li><a href="salons-professionnels.html">Trade shows</a></li>
         <li><a href="congres-conferences.html">Congresses</a></li>
         <li><a href="evenements-entreprise.html">Corporate</a></li>
         <li><a href="concerts-spectacles.html">Concerts</a></li>
         <li><a href="venir-a-abidjan.html">Coming to Abidjan</a></li>
+        <li><a href="contact-devis.html">Request a quote</a></li>
       </ul>
     </nav>
-    <a class="footer__partner" href="https://www.gl-events.com/" target="_blank" rel="noopener" aria-label="GL events, international expertise (new tab)">
-      <span class="footer__partner-logo"><img src="../assets/logo-gl-events.png" alt="GL events" width="225" height="225" loading="lazy"></span>
-      <span class="footer__partner-text">International expertise</span>
-    </a>
-    <div class="footer__bottom">
-    <nav class="footer__legal" aria-label="Legal information">
-      <ul role="list">
-        <li><a href="informations-legales.html#mentions-legales">Legal notice</a></li>
-        <li><a href="informations-legales.html#cookies">Cookie policy</a></li>
-        <li><a href="informations-legales.html#confidentialite">Privacy policy</a></li>
-        <li><a href="informations-legales.html#cgu">Terms of use</a></li>
-        <li><a href="informations-legales.html#ethique">Ethics &amp; compliance</a></li>
-        <li><button type="button" class="footer__cookies" data-consent-open>Manage cookies</button></li>
-      </ul>
-    </nav>
-    <p class="footer__credit">Design by <a href="https://bigfive.solutions/" target="_blank" rel="noopener" aria-label="Big Five, website design (new tab)">Big Five</a></p>
+  </div>
+  <div class="wrap footer__legal-wrap">
+    <div class="footer__legal-bar">
+      <a class="footer__partner" href="https://www.gl-events.com/" target="_blank" rel="noopener" aria-label="GL events, international expertise (new tab)">
+        <span class="footer__partner-logo"><img src="../assets/logo-gl-events.png" alt="GL events" width="225" height="225" loading="lazy"></span>
+      </a>
+      <p class="footer__copyright">© 2026 Abidjan Exhibition Center · GL events</p>
+      <nav class="footer__legal" aria-label="Legal information">
+        <ul role="list">
+          <li><a href="informations-legales.html#mentions-legales">Legal notice</a></li>
+          <li><a href="informations-legales.html#cookies">Cookie policy</a></li>
+          <li><a href="informations-legales.html#confidentialite">Privacy policy</a></li>
+          <li><a href="informations-legales.html#cgu">Terms of use</a></li>
+          <li><a href="informations-legales.html#ethique">Ethics &amp; compliance</a></li>
+          <li><button type="button" class="footer__cookies" data-consent-open>Manage cookies</button></li>
+        </ul>
+      </nav>
+      <p class="footer__credit">Design by <a href="https://bigfive.solutions/" target="_blank" rel="noopener" aria-label="Big Five, website design (new tab)">Big Five</a></p>
     </div>
   </div>
 </footer>
 <a class="to-top" href="#contenu" aria-label="Back to top"><svg viewBox="16 -1 360 62.5" aria-hidden="true" focusable="false"><path d="M20 61C70 54 120 25.5 150 12C164 5.7 182 0 196 0C210 0 228 5.7 242 12C272 25.5 322 54 372 61Z"/></svg></a>
-<section class="cookie-banner" id="cookie-consent" aria-labelledby="consent-title" hidden>
+<section class="cookie-banner" data-bento="Modal" id="cookie-consent" aria-labelledby="consent-title" hidden>
   <div class="wrap consent__inner">
     <div class="consent__text">
-      <h2 class="consent__title" id="consent-title">Cookies and third-party content</h2>
+      <h2 class="consent__title title title--l5" id="consent-title" data-bento="Title">Cookies and third-party content</h2>
       <p>This site only stores your choice. With your consent, the Google Maps map, the Facebook feed and the Matterport virtual tour are loaded and may set their own cookies. <a href="informations-legales.html#cookies">Learn more</a></p>
     </div>
     <div class="consent__actions">
-      <button class="btn btn--secondary" type="button" data-consent="refused">Reject all</button>
-      <button class="btn btn--secondary" type="button" data-consent="accepted">Accept all</button>
+      <button class="btn btn--invert btn--outline" data-bento="Button" type="button" data-consent="refused">Reject all</button>
+      <button class="btn btn--invert btn--outline" data-bento="Button" type="button" data-consent="accepted">Accept all</button>
     </div>
   </div>
 </section>

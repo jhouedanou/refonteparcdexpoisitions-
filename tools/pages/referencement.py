@@ -7,7 +7,7 @@ import json as _js
 
 SITE = "https://pae-orpin.vercel.app/"  # adresse de la maquette : remplacer par le domaine du Parc à la mise en ligne
 NAME_FR, NAME_EN = "Parc des Expositions d’Abidjan", "Abidjan Exhibition Center"
-OG_DEFAULT = "slider/dome-rendu"
+OG_DEFAULT = "officiel/dome-exterieur/dome-ciel"
 ADDRESS = {"@type": "PostalAddress", "streetAddress": "Boulevard de l’aéroport", "addressLocality": "Abidjan",
            "addressRegion": "Port-Bouët", "addressCountry": "CI"}
 GEO = {"@type": "GeoCoordinates", "latitude": 5.2634735, "longitude": -3.9465668}
@@ -55,37 +55,37 @@ def asset_url(name, size=1600):
 
 # ---------------------------------------------------------------- balises des pages existantes (titre Google, description, image de partage)
 META = {
-    "index.html": dict(image="slider/dome-rendu",
+    "index.html": dict(image="officiel/dome-exterieur/dome-ciel",
         fr=("Parc des Expositions d’Abidjan – Convention center & salons en Côte d’Ivoire",
             "Salons, congrès, conventions et concerts à Abidjan : le Dôme (5 023 places assises), un hall de 6 500 m² et 67 000 m² d’esplanades. Demandez votre devis."),
         en=("Abidjan Exhibition Center – Convention center & trade shows in Côte d’Ivoire",
             "Trade shows, congresses, conventions and concerts in Abidjan: the Dome (5,023 seats), a 6,500 m² hall and 67,000 m² of esplanades. Request a quote.")),
-    "qui-sommes-nous.html": dict(image="slider/journee-internationale",
+    "qui-sommes-nous.html": dict(image="officiel/dome-exterieur/dome-ciel",
         fr=("Qui sommes-nous ? Le Parc des Expositions d’Abidjan, exploité par GL events",
             "Le Parc des Expositions d’Abidjan accueille salons, congrès et concerts d’Afrique de l’Ouest, avec l’expertise internationale de GL events."),
         en=("About us – the Abidjan Exhibition Center, operated by GL events",
             "The Abidjan Exhibition Center hosts West Africa’s trade shows, congresses and concerts, backed by GL events’ international expertise.")),
-    "nos-espaces.html": dict(image="espaces/hall/salon-vue-plongeante",
+    "nos-espaces.html": dict(image="officiel/dome-exterieur/dome-aerien",
         fr=("Espaces événementiels à Abidjan : Hall, Dôme, Esplanades | Parc des Expositions d’Abidjan",
             "Comparez les espaces du Parc des Expositions d’Abidjan : Hall d’exposition de 6 500 m², Dôme de 5 000 m², 67 000 m² de parvis et d’esplanades."),
         en=("Event venues in Abidjan: Hall, Dome, Esplanades | Abidjan Exhibition Center",
             "Compare the Abidjan Exhibition Center’s venues: a 6,500 m² exhibition hall, the 5,000 m² Dome and 67,000 m² of forecourts and esplanades.")),
-    "hall-exposition.html": dict(image="espaces/hall/interieur",
+    "hall-exposition.html": dict(image="officiel/hall/hall-drapeaux",
         fr=("Hall d’exposition à Abidjan – 6 500 m², 17 m sous plafond | Parc des Expositions d’Abidjan",
             "Le Hall d’exposition du Parc : 6 500 m² d’un seul tenant, 17 m sous plafond, divisible en 2 ou 3 espaces pour vos salons et expositions."),
         en=("Exhibition hall in Abidjan – 6,500 m², 17 m ceiling | Abidjan Exhibition Center",
             "The venue’s exhibition hall: 6,500 m² in a single space, 17 m clear height, divisible into 2 or 3 areas for your trade shows and exhibitions.")),
-    "le-dome.html": dict(image="espaces/parvis/dome-sous-le-nuage",
+    "le-dome.html": dict(image="officiel/dome-exterieur/dome-ciel",
         fr=("Le Dôme, convention center d’Abidjan – 5 023 places assises | Parc des Expositions d’Abidjan",
             "Le Dôme : 5 000 m², 5 023 places assises et 9 588 personnes debout pour vos congrès, conventions, cérémonies et concerts à Abidjan."),
         en=("The Dome, Abidjan’s convention center – 5,023 seats | Abidjan Exhibition Center",
             "The Dome: 5,000 m², 5,023 seats and room for 9,588 standing guests for your congresses, conventions, ceremonies and concerts in Abidjan.")),
-    "parvis-esplanades.html": dict(image="espaces/parvis/salon-plein-air-aerien",
+    "parvis-esplanades.html": dict(image="officiel/dome-exterieur/dome-panorama",
         fr=("Esplanades événementielles à Abidjan – 67 000 m² en plein air | Parc des Expositions d’Abidjan",
             "Parvis et esplanades du Parc : 67 000 m² d’espaces extérieurs pour salons en plein air, expositions de véhicules et concerts à Abidjan."),
         en=("Outdoor event space in Abidjan – 67,000 m² | Abidjan Exhibition Center",
             "The venue’s forecourts and esplanades: 67,000 m² of outdoor space for open-air trade shows, vehicle exhibitions and concerts in Abidjan.")),
-    "nos-services.html": dict(image="phototheque/salon-stand",
+    "nos-services.html": dict(image="officiel/hall/hall-portes",
         fr=("Services événementiels à Abidjan : audiovisuel, restauration, sécurité | Parc des Expositions d’Abidjan",
             "Audiovisuel, mobilier, restauration, sécurité, accueil, nettoyage et logistique : un seul interlocuteur pour toutes les prestations de votre événement."),
         en=("Event services in Abidjan: audiovisual, catering, security | Abidjan Exhibition Center",
@@ -95,22 +95,22 @@ META = {
             "Les espaces et les événements du Parc des Expositions d’Abidjan en images : salons, concerts, congrès et grands rendez-vous."),
         en=("Photo library – trade shows, concerts and events | Abidjan Exhibition Center",
             "The Abidjan Exhibition Center’s venues and events in pictures: trade shows, concerts, congresses and major gatherings.")),
-    "agenda.html": dict(image="slider/concert-scene",
+    "agenda.html": dict(image="officiel/dome-salle/salle-gradins",
         fr=("Agenda des salons, concerts et événements à Abidjan | Parc des Expositions d’Abidjan",
             "Salons, congrès, conférences et concerts à venir au Parc des Expositions d’Abidjan : dates, lieux et liens de réservation."),
         en=("Upcoming trade shows, concerts and events in Abidjan | Abidjan Exhibition Center",
             "Upcoming trade shows, congresses, conferences and concerts at the Abidjan Exhibition Center: dates, venues and booking links.")),
-    "contact-devis.html": dict(image="pages/parlez-nous",
+    "contact-devis.html": dict(image="officiel/dome-salon-vip/salon-vip-accueil",
         fr=("Demander un devis pour votre événement à Abidjan | Parc des Expositions d’Abidjan",
             "Décrivez votre salon, congrès ou concert : l’équipe commerciale du Parc des Expositions d’Abidjan vous recontacte avec une proposition adaptée."),
         en=("Request a quote for your event in Abidjan | Abidjan Exhibition Center",
             "Tell us about your trade show, congress or concert: the Abidjan Exhibition Center’s sales team will get back to you with a tailored proposal.")),
-    "visite-virtuelle.html": dict(image="espaces/parvis/vue-aerienne",
+    "visite-virtuelle.html": dict(image="officiel/dome-exterieur/dome-aerien",
         fr=("Visite virtuelle 360° du Parc des Expositions d’Abidjan",
             "Parcourez le Parc des Expositions d’Abidjan en 360° : Hall, Dôme et esplanades, depuis votre bureau."),
         en=("360° virtual tour of the Abidjan Exhibition Center",
             "Explore the Abidjan Exhibition Center in 360°: the hall, the Dome and the esplanades, from your desk.")),
-    "informations-legales.html": dict(image="espaces/hall/galerie-couverte",
+    "informations-legales.html": dict(image="officiel/dome-salon-vip/salon-vip-galerie",
         fr=("Mentions légales, cookies et confidentialité | Parc des Expositions d’Abidjan",
             "Mentions légales, politique cookies, politique de confidentialité, CGU et éthique du site du Parc des Expositions d’Abidjan."),
         en=("Legal notice, cookies and privacy | Abidjan Exhibition Center",
@@ -121,13 +121,13 @@ META = {
 # ---------------------------------------------------------------- pages par type d'événement
 def reasons(items):
     lis = "".join(f'<li><h3>{h}</h3><p>{p}</p></li>' for h, p in items)
-    return f'<ul class="reasons" role="list">{lis}</ul>'
+    return f'<ul class="reasons" role="list" data-bento="Block/Icons text">{lis}</ul>'
 
 
 def cta_block(title, href):
     return f"""<section class="section">
   <div class="wrap">
-    <div class="cta cta--photo">
+    <div class="cta cta--photo" data-bento="Cta">
       <div class="cta__img" aria-hidden="true"></div>
       <p class="eyebrow">{t("Votre projet", "Your project")}</p>
       <h2>{title}</h2>
@@ -159,7 +159,7 @@ def landing(name, eyebrow, h1, lead, why, spaces_html, events, cta_title, devis_
 <section class="section section--white">
   <div class="wrap">
     <div class="section__head"><p class="eyebrow">{t("Au Parc", "At the venue")}</p><h2>{t("Prochainement au Parc", "Coming up at the venue")}</h2></div>
-    <div class="agenda">
+    <div class="collection collection--3" data-bento="Collection">
 {event_cards(events)}
     </div>
     <p class="section__more"><a class="link-arrow" href="agenda.html">{t("Voir tout l’agenda", "See the full events calendar")} {ARROW}</a></p>
@@ -178,7 +178,7 @@ def landing(name, eyebrow, h1, lead, why, spaces_html, events, cta_title, devis_
 <section class="section">
   <div class="wrap">
     <div class="section__head"><p class="eyebrow">{t("Les espaces", "The venues")}</p><h2>{t("Les espaces adaptés.", "The right venues.")}</h2></div>
-    <div class="spaces{" spaces--2" if spaces_html.count('<a class="space') == 2 else ""}">
+    <div class="collection collection--{2 if spaces_html.count('card--space') == 2 else 3}" data-bento="Collection">
 {spaces_html}
     </div>
     {type_links(name, t("Autres types d’événements", "Other event types"))}
@@ -256,22 +256,22 @@ for fr, en in [("Plénières · soirées · cérémonies", "Plenaries · evening
     t(fr, en)
 
 LANDING_META = {
-    "salons-professionnels.html": ("espaces/hall/salon-vue-plongeante",
+    "salons-professionnels.html": ("officiel/hall/hall-drapeaux",
         ("Salon professionnel à Abidjan – Hall de 6 500 m² | Parc des Expositions d’Abidjan",
          "Organisez votre salon professionnel à Abidjan : hall d’exposition modulable de 6 500 m², 67 000 m² d’espaces extérieurs, services intégrés et équipe dédiée."),
         ("Trade show venue in Abidjan – 6,500 m² hall | Abidjan Exhibition Center",
          "Host your trade show in Abidjan: a modular 6,500 m² exhibition hall, 67,000 m² of outdoor space, integrated services and a dedicated team.")),
-    "congres-conferences.html": ("slider/journee-internationale",
+    "congres-conferences.html": ("officiel/dome-salle/salle-pleniere",
         ("Congrès et conférences à Abidjan – Le Dôme, 5 023 places | Parc des Expositions d’Abidjan",
          "Votre congrès ou conférence à Abidjan : le Dôme offre 5 000 m² et 5 023 places assises, avec audiovisuel, restauration et accueil des délégations."),
         ("Congress & conference venue in Abidjan – the Dome, 5,023 seats | Abidjan Exhibition Center",
          "Host your congress or conference in Abidjan: the Dome offers 5,000 m² and 5,023 seats, with audiovisual, catering and delegate reception services.")),
-    "evenements-entreprise.html": ("slider/salon-rencontres",
+    "evenements-entreprise.html": ("officiel/dome-salon-vip/salon-vip-galerie",
         ("Événement d’entreprise à Abidjan – conventions, lancements, galas | Parc des Expositions d’Abidjan",
          "Convention, lancement de produit, assemblée, soirée de gala : le Parc accueille vos événements d’entreprise à Abidjan, jusqu’à près de 10 000 invités."),
         ("Corporate events in Abidjan – conventions, launches, galas | Abidjan Exhibition Center",
          "Conventions, product launches, general meetings, gala evenings: the Abidjan Exhibition Center hosts your corporate events for up to nearly 10,000 guests.")),
-    "concerts-spectacles.html": ("slider/concert-foule",
+    "concerts-spectacles.html": ("officiel/dome-salle/salle-gradins",
         ("Salle de concert à Abidjan – le Dôme, jusqu’à 9 588 spectateurs | Parc des Expositions d’Abidjan",
          "Concerts, spectacles et grands shows à Abidjan : le Dôme accueille jusqu’à 9 588 spectateurs debout, et les esplanades les événements en plein air."),
         ("Concert venue in Abidjan – the Dome, up to 9,588 spectators | Abidjan Exhibition Center",
@@ -314,7 +314,7 @@ PAGES["venir-a-abidjan.html"] = ("Venir à Abidjan", page_hero(
 
 <section class="section section--white">
   <div class="wrap">
-    <ul class="reasons" role="list">
+    <ul class="reasons" role="list" data-bento="Block/Icons text">
       <li><h2 class="t3">{t("Rejoindre le Parc", "Getting to the venue")}</h2>
         <p>{t("Le Parc se trouve boulevard de l’aéroport, à Port-Bouët, à quelques minutes de l’aéroport international Félix-Houphouët-Boigny.", "The venue is on Boulevard de l’aéroport in Port-Bouët, just minutes from Félix-Houphouët-Boigny International Airport.")}</p>
         <p>{t("Plus d’une vingtaine de compagnies aériennes relient Abidjan à l’Afrique et au reste du monde.", "More than twenty airlines connect Abidjan with Africa and the rest of the world.")}</p>
@@ -334,14 +334,14 @@ PAGES["venir-a-abidjan.html"] = ("Venir à Abidjan", page_hero(
 <section class="section" id="faq">
   <div class="wrap faq">
     <div class="section__head"><p class="eyebrow">FAQ</p><h2>{t("Questions fréquentes", "Frequently asked questions")}</h2></div>
-    <div class="faq__list">{FAQ_HTML}</div>
+    <div class="faq__list" data-bento="Accordion">{FAQ_HTML}</div>
   </div>
 </section>
 
 <section class="section section--white">
   <div class="wrap">
     <div class="section__head"><p class="eyebrow">{t("Une destination", "A destination")}</p><h2>{t("Abidjan, ville d’affaires et d’expériences.", "Abidjan, a city of business and experiences.")}</h2></div>
-    <div class="destination-grid" data-lightbox>{DESTINATION_ITEMS}</div>
+    <div class="destination-grid" data-lightbox data-bento="Image gallery">{DESTINATION_ITEMS}</div>
   </div>
 </section>
 {LIGHTBOX}
@@ -352,7 +352,7 @@ META["venir-a-abidjan.html"] = dict(image="pages/destination-abidjan",
         "Préparez la venue de vos participants : accès au Parc depuis l’aéroport, hébergement à Abidjan, formalités de visa et informations pratiques."),
     en=("Coming to Abidjan: access, hotels and visas | Abidjan Exhibition Center",
         "Plan your attendees’ trip: getting to the venue from the airport, accommodation in Abidjan, visa formalities and practical information."))
-PAGE_BG["venir-a-abidjan.html"] = "espaces/parvis/vue-aerienne"  # photo sans texte incrusté
+PAGE_BG["venir-a-abidjan.html"] = "officiel/dome-exterieur/dome-aerien"  # photo officielle, sans texte incrusté
 
 # ---------------------------------------------------------------- une page par événement de l'agenda
 MONTHS_EN = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -377,6 +377,8 @@ def cut(s, n=155):
 
 
 EVENT_PAGES = {}
+BACK_ICON = '<svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg>'
+EVENT_BG = {"Concert": "officiel/dome-salle/salle-gradins", "Cérémonie": "officiel/dome-salle/salle-pleniere", "Forum": "officiel/dome-salle/salle-pleniere"}
 for i, (slug_, title, start, end, kind, tags, resa, resa_label) in enumerate(EVENTS):
     name = f"evenement-{slug_}.html"
     det = DETAILS.get(slug_, {})
@@ -393,27 +395,26 @@ for i, (slug_, title, start, end, kind, tags, resa, resa_label) in enumerate(EVE
     if det.get("site"):
         links.append(f'<a class="link-arrow" href="{det["site"]}" target="_blank" rel="noopener" aria-label="Site officiel : {title} (nouvel onglet)">Site officiel {EXT}</a>')
     others = [e[0] for e in EVENTS[i + 1:i + 4]] or [e[0] for e in EVENTS[:3]]
-    PAGES[name] = (title, f"""
-<section class="hero hero--small hero--under-header">
-  <div class="hero__img" aria-hidden="true">{img(f"agenda/{slug_}", priority=True, lazy=False)}</div>
-  <div class="wrap hero__inner">
-    {crumbs(A, ("Agenda", "agenda.html"), (title, None), ink=True)}
-    <p class="eyebrow">Agenda · {kind}</p>
-    <h1>{title}</h1>
-    <p class="lead">{when_long(start, end)}</p>
-  </div>
-</section>
+    t(f"Affiche : {title}", f"Poster: {tr_en(title)}")
+    if desc and cut(desc, 160) != desc:
+        t(cut(desc, 160), cut(tr_en(desc), 160))  # résumé de l’en-tête de page
+    back = f'<a class="page-hero__back" href="agenda.html">{BACK_ICON}{t("Tout l’agenda", "All events")}</a>'
+    meta = f'{back}<span class="page-hero__date">{when_long(start, end)}</span><span class="page-hero__category">{kind}</span>'
+    addons = (links[0] if resa else "") + f'<span class="badge">{lieu}</span>'
+    PAGES[name] = (title, page_hero(crumbs(A, ("Agenda", "agenda.html"), (title, None)), f"Agenda · {kind}", title,
+                                    cut(desc, 160), compact=True, meta=meta, addons=addons) + f"""
 
 <section class="section section--white">
   <div class="wrap with-aside">
     <div>
+      <figure class="ev-poster">{img(f"agenda/{slug_}", f"Affiche : {title}", "(min-width: 1024px) 50vw, 100vw")}</figure>
       <h2>{t("À propos de l’événement", "About the event")}</h2>
       <p class="lead">{desc}</p>
       <dl class="ev-facts block-gap">{facts_html}</dl>
       <div class="ev-links block-gap">{"".join(links)}</div>
       {note("Zone administrable Drupal : présentation, programme, organisateur, informations pratiques.")}
     </div>
-    <aside class="aside-box" aria-labelledby="aside-{slug_}">
+    <aside class="aside-box card" aria-labelledby="aside-{slug_}" data-bento="Card">
       <p class="eyebrow">{t("Organisateurs", "Organizers")}</p>
       <h2 class="t3" id="aside-{slug_}">{t("Votre événement au Parc ?", "Your event at the venue?")}</h2>
       <p>{t("Salons, congrès, concerts : parlez-nous de votre projet.", "Trade shows, congresses, concerts: tell us about your project.")}</p>
@@ -425,7 +426,7 @@ for i, (slug_, title, start, end, kind, tags, resa, resa_label) in enumerate(EVE
 <section class="section">
   <div class="wrap">
     <div class="section__head"><p class="eyebrow">Agenda</p><h2>{t("À suivre au Parc", "Next at the venue")}</h2></div>
-    <div class="agenda">
+    <div class="collection collection--3" data-bento="Collection">
 {event_cards(others)}
     </div>
     <p class="section__more"><a class="link-arrow" href="agenda.html">{t("Voir tout l’agenda", "See the full events calendar")} {ARROW}</a></p>
@@ -433,6 +434,7 @@ for i, (slug_, title, start, end, kind, tags, resa, resa_label) in enumerate(EVE
 </section>
 """)
     SECTION_OF[name] = "agenda.html"
+    PAGE_BG[name] = EVENT_BG.get(kind, "officiel/hall/hall-drapeaux")
     when_fr, when_en_ = when_long(start, end), when_en(start, end)
     t(when_fr, when_en_)  # dates de l'en-tête et des fiches en anglais
     title_en = tr_en(title)
@@ -460,7 +462,7 @@ def venue_graph(lang):
            "sameAs": [IG_URL, FB_URL, LI_URL],
            "parentOrganization": {"@type": "Organization", "name": "GL events", "url": "https://www.gl-events.com/"}}
     venue = {"@type": "EventVenue", "@id": VENUE_ID, "name": nm, "url": page_url("index.html", lang), "address": ADDRESS, "geo": GEO,
-             "telephone": "+225 27 21 71 09 97", "maximumAttendeeCapacity": 9588, "image": asset_url("slider/dome-rendu"),
+             "telephone": "+225 27 21 71 09 97", "maximumAttendeeCapacity": 9588, "image": asset_url("officiel/dome-exterieur/dome-ciel"),
              "hasMap": MAPS_PLACE, "publicAccess": True}
     return [org, venue]
 

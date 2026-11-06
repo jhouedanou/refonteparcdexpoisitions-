@@ -18,8 +18,8 @@ NAV = [
 
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
-         '<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&amp;family=Barlow+Condensed:wght@600;700;800'
-         '&amp;family=Barlow:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet">')
+         '<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,400'
+         '&amp;display=swap" rel="stylesheet">')  # charte, kit web : Poppins Thin, Regular, Bold
 
 
 def head(title):
@@ -56,7 +56,7 @@ def header(active):
 {items}
       </ul>
     </nav>
-    <a class="btn btn--primary topbar__cta" href="contact-devis.html"{CUR if active == "contact-devis.html" else ""}><span><span class="hide-sm">Demander un </span>devis</span></a>
+    <a class="btn btn--primary topbar__cta" href="contact-devis.html"{CUR if active == "contact-devis.html" else ""}><span class="hide-sm">Demander un devis</span><span class="show-sm">Devis</span></a>
   </div>
 </header>
 <main class="page" id="contenu" tabindex="-1">"""

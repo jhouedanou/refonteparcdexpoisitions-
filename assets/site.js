@@ -148,7 +148,28 @@
     });
   }
 
-  // ---------- En-tête transparent (toutes les pages) : fond blanc dès qu'on défile ou que le menu est ouvert ----------
+  // ---------- Vidéo de présentation (Block/Video) : chargée seulement au clic (façade) ----------
+  document.querySelectorAll('[data-video] .video__facade').forEach(function (facade) {
+    facade.addEventListener('click', function (e) {
+      e.preventDefault();
+      var stage = facade.parentElement;
+      var small = window.matchMedia('(max-width: 767px)').matches;
+      var video = document.createElement('video');
+      video.src = facade.getAttribute(small ? 'data-video-sd' : 'data-video-hd');
+      video.controls = true;
+      video.playsInline = true;
+      video.preload = 'auto';
+      video.setAttribute('aria-label', facade.getAttribute('data-video-title'));
+      var poster = facade.querySelector('img');
+      if (poster) video.poster = poster.currentSrc || poster.src;
+      stage.replaceChildren(video);
+      video.focus();
+      var p = video.play();   // geste de l’utilisateur : lecture avec le son autorisée
+      if (p && p.catch) p.catch(function () {});
+    });
+  });
+
+  // ---------- Site header (Bento, Stuck=true) : ombre et WhatsApp dès qu'on défile ou que le menu est ouvert ----------
   var overlay = document.querySelector('.topbar--overlay');
   if (overlay) {
     var menuBtn = overlay.querySelector('.menu-toggle');
@@ -166,7 +187,7 @@
   // (rien ne clignote au-dessus du pli). Un bloc dépassé d'un coup (touche Fin, ancre) est révélé aussi : on teste
   // « haut du bloc au-dessus de 92 % de l'écran » plutôt qu'une intersection. Rien avec « réduire les animations ».
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    var ITEMS = '.figure, .space, .service, .event, .tl-item, .gallery__item, .wall__tile, .destination-grid > *, .commitments > *, .support__list > *';
+    var ITEMS = '.figure, .card, .service, .tl-item, .gallery__item, .destination-grid > *, .commitments > *, .support__list > *, .reasons > *, .faq__item';
     var targets = [];
     document.querySelectorAll('main section:not(.hero):not(.page-hero) > .wrap > *').forEach(function (block) {
       var items = block.matches(ITEMS) ? [] : block.querySelectorAll(ITEMS);

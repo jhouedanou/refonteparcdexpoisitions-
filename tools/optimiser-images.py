@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Convertit les photos sources (dossier images/) en WebP optimisés dans assets/img/.
 
-Usage : python3 tools/optimiser-images.py [--agenda]
+Usage : python3 tools/optimiser-images.py [--agenda] [--video]
   --agenda  télécharge aussi les visuels des événements depuis le site officiel du Parc.
+  --video   réencode la vidéo de présentation officielle (ffmpeg) et son affiche.
 
 Chaque image est produite en deux largeurs : <nom>-1600.webp (affichage large) et <nom>-800.webp
 (vignettes, mobile), à utiliser avec srcset. Les originaux restent dans images/.
@@ -13,6 +14,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import unicodedata
 import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -119,6 +121,90 @@ def convert_folders():
     print(f"Dossiers pilotés : {ko(before)} -> {ko(after)}")
 
 
+# Photos officielles fournies par le client (docs/retourclient/images, non versionné : 1 Go, vidéo > 100 Mo).
+# Organisation du client (6 novembre 2026) : un dossier par lieu. TOUTES les photos d’un dossier sont converties
+# (déposer une photo dans un dossier suffit) vers assets/img/officiel/<groupe>/<nom>-{1600,800}.webp.
+# Les TIF sont d’abord convertis en JPG à côté de l’original (sips, qualité 92) ; un TIF qui a déjà son JPG est ignoré.
+# Les doublons « … - Copie » sont ignorés. Nom de sortie : NOMS_OFFICIELS, sinon nom de fichier normalisé.
+OFFICIELLES_SRC = ROOT / "docs" / "retourclient" / "images"
+DOSSIERS_OFFICIELS = {
+    "hall exposition": "officiel/hall",
+    "dome": "officiel/dome-exterieur",
+    "dome/salle": "officiel/dome-salle",
+    "dome/salon vip": "officiel/dome-salon-vip",
+    "espalanafes": "officiel/esplanades",
+}
+NOMS_OFFICIELS = {
+    "Hall 1 bis": "hall-drapeaux", "_DSF6401": "hall-portes", "_DSF6404": "hall-perspective",
+    "IMG_3429": "dome-ciel", "IMG_3415": "dome-aerien", "IMG_3413": "dome-toiture", "Dôme Panorama": "dome-panorama",
+    "6C2A7053": "salle-pleniere", "6C2A7050": "salle-fauteuils", "_DSF6430": "salle-parterre", "_DSF6437": "salle-gradins",
+    "_DSF6457": "salon-vip-galerie", "_DSF6458": "salon-vip-banc", "_DSF6459": "salon-vip-oeuvre", "_DSF6460": "salon-vip-accueil",
+}
+
+
+def tif_en_jpg():
+    """Convertit chaque TIF officiel en JPG (même dossier, même nom) s’il n’a pas déjà son JPG."""
+    for tif in sorted(OFFICIELLES_SRC.rglob("*.tif")):
+        jpg = tif.with_suffix(".jpg")
+        if not jpg.exists():
+            subprocess.run(["sips", "-s", "format", "jpeg", "-s", "formatOptions", "92", str(tif), "--out", str(jpg)], check=True, capture_output=True)
+            print(f"  TIF -> JPG : {jpg.relative_to(OFFICIELLES_SRC)}")
+
+
+def convert_officielles():
+    if not OFFICIELLES_SRC.is_dir():
+        print("  photos officielles absentes : docs/retourclient/images")
+        return
+    tif_en_jpg()
+    before = after = 0
+    with tempfile.TemporaryDirectory() as tmp:
+        for dossier, groupe in DOSSIERS_OFFICIELS.items():
+            src_dir, out_dir = OFFICIELLES_SRC / dossier, OUT / groupe
+            if not src_dir.is_dir():
+                print(f"  dossier absent : {dossier}")
+                continue
+            if out_dir.is_dir():
+                for old in out_dir.glob("*.webp"):
+                    old.unlink()
+            for src in sorted(p for p in src_dir.iterdir() if p.suffix.lower() in {".jpg", ".jpeg", ".png"} and "copie" not in p.stem.lower()):
+                stem = unicodedata.normalize("NFC", src.stem)  # noms de fichiers macOS en NFD (« Dôme »)
+                name = NOMS_OFFICIELS.get(stem, re.sub(r"[^a-z0-9]+", "-", unicodedata.normalize("NFKD", stem).encode("ascii", "ignore").decode().lower()).strip("-"))
+                before += src.stat().st_size
+                mid = pathlib.Path(tmp) / f"{name}.jpg"
+                subprocess.run(["sips", "-s", "format", "jpeg", "-s", "formatOptions", "92", "-Z", "3200", str(src), "--out", str(mid)], check=True, capture_output=True)
+                for w in WIDTHS:
+                    dest = out_dir / f"{name}-{w}.webp"
+                    cwebp(mid, dest, w)
+                    after += dest.stat().st_size
+                print(f"  officielle {dossier}/{src.name} -> assets/img/{groupe}/{name}-{{1600,800}}.webp")
+    print(f"Photos officielles : {ko(before)} -> {ko(after)}")
+
+
+VIDEO_SRC = OFFICIELLES_SRC / "Vidéo présentation PEA FRANÇAIS.mp4"
+
+
+def convert_video():
+    """Vidéo de présentation : H.264 1080p (~25 Mo) et 720p (~14 Mo), affiche WebP tirée de la 4e seconde (vue aérienne)."""
+    if not VIDEO_SRC.exists():
+        print("  vidéo source absente : docs/retourclient/images")
+        return
+    out = ROOT / "assets" / "video"
+    out.mkdir(parents=True, exist_ok=True)
+    for width, crf, maxrate, audio in ((1920, "28", "2000k", "128k"), (1280, "28", "1100k", "96k")):
+        name = "1080" if width == 1920 else "720"
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(VIDEO_SRC), "-vf", f"scale={width}:-2",
+                        "-c:v", "libx264", "-preset", "slow", "-crf", crf, "-maxrate", maxrate, "-bufsize", str(int(maxrate[:-1]) * 2) + "k",
+                        "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", audio, "-movflags", "+faststart",
+                        str(out / f"presentation-pea-{name}.mp4")], check=True)
+    with tempfile.TemporaryDirectory() as tmp:
+        frame = pathlib.Path(tmp) / "poster.png"
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", "4", "-i", str(VIDEO_SRC), "-frames:v", "1",
+                        "-vf", "scale=1920:-2", str(frame)], check=True)
+        for w in WIDTHS:
+            cwebp(frame, OUT / "video" / f"presentation-poster-{w}.webp", w)
+    print("  vidéo -> assets/video/presentation-pea-{1080,720}.mp4 + affiche")
+
+
 # Logos des références (images/logos) : une seule largeur, transparence conservée
 LOGOS_NOMS = {"images.png": "sara-2025"}
 
@@ -217,6 +303,9 @@ def download_agenda():
 if __name__ == "__main__":
     convert_images()
     convert_folders()
+    convert_officielles()
     convert_logos()
     if "--agenda" in sys.argv:
         download_agenda()
+    if "--video" in sys.argv:
+        convert_video()

@@ -1,0 +1,49 @@
+Objet : Parc des Expositions d’Abidjan — nouvelle version de la maquette du site
+
+Bonjour,
+
+Nous avons le plaisir de vous présenter la nouvelle version de la maquette du site du Parc des Expositions d’Abidjan. Elle intègre la charte graphique officielle et le design system Bento de GL events que vous nous avez transmis.
+
+CE QUI CHANGE
+
+- Charte graphique appliquée sur tout le site :
+  - police Poppins ;
+  - orange PEA pour les titres et les chiffres clés ;
+  - couleurs d’accompagnement (brun, vert, crème) en aplats ;
+  - logo du Parc dans ses versions officielles ;
+  - logo GL events en signature.
+- Design system Bento : chaque bloc du site (en-tête, cartes, chiffres clés, agenda, formulaires, pied de page…) reprend un composant Bento, aux couleurs du Parc.
+- Photos officielles : le diaporama d’accueil, les pages des espaces (Hall, Dôme, salle plénière, salon VIP) et les bandeaux de page utilisent désormais vos photos. La vidéo de présentation est intégrée sur l’accueil et sur la page « Qui sommes-nous ? ».
+- 40 pages vérifiées sur ordinateur, tablette et mobile : lisibilité, accessibilité et régularité des espacements.
+
+DÉCOUVRIR LE SITE DE DÉMONSTRATION
+
+- Accueil : https://pae-orpin.vercel.app/
+- Nos espaces : https://pae-orpin.vercel.app/nos-espaces.html
+- Hall d’Exposition : https://pae-orpin.vercel.app/hall-exposition.html
+- Le Dôme : https://pae-orpin.vercel.app/le-dome.html
+- Parvis & Esplanades : https://pae-orpin.vercel.app/parvis-esplanades.html
+- Nos services : https://pae-orpin.vercel.app/nos-services.html
+- Agenda : https://pae-orpin.vercel.app/agenda.html
+- Exemple de fiche événement (Auto Expo) : https://pae-orpin.vercel.app/evenement-auto-expo.html
+- Contact & devis : https://pae-orpin.vercel.app/contact-devis.html
+- Version anglaise : https://pae-orpin.vercel.app/en/
+
+RAPPORT D’INTÉGRATION
+
+Pour chaque page, le rapport présente les composants utilisés et les points de la charte graphique respectés, avec des captures sur ordinateur et sur mobile. Chaque nom de page y renvoie directement vers le site de démonstration.
+https://claude.ai/artifact/Do2dCVQ54yHMzqS9ULxTv5
+
+POINTS À VALIDER DE VOTRE CÔTÉ
+
+1. L’accroche « Le plus grand parc exposition d’Afrique de l’Ouest », reprise de la charte, est utilisée en tête de la page d’accueil : pouvez-vous la confirmer ?
+2. Pourriez-vous nous transmettre le logo du Parc en versions blanche et noire, au format vectoriel (SVG) ?
+3. La charte indique deux valeurs pour l’orange du kit web (p. 17) : nous avons appliqué l’orange de la page 10 (RVB 218-89-0).
+4. La vidéo de présentation n’a pas de sous-titres : souhaitez-vous en ajouter ?
+
+Nous restons à votre disposition pour en discuter.
+
+Cordialement,
+
+[Votre nom]
+Big Five
