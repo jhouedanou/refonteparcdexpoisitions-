@@ -134,7 +134,7 @@ def charte(p, src):
         if s["fond"] in APLATS and APLATS[s["fond"]][0] not in vus:
             vus.append(APLATS[s["fond"]][0])
     if vus:
-        pts.append(("Couleurs d’accompagnement de la charte (p. 11 et 17) en aplats : " + ", ".join(vus), [APLATS[k][1] for k in APLATS if APLATS[k][0] in vus]))
+        pts.append(("Couleurs d’accompagnement de la charte (p. 11 et 17) en aplats : " + ", ".join(vus), [next(v[1] for v in APLATS.values() if v[0] == nom) for nom in vus]))
     pts.append(("Fond blanc dominant, sans aplat noir (le noir est réservé au texte et au logo monochrome)", "#FFFFFF"))
     pts.append(("Logo du Parc intact : version orange sur l’en-tête blanc, version blanche (« négatif ») sur le brun du pied de page (p. 4–5)", None))
     pts.append(("Logo GL events en signature dans le pied de page (p. 17–18)", None))
@@ -216,10 +216,20 @@ H = ['<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="vie
      ".ok{display:inline-block;margin:0 0 16px;padding:4px 12px;background:var(--v);color:#fff;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}",
      ".liste{margin:0 0 24px;padding:0;list-style:none}.liste li{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--l);font-size:15px}.liste li:last-child{border-bottom:0}",
      ".liste .k{flex:none;min-width:1.6em;font-weight:700;color:var(--a);font-variant-numeric:tabular-nums}.liste .c{flex:none;width:1.2em;color:var(--v);font-weight:700}.sw{display:inline-block;width:14px;height:14px;border:1px solid #bbb;vertical-align:-2px;margin-left:4px}",
+     ".kicker{display:none}.evts-titre{margin:24px 0 8px}",
      "h4{font-size:14px;text-transform:uppercase;letter-spacing:.06em;margin:0 0 8px;color:var(--m)}",
      "table{border-collapse:collapse;width:100%;font-size:14px}th,td{border-bottom:1px solid var(--l);padding:8px;text-align:left}th{background:var(--p)}.tw{overflow-x:auto}",
      ".pts{background:var(--c);padding:24px 32px;margin-top:48px}.pts h2{margin-top:0}.pts li{margin-bottom:8px}",
      "@media(max-width:860px){.fiche{grid-template-columns:1fr}.shots{grid-template-columns:2fr 1fr}}",
+     # Impression / PDF (A4) : couleurs conservées, un groupe par page, fiches non coupées, liens actifs vers le site de démonstration
+     "@page{size:A4;margin:12mm 12mm 14mm}",
+     "@media print{*{-webkit-print-color-adjust:exact;print-color-adjust:exact}body{font-size:10.5px;line-height:1.5}",
+     ".top{padding:18px 20px}.top h1{font-size:24px}main{padding:0;max-width:none}h2{font-size:20px;margin:22px 0 10px;break-after:avoid}",
+     ".bref{gap:12px;margin-top:18px}.bref b{font-size:12px}.pal{gap:8px}.pal span{width:30px;height:30px}.gl{gap:4px 18px}.gl li{font-size:10px;padding:4px 0}",
+     ".groupe{display:none}.kicker{display:block;margin:0 0 4px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--a)}",
+     ".fiche{break-before:page;break-inside:avoid;grid-template-columns:1fr 1fr;gap:16px;padding:0;border-top:0}.evts{break-before:page}",
+     ".fiche h3{font-size:16px}.liste li{font-size:10px;padding:3px 0}.ok{font-size:9px;margin-bottom:8px}.shots img{max-height:135mm;object-fit:cover;object-position:top}.comps{columns:2;column-gap:14px}.comps li{break-inside:avoid}.comps .d,.evts-intro{display:none}",
+     "table{font-size:9.5px}th,td{padding:4px 6px}.pts{break-inside:avoid;padding:14px 18px}a{text-decoration:none}}",
      "</style></head><body>",
      f'<header class="top"><h1>Rapport d’intégration : charte graphique et design system</h1><p>Parc des Expositions d’Abidjan — nouvelle version de la maquette, {DATE}. '
      f'Site de démonstration : <a href="{DEMO}">{DEMO.replace("https://", "").rstrip("/")}</a>. Chaque nom de page est un lien direct vers la page sur ce site.</p></header><main>',
@@ -235,6 +245,9 @@ H = ['<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="vie
      "".join(f"<li><b>{html.escape(n)}</b>{html.escape(r)}<br><small>{html.escape(k)}</small></li>" for k, n, r in COMPOSANTS) + "</ul>"]
 
 
+GROUPE_COURANT = [""]
+
+
 def fiche(p, nom):
     src = page_html(p)
     X = by_page[p][WMAX]
@@ -247,12 +260,12 @@ def fiche(p, nom):
     md_ += ["", "**Charte graphique respectée**", ""] + [f"- {t}" for t, _ in pts] + [""]
     big, small = thumb(p, WMAX, 2400, 900), thumb(p, WMIN, 2400, 300)
     sw = lambda c: "".join(f'<span class="sw" style="background:{x}" title="{x}"></span>' for x in (c if isinstance(c, list) else [c])) if c else ""
-    h = [f'<article class="fiche" id="{re.sub("[^a-z0-9]+", "-", p)}"><div>',
+    h = [f'<article class="fiche" id="{re.sub("[^a-z0-9]+", "-", p)}"><div><p class="kicker">{html.escape(GROUPE_COURANT[0])}</p>',
          f'<h3><a href="{demo(p)}">{html.escape(nom)} ↗</a></h3>' + (f'<p class="desc">{html.escape(desc)}</p>' if desc else ""),
          f'<span class="ok">{statut}</span>',
          '<div class="shots">' + (f'<figure><img loading="lazy" src="{big}" alt="Page {html.escape(nom)} sur ordinateur"><figcaption>Ordinateur</figcaption></figure>' if big else "") +
          (f'<figure><img loading="lazy" src="{small}" alt="Page {html.escape(nom)} sur mobile"><figcaption>Mobile</figcaption></figure>' if small else "") + "</div></div><div>",
-         "<h4>Composants utilisés</h4><ul class=\"liste\">" + "".join(f'<li><span class="k">{n}×</span><span><b>{html.escape(NOM[k][0])}</b> — {html.escape(NOM[k][1])}</span></li>' for k, n in comps) + "</ul>",
+         "<h4>Composants utilisés</h4><ul class=\"liste comps\">" + "".join(f'<li><span class="k">{n}×</span><span><b>{html.escape(NOM[k][0])}</b><span class="d"> — {html.escape(NOM[k][1])}</span></span></li>' for k, n in comps) + "</ul>",
          "<h4>Charte graphique respectée</h4><ul class=\"liste\">" + "".join(f'<li><span class="c">✓</span><span>{html.escape(t)}{sw(c)}</span></li>' for t, c in pts) + "</ul></div></article>"]
     return md_, h
 
@@ -265,13 +278,15 @@ for p, nom, g in PAGES:
         groupe = g
         md += [f"## {g}", ""]
         H.append(f'<p class="groupe">{html.escape(g)}</p>')
+    GROUPE_COURANT[0] = g
     m_, h_ = fiche(p, nom)
     md += m_
     H += h_
     if p == "agenda.html" and events:   # fiches événement juste après l’agenda : un modèle + la liste
         modele = events[0] if "evenement-auto-expo.html" not in events else "evenement-auto-expo.html"
         md += ["### Fiches événement", "", f"Les {len(events)} fiches événement suivent le même modèle. Il est présenté avec la fiche « {h1(page_html(modele))} », puis chaque fiche est listée avec son lien.", ""]
-        H.append(f'<p class="groupe">Fiches événement</p><p class="desc">Les {len(events)} fiches événement suivent le même modèle, présenté ci-dessous, puis listées avec leur lien.</p>')
+        GROUPE_COURANT[0] = "Fiches événement"
+        H.append(f'<p class="groupe">Fiches événement</p><p class="desc evts-intro">Les {len(events)} fiches événement suivent le même modèle, présenté ci-dessous, puis listées avec leur lien.</p>')
         m_, h_ = fiche(modele, f"Fiche événement (modèle) : {h1(page_html(modele))}")
         md += m_
         H += h_
@@ -288,7 +303,8 @@ for p, nom, g in PAGES:
             md.append(f"| [{titre}]({demo(e)}) | {date_.group(1) if date_ else ''} | {bgtxt} | {ok} |")
             rows.append(f'<tr><td><a href="{demo(e)}">{html.escape(titre)}</a></td><td>{html.escape(date_.group(1) if date_ else "")}</td><td>{html.escape(bgtxt)}</td><td>{ok}</td></tr>')
         md.append("")
-        H.append('<div class="tw"><table><tr><th>Événement</th><th>Date</th><th>Fond du bandeau</th><th>Contrôle</th></tr>' + "".join(rows) + "</table></div>")
+        GROUPE_COURANT[0] = g
+        H.append(f'<div class="tw evts"><h3 class="evts-titre">Les {len(events)} fiches événement</h3><table><tr><th>Événement</th><th>Date</th><th>Fond du bandeau</th><th>Contrôle</th></tr>' + "".join(rows) + "</table></div>")
 
 md += ["## Points à valider par le Parc", ""] + [f"{i}. {t}" for i, t in enumerate(POINTS_CLIENT, 1)] + ["",
        "Annexe technique (mesures détaillées) : `design-system/pea/RAPPORT-TECHNIQUE.md`."]
