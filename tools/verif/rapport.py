@@ -3,7 +3,8 @@
 
 Usage : node tools/verif/conformite.mjs --shots --out=<dossier> --pages=…   puis
         python3 tools/verif/rapport.py <dossier>
-Sorties : design-system/pea/RAPPORT-INTEGRATION.md (versionné) et <dossier>/rapport-html/ (HTML illustré + vignettes).
+Sorties : design-system/pea/RAPPORT-TECHNIQUE.md (annexe technique, versionnée) et <dossier>/rapport-technique-html/.
+Le rapport destiné au client (moins technique) est produit par tools/verif/rapport_client.py.
 """
 import collections
 import datetime
@@ -17,9 +18,16 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 SRC = pathlib.Path(sys.argv[1])
 DATA = json.loads((SRC / "rapport.json").read_text(encoding="utf-8"))
-OUT_MD = ROOT / "design-system" / "pea" / "RAPPORT-INTEGRATION.md"
-OUT_HTML = pathlib.Path(sys.argv[2]) if len(sys.argv) > 2 else SRC / "rapport-html"
+OUT_MD = ROOT / "design-system" / "pea" / "RAPPORT-TECHNIQUE.md"  # annexe technique ; version client : rapport_client.py
+OUT_HTML = pathlib.Path(sys.argv[2]) if len(sys.argv) > 2 else SRC / "rapport-technique-html"
 WIDTHS = sorted({x["width"] for x in DATA})
+_ref = (ROOT / "tools" / "pages" / "referencement.py").read_text(encoding="utf-8")
+DEMO = re.search(r'^SITE = "([^"]+)"', _ref, re.M).group(1)  # site de démonstration (Vercel)
+
+
+def demo(page):
+    """Lien direct vers la page sur le site de démonstration (l’accueil est servi à la racine)."""
+    return DEMO + ("" if page == "index.html" else "en/" if page == "en/index.html" else page)
 SCALE = [0, 1, 2, 3, 4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 96, 128]
 
 FONDS = {"#FFFFFF": "blanc", "#F7F5F1": "pierre claire", "#FCF2EA": "crème", "#9D4015": "brun", "#006528": "vert",
@@ -140,7 +148,8 @@ for p in pages:
         usage[k] += 1
 date = datetime.date.today().strftime("%d/%m/%Y")
 
-md = [f"# Rapport d’intégration : charte PEA + Bento DS, page par page", "",
+md = [f"# Annexe technique : mesures de l’intégration charte PEA + Bento DS, page par page", "",
+      f"Site de démonstration : <{DEMO}>. Chaque titre de page ci-dessous est un lien direct vers la page sur ce site.", "",
       f"Généré le {date} par `tools/verif/rapport.py`, à partir des mesures de `node tools/verif/conformite.mjs` "
       f"(Chrome headless, styles **calculés**, mouvement réduit pour que tout soit visible). Version illustrée (captures) : publiée avec ce rapport.", "",
       "## Synthèse", "",
@@ -183,7 +192,7 @@ H = ['<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="vie
      "main{padding:0 clamp(16px,4vw,64px) 64px;max-width:1400px;margin:auto}h2{color:var(--o);font-size:26px;margin:48px 0 16px}h3{font-size:20px;margin:24px 0 8px}",
      "table{border-collapse:collapse;width:100%;margin:8px 0 16px;font-size:13px}th,td{border-bottom:1px solid var(--l);padding:6px 8px;text-align:left;vertical-align:top}th{background:var(--p);font-weight:700}",
      ".kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin:24px 0}.kpi{border:1px solid var(--l);padding:16px}.kpi b{display:block;font-size:28px;color:var(--o)}",
-     "nav.toc{columns:3 220px;font-size:13px;margin:16px 0}nav.toc a{color:var(--a)}section.page{border-top:3px solid var(--o);margin-top:48px;padding-top:8px}",
+     "nav.toc{columns:3 220px;font-size:13px;margin:16px 0}nav.toc a{color:var(--a)}nav.toc a.fiche{color:var(--m);font-size:12px}h2 a{color:inherit;text-decoration:none}h2 a:hover{text-decoration:underline}.demo{font-weight:700;color:var(--a)}section.page{border-top:3px solid var(--o);margin-top:48px;padding-top:8px}",
      ".shots{display:grid;grid-template-columns:3fr 1fr;gap:16px;align-items:start;margin:16px 0}.shots figure{margin:0}.shots img{width:100%;border:1px solid var(--l)}.shots figcaption{font-size:12px;color:var(--m)}",
      ".ok{color:var(--v);font-weight:700}.ko{color:#b42318;font-weight:700}.sw{display:inline-block;width:12px;height:12px;border:1px solid #ccc;vertical-align:-1px;margin-right:4px}",
      ".badge{display:inline-block;padding:2px 8px;border:1px solid var(--a);color:var(--a);font-weight:700;font-size:12px;text-transform:uppercase}",
@@ -200,7 +209,7 @@ H = ['<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="vie
      "(chaque padding / marge / gap, puis l’écart rendu entre sous-éléments voisins).</p>",
      "<h2>Composants Bento par page</h2><div class=\"tw\"><table><tr><th>Composant</th><th>Pages</th><th>Spec Bento contrôlée</th></tr>" +
      "".join(f"<tr><td>{html.escape(k)}</td><td>{n} / {len(pages)}</td><td>{html.escape(SPECS.get(k, ('—',))[0])}</td></tr>" for k, n in sorted(usage.items(), key=lambda t: (-t[1], t[0]))) + "</table></div>",
-     "<h2>Pages</h2><nav class=\"toc\">" + "".join(f'<a href="#{re.sub("[^a-z0-9]+", "-", p)}">{html.escape(by_page[p][WMAX]["releve"]["titrePage"].split(" | ")[0].split(" — ")[0])}</a><br>' for p in pages) + "</nav>"]
+     f'<h2>Pages</h2><p>Chaque nom de page ouvre la page sur le site de démonstration (<a href="{DEMO}">{DEMO}</a>) ; « fiche » mène au détail ci-dessous.</p><nav class="toc">' + "".join(f'<a href="{demo(p)}">{html.escape(by_page[p][WMAX]["releve"]["titrePage"].split(" | ")[0].split(" — ")[0])}</a> · <a class="fiche" href="#{re.sub("[^a-z0-9]+", "-", p)}">fiche</a><br>' for p in pages) + "</nav>"]
 
 for p in pages:
     X = by_page[p][WMAX]
@@ -214,7 +223,7 @@ for p in pages:
     Xm = by_page[p].get(WMIN)
     anchor = re.sub("[^a-z0-9]+", "-", p)
 
-    md += [f"### {titre}", "", f"`{p}` — **{statut}** · {X['stats']['textes']} textes, {X['stats']['titres']} titres, {X['stats']['boutons']} boutons, "
+    md += [f"### [{titre}]({demo(p)})", "", f"Site de démonstration : <{demo(p)}>", "", f"`{p}` — **{statut}** · {X['stats']['textes']} textes, {X['stats']['titres']} titres, {X['stats']['boutons']} boutons, "
            f"{X['stats']['composants']} composants Bento · contraste minimal {rel['contrasteMin']}:1", ""]
     md += [f"**Sections ({WMAX} px)**", "", "| # | Section | Fond | Padding haut / bas | Hauteur | Composants |", "|---|---|---|---|---|---|"]
     for i, s in enumerate(rel["sections"], 1):
@@ -248,7 +257,7 @@ for p in pages:
         md += [f"**Mobile ({WMIN} px)** : en-tête {hh} px · titre L1 {t1} · padding des sections {', '.join(sp[:3])} · {len(Xm['violations'])} écart.", ""]
     big = thumb(p, WMAX, 2400, 900)
     small = thumb(p, WMIN, 2400, 300)
-    H.append(f'<section class="page" id="{anchor}"><h2>{html.escape(titre)}</h2><p><span class="badge">{html.escape(p)}</span> <b class="{"ok" if not sum(ecarts.values()) else "ko"}">{html.escape(statut)}</b> · '
+    H.append(f'<section class="page" id="{anchor}"><h2><a href="{demo(p)}">{html.escape(titre)}</a></h2><p><a class="demo" href="{demo(p)}">Voir la page sur le site de démonstration ↗</a></p><p><span class="badge">{html.escape(p)}</span> <b class="{"ok" if not sum(ecarts.values()) else "ko"}">{html.escape(statut)}</b> · '
              f"{X['stats']['textes']} textes, {X['stats']['titres']} titres, {X['stats']['boutons']} boutons, {X['stats']['composants']} composants Bento · contraste minimal {rel['contrasteMin']}:1</p>")
     if big or small:
         H.append('<div class="shots">' + (f'<figure><img loading="lazy" src="{big}" alt="Capture {WMAX} px : {html.escape(titre)}"><figcaption>{WMAX} px (haut de page)</figcaption></figure>' if big else "") +
