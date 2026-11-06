@@ -894,6 +894,5 @@ Les 20 fiches événement suivent le même modèle. Il est présenté avec la fi
 2. Le logo du Parc en versions blanche et noire en fichier vectoriel (SVG) reste à fournir.
 3. La charte indique deux valeurs pour l’orange du kit web (p. 17) : le site applique l’orange de la page 10.
 4. La vidéo de présentation n’a pas de sous-titres.
-5. Le dossier « espalanafes » est vide : la galerie Parvis & Esplanades montre pour l’instant 2 photos du Dôme vu du parvis.
 
 Annexe technique (mesures détaillées) : `design-system/pea/RAPPORT-TECHNIQUE.md`.

@@ -176,8 +176,7 @@ PALETTE = [("#DA5900", "Orange PEA", "couleur principale : logo, grands titres, 
 POINTS_CLIENT = ["L’accroche « Le plus grand parc exposition d’Afrique de l’Ouest », reprise de la charte, est utilisée en tête de l’accueil : à confirmer.",
                  "Le logo du Parc en versions blanche et noire en fichier vectoriel (SVG) reste à fournir.",
                  "La charte indique deux valeurs pour l’orange du kit web (p. 17) : le site applique l’orange de la page 10.",
-                 "La vidéo de présentation n’a pas de sous-titres.",
-                 "Le dossier « espalanafes » est vide : la galerie Parvis & Esplanades montre pour l’instant 2 photos du Dôme vu du parvis."]
+                 "La vidéo de présentation n’a pas de sous-titres."]
 
 # ---------------------------------------------------------------- Markdown
 md = ["# Rapport d’intégration : charte graphique et design system", "",
