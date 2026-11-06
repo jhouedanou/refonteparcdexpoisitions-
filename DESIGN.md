@@ -1,62 +1,63 @@
 ---
 name: Parc des Expositions d’Abidjan
-description: Charte graphique officielle (Poppins, orange #DA5900) appliquée aux composants Bento DS de GL events, en angles vifs
+description: Charte graphique officielle (Poppins 100/400/700, orange #DA5900, aplats d’accompagnement) appliquée aux composants Bento DS de GL events, en angles vifs
 colors:
   brand: "#da5900"
   primary: "#b34900"
   primary-hover: "#9d4015"
-  brown: "#9d4015"
-  brown-dark: "#5d120a"
-  orange-light: "#f3931b"
-  terracotta: "#d68644"
+  aplat-brun: "#9d4015"
+  aplat-vert: "#006528"
+  aplat-brun-fonce: "#5d120a"
+  aplat-creme: "#fcf2ea"
   beige: "#ead1b8"
-  stone: "#d5cebc"
-  green: "#006528"
-  green-light: "#95c11f"
-  black: "#0a0a0a"
-  black-2: "#171717"
-  white: "#ffffff"
+  pierre: "#d5cebc"
+  terracotta: "#c96b51"
+  orange-clair: "#f3931b"
+  vert-clair: "#95c11f"
+  base-100: "#ffffff"
   base-200: "#f7f5f1"
-  base-300: "#ece8df"
+  base-300: "#e7e1d6"
+  base-content: "#0a0a0a"
   muted: "#525252"
-  muted-on-dark: "#a1a1a1"
-  on-photo: "#e5e5e5"
-  border: "#dcd6ca"
-  border-dark: "#262626"
+  on-dark-muted: "#f8e0cc"
   field: "#737373"
-  placeholder-text: "#6b6b6b"
-  cream: "#f8e0cc"
-  note-bg: "#fcf2ea"
-  error: "#b42318"
+  neutral-100: "#f5f5f5"
+  neutral-200: "#e5e5e5"
+  neutral-300: "#d4d4d4"
 typography:
-  hero:
+  title-l1:
     fontFamily: "Poppins, sans-serif"
-    fontSize: "clamp(2.125rem, 5vw, 4.25rem)"
-    fontWeight: 600
-    lineHeight: 1.1
-  display:
+    fontSize: "3rem"
+    fontWeight: 700
+    lineHeight: 1.2
+  title-l2:
     fontFamily: "Poppins, sans-serif"
-    fontSize: "clamp(2rem, 4vw, 3.25rem)"
-    fontWeight: 600
-    lineHeight: 1.1
-  headline:
+    fontSize: "1.875rem"
+    fontWeight: 700
+    lineHeight: 1.2
+  title-l3:
     fontFamily: "Poppins, sans-serif"
-    fontSize: "clamp(1.5rem, 2.5vw, 2.125rem)"
-    fontWeight: 600
-    lineHeight: 1.15
-  title:
+    fontSize: "1.5rem"
+    fontWeight: 700
+    lineHeight: 1.2
+  title-l4:
     fontFamily: "Poppins, sans-serif"
-    fontSize: "clamp(1.0625rem, 1.25vw, 1.25rem)"
-    fontWeight: 600
-    lineHeight: 1.3
+    fontSize: "1.25rem"
+    fontWeight: 700
+    lineHeight: 1.2
+  title-l5:
+    fontFamily: "Poppins, sans-serif"
+    fontSize: "1.125rem"
+    fontWeight: 700
+    lineHeight: 1.2
   figure:
     fontFamily: "Poppins, sans-serif"
-    fontSize: "clamp(1.5rem, 2vw + .5rem, 2.125rem)"
+    fontSize: "2.25rem"
     fontWeight: 700
-    lineHeight: 1
+    lineHeight: 1.1
   lead:
     fontFamily: "Poppins, sans-serif"
-    fontSize: "clamp(1.0625rem, 1.3vw, 1.1875rem)"
+    fontSize: "1.125rem"
     fontWeight: 400
     lineHeight: 1.55
   body:
@@ -66,21 +67,22 @@ typography:
     lineHeight: 1.65
   small:
     fontFamily: "Poppins, sans-serif"
-    fontSize: "0.9375rem"
+    fontSize: "0.875rem"
     fontWeight: 400
   button:
     fontFamily: "Poppins, sans-serif"
-    fontSize: "0.9375rem"
-    fontWeight: 600
-  label:
-    fontFamily: "Poppins, sans-serif"
-    fontSize: "0.8125rem"
-    fontWeight: 600
-    letterSpacing: "0.08em"
+    fontSize: "1rem"
+    fontWeight: 400
+    lineHeight: 1
   badge:
     fontFamily: "Poppins, sans-serif"
-    fontSize: "0.75rem"
-    fontWeight: 600
+    fontSize: "0.875rem"
+    fontWeight: 700
+  eyebrow:
+    fontFamily: "Poppins, sans-serif"
+    fontSize: "0.8125rem"
+    fontWeight: 700
+    letterSpacing: "0.08em"
 rounded:
   none: "0px"
   field: "2px"
@@ -99,191 +101,228 @@ spacing:
 components:
   button-primary:
     backgroundColor: "{colors.primary}"
-    textColor: "{colors.white}"
+    textColor: "{colors.base-100}"
     rounded: "{rounded.none}"
-    padding: "12px 20px"
-    height: "48px"
+    padding: "12px 16px"
+    height: "44px"
   button-primary-hover:
     backgroundColor: "{colors.primary-hover}"
-    textColor: "{colors.white}"
   button-secondary:
     backgroundColor: "transparent"
-    textColor: "{colors.black}"
+    textColor: "{colors.base-content}"
     rounded: "{rounded.none}"
-    padding: "12px 20px"
-    height: "48px"
-  button-secondary-hover:
-    backgroundColor: "{colors.black}"
-    textColor: "{colors.white}"
+    padding: "12px 16px"
   button-tertiary:
-    backgroundColor: "{colors.green}"
-    textColor: "{colors.white}"
-    rounded: "{rounded.none}"
-  footer:
-    backgroundColor: "{colors.brown}"
-    textColor: "{colors.cream}"
+    backgroundColor: "{colors.aplat-vert}"
+    textColor: "{colors.base-100}"
+  button-invert:
+    backgroundColor: "#fafafa"
+    textColor: "{colors.base-content}"
+  badge:
+    backgroundColor: "{colors.base-200}"
+    textColor: "{colors.base-content}"
+    padding: "4px 12px"
+  card:
+    backgroundColor: "{colors.base-100}"
+    padding: "24px"
+  topbar:
+    backgroundColor: "{colors.aplat-brun}"
+    textColor: "{colors.base-100}"
+    height: "48px"
+  site-header:
+    backgroundColor: "{colors.base-100}"
+    height: "64px"
   page-header:
     backgroundColor: "{colors.primary}"
-    textColor: "{colors.white}"
+    textColor: "{colors.base-100}"
+  footer:
+    backgroundColor: "{colors.aplat-brun}"
+    textColor: "#fafafa"
   input:
-    backgroundColor: "{colors.white}"
-    textColor: "{colors.black}"
+    backgroundColor: "{colors.base-100}"
+    textColor: "{colors.base-content}"
     rounded: "{rounded.field}"
-    padding: "12px 14px"
-    height: "52px"
+    padding: "12px"
+    height: "48px"
 ---
 
 # Design System : Parc des Expositions d’Abidjan
 
-> Système en vigueur depuis le 6 novembre 2026 : **charte graphique officielle** (`docs/retourclient/PARC DES EXPOSITIONS D'ABIDJAN_CHARTE GRAPHIQUE.pdf`) appliquée aux **composants Bento DS** de GL events (`docs/retourclient/Bento DS.fig`). La charte prévaut sur tout le reste. Tokens et correspondance des composants : `design-system/pea/BENTO-TOKENS.md` ; contrastes : `design-system/pea/MASTER.md`. États précédents : `design-system/pea/DESIGN-avant-charte.md` (direction B, Barlow), `DESIGN-avant-refonte.md`.
+> En vigueur depuis le 6 novembre 2026.
+> - Sources : la **charte graphique officielle** (`docs/retourclient/PARC DES EXPOSITIONS D'ABIDJAN_CHARTE GRAPHIQUE.pdf`), qui prévaut, et le **Bento DS** de GL events (`docs/retourclient/Bento DS.fig`), qui fournit les composants et la structure des tokens.
+> - Correspondance des tokens Bento et PEA : `design-system/pea/BENTO-TOKENS.md`.
+> - Matrice de conformité et preuves : `design-system/pea/CONFORMITE.md`.
+> - Contrôle automatique : `node tools/verif/conformite.mjs`.
+> - États précédents archivés : `design-system/pea/DESIGN-avant-charte.md` (direction B) et `DESIGN-avant-refonte.md`.
 
 ## Overview
 
-**Creative North Star : « Signalétique & architecture », aux couleurs de la charte**
+**Creative North Star : « Le Parc tel que le montre sa charte »**
 
-Le site se lit comme la signalétique d'un parc d'expositions : des repères orange qui indiquent où aller, des grilles en filets d'un pixel qui rappellent les plans de halls, et désormais les photos officielles des lieux (le Hall pavoisé, la coupole du Dôme, sa salle plénière). L'échelle se montre par les chiffres (6 500 m², 67 000 m²) et par la vidéo de présentation. Le motif de l'arche du logo signe les moments clés : héros, appel à l'action, visite 360°, bas de section, pied de page.
+Le site reprend le langage des supports officiels (PowerPoint et brochure de la charte) :
+- un fond blanc ;
+- de grandes photos des lieux : le Hall pavoisé, la coupole du Dôme, la salle plénière ;
+- des aplats de couleurs d’accompagnement en panneaux : brun, vert, brun foncé, crème ;
+- des chiffres mis en avant en orange ;
+- le logo en orange sur fond clair, en blanc sur photo ou sur couleur.
 
-La structure des composants suit Bento DS (Button, Badge, Title, Page header, Block/Hero, Key figures, Card, Cta, Footer, Block/Video…), avec ses trois couches de tokens. Choix PEA : angles vifs (rayons Bento ramenés à 0, 2 px pour les champs).
+Chaque bloc est un composant Bento DS, repérable dans le HTML par `data-bento="<nom Figma>"`. Les composants utilisés sont :
+- structure : Topbar, Site header, Menu, Breadcrumb, Page header, Footer ;
+- blocs : Block/Hero, Carousel, Block/Key figures, Card, Collection, Block/Video, Cta, Block/Partners, Block/Agenda list ;
+- interactions et formulaires : Modal, Accordion, Image gallery, Form/Field, Newsletter form, Contact details, Block/Map ;
+- éléments de base : Title, Button, Badge, Link.
 
-**Key Characteristics:**
-- Poppins seule, comme toute la communication du Parc (charte p. 7).
-- Orange PEA #DA5900 pour la marque, ombré en #B34900 dès qu'un texte ou un bouton doit être lu sur fond clair.
-- Couleurs d'accompagnement de la charte : brun #9D4015 (pied de page, survols), vert #006528 (dates, statut), beige et pierre (surfaces).
-- Logo en version Positif sur fond clair, Négatif blanc sur photo, orange ou brun, jamais recoloré.
-- Grilles visibles, cellules de tailles inégales ; aucune ombre, aucun arrondi.
+Seul motif propre au Parc : l’**arche du logo**. La brochure de la charte reprend la même courbe. On la retrouve :
+- au-dessus du titre du héros ;
+- en bas des en-têtes de page et des aplats ;
+- en haut du pied de page ;
+- sur les chiffres-clés ;
+- dans le soulignement du menu ;
+- pendant le chargement.
+
+**Key Characteristics**
+- Poppins seule, en Thin, Regular et Bold (100, 400, 700 : kit web p. 17).
+- L’orange PEA #DA5900 sert à la marque et aux titres de 24 px et plus. L’orange action #B34900 sert aux boutons et aux liens.
+- Les fonds sont blancs ou en aplats de la charte, jamais noirs. Le noir #0A0A0A est réservé au texte et au logo monochrome.
+- Angles vifs : les rayons Bento sont ramenés à 0 ; les champs de formulaire gardent 2 px.
+- Ombres Bento : en-tête collé, sous-menu, modale, survol des cartes.
 
 ## Colors
 
 ### Primary
-- **Orange PEA** (#DA5900, charte RVB 218-89-0) : logo, aplats (lettres de hall, plaques), arche, h1/h2 ≥ 24 px (3,88:1 sur blanc, grand texte), chiffres et accents sur noir (5,1:1).
-- **Orange action** (#B34900) : fond des boutons primaires (texte blanc 5,43:1), liens, eyebrows et page active sur fond clair, fond des en-têtes de page. Survol : brun #9D4015 (6,61:1).
-- **Orange clair** (#F3931B, kit web) : aplats sans texte, badge « reporté » (texte noir).
+- **Orange PEA** (#DA5900, RVB 218-89-0) : logo, arche, titres L1 à L3 (24 px et plus, 3,88:1 sur blanc), valeurs des chiffres-clés (36 px).
+- **Orange action** (#B34900) : fond des boutons primaires (texte blanc 5,43:1), liens, sur-titres, fond des en-têtes de page, filtres actifs. Au survol, il passe au brun #9D4015.
 
-### Secondary (charte, couleurs d'accompagnement)
-- **Brun** (#9D4015) : fond du pied de page (Bento `footer/bg → brand/primary/800`), survol des boutons.
-- **Vert** (#006528) : dates, statut « à venir », bouton tertiaire (7,26:1). **Vert clair** (#95C11F) : aplats sans texte.
-- **Beige** (#EAD1B8), **Pierre** (#D5CEBC), **Terracotta** (#D68644), **Brun foncé** (#5D120A) : surfaces et encarts.
+### Aplats d’accompagnement (charte p. 11, 16 et 17)
+
+| Aplat | Texte | Rôle |
+|---|---|---|
+| Brun #9D4015 | blanc, accents crème | barre du haut (Topbar), section vidéo, pied de page |
+| Vert #006528 | blanc | liste des services, bâtiment administratif |
+| Brun foncé #5D120A | blanc | appel à l’action, visite 360°, bandeau cookies, message de succès, tuile « Prochainement » |
+| Crème #FCF2EA | noir, titres orange | bloc newsletter, fond des chiffres-clés, accordéon |
+| Beige #EAD1B8, pierre #D5CEBC, terracotta #C96B51, orange clair #F3931B, vert clair #95C11F | — | en réserve : aplats sans texte orange |
 
 ### Neutral
-- **Noir** (#0A0A0A, version Monochrome) : texte, sections sombres (vidéo, services, encarts).
-- **Pierre très claire** (#F7F5F1) : fond de page ; **#ECE8DF** : visuels provisoires.
-- **Texte secondaire** (#525252, 7,18:1) ; sur noir **#A1A1A1** (7,66:1) ; filets **#DCD6CA** et **#262626**.
+- Fonds : blanc (page, cartes) et pierre très claire #F7F5F1 (alternance douce des sections).
+- Texte : #0A0A0A. Texte secondaire : #525252 (7,2:1).
+- Bordures : #E7E1D6 pour les cartes, #737373 pour les champs.
+- Voiles noirs, uniquement sur photo : héros, visionneuse, modale (60 %), survol de galerie (30 %), façade vidéo (18 %).
 
 ### Named Rules
-**La règle des deux oranges.** #DA5900 pour la marque et les grands titres, #B34900 dès qu'un petit texte ou un bouton à texte blanc doit être lu sur fond clair.
-**La règle du pied brun.** Sur le brun, l'orange disparaît (1,7:1) : accents crème #F8E0CC (5,2:1), logo Négatif, logo GL events en signature grise.
-**La règle du logo intact.** Positif, Négatif ou Monochrome, jamais d'autre teinte, jamais déformé (charte p. 4–5).
+**La règle des deux oranges.** #DA5900 pour la marque et les grands textes. #B34900 dès qu’un petit texte orange ou un bouton à texte blanc doit être lu sur fond clair.
+**La règle des aplats.** Une section colorée prend une couleur de la charte, jamais du noir. Sur un aplat sombre, le texte est blanc et les accents sont crème (#F8E0CC). L’orange n’y est jamais utilisé : 1,7:1 sur le brun.
+**La règle du logo intact.** Positif sur fond clair, Négatif blanc sur photo ou couleur (`filter: brightness(0) invert(1)`), Monochrome. Aucune autre teinte et aucune déformation : le script le contrôle.
 
 ## Typography
 
-**Police unique :** Poppins (Google Fonts), 400 / 500 / 600 / 700 ; repli `sans-serif`.
+**Police unique :** Poppins (Google Fonts), chargée en 100, 400, 700 et 400 italique.
 
-**Character :** la voix du logo partout. Les titres en Poppins 600 orange, les labels en Poppins 600 en petites capitales espacées, le texte courant en Poppins 400. Barlow et Barlow Condensed sont retirés.
+### Hierarchy (composant Bento « Title »)
 
-### Hierarchy
-- **Hero** (600, clamp 34→68 px, lh 1.1) : titre du diaporama de l’accueil, en blanc.
-- **Display** (600, clamp 32→52 px, lh 1.1) : h1 de page, blanc sur l’en-tête orange ; 30→44 px dans les en-têtes compacts.
-- **Headline** (600, clamp 24→34 px, lh 1.15, #DA5900) : h2 de section ; blanc dans le pied de page.
-- **Title** (600, clamp 17→20 px, lh 1.3, noir ou blanc) : titres de cartes ; pas d'orange à cette taille. La classe `.t3` applique ce style à un h2.
-- **Figure** (700, clamp 24→34 px) : chiffres-clés.
-- **Lead** (400, 17→19 px, lh 1.55, 60ch max) ; **Body** (400, 16 px, lh 1.65, 68ch max).
-- **Button** (600, 15 px, casse normale, comme Bento `btn/text-transform: none`).
-- **Label** (600, 13 px, .08em, capitales) : eyebrows avec un trait orange de 2 px à gauche, dates, plaques ; **Badge** (600, 12 px, capitales).
+| Niveau | Taille | Couleur | Usage |
+|---|---|---|---|
+| L1 | 48 px (36 px sous 768 px) | orange ; blanc sur photo | h1 |
+| L2 | 30 px (26 px sous 768 px) | orange | h2 de section |
+| L3 | 24 px | orange | intertitres d’agenda, newsletter |
+| L4 | 20 px | noir | titres de cartes, encarts, h3 |
+| L5 | 18 px | noir ; blanc sur aplat | titres du pied de page, cookies |
+
+Tous les niveaux sont en Bold 700, avec un interligne de 1,2 et une marge basse de 32 px. Les classes `title title--lN` sont posées par `bentoize()` (`tools/pages/generer.py`) selon le niveau visuel du titre, pas selon sa balise.
+
+Autres rôles :
+- **Texte** : 16 px Regular, interligne 1,65.
+- **Chapô** : 18 px.
+- **Bouton** : 16 px Regular, en casse normale.
+- **Badge** : 14 px Bold, en capitales.
+- **Sur-titre** : 13 px Bold, en capitales, interlettrage .08em ; orange action, blanc sur photo, crème sur aplat.
+- **Chiffre-clé** : 36 px Bold, en orange.
 
 ### Named Rules
-**La règle des capitales.** Seuls les labels, eyebrows et badges sont en capitales ; titres, boutons et texte restent en casse normale.
-**La règle du titre logo.** h1 et h2 prennent l'orange du logo ; sur photo, sur l'en-tête orange et dans le pied de page brun ils sont blancs ; les h3 restent noirs.
-**La règle du sur-titre discret.** L'eyebrow orange n'apparaît que dans les héros, la vidéo et l'appel à l'action ; dans le corps des pages, il passe en gris.
+**La règle des capitales.** Seuls les sur-titres, les badges et les éléments de la barre du haut sont en capitales. Les titres en capitales ont été refusés le 07/10, et la brochure de la charte est en casse normale.
+**La règle des trois graisses.** Seules les graisses 100, 400 et 700 sont utilisées. Toute graisse Bento à 500 ou 600 passe à 700 ; le script le contrôle.
 
 ## Layout
 
-Conteneur `min(1320px, 100% − 2 × gouttière)`, avec une gouttière de 16 px sous 768 px, 32 px de 768 à 1279 px et 64 px au-delà. La mise en page est mobile-first, avec des points de rupture à 480, 600, 768, 1024 et 1120 px (70em, menu complet). Les grilles « plan de hall » utilisent `gap: 1px` sur fond de filet : les cellules se touchent et la grille se voit. Les compositions sont volontairement variées : bande de chiffres de largeurs inégales (1.35/1/1.15/.85), bento des espaces (1.45/1, la première cellule sur deux rangées), agenda avec une vedette et une liste, services en tableau sur deux colonnes, photothèque sur 12 colonnes.
+- Conteneur : `min(1320px, 100% − 2 × gouttière)`.
+- Gouttière : 16 px, puis 32 px à partir de 768 px et 64 px à partir de 1280 px.
+- Hauteur des sections : de 48 à 96 px.
+- Grilles en « Collection » Bento : 1 à 3 colonnes, espacement de 24 px.
+- Points de rupture : 480, 600, 768, 1024, 1120 (menu complet) et 1280 px.
+- Barre du haut : 48 px. En-tête : 64 px, puis 72 px à partir de 1120 px.
+- En-tête de page : de 48 à 96 px en haut et en bas, plus la place de l’arche.
 
 ## Elevation & Depth
 
-Aucune ombre. La profondeur vient uniquement de l'alternance des surfaces (noir, blanc, pierre claire, brun) et des filets. L'en-tête collant est séparé du contenu par un filet orange #DA5900 de 4 px.
+Ombres Bento :
+- survol des cartes : `shadow-md` ;
+- en-tête collé : `0 2px 8px rgba(0,0,0,.12)` ;
+- sous-menu et menu mobile : `shadow-lg` ;
+- modale et bandeau cookies : `shadow-xl`.
+
+Ailleurs, la profondeur vient de l’alternance entre blanc, pierre et aplats.
 
 ## Shapes
 
-Angles vifs partout (0 px, choix PEA appliqué aux rayons Bento `radius-*`) ; 2 px seulement sur les champs de formulaire. L'arche du logo est le seul élément courbe. Elle est formée de deux surfaces pleines effilées : la cloche (épaisse de 6,5 unités au sommet, en pointe aux extrémités) et l'arc plat dessous (3,5 unités au centre), dans un viewBox `16 -1 360 68`. On la trouve en SVG inline dans le héros et le CTA, et en image de fond dans les visuels du Dôme, la visite 360° et les emplacements photo.
+- Angles vifs partout ; 2 px pour les champs. Seule exception : le coin du logo GL events, qui fait partie du fichier officiel.
+- L’arche du logo est le seul élément courbe : tracés exacts, viewBox `16 -1 360 68`, jamais étirés.
 
 ## Components
 
-- **Bouton** (Bento « Button ») : primaire orange action #B34900, texte blanc, Poppins 600 15 px en casse normale, hauteur minimale 48 px, angles vifs, flèche SVG qui glisse de 3 px au survol ; variantes `.btn--secondary` (contour), `.btn--tertiary` (vert), `.btn--default` (sans fond), `.btn--outline`.
-- **Bouton secondaire** : contour 2 px de la couleur du texte. Il s'inverse au survol (noir ou blanc selon le fond).
-- **En-tête** : logo officiel (`assets/logo-pea.webp`), navigation avec `aria-current`, CTA. Sous 1120 px, un bouton « Menu » (`aria-expanded`) ouvre un panneau noir, et le CTA se réduit à « Devis » sous 600 px.
-- **Bande de chiffres** : cellules blanches ; sur l’accueil (`.figures--interactive`), le style noir + chiffre orange devient l’effet de survol et de focus. Les chiffres comptent jusqu’à leur valeur à l’apparition (valeur finale en `sr-only`, désactivé si mouvement réduit). « Visiter le Parc » est un bouton secondaire.
-- **Carte espace** : photo pleine carte (`object-fit: cover`), dégradé noir en bas, plaque avec la lettre de hall (A/B/C) sur carré orange, le nom, les données et une flèche ; zoom léger au survol. Liens vers les pages dédiées (hall-exposition, le-dome, parvis-esplanades).
-- **Ligne de service** : numéro orange, titre, description, filet sombre.
-- **Filtres** : `<button aria-pressed>` avec contour noir, l'état actif est plein.
-- **En-tête de page intérieure** : à partir de 1024 px, deux colonnes (titre 1.65fr, chapô 1fr aligné en bas), pour éviter le vide à droite. Pas de césure automatique dans les titres.
-- **Visite 360°** : façade (arche et bouton « Lancer la visite 360° »). Au clic, l'iframe Matterport est injectée sur place (`play=1`, plein écran autorisé). Sans JavaScript, le lien ouvre Matterport dans un nouvel onglet.
-- **Encart** : bordure noir 1 px, collant à partir de 1024 px.
-- **En-tête compact** (`.page-hero--compact`) : sur les fiches, l'agenda, le contact et la visite, le h1 descend à `clamp(2.5rem, 5.5vw, 4.5rem)` pour que le contenu utile apparaisse au-dessus du pli.
-- **Filtres** : le groupe commence toujours par « Tous », actif par défaut. Un compteur `role="status"` (« 3 espaces ») annonce le résultat et un état vide en pointillés s'affiche quand aucun élément ne correspond. Les données sont portées par des attributs `data-usage` / `data-espace` / `data-type`, à administrer dans Drupal.
-- **Formulaire de devis** : trois `fieldset` (Vous, Votre événement, Vos besoins) séparés par un filet noir. Les champs obligatoires portent un astérisque orange, les autres la mention « (facultatif) ». La date est une période (du / au) avec une case « dates flexibles », les services sont des cases à cocher et un consentement est requis. Les erreurs s'affichent sous le champ (#b42318, `aria-invalid` + `aria-describedby`), le focus va sur le premier champ en erreur, et le succès s'affiche dans un bloc noir. L'espace peut être pré-rempli via `?espace=hall|dome|parvis`.
-- **Barre utilitaire** (sur mobile : WhatsApp et FR | EN seulement ; réseaux sociaux dans le menu) : bandeau noir de 44 px au-dessus de l'en-tête collant : numéro en lien WhatsApp (`wa.me`) à gauche ; à droite, le sélecteur de langue FR | EN (langue active soulignée d’orange, `aria-current`) et les icônes Instagram, Facebook, LinkedIn (cibles de 44 px).
-- **Frise de l'agenda (compacte)** : vignette carrée de 72 px (affiche entière sur noir), type, titre, date et un seul bouton « Détails » ; « Réserver » et « Site officiel » sont dans la fenêtre. Description d’origine : intertitres de mois collants (carré orange et titre condensé), puis une colonne date (jour en très grand, fin de période ou mois en label), un rail de 1 px et un repère carré. Les cartes sont sur fond pierre claire ; le prochain événement, calculé d'après la date du jour, a un repère orange, une carte blanche bordée d'noir et la mention « Prochainement ». Les actions sont « Réserver » (bouton primaire), quand un lien existe, et « Détails » (lien fléché ou icône de lien externe).
-- **Fenêtre de détails d'événement** (`<dialog>`) : affiche officielle entière (`contain` sur noir, 48vh max) au-dessus de en-tête noir avec l'arche en ton sourd, le type, le titre et la date, puis la description, une liste de faits (Date, Lieu, Organisateur) et les liens. Elle se ferme avec le bouton, la touche Échap ou un clic sur le fond, et le focus revient au bouton « Détails ». Sans JavaScript, les détails s'affichent directement dans la carte.
-- **Mur d'actualité** : grille jointive de 1 px. La tuile Facebook occupe deux rangées, la tuile Instagram (grille de vignettes) deux colonnes ; puis LinkedIn sur fond pierre claire et « Prochainement au Parc » sur fond noir.
-- **Intégrations tierces** (`data-embed-src`) : une façade pierre claire avec l'arche et un bouton « Afficher… » tant que le visiteur n'a pas donné son accord ; l'iframe est injectée après accord ou au clic.
-- **Bandeau cookies** : fixé en bas, fond noir ; « Tout refuser » et « Tout accepter » sont deux boutons secondaires de même poids.
-- **Bloc « Parlez-nous de votre projet » (`.cta--photo`)** : il utilise la photo officielle de la coupole du Dôme (`assets/img/espaces/dome/officiel-dome-ciel`), dont le toit reprend l'arche du logo. À partir de 1024 px, la photo occupe les 70 % de droite sous un dégradé noir horizontal (opaque jusqu'à 36 %, 0,92 à 46 %) et le texte est limité à 38ch pour rester sur l'noir. Sous 1024 px, la photo est placée en bas du bloc, avec un fondu vertical court.
-- **Carte d'accès** : iframe Google Maps chargée en différé, au ratio 4:3 sur mobile et 16:10 sur grand écran, à côté de l'adresse et des boutons Itinéraire / Google Maps.
-- **Pied de page** : une vraie navigation (Espaces, Services, Destination, Expertise), le téléphone et le logo GL events en signature grise (kit web de la charte ; le carré est recadré en CSS, avec son coin arrondi). Fond brun #9D4015 (Bento `footer/bg`), logo PEA en version Négatif, accents crème #F8E0CC. L’arche du logo, en brun, monte dans la section précédente en haut du pied de page. Mise en page compacte : newsletter, puis trois colonnes (le Parc et ses coordonnées, menu, GL events), puis une barre basse (liens légaux à gauche, « Design par Big Five » à droite, lien suivi vers bigfive.solutions). Le sélecteur de langue n’est que dans la barre du haut.
-- **Diaporama Ken Burns** (héros de l’accueil, 90vh) : 8 images en fondu enchaîné toutes les 7 s avec zoom lent ; contrôle de défilement (`.ctrl--on-photo` : compteur « 01 / 08 », barre qui se remplit pendant 7 s, Précédent / Pause / Suivant) ; boutons orange, titre blanc ; parallaxe légère au défilement (la photo descend de 14 % du défilement) ; mouvement réduit = fondu sans zoom ni parallaxe. Indicateur « souris » animé (4 cycles) vers la section suivante.
-- **Références (accueil, avant le pied de page)** : « Ils nous ont fait confiance », carrousel de 10 logos d’organisateurs (`images/logos` → `assets/img/logos`, 400 px), 5 par page dès 1024 px (3 dès 600 px, 2 en dessous). Tuiles blanches en 3:2, logos désaturés (gris, opacité .75), couleur au survol (toujours en couleur sur écran tactile). Le logo Abidjan Border Forum, blanc sur transparent, a une tuile noir. Défilement automatique d’une page toutes les 5 s (retour au début à la fin), contrôle de défilement (`.ctrl` : compteur « 1 / 2 », barre qui se remplit pendant 5 s, Précédent / Pause / Suivant), pause au survol, au focus et quand l’onglet est masqué ; aucune animation si mouvement réduit.
-- **En-tête de page (`.page-hero--bg`)** : la photo du sujet (`PAGE_BG`, `tools/pages/generer.py`) en fond, désaturée et fondue à 60 % dans l'orange action #B34900 (elle ne peut que foncer l'orange : texte blanc ≥ 5,43:1 ; fil d'Ariane en graisse 500). En bas à droite, la silhouette exacte de l'arche du logo (360 × 62,5, jamais étirée) prend la couleur de la section suivante, qui monte dans l'en-tête ; texte à gauche (52 %). Sous 1024 px, l'arche passe sous le texte. Parallaxe légère : la photo descend de 18 % du défilement (aucune si mouvement réduit). Motif et autres usages : `design-system/pea/MASTER.md` § 9 et la planche [L'arche du Parc](https://claude.ai/artifact/3NKB1kd9hXu4pcyu4AbF8W).
-- **En-tête transparent (toutes les pages)** : comme sur l’accueil, barre utilitaire et en-tête se posent sur le héros ou l’en-tête orange ; sur l’orange, logo passé en blanc (filtre), page active soulignée de blanc, bouton devis noir, langues en blanc. Barre utilitaire : léger fond noir translucide (noir 32 %).
-- **Logo sur photo** : dans l’en-tête transparent, le logo passe en version Négatif (blanc) sur le diaporama comme sur l’orange (charte p. 4).
-- **En-tête transparent (accueil)** : avec JavaScript, la barre utilitaire et l’en-tête se posent sur le diaporama (fond et filet transparents, liens et bouton « Menu » en blanc, page active en orange, bouton devis orange), au-dessus d’un voile noir dédié (.82 → 0 sur 260 px ; texte blanc ≥ 7,6:1 dans le pire cas). Fond blanc et filet orange dès 8 px de défilement ou menu ouvert. Sans JavaScript : en-tête blanc.
-- **Pages par type d’événement** (salons, congrès, entreprise, concerts) : en-tête photo, trois raisons (`.reasons`, filet orange en tête), espaces adaptés (cartes, deux colonnes s’il n’y en a que deux), liens vers les autres types (`.type-links`, puces), prochains événements, bloc devis avec le type pré-rempli.
-- **Venir à Abidjan** : accès, hébergement, visas (`.reasons`), infos pratiques (`.ev-facts`), FAQ (`<details>`, `.faq__item`), série destination, bloc devis.
-- **Page événement** (`evenement-*.html`) : héros photo sombre, description, faits (date, lieu, type, organisateur), liens de réservation et site officiel, encadré « Votre événement au Parc ? », événements suivants.
-- **Sous-menu « Nos espaces »** : à partir de 1120 px, un bouton chevron (44 px, `aria-expanded`) à côté du lien ouvre un panneau noir à filet orange de 3 px : Hall, Dôme, Parvis & Esplanades, Visite virtuelle, chacun avec une ligne de description ; il s’ouvre aussi au survol et se ferme avec Échap, au clic à l’extérieur ou quand le focus sort. Dans le menu mobile, les quatre liens sont toujours affichés sous « Nos espaces », en retrait derrière un filet orange.
-- **WhatsApp dans l’en-tête fixe** : quand l’en-tête devient blanc au défilement (la barre du haut a disparu), l’icône WhatsApp apparaît à côté du logo, avec le numéro à partir de 1280 px ; elle ouvre wa.me avec le message pré-rempli.
-- **Newsletter (pied de page)** : inscription aux prochains événements (e-mail + consentement), validation accessible, confirmation annoncée ; simulée dans la maquette.
-- **Retour en haut** : carré noir de 48 px fixé en bas à droite, visible après un écran de défilement ; remonte au-dessus du bandeau cookies (`--banner-h`). Icône : silhouette du dôme du logo.
-- **Galeries et visionneuse** : sur les pages espaces, toutes les photos du dossier source (1 grande en 2×2, chargée immédiatement, puis vignettes en grille dense 4 colonnes) ; vignettes jointives (4 px) en `cover` ; chaque vignette ouvre une visionneuse `<dialog>` plein écran (légende, compteur, précédent/suivant au clavier, Échap, retour du focus). Photothèque en grille dense 4 colonnes avec une vignette sur cinq en 2×2.
-- **Pages espaces** : bande de 3 chiffres officiels, galerie, présentation, usages (étiquettes à puce), équipements (Dôme), encart devis pré-rempli et documents (fiche technique, plan du site PDF).
-- **Accompagnement (Services)** : texte d’accompagnement + bloc noir « Bâtiment administratif » en grille 2 colonnes ; engagements RSE en liste numérotée sur 3 colonnes.
-- **Série « destination »** (Qui sommes-nous) : 4 visuels carrés à légende incrustée, affichés entiers (`contain`), légende reprise en texte alternatif, ouverts dans la visionneuse.
-- **Comparatif des espaces** (`.compare`, Nos espaces) : tableau surface / hauteur / capacité / usages / documents / devis pré-rempli ; sous 1024 px, chaque ligne devient une fiche avec libellés (`data-label`).
-- **Message de succès du devis** : récapitule type d’événement, espace et dates saisis.
-- **Version anglaise** : pages générées dans `en/` à partir du dictionnaire `tools/i18n/en.json` (chaînes entières), `hreflang` réciproques.
-- **Vidéo de présentation** (Bento « Block/Video », accueil et Qui sommes-nous) : section noire, façade avec l’affiche tirée de la vidéo officielle (vue aérienne du site), bouton de lecture carré orange action et libellé « Voir la vidéo de présentation · 1 min 37 · en français ». La vidéo (H.264, `assets/video/presentation-pea-1080.mp4` 25 Mo, `-720.mp4` 14 Mo sous 768 px) n’est chargée qu’au clic, puis lue avec le son ; sans JS, le lien ouvre le MP4. Pas de sous-titres fournis.
-- **Badge** (Bento « Badge ») : Poppins 600 12 px en capitales, angles vifs ; `.badge--primary`, `--secondary`, `--outline` et statuts `--full`, `--postponed`, `--cancelled` en couleurs de la charte.
-- **Champ** : label visible relié par `for`, bordure #84878d (3,6:1), focus orange action.
-- **Focus** : contour de 3 px orange action, décalé de 3 px ; orange PEA sur fond sombre.
+Le détail des composants (specs Bento et état) est dans `design-system/pea/CONFORMITE.md` § 2. Voici les points propres au Parc.
 
+- **Topbar** :
+  - WhatsApp et « Abidjan, Côte d’Ivoire » à gauche ; FR | EN et réseaux à droite ;
+  - sous 768 px, seuls le téléphone et la langue restent.
+- **Site header** :
+  - logo Positif, menu, WhatsApp (visible une fois l’en-tête collé), bouton « Demander un devis » (« Devis » sous 600 px) ;
+  - sous 1120 px, un burger de 44 px ouvre un panneau blanc de 384 px ;
+  - le sous-menu « Nos espaces » est blanc, avec une description par lien.
+- **Page header** :
+  - photo désaturée, fondue dans l’orange action ; arche à la couleur de la section suivante ;
+  - pages événement : `meta` (« Tout l’agenda », date, type) et `addons` (Réserver, badge du lieu) ; l’affiche passe dans le contenu.
+- **Block/Hero** :
+  - diaporama des photos officielles, contenu de 768 px au plus ;
+  - sur-titre « Le plus grand parc exposition d’Afrique de l’Ouest », l’accroche de la charte (à valider par le client) ;
+  - boutons primaire et « invert » ;
+  - Carousel : puces de 10 px, boutons de 56 px.
+- **Card** : espaces au format paysage (badge « Espace A/B/C ») ; événements au format affiche (badge de date) ; tuiles du mur d’actualité ; encarts latéraux.
+- **Block/Key figures** : éléments centrés, valeur en orange, arche tracée au-dessus ; fond crème sur l’accueil (`figures--light`).
+- **Block/Video** : section brune, bouton de lecture de 64 px centré. Le MP4 n’est chargé qu’au clic : 1080p, ou 720p sous 768 px.
+- **Block/Agenda list** :
+  - intertitres de mois en Title L3 ;
+  - cartes compactes avec badge de type et bouton « Détails » primaire ;
+  - l’événement suivant est bordé d’orange ;
+  - modale d’événement blanche.
+- **Footer** :
+  - bloc Newsletter crème juste avant ;
+  - trois colonnes : le Parc (logo Négatif, coordonnées), « Nos espaces », « Votre événement » ;
+  - barre légale : logo GL events en gris, © 2026, liens légaux, crédit Big Five.
+- **Filtres** : boutons à bascule à contour noir de 2 px ; orange action une fois pressés.
 
 ## Correspondance Bento DS
 
-| Composant Bento | Site | Notes |
-|---|---|---|
-| Button · Link · Title · Badge | `.btn*`, `.link-arrow`, h1–h3 / `.t3`, `.badge*` | rayons à 0 |
-| Topbar · Site header · Menu / Submenu / Mobile | `.utility`, `.topbar`, `.nav`, `.nav__sub` | |
-| Breadcrumb · Page header (Background=image, Color=primary) | `.breadcrumbs`, `.page-hero--bg` | |
-| Block/Hero (image overlay) · Block/Slider | diaporama de l’accueil | photos officielles |
-| Block/Key figures | `.figures` | |
-| Card (landscape / poster) · Block/Agenda list · Block/Events | `.space`, `.event`, frise de l’agenda | |
-| Block/Partners (carousel) | `.logos` | |
-| Cta (Background=image) | `.cta--photo` | |
-| Accordion · Image gallery · Modal | FAQ, galeries, visionneuse, fenêtre d’événement | |
-| Form/Field · Newsletter form · Contact details · Block/Map | devis, newsletter, accès | |
-| Footer (Columns=3) | `.footer` | fond `brand/primary/800` = brun charte |
-| Block/Video | `.video-block` | nouveau |
-
-Tokens : `design-system/pea/BENTO-TOKENS.md`.
+| Composant Bento | Site |
+|---|---|
+| Topbar · Site header · Menu / Submenu / Menu/Mobile | `.utility`, `.topbar`, `.nav`, `.nav__sub` |
+| Breadcrumb · Page header · Tabs | `.breadcrumbs`, `.page-hero`, `.subnav` |
+| Title · Button · Link · Badge · Divider | `.title--l1…l6`, `.btn--*`, `.link-arrow`, `.badge--*`, `.reasons li::before` |
+| Block/Hero · Carousel | `.hero--slider`, `.ctrl` |
+| Block/Key figures | `.figures` |
+| Card · Collection | `.card`, `.card--space`, `.card--event`, `.wall__tile`, `.aside-box`, `.collection--2/3` |
+| Block/Video · Cta · Block/Partners | `.video-block`, `.tour`, `.cta`, `.logos` |
+| Block/Agenda list · Modal | `.timeline`, `.tl-card`, `.event-dialog`, `.lightbox`, `.cookie-banner` |
+| Accordion · Image gallery | `.faq__list`, `.gallery`, `.photo-grid`, `.destination-grid` |
+| Form/Field · Newsletter form · Contact details · Block/Map | `.field`, `.newsletter-block`, `.contact-details`, `.footer__contact`, `.access__map` |
+| Item list · Block/Icons text · Table | `.services`, `.reasons`, `.compare` |
+| Footer | `.footer` |
 
 ## Do's and Don'ts
 
-- **Do** garder deux niveaux de boutons (primaire orange, secondaire contour) ; les liens fléchés sont des liens, pas des boutons.
-- **Do** vérifier chaque paire texte/fond (4,5:1 minimum, 3:1 pour le gros texte et l'UI).
-- **Do** varier les compositions d'une section à l'autre.
-- **Do** utiliser exclusivement des Google Fonts.
-- **Don't** utiliser de bordure latérale épaisse sur une carte (side-tab), d'ombre, de pilule ou de rayon supérieur à 2 px.
-- **Don't** utiliser de dégradés violets, de rayures en dégradé ni d'emojis comme icônes.
-- **Don't** poser du texte orange #DA5900 de moins de 24 px sur un fond clair (utiliser #B34900).
-- **Don't** recolorer ou déformer le logo, ni utiliser une autre police que Poppins.
-- **Don't** réintroduire les rayons Bento (pilules, 8 px) : le Parc garde des angles vifs.
+- **Do** lancer `node tools/verif/conformite.mjs` après chaque changement (0 écart attendu).
+- **Do** poser `data-bento` sur tout nouveau composant et choisir son aplat dans la charte.
+- **Don't** utiliser du noir en fond de section, une graisse autre que 100, 400 ou 700, ou une autre police que Poppins.
+- **Don't** poser de texte orange #DA5900 de moins de 24 px sur fond clair, ni d’orange sur un aplat sombre.
+- **Don't** recolorer ou déformer le logo.
+- **Don't** réintroduire les grilles jointives de 1 px, le filet orange sous l’en-tête ou les lettres de hall : ils ont été retirés au profit des composants Bento.
+- **Don't** utiliser de rayon (pilules, 8 px), de dégradé violet ou d’emoji en guise d’icône.

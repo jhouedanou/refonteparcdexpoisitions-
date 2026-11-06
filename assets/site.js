@@ -169,7 +169,7 @@
     });
   });
 
-  // ---------- En-tête transparent (toutes les pages) : fond blanc dès qu'on défile ou que le menu est ouvert ----------
+  // ---------- Site header (Bento, Stuck=true) : ombre et WhatsApp dès qu'on défile ou que le menu est ouvert ----------
   var overlay = document.querySelector('.topbar--overlay');
   if (overlay) {
     var menuBtn = overlay.querySelector('.menu-toggle');
@@ -187,7 +187,7 @@
   // (rien ne clignote au-dessus du pli). Un bloc dépassé d'un coup (touche Fin, ancre) est révélé aussi : on teste
   // « haut du bloc au-dessus de 92 % de l'écran » plutôt qu'une intersection. Rien avec « réduire les animations ».
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    var ITEMS = '.figure, .space, .service, .event, .tl-item, .gallery__item, .wall__tile, .destination-grid > *, .commitments > *, .support__list > *';
+    var ITEMS = '.figure, .card, .service, .tl-item, .gallery__item, .destination-grid > *, .commitments > *, .support__list > *, .reasons > *, .faq__item';
     var targets = [];
     document.querySelectorAll('main section:not(.hero):not(.page-hero) > .wrap > *').forEach(function (block) {
       var items = block.matches(ITEMS) ? [] : block.querySelectorAll(ITEMS);

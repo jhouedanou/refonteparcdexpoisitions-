@@ -8,7 +8,7 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <script src="assets/site.js" defer></script>
 <meta name="description" content="Salons, congrès, conférences et concerts à venir au Parc des Expositions d’Abidjan : dates, lieux et liens de réservation.">
@@ -160,9 +160,12 @@
 </head>
 <body>
 <a class="skip" href="#contenu">Aller au contenu</a>
-<div class="utility utility--overlay utility--on-orange">
+<div class="utility" data-bento="Topbar">
   <div class="wrap utility__inner">
-    <a class="wa-link utility__tel" href="https://wa.me/2252721710997?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20le%20Parc%20des%20Expositions%20d%E2%80%99Abidjan." target="_blank" rel="noopener" aria-label="WhatsApp : +225 27 21 71 09 97 (nouvel onglet)"><svg class="i i--wa" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.2 20.8l4.5-1.2A8.8 8.8 0 1 0 12 3.2z"/><path class="i--wa-handset" d="M9.1 7.6c-.3 0-.7.1-.9.5-.4.6-.6 1.4-.3 2.3.6 1.9 2.5 4 4.6 4.8.9.3 1.7.2 2.3-.2.4-.3.6-.7.5-1l-.2-.5-1.6-.8c-.3-.1-.5 0-.7.2l-.5.6c-1-.4-2-1.4-2.4-2.4l.6-.5c.2-.2.3-.4.2-.7l-.7-1.6c-.1-.3-.4-.4-.6-.4z"/></svg>+225 27 21 71 09 97</a>
+    <ul class="utility__items" role="list">
+      <li class="utility__item"><a class="wa-link utility__tel" href="https://wa.me/2252721710997?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20le%20Parc%20des%20Expositions%20d%E2%80%99Abidjan." target="_blank" rel="noopener" aria-label="WhatsApp : +225 27 21 71 09 97 (nouvel onglet)"><svg class="i i--wa" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.2 20.8l4.5-1.2A8.8 8.8 0 1 0 12 3.2z"/><path class="i--wa-handset" d="M9.1 7.6c-.3 0-.7.1-.9.5-.4.6-.6 1.4-.3 2.3.6 1.9 2.5 4 4.6 4.8.9.3 1.7.2 2.3-.2.4-.3.6-.7.5-1l-.2-.5-1.6-.8c-.3-.1-.5 0-.7.2l-.5.6c-1-.4-2-1.4-2.4-2.4l.6-.5c.2-.2.3-.4.2-.7l-.7-1.6c-.1-.3-.4-.4-.6-.4z"/></svg>+225 27 21 71 09 97</a></li>
+      <li class="utility__item utility__item--place"><svg class="i i--pin" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s-6.5-6.1-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 14.9 12 21 12 21z"/><circle cx="12" cy="9.8" r="2.3"/></svg><span>Abidjan, Côte d’Ivoire</span></li>
+    </ul>
     <div class="utility__end">
     <nav class="lang-switch" aria-label="Langue"><a href="agenda.html" hreflang="fr" lang="fr" aria-current="true">FR</a><a href="en/agenda.html" hreflang="en" lang="en">EN</a></nav>
     <ul class="social" role="list" aria-label="Réseaux sociaux">
@@ -173,11 +176,11 @@
     </div>
   </div>
 </div>
-<header class="topbar topbar--overlay topbar--on-orange">
+<header class="topbar topbar--overlay" data-bento="Site header">
   <div class="wrap topbar__inner">
     <a class="brand" href="index.html"><img src="assets/logo-pea.webp" alt="Parc des Expositions d’Abidjan — accueil" width="394" height="210"></a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-principale"><span class="menu-toggle__bars" aria-hidden="true"></span>Menu</button>
-    <nav class="nav" id="nav-principale" aria-label="Navigation principale">
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-principale"><span class="menu-toggle__bars" aria-hidden="true"></span><span class="sr-only">Menu</span></button>
+    <nav class="nav" id="nav-principale" aria-label="Navigation principale" data-bento="Menu">
       <ul>
       <li><a href="qui-sommes-nous.html">Qui sommes-nous ?</a></li>
       <li class="nav__item--sub"><a href="nos-espaces.html">Nos espaces</a><button class="nav__subtoggle" type="button" aria-expanded="false" aria-controls="sub-espaces" aria-label="Sous-menu Nos espaces"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></button><ul class="nav__sub" id="sub-espaces" role="list"><li><a href="hall-exposition.html"><span class="nav__sub-title">Hall d’Exposition</span><span class="nav__sub-desc">6 500 m² · 17 m sous plafond</span></a></li><li><a href="le-dome.html"><span class="nav__sub-title">Le Dôme</span><span class="nav__sub-desc">5 000 m² · 5 023 assis · 9 588 debout</span></a></li><li><a href="parvis-esplanades.html"><span class="nav__sub-title">Parvis & Esplanades</span><span class="nav__sub-desc">67 000 m² d’espaces extérieurs</span></a></li><li><a href="visite-virtuelle.html"><span class="nav__sub-title">Visite virtuelle 360°</span><span class="nav__sub-desc">Explorer le Parc à distance</span></a></li></ul></li>
@@ -192,15 +195,15 @@
       </ul>
     </nav>
     <a class="topbar__wa" href="https://wa.me/2252721710997?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20le%20Parc%20des%20Expositions%20d%E2%80%99Abidjan." target="_blank" rel="noopener" aria-label="WhatsApp : +225 27 21 71 09 97 (nouvel onglet)"><svg class="i i--wa" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.2 20.8l4.5-1.2A8.8 8.8 0 1 0 12 3.2z"/><path class="i--wa-handset" d="M9.1 7.6c-.3 0-.7.1-.9.5-.4.6-.6 1.4-.3 2.3.6 1.9 2.5 4 4.6 4.8.9.3 1.7.2 2.3-.2.4-.3.6-.7.5-1l-.2-.5-1.6-.8c-.3-.1-.5 0-.7.2l-.5.6c-1-.4-2-1.4-2.4-2.4l.6-.5c.2-.2.3-.4.2-.7l-.7-1.6c-.1-.3-.4-.4-.6-.4z"/></svg><span class="topbar__wa-num">+225 27 21 71 09 97</span></a>
-    <a class="btn btn--primary topbar__cta" href="contact-devis.html"><span class="hide-sm">Demander un devis</span><span class="show-sm">Devis</span></a>
+    <a class="btn btn--primary topbar__cta" data-bento="Button" href="contact-devis.html"><span class="hide-sm">Demander un devis</span><span class="show-sm">Devis</span></a>
   </div>
 </header>
 <main class="page" id="contenu" tabindex="-1">
-<section style="--page-bg: url(assets/img/slider/concert-scene-1600.webp)" class="page-hero page-hero--bg page-hero--compact">
+<section style="--page-bg: url(assets/img/slider/concert-scene-1600.webp)" class="page-hero page-hero--bg page-hero--compact" data-bento="Page header">
   <div class="wrap">
-    <nav class="breadcrumbs" aria-label="Fil d’Ariane"><ol role="list"><li><a href="index.html">Accueil</a></li><li><span aria-current="page">Agenda</span></li></ol></nav>
+    <nav class="breadcrumbs" aria-label="Fil d’Ariane" data-bento="Breadcrumb"><ol role="list"><li><a href="index.html">Accueil</a></li><li><span aria-current="page">Agenda</span></li></ol></nav>
     <p class="eyebrow">Agenda</p>
-    <h1>Les prochains événements au Parc.</h1>
+    <h1 class="title title--l1" data-bento="Title">Les prochains événements au Parc.</h1>
     <!-- Note de maquette (texte d’origine) : Un listing filtrable par date et catégorie, avec une URL dédiée pour chaque événement afin de soutenir le référencement. -->
     <p class="lead">Salons, congrès, conférences, concerts : retrouvez les prochains rendez-vous accueillis au Parc.</p>
     <div class="filters" role="group" aria-label="Filtrer par catégorie" data-filters="evenements" data-key="type"><button class="chip" type="button" aria-pressed="true" data-value="">Tous</button><button class="chip" type="button" aria-pressed="false" data-value="salons">Salons</button><button class="chip" type="button" aria-pressed="false" data-value="congres">Congrès</button><button class="chip" type="button" aria-pressed="false" data-value="conferences">Conférences</button><button class="chip" type="button" aria-pressed="false" data-value="concerts">Concerts</button><button class="chip" type="button" aria-pressed="false" data-value="expositions">Expositions</button></div>
@@ -211,341 +214,340 @@
   <div class="wrap">
     <p class="filter-status" role="status" data-status-for="evenements">20 événements</p><p class="empty" data-empty-for="evenements" hidden>Aucun événement à venir dans cette catégorie pour le moment.</p>
     <!-- Événements relevés le 7 octobre 2026 sur parcdesexpositionsabidjan.com/fr/liste-des-agendas (types déduits des intitulés) -->
-    <ol class="timeline" id="evenements" role="list">
-      <li class="timeline__month" data-heading><h2 class="timeline__month-title">Octobre 2026</h2></li>
+    <ol class="timeline" id="evenements" role="list" data-bento="Block/Agenda list">
+      <li class="timeline__month" data-heading><h2 class="timeline__month-title title title--l3" data-bento="Title">Octobre 2026</h2></li>
       <li class="tl-item" id="auto-expo" data-type="salons expositions" data-start="2026-10-08" data-end="2026-10-10">
         <p class="tl-date"><time datetime="2026-10-08" class="tl-date__day">08</time><span class="tl-date__rest">→ 10 oct.</span></p>
-        <div class="tl-card">
+        <div class="tl-card" data-bento="Card">
           <div class="tl-card__media"><img src="assets/img/agenda/auto-expo-800.webp" alt="" width="800" height="451" loading="lazy" decoding="async"></div>
-          <p class="tl-card__type">Salon<span class="tl-card__next" hidden> · Prochainement</span></p>
-          <h3 class="tl-card__title"><a href="evenement-auto-expo.html">Auto Expo</a></h3>
+          <p class="tl-card__type badge" data-bento="Badge">Salon<span class="tl-card__next" hidden> · Prochainement</span></p>
+          <h3 class="tl-card__title title title--l4" data-bento="Title"><a href="evenement-auto-expo.html">Auto Expo</a></h3>
           <p class="tl-card__when">Du 8 au 10 octobre 2026</p>
           <div class="tl-card__more" data-event-more>
             <p class="ev-desc">Le salon de l’industrie automobile réunit plus de 15 nations participantes et 900 acheteurs professionnels, avec des rencontres B2B et des panels sectoriels.</p>
             <dl class="ev-facts"><div><dt>Date</dt><dd>Du 8 au 10 octobre 2026</dd></div><div><dt>Lieu</dt><dd>Parc des Expositions d’Abidjan</dd></div></dl>
-            <div class="ev-links"><a class="link-arrow" href="https://ivorycoastautoexpo.com/" target="_blank" rel="noopener" aria-label="Site officiel : Auto Expo (nouvel onglet)">Site officiel <svg class="i i--ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg></a><a class="link-arrow" href="evenement-auto-expo.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+            <div class="ev-links"><a class="link-arrow" data-bento="Link" href="https://ivorycoastautoexpo.com/" target="_blank" rel="noopener" aria-label="Site officiel : Auto Expo (nouvel onglet)">Site officiel <svg class="i i--ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg></a><a class="link-arrow" data-bento="Link" href="evenement-auto-expo.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
           </div>
-          <div class="tl-card__actions"><button class="link-arrow" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Auto Expo">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
+          <div class="tl-card__actions"><button class="btn btn--primary btn--sm" data-bento="Button" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Auto Expo">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
         </div>
       </li>
       <li class="tl-item" id="horeca-expo" data-type="salons expositions" data-start="2026-10-08" data-end="2026-10-10">
         <p class="tl-date"><time datetime="2026-10-08" class="tl-date__day">08</time><span class="tl-date__rest">→ 10 oct.</span></p>
-        <div class="tl-card">
+        <div class="tl-card" data-bento="Card">
           <div class="tl-card__media"><img src="assets/img/agenda/horeca-expo-800.webp" alt="" width="800" height="451" loading="lazy" decoding="async"></div>
-          <p class="tl-card__type">Salon<span class="tl-card__next" hidden> · Prochainement</span></p>
-          <h3 class="tl-card__title"><a href="evenement-horeca-expo.html">Horeca Expo</a></h3>
+          <p class="tl-card__type badge" data-bento="Badge">Salon<span class="tl-card__next" hidden> · Prochainement</span></p>
+          <h3 class="tl-card__title title title--l4" data-bento="Title"><a href="evenement-horeca-expo.html">Horeca Expo</a></h3>
           <p class="tl-card__when">Du 8 au 10 octobre 2026</p>
           <div class="tl-card__more" data-event-more>
             <p class="ev-desc">Le rendez-vous des marques internationales de l’hôtellerie, de la restauration et des cafés, avec des rencontres B2B avec des acheteurs qualifiés et des conférences professionnelles.</p>
             <dl class="ev-facts"><div><dt>Date</dt><dd>Du 8 au 10 octobre 2026</dd></div><div><dt>Lieu</dt><dd>Parc des Expositions d’Abidjan</dd></div></dl>
-            <div class="ev-links"><a class="link-arrow" href="https://ivorycoasthorecaexpo.com/" target="_blank" rel="noopener" aria-label="Site officiel : Horeca Expo (nouvel onglet)">Site officiel <svg class="i i--ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg></a><a class="link-arrow" href="evenement-horeca-expo.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+            <div class="ev-links"><a class="link-arrow" data-bento="Link" href="https://ivorycoasthorecaexpo.com/" target="_blank" rel="noopener" aria-label="Site officiel : Horeca Expo (nouvel onglet)">Site officiel <svg class="i i--ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg></a><a class="link-arrow" data-bento="Link" href="evenement-horeca-expo.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
           </div>
-          <div class="tl-card__actions"><button class="link-arrow" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Horeca Expo">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
+          <div class="tl-card__actions"><button class="btn btn--primary btn--sm" data-bento="Button" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Horeca Expo">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
         </div>
       </li>
       <li class="tl-item" id="agrofood-plastprintpack-west-africa-0" data-type="salons expositions" data-start="2026-10-08" data-end="2026-10-10">
         <p class="tl-date"><time datetime="2026-10-08" class="tl-date__day">08</time><span class="tl-date__rest">→ 10 oct.</span></p>
-        <div class="tl-card">
+        <div class="tl-card" data-bento="Card">
           <div class="tl-card__media"><img src="assets/img/agenda/agrofood-plastprintpack-west-africa-0-800.webp" alt="" width="800" height="533" loading="lazy" decoding="async"></div>
-          <p class="tl-card__type">Salon<span class="tl-card__next" hidden> · Prochainement</span></p>
-          <h3 class="tl-card__title"><a href="evenement-agrofood-plastprintpack-west-africa-0.html">Agrofood & Plastprintpack West Africa</a></h3>
+          <p class="tl-card__type badge" data-bento="Badge">Salon<span class="tl-card__next" hidden> · Prochainement</span></p>
+          <h3 class="tl-card__title title title--l4" data-bento="Title"><a href="evenement-agrofood-plastprintpack-west-africa-0.html">Agrofood & Plastprintpack West Africa</a></h3>
           <p class="tl-card__when">Du 8 au 10 octobre 2026</p>
           <div class="tl-card__more" data-event-more>
             <p class="ev-desc">Plus de 150 exposants venus de 25 pays présentent leurs produits et solutions pour le marché ivoirien et ouest-africain. Troisième édition des salons Agrofood, Plastprintpack et Afrik’embal à Abidjan.</p>
             <dl class="ev-facts"><div><dt>Date</dt><dd>Du 8 au 10 octobre 2026</dd></div><div><dt>Lieu</dt><dd>Parc des Expositions d’Abidjan</dd></div><div><dt>Organisateur</dt><dd>Fairtrade Messe</dd></div></dl>
-            <div class="ev-links"><a class="link-arrow" href="evenement-agrofood-plastprintpack-west-africa-0.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+            <div class="ev-links"><a class="link-arrow" data-bento="Link" href="evenement-agrofood-plastprintpack-west-africa-0.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
           </div>
-          <div class="tl-card__actions"><button class="link-arrow" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Agrofood & Plastprintpack West Africa">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
+          <div class="tl-card__actions"><button class="btn btn--primary btn--sm" data-bento="Button" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Agrofood & Plastprintpack West Africa">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
         </div>
       </li>
       <li class="tl-item" id="food-expo-0" data-type="salons expositions" data-start="2026-10-08" data-end="2026-10-10">
         <p class="tl-date"><time datetime="2026-10-08" class="tl-date__day">08</time><span class="tl-date__rest">→ 10 oct.</span></p>
-        <div class="tl-card">
+        <div class="tl-card" data-bento="Card">
           <div class="tl-card__media"><img src="assets/img/agenda/food-expo-0-800.webp" alt="" width="800" height="451" loading="lazy" decoding="async"></div>
-          <p class="tl-card__type">Salon<span class="tl-card__next" hidden> · Prochainement</span></p>
-          <h3 class="tl-card__title"><a href="evenement-food-expo-0.html">Food Expo</a></h3>
+          <p class="tl-card__type badge" data-bento="Badge">Salon<span class="tl-card__next" hidden> · Prochainement</span></p>
+          <h3 class="tl-card__title title title--l4" data-bento="Title"><a href="evenement-food-expo-0.html">Food Expo</a></h3>
           <p class="tl-card__when">Du 8 au 10 octobre 2026</p>
           <div class="tl-card__more" data-event-more>
             <p class="ev-desc">Les acteurs de l’agroalimentaire, de l’agriculture et de l’emballage : plus de 150 marques, 15 pays participants, plus de 25 conférences et 5 200 visiteurs professionnels attendus.</p>
             <dl class="ev-facts"><div><dt>Date</dt><dd>Du 8 au 10 octobre 2026</dd></div><div><dt>Lieu</dt><dd>Parc des Expositions d’Abidjan</dd></div></dl>
-            <div class="ev-links"><a class="link-arrow" href="https://ivorycoastfoodexpo.com/" target="_blank" rel="noopener" aria-label="Site officiel : Food Expo (nouvel onglet)">Site officiel <svg class="i i--ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg></a><a class="link-arrow" href="evenement-food-expo-0.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+            <div class="ev-links"><a class="link-arrow" data-bento="Link" href="https://ivorycoastfoodexpo.com/" target="_blank" rel="noopener" aria-label="Site officiel : Food Expo (nouvel onglet)">Site officiel <svg class="i i--ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg></a><a class="link-arrow" data-bento="Link" href="evenement-food-expo-0.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
           </div>
-          <div class="tl-card__actions"><button class="link-arrow" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Food Expo">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
+          <div class="tl-card__actions"><button class="btn btn--primary btn--sm" data-bento="Button" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Food Expo">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
         </div>
       </li>
       <li class="tl-item" id="concert-tayc" data-type="concerts" data-start="2026-10-11" data-end="2026-10-11">
         <p class="tl-date"><time datetime="2026-10-11" class="tl-date__day">11</time><span class="tl-date__rest">oct.</span></p>
-        <div class="tl-card">
+        <div class="tl-card" data-bento="Card">
           <div class="tl-card__media"><img src="assets/img/agenda/concert-tayc-800.webp" alt="" width="800" height="1000" loading="lazy" decoding="async"></div>
-          <p class="tl-card__type">Concert<span class="tl-card__next" hidden> · Prochainement</span></p>
-          <h3 class="tl-card__title"><a href="evenement-concert-tayc.html">Concert TAYC</a></h3>
+          <p class="tl-card__type badge" data-bento="Badge">Concert<span class="tl-card__next" hidden> · Prochainement</span></p>
+          <h3 class="tl-card__title title title--l4" data-bento="Title"><a href="evenement-concert-tayc.html">Concert TAYC</a></h3>
           <p class="tl-card__when">Le 11 octobre 2026</p>
           <div class="tl-card__more" data-event-more>
             <p class="ev-desc">Une star du R&B se produit pour la première fois au Parc des Expositions d’Abidjan.</p>
             <dl class="ev-facts"><div><dt>Date</dt><dd>Le 11 octobre 2026</dd></div><div><dt>Lieu</dt><dd>Parc des Expositions d’Abidjan</dd></div></dl>
-            <div class="ev-links"><a class="link-arrow" href="evenement-concert-tayc.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+            <div class="ev-links"><a class="link-arrow" data-bento="Link" href="evenement-concert-tayc.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
           </div>
-          <div class="tl-card__actions"><button class="link-arrow" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Concert TAYC">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
+          <div class="tl-card__actions"><button class="btn btn--primary btn--sm" data-bento="Button" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Concert TAYC">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
         </div>
       </li>
       <li class="tl-item" id="brands-licensing-africa" data-type="salons" data-start="2026-10-15" data-end="2026-10-16">
         <p class="tl-date"><time datetime="2026-10-15" class="tl-date__day">15</time><span class="tl-date__rest">→ 16 oct.</span></p>
-        <div class="tl-card">
+        <div class="tl-card" data-bento="Card">
           <div class="tl-card__media"><img src="assets/img/agenda/brands-licensing-africa-800.webp" alt="" width="800" height="473" loading="lazy" decoding="async"></div>
-          <p class="tl-card__type">Salon<span class="tl-card__next" hidden> · Prochainement</span></p>
-          <h3 class="tl-card__title"><a href="evenement-brands-licensing-africa.html">Brands Licensing Africa</a></h3>
+          <p class="tl-card__type badge" data-bento="Badge">Salon<span class="tl-card__next" hidden> · Prochainement</span></p>
+          <h3 class="tl-card__title title title--l4" data-bento="Title"><a href="evenement-brands-licensing-africa.html">Brands Licensing Africa</a></h3>
           <p class="tl-card__when">Du 15 au 16 octobre 2026</p>
           <div class="tl-card__more" data-event-more>
             <p class="ev-desc">La plateforme dédiée aux licences et au développement des marques en Afrique : 3 000 visiteurs professionnels et des marques de 20 pays attendus, des biens de consommation aux jouets, au divertissement, aux cosmétiques et à la mode.</p>
             <dl class="ev-facts"><div><dt>Date</dt><dd>Du 15 au 16 octobre 2026</dd></div><div><dt>Lieu</dt><dd>Parc des Expositions d’Abidjan</dd></div></dl>
-            <div class="ev-links"><a class="btn btn--primary btn--sm" href="https://www.brandslicensingafrica.com/" target="_blank" rel="noopener" aria-label="Réserver : Brands Licensing Africa (nouvel onglet)">Réserver <svg class="i i--ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg></a><a class="link-arrow" href="evenement-brands-licensing-africa.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+            <div class="ev-links"><a class="btn btn--primary btn--sm" data-bento="Button" href="https://www.brandslicensingafrica.com/" target="_blank" rel="noopener" aria-label="Réserver : Brands Licensing Africa (nouvel onglet)">Réserver <svg class="i i--ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg></a><a class="link-arrow" data-bento="Link" href="evenement-brands-licensing-africa.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
           </div>
-          <div class="tl-card__actions"><button class="link-arrow" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Brands Licensing Africa">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
+          <div class="tl-card__actions"><button class="btn btn--primary btn--sm" data-bento="Button" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Brands Licensing Africa">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
         </div>
       </li>
       <li class="tl-item" id="salon-des-collectivites-territoriales" data-type="salons" data-start="2026-10-15" data-end="2026-10-17">
         <p class="tl-date"><time datetime="2026-10-15" class="tl-date__day">15</time><span class="tl-date__rest">→ 17 oct.</span></p>
-        <div class="tl-card">
+        <div class="tl-card" data-bento="Card">
           <div class="tl-card__media"><img src="assets/img/agenda/salon-des-collectivites-territoriales-800.webp" alt="" width="800" height="800" loading="lazy" decoding="async"></div>
-          <p class="tl-card__type">Salon<span class="tl-card__next" hidden> · Prochainement</span></p>
-          <h3 class="tl-card__title"><a href="evenement-salon-des-collectivites-territoriales.html">Salon des collectivités territoriales</a></h3>
+          <p class="tl-card__type badge" data-bento="Badge">Salon<span class="tl-card__next" hidden> · Prochainement</span></p>
+          <h3 class="tl-card__title title title--l4" data-bento="Title"><a href="evenement-salon-des-collectivites-territoriales.html">Salon des collectivités territoriales</a></h3>
           <p class="tl-card__when">Du 15 au 17 octobre 2026</p>
           <div class="tl-card__more" data-event-more>
             <p class="ev-desc">Thème de l’édition : « Décentralisation renforcée : maîtriser les transferts de compétences pour des territoires plus efficaces et autonomes ».</p>
             <dl class="ev-facts"><div><dt>Date</dt><dd>Du 15 au 17 octobre 2026</dd></div><div><dt>Lieu</dt><dd>Parc des Expositions d’Abidjan</dd></div></dl>
-            <div class="ev-links"><a class="link-arrow" href="evenement-salon-des-collectivites-territoriales.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+            <div class="ev-links"><a class="link-arrow" data-bento="Link" href="evenement-salon-des-collectivites-territoriales.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
           </div>
-          <div class="tl-card__actions"><button class="link-arrow" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Salon des collectivités territoriales">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
+          <div class="tl-card__actions"><button class="btn btn--primary btn--sm" data-bento="Button" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Salon des collectivités territoriales">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
         </div>
       </li>
       <li class="tl-item" id="abidjan-border-forum" data-type="congres conferences" data-start="2026-10-20" data-end="2026-10-22">
         <p class="tl-date"><time datetime="2026-10-20" class="tl-date__day">20</time><span class="tl-date__rest">→ 22 oct.</span></p>
-        <div class="tl-card">
+        <div class="tl-card" data-bento="Card">
           <div class="tl-card__media"><img src="assets/img/agenda/abidjan-border-forum-800.webp" alt="" width="800" height="616" loading="lazy" decoding="async"></div>
-          <p class="tl-card__type">Forum<span class="tl-card__next" hidden> · Prochainement</span></p>
-          <h3 class="tl-card__title"><a href="evenement-abidjan-border-forum.html">Abidjan Border Forum</a></h3>
+          <p class="tl-card__type badge" data-bento="Badge">Forum<span class="tl-card__next" hidden> · Prochainement</span></p>
+          <h3 class="tl-card__title title title--l4" data-bento="Title"><a href="evenement-abidjan-border-forum.html">Abidjan Border Forum</a></h3>
           <p class="tl-card__when">Du 20 au 22 octobre 2026</p>
           <div class="tl-card__more" data-event-more>
             <p class="ev-desc">Forum panafricain des acteurs frontaliers, qui aborde les frontières africaines comme des espaces de dialogue et de coopération. Thème : « Les peuples aux frontières : culture, intégration et sécurité ».</p>
             <dl class="ev-facts"><div><dt>Date</dt><dd>Du 20 au 22 octobre 2026</dd></div><div><dt>Lieu</dt><dd>Parc des Expositions d’Abidjan</dd></div><div><dt>Organisateur</dt><dd>Parc des Expositions d’Abidjan</dd></div></dl>
-            <div class="ev-links"><a class="link-arrow" href="evenement-abidjan-border-forum.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+            <div class="ev-links"><a class="link-arrow" data-bento="Link" href="evenement-abidjan-border-forum.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
           </div>
-          <div class="tl-card__actions"><button class="link-arrow" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Abidjan Border Forum">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
+          <div class="tl-card__actions"><button class="btn btn--primary btn--sm" data-bento="Button" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Abidjan Border Forum">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
         </div>
       </li>
       <li class="tl-item" id="concert-milo" data-type="concerts" data-start="2026-10-24" data-end="2026-10-24">
         <p class="tl-date"><time datetime="2026-10-24" class="tl-date__day">24</time><span class="tl-date__rest">oct.</span></p>
-        <div class="tl-card">
+        <div class="tl-card" data-bento="Card">
           <div class="tl-card__media"><img src="assets/img/agenda/concert-milo-800.webp" alt="" width="800" height="1001" loading="lazy" decoding="async"></div>
-          <p class="tl-card__type">Concert<span class="tl-card__next" hidden> · Prochainement</span></p>
-          <h3 class="tl-card__title"><a href="evenement-concert-milo.html">Concert Milo</a></h3>
+          <p class="tl-card__type badge" data-bento="Badge">Concert<span class="tl-card__next" hidden> · Prochainement</span></p>
+          <h3 class="tl-card__title title title--l4" data-bento="Title"><a href="evenement-concert-milo.html">Concert Milo</a></h3>
           <p class="tl-card__when">Le 24 octobre 2026</p>
           <div class="tl-card__more" data-event-more>
             <p class="ev-desc">Une soirée qui rassemble le public autour d’un message spirituel.</p>
             <dl class="ev-facts"><div><dt>Date</dt><dd>Le 24 octobre 2026</dd></div><div><dt>Lieu</dt><dd>Parc des Expositions d’Abidjan</dd></div></dl>
-            <div class="ev-links"><a class="link-arrow" href="evenement-concert-milo.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+            <div class="ev-links"><a class="link-arrow" data-bento="Link" href="evenement-concert-milo.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
           </div>
-          <div class="tl-card__actions"><button class="link-arrow" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Concert Milo">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
+          <div class="tl-card__actions"><button class="btn btn--primary btn--sm" data-bento="Button" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Concert Milo">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
         </div>
       </li>
       <li class="tl-item" id="concert-40-ans-de-carriere-gadji-celi" data-type="concerts" data-start="2026-10-31" data-end="2026-10-31">
         <p class="tl-date"><time datetime="2026-10-31" class="tl-date__day">31</time><span class="tl-date__rest">oct.</span></p>
-        <div class="tl-card">
+        <div class="tl-card" data-bento="Card">
           <div class="tl-card__media"><img src="assets/img/agenda/concert-40-ans-de-carriere-gadji-celi-800.webp" alt="" width="800" height="800" loading="lazy" decoding="async"></div>
-          <p class="tl-card__type">Concert<span class="tl-card__next" hidden> · Prochainement</span></p>
-          <h3 class="tl-card__title"><a href="evenement-concert-40-ans-de-carriere-gadji-celi.html">Concert 40 ans de carrière Gadji Celi</a></h3>
+          <p class="tl-card__type badge" data-bento="Badge">Concert<span class="tl-card__next" hidden> · Prochainement</span></p>
+          <h3 class="tl-card__title title title--l4" data-bento="Title"><a href="evenement-concert-40-ans-de-carriere-gadji-celi.html">Concert 40 ans de carrière Gadji Celi</a></h3>
           <p class="tl-card__when">Le 31 octobre 2026</p>
           <div class="tl-card__more" data-event-more>
             <p class="ev-desc">Le Parc célèbre les 40 ans de carrière de Gadji Celi, grande figure de la scène musicale ivoirienne.</p>
             <dl class="ev-facts"><div><dt>Date</dt><dd>Le 31 octobre 2026</dd></div><div><dt>Lieu</dt><dd>Parc des Expositions d’Abidjan</dd></div></dl>
-            <div class="ev-links"><a class="link-arrow" href="evenement-concert-40-ans-de-carriere-gadji-celi.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+            <div class="ev-links"><a class="link-arrow" data-bento="Link" href="evenement-concert-40-ans-de-carriere-gadji-celi.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
           </div>
-          <div class="tl-card__actions"><button class="link-arrow" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Concert 40 ans de carrière Gadji Celi">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
+          <div class="tl-card__actions"><button class="btn btn--primary btn--sm" data-bento="Button" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Concert 40 ans de carrière Gadji Celi">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
         </div>
       </li>
-      <li class="timeline__month" data-heading><h2 class="timeline__month-title">Novembre 2026</h2></li>
+      <li class="timeline__month" data-heading><h2 class="timeline__month-title title title--l3" data-bento="Title">Novembre 2026</h2></li>
       <li class="tl-item" id="concert-mary-sy" data-type="concerts" data-start="2026-11-01" data-end="2026-11-01">
         <p class="tl-date"><time datetime="2026-11-01" class="tl-date__day">01</time><span class="tl-date__rest">nov.</span></p>
-        <div class="tl-card">
+        <div class="tl-card" data-bento="Card">
           <div class="tl-card__media"><img src="assets/img/agenda/concert-mary-sy-800.webp" alt="" width="800" height="915" loading="lazy" decoding="async"></div>
-          <p class="tl-card__type">Concert<span class="tl-card__next" hidden> · Prochainement</span></p>
-          <h3 class="tl-card__title"><a href="evenement-concert-mary-sy.html">Concert Mary Sy</a></h3>
+          <p class="tl-card__type badge" data-bento="Badge">Concert<span class="tl-card__next" hidden> · Prochainement</span></p>
+          <h3 class="tl-card__title title title--l4" data-bento="Title"><a href="evenement-concert-mary-sy.html">Concert Mary Sy</a></h3>
           <p class="tl-card__when">Le 1er novembre 2026</p>
           <div class="tl-card__more" data-event-more>
             <p class="ev-desc">Mary Sy en concert au Parc des Expositions d’Abidjan.</p>
             <dl class="ev-facts"><div><dt>Date</dt><dd>Le 1er novembre 2026</dd></div><div><dt>Lieu</dt><dd>Parc des Expositions d’Abidjan</dd></div></dl>
-            <div class="ev-links"><a class="link-arrow" href="evenement-concert-mary-sy.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+            <div class="ev-links"><a class="link-arrow" data-bento="Link" href="evenement-concert-mary-sy.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
           </div>
-          <div class="tl-card__actions"><button class="link-arrow" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Concert Mary Sy">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
+          <div class="tl-card__actions"><button class="btn btn--primary btn--sm" data-bento="Button" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Concert Mary Sy">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
         </div>
       </li>
       <li class="tl-item" id="concert-ismael-isaac" data-type="concerts" data-start="2026-11-07" data-end="2026-11-07">
         <p class="tl-date"><time datetime="2026-11-07" class="tl-date__day">07</time><span class="tl-date__rest">nov.</span></p>
-        <div class="tl-card">
+        <div class="tl-card" data-bento="Card">
           <div class="tl-card__media"><img src="assets/img/agenda/concert-ismael-isaac-800.webp" alt="" width="800" height="601" loading="lazy" decoding="async"></div>
-          <p class="tl-card__type">Concert<span class="tl-card__next" hidden> · Prochainement</span></p>
-          <h3 class="tl-card__title"><a href="evenement-concert-ismael-isaac.html">Concert Ismaël Isaac</a></h3>
+          <p class="tl-card__type badge" data-bento="Badge">Concert<span class="tl-card__next" hidden> · Prochainement</span></p>
+          <h3 class="tl-card__title title title--l4" data-bento="Title"><a href="evenement-concert-ismael-isaac.html">Concert Ismaël Isaac</a></h3>
           <p class="tl-card__when">Le 7 novembre 2026</p>
           <div class="tl-card__more" data-event-more>
             <p class="ev-desc">Un concert anniversaire pour les 40 ans de carrière d’une figure emblématique du reggae.</p>
             <dl class="ev-facts"><div><dt>Date</dt><dd>Le 7 novembre 2026</dd></div><div><dt>Lieu</dt><dd>Parc des Expositions d’Abidjan</dd></div></dl>
-            <div class="ev-links"><a class="link-arrow" href="evenement-concert-ismael-isaac.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+            <div class="ev-links"><a class="link-arrow" data-bento="Link" href="evenement-concert-ismael-isaac.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
           </div>
-          <div class="tl-card__actions"><button class="link-arrow" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Concert Ismaël Isaac">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
+          <div class="tl-card__actions"><button class="btn btn--primary btn--sm" data-bento="Button" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Concert Ismaël Isaac">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
         </div>
       </li>
       <li class="tl-item" id="ceremonie-primud" data-type="" data-start="2026-11-08" data-end="2026-11-08">
         <p class="tl-date"><time datetime="2026-11-08" class="tl-date__day">08</time><span class="tl-date__rest">nov.</span></p>
-        <div class="tl-card">
+        <div class="tl-card" data-bento="Card">
           <div class="tl-card__media"><img src="assets/img/agenda/ceremonie-primud-800.webp" alt="" width="800" height="418" loading="lazy" decoding="async"></div>
-          <p class="tl-card__type">Cérémonie<span class="tl-card__next" hidden> · Prochainement</span></p>
-          <h3 class="tl-card__title"><a href="evenement-ceremonie-primud.html">Cérémonie PRIMUD</a></h3>
+          <p class="tl-card__type badge" data-bento="Badge">Cérémonie<span class="tl-card__next" hidden> · Prochainement</span></p>
+          <h3 class="tl-card__title title title--l4" data-bento="Title"><a href="evenement-ceremonie-primud.html">Cérémonie PRIMUD</a></h3>
           <p class="tl-card__when">Le 8 novembre 2026</p>
           <div class="tl-card__more" data-event-more>
             <p class="ev-desc">Une cérémonie de remise de prix qui honore les acteurs de la musique urbaine et du divertissement.</p>
             <dl class="ev-facts"><div><dt>Date</dt><dd>Le 8 novembre 2026</dd></div><div><dt>Lieu</dt><dd>Parc des Expositions d’Abidjan</dd></div></dl>
-            <div class="ev-links"><a class="link-arrow" href="evenement-ceremonie-primud.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+            <div class="ev-links"><a class="link-arrow" data-bento="Link" href="evenement-ceremonie-primud.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
           </div>
-          <div class="tl-card__actions"><button class="link-arrow" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Cérémonie PRIMUD">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
+          <div class="tl-card__actions"><button class="btn btn--primary btn--sm" data-bento="Button" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Cérémonie PRIMUD">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
         </div>
       </li>
       <li class="tl-item" id="salon-ivoirien-des-ressources-extractives-energetiques" data-type="salons" data-start="2026-11-18" data-end="2026-11-22">
         <p class="tl-date"><time datetime="2026-11-18" class="tl-date__day">18</time><span class="tl-date__rest">→ 22 nov.</span></p>
-        <div class="tl-card">
+        <div class="tl-card" data-bento="Card">
           <div class="tl-card__media"><img src="assets/img/agenda/salon-ivoirien-des-ressources-extractives-energetiques-800.webp" alt="" width="800" height="972" loading="lazy" decoding="async"></div>
-          <p class="tl-card__type">Salon<span class="tl-card__next" hidden> · Prochainement</span></p>
-          <h3 class="tl-card__title"><a href="evenement-salon-ivoirien-des-ressources-extractives-energetiques.html">Salon ivoirien des ressources extractives & énergétiques</a></h3>
+          <p class="tl-card__type badge" data-bento="Badge">Salon<span class="tl-card__next" hidden> · Prochainement</span></p>
+          <h3 class="tl-card__title title title--l4" data-bento="Title"><a href="evenement-salon-ivoirien-des-ressources-extractives-energetiques.html">Salon ivoirien des ressources extractives & énergétiques</a></h3>
           <p class="tl-card__when">Du 18 au 22 novembre 2026</p>
           <div class="tl-card__more" data-event-more>
             <p class="ev-desc">Le premier salon à réunir les secteurs des mines, du pétrole et de l’énergie en Côte d’Ivoire.</p>
             <dl class="ev-facts"><div><dt>Date</dt><dd>Du 18 au 22 novembre 2026</dd></div><div><dt>Lieu</dt><dd>Parc des Expositions d’Abidjan</dd></div></dl>
-            <div class="ev-links"><a class="link-arrow" href="evenement-salon-ivoirien-des-ressources-extractives-energetiques.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+            <div class="ev-links"><a class="link-arrow" data-bento="Link" href="evenement-salon-ivoirien-des-ressources-extractives-energetiques.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
           </div>
-          <div class="tl-card__actions"><button class="link-arrow" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Salon ivoirien des ressources extractives & énergétiques">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
+          <div class="tl-card__actions"><button class="btn btn--primary btn--sm" data-bento="Button" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Salon ivoirien des ressources extractives & énergétiques">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
         </div>
       </li>
       <li class="tl-item" id="salon-equip-auto" data-type="salons" data-start="2026-11-26" data-end="2026-11-28">
         <p class="tl-date"><time datetime="2026-11-26" class="tl-date__day">26</time><span class="tl-date__rest">→ 28 nov.</span></p>
-        <div class="tl-card">
+        <div class="tl-card" data-bento="Card">
           <div class="tl-card__media"><img src="assets/img/agenda/salon-equip-auto-800.webp" alt="" width="800" height="420" loading="lazy" decoding="async"></div>
-          <p class="tl-card__type">Salon<span class="tl-card__next" hidden> · Prochainement</span></p>
-          <h3 class="tl-card__title"><a href="evenement-salon-equip-auto.html">Salon Equip Auto</a></h3>
+          <p class="tl-card__type badge" data-bento="Badge">Salon<span class="tl-card__next" hidden> · Prochainement</span></p>
+          <h3 class="tl-card__title title title--l4" data-bento="Title"><a href="evenement-salon-equip-auto.html">Salon Equip Auto</a></h3>
           <p class="tl-card__when">Du 26 au 28 novembre 2026</p>
           <div class="tl-card__more" data-event-more>
             <p class="ev-desc">Salon international de l’automobile, des mobilités et des véhicules industriels : véhicules particuliers, poids lourds, transport, engins agricoles et de travaux publics. Première édition : plus de 150 exposants et environ 10 000 visiteurs attendus.</p>
             <dl class="ev-facts"><div><dt>Date</dt><dd>Du 26 au 28 novembre 2026</dd></div><div><dt>Lieu</dt><dd>Parc des Expositions d’Abidjan</dd></div><div><dt>Organisateur</dt><dd>EQUIP’AUTO SAS, avec Interlinks Auto</dd></div></dl>
-            <div class="ev-links"><a class="link-arrow" href="evenement-salon-equip-auto.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+            <div class="ev-links"><a class="link-arrow" data-bento="Link" href="evenement-salon-equip-auto.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
           </div>
-          <div class="tl-card__actions"><button class="link-arrow" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Salon Equip Auto">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
+          <div class="tl-card__actions"><button class="btn btn--primary btn--sm" data-bento="Button" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Salon Equip Auto">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
         </div>
       </li>
       <li class="tl-item" id="concert-kiff-no-beat" data-type="concerts" data-start="2026-11-28" data-end="2026-11-28">
         <p class="tl-date"><time datetime="2026-11-28" class="tl-date__day">28</time><span class="tl-date__rest">nov.</span></p>
-        <div class="tl-card">
+        <div class="tl-card" data-bento="Card">
           <div class="tl-card__media"><img src="assets/img/agenda/concert-kiff-no-beat-800.webp" alt="" width="800" height="1001" loading="lazy" decoding="async"></div>
-          <p class="tl-card__type">Concert<span class="tl-card__next" hidden> · Prochainement</span></p>
-          <h3 class="tl-card__title"><a href="evenement-concert-kiff-no-beat.html">Concert Kiff No Beat</a></h3>
+          <p class="tl-card__type badge" data-bento="Badge">Concert<span class="tl-card__next" hidden> · Prochainement</span></p>
+          <h3 class="tl-card__title title title--l4" data-bento="Title"><a href="evenement-concert-kiff-no-beat.html">Concert Kiff No Beat</a></h3>
           <p class="tl-card__when">Le 28 novembre 2026</p>
           <div class="tl-card__more" data-event-more>
             <p class="ev-desc">Le groupe Kiff No Beat en concert au Parc des Expositions d’Abidjan, une nouvelle étape de son histoire.</p>
             <dl class="ev-facts"><div><dt>Date</dt><dd>Le 28 novembre 2026</dd></div><div><dt>Lieu</dt><dd>Parc des Expositions d’Abidjan</dd></div></dl>
-            <div class="ev-links"><a class="link-arrow" href="evenement-concert-kiff-no-beat.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+            <div class="ev-links"><a class="link-arrow" data-bento="Link" href="evenement-concert-kiff-no-beat.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
           </div>
-          <div class="tl-card__actions"><button class="link-arrow" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Concert Kiff No Beat">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
+          <div class="tl-card__actions"><button class="btn btn--primary btn--sm" data-bento="Button" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Concert Kiff No Beat">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
         </div>
       </li>
-      <li class="timeline__month" data-heading><h2 class="timeline__month-title">Décembre 2026</h2></li>
+      <li class="timeline__month" data-heading><h2 class="timeline__month-title title title--l3" data-bento="Title">Décembre 2026</h2></li>
       <li class="tl-item" id="concert-25-ans-de-carriere-de-moliere" data-type="concerts" data-start="2026-12-05" data-end="2026-12-05">
         <p class="tl-date"><time datetime="2026-12-05" class="tl-date__day">05</time><span class="tl-date__rest">déc.</span></p>
-        <div class="tl-card">
+        <div class="tl-card" data-bento="Card">
           <div class="tl-card__media"><img src="assets/img/agenda/concert-25-ans-de-carriere-de-moliere-800.webp" alt="" width="800" height="638" loading="lazy" decoding="async"></div>
-          <p class="tl-card__type">Concert<span class="tl-card__next" hidden> · Prochainement</span></p>
-          <h3 class="tl-card__title"><a href="evenement-concert-25-ans-de-carriere-de-moliere.html">Concert 25 ans de carrière de Molière</a></h3>
+          <p class="tl-card__type badge" data-bento="Badge">Concert<span class="tl-card__next" hidden> · Prochainement</span></p>
+          <h3 class="tl-card__title title title--l4" data-bento="Title"><a href="evenement-concert-25-ans-de-carriere-de-moliere.html">Concert 25 ans de carrière de Molière</a></h3>
           <p class="tl-card__when">Le 5 décembre 2026</p>
           <div class="tl-card__more" data-event-more>
             <p class="ev-desc">Le chanteur zouglou Molière fête ses 25 ans de carrière sur scène.</p>
             <dl class="ev-facts"><div><dt>Date</dt><dd>Le 5 décembre 2026</dd></div><div><dt>Lieu</dt><dd>Parc des Expositions d’Abidjan</dd></div></dl>
-            <div class="ev-links"><a class="btn btn--primary btn--sm" href="https://concertmoliereparcdesexpositionsabidjan.nbh.ci/event/HWLO89" target="_blank" rel="noopener" aria-label="Réserver : Concert 25 ans de carrière de Molière (nouvel onglet)">Réserver <svg class="i i--ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg></a><a class="link-arrow" href="evenement-concert-25-ans-de-carriere-de-moliere.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+            <div class="ev-links"><a class="btn btn--primary btn--sm" data-bento="Button" href="https://concertmoliereparcdesexpositionsabidjan.nbh.ci/event/HWLO89" target="_blank" rel="noopener" aria-label="Réserver : Concert 25 ans de carrière de Molière (nouvel onglet)">Réserver <svg class="i i--ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg></a><a class="link-arrow" data-bento="Link" href="evenement-concert-25-ans-de-carriere-de-moliere.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
           </div>
-          <div class="tl-card__actions"><button class="link-arrow" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Concert 25 ans de carrière de Molière">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
+          <div class="tl-card__actions"><button class="btn btn--primary btn--sm" data-bento="Button" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Concert 25 ans de carrière de Molière">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
         </div>
       </li>
       <li class="tl-item" id="concert-serge-beynaud-0" data-type="concerts" data-start="2026-12-05" data-end="2026-12-05">
         <p class="tl-date"><time datetime="2026-12-05" class="tl-date__day">05</time><span class="tl-date__rest">déc.</span></p>
-        <div class="tl-card">
+        <div class="tl-card" data-bento="Card">
           <div class="tl-card__media"><img src="assets/img/agenda/concert-serge-beynaud-0-800.webp" alt="" width="800" height="787" loading="lazy" decoding="async"></div>
-          <p class="tl-card__type">Concert<span class="tl-card__next" hidden> · Prochainement</span></p>
-          <h3 class="tl-card__title"><a href="evenement-concert-serge-beynaud-0.html">Concert Serge Beynaud</a></h3>
+          <p class="tl-card__type badge" data-bento="Badge">Concert<span class="tl-card__next" hidden> · Prochainement</span></p>
+          <h3 class="tl-card__title title title--l4" data-bento="Title"><a href="evenement-concert-serge-beynaud-0.html">Concert Serge Beynaud</a></h3>
           <p class="tl-card__when">Le 5 décembre 2026</p>
           <div class="tl-card__more" data-event-more>
             <p class="ev-desc">Serge Beynaud en concert sur l’esplanade du Parc.</p>
             <dl class="ev-facts"><div><dt>Date</dt><dd>Le 5 décembre 2026</dd></div><div><dt>Lieu</dt><dd>Esplanade du Parc</dd></div></dl>
-            <div class="ev-links"><a class="btn btn--primary btn--sm" href="https://tikerama.com/fr/evenements/b-en-concert-a-lesplanade-du-parc-des-expositions" target="_blank" rel="noopener" aria-label="Réserver : Concert Serge Beynaud (nouvel onglet)">Réserver <svg class="i i--ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg></a><a class="link-arrow" href="evenement-concert-serge-beynaud-0.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+            <div class="ev-links"><a class="btn btn--primary btn--sm" data-bento="Button" href="https://tikerama.com/fr/evenements/b-en-concert-a-lesplanade-du-parc-des-expositions" target="_blank" rel="noopener" aria-label="Réserver : Concert Serge Beynaud (nouvel onglet)">Réserver <svg class="i i--ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg></a><a class="link-arrow" data-bento="Link" href="evenement-concert-serge-beynaud-0.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
           </div>
-          <div class="tl-card__actions"><button class="link-arrow" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Concert Serge Beynaud">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
+          <div class="tl-card__actions"><button class="btn btn--primary btn--sm" data-bento="Button" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Concert Serge Beynaud">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
         </div>
       </li>
       <li class="tl-item" id="concert-ariel-sheney" data-type="concerts" data-start="2026-12-12" data-end="2026-12-12">
         <p class="tl-date"><time datetime="2026-12-12" class="tl-date__day">12</time><span class="tl-date__rest">déc.</span></p>
-        <div class="tl-card">
+        <div class="tl-card" data-bento="Card">
           <div class="tl-card__media"><img src="assets/img/agenda/concert-ariel-sheney-800.webp" alt="" width="800" height="585" loading="lazy" decoding="async"></div>
-          <p class="tl-card__type">Concert<span class="tl-card__next" hidden> · Prochainement</span></p>
-          <h3 class="tl-card__title"><a href="evenement-concert-ariel-sheney.html">Concert Ariel Sheney</a></h3>
+          <p class="tl-card__type badge" data-bento="Badge">Concert<span class="tl-card__next" hidden> · Prochainement</span></p>
+          <h3 class="tl-card__title title title--l4" data-bento="Title"><a href="evenement-concert-ariel-sheney.html">Concert Ariel Sheney</a></h3>
           <p class="tl-card__when">Le 12 décembre 2026</p>
           <div class="tl-card__more" data-event-more>
             <p class="ev-desc">Ariel Sheney fait son retour sur scène avec son premier concert au Parc des Expositions d’Abidjan.</p>
             <dl class="ev-facts"><div><dt>Date</dt><dd>Le 12 décembre 2026</dd></div><div><dt>Lieu</dt><dd>Parc des Expositions d’Abidjan</dd></div></dl>
-            <div class="ev-links"><a class="link-arrow" href="evenement-concert-ariel-sheney.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+            <div class="ev-links"><a class="link-arrow" data-bento="Link" href="evenement-concert-ariel-sheney.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
           </div>
-          <div class="tl-card__actions"><button class="link-arrow" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Concert Ariel Sheney">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
+          <div class="tl-card__actions"><button class="btn btn--primary btn--sm" data-bento="Button" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Concert Ariel Sheney">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
         </div>
       </li>
       <li class="tl-item" id="foire-europe-afrique-dabidjan" data-type="salons expositions" data-start="2026-12-16" data-end="2026-12-19">
         <p class="tl-date"><time datetime="2026-12-16" class="tl-date__day">16</time><span class="tl-date__rest">→ 19 déc.</span></p>
-        <div class="tl-card">
+        <div class="tl-card" data-bento="Card">
           <div class="tl-card__media"><img src="assets/img/agenda/foire-europe-afrique-dabidjan-800.webp" alt="" width="800" height="393" loading="lazy" decoding="async"></div>
-          <p class="tl-card__type">Foire<span class="tl-card__next" hidden> · Prochainement</span></p>
-          <h3 class="tl-card__title"><a href="evenement-foire-europe-afrique-dabidjan.html">Foire Europe Afrique d’Abidjan</a></h3>
+          <p class="tl-card__type badge" data-bento="Badge">Foire<span class="tl-card__next" hidden> · Prochainement</span></p>
+          <h3 class="tl-card__title title title--l4" data-bento="Title"><a href="evenement-foire-europe-afrique-dabidjan.html">Foire Europe Afrique d’Abidjan</a></h3>
           <p class="tl-card__when">Du 16 au 19 décembre 2026</p>
           <div class="tl-card__more" data-event-more>
             <p class="ev-desc">Le premier rendez-vous commercial et culturel entre l’Europe et l’Afrique, autour de l’agriculture, du tourisme, de l’artisanat et de l’immobilier.</p>
             <dl class="ev-facts"><div><dt>Date</dt><dd>Du 16 au 19 décembre 2026</dd></div><div><dt>Lieu</dt><dd>Parc des Expositions d’Abidjan</dd></div></dl>
-            <div class="ev-links"><a class="link-arrow" href="evenement-foire-europe-afrique-dabidjan.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+            <div class="ev-links"><a class="link-arrow" data-bento="Link" href="evenement-foire-europe-afrique-dabidjan.html">Page de l’événement <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
           </div>
-          <div class="tl-card__actions"><button class="link-arrow" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Foire Europe Afrique d’Abidjan">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
+          <div class="tl-card__actions"><button class="btn btn--primary btn--sm" data-bento="Button" type="button" data-event-open aria-haspopup="dialog" aria-label="Détails : Foire Europe Afrique d’Abidjan">Détails <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
         </div>
       </li>
     </ol>
-    <dialog class="event-dialog" id="event-dialog" aria-labelledby="event-dialog-title">
+    <dialog class="event-dialog" id="event-dialog" aria-labelledby="event-dialog-title" data-bento="Modal">
       <button class="event-dialog__close" type="button" aria-label="Fermer la fenêtre"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
       <img class="event-dialog__img" src="data:," alt="" width="800" height="450" hidden>
       <div class="event-dialog__head">
-        <svg class="event-dialog__arch" viewBox="16 -1 360 68" aria-hidden="true" focusable="false"><path d="M20 61C70 54 120 25.5 150 12C164 5.7 182 0 196 0C210 0 228 5.7 242 12C272 25.5 322 54 372 61L372 61.5C322 54.5 272 31 242 17.5C226 10.5 210 6.5 196 6.5C182 6.5 166 10.5 150 17.5C120 31 70 54.5 20 61.5Z"/><path d="M36 64.8C100 54 150 47 200 47C250 47 300 54 364 64.8L364 65.3C300 57 250 50.5 200 50.5C150 50.5 100 57 36 65.3Z"/></svg>
-        <p class="event-dialog__type"></p>
-        <h2 class="event-dialog__title" id="event-dialog-title"></h2>
+        <p class="event-dialog__type badge badge--primary" data-bento="Badge"></p>
+        <h2 class="event-dialog__title title title--l2" id="event-dialog-title" data-bento="Title"></h2>
         <p class="event-dialog__when"></p>
       </div>
       <div class="event-dialog__body"></div>
       <div class="event-dialog__foot">
-        <button class="link-arrow" type="button" data-event-ics>Ajouter à mon agenda</button>
+        <button class="link-arrow" data-bento="Link" type="button" data-event-ics>Ajouter à mon agenda</button>
       </div>
     </dialog>
   </div>
 </section>
 </main>
-<footer class="footer">
-  <!-- Note de maquette : inscription simulée ; à brancher sur l’outil d’e-mailing du Parc (Brevo, Mailchimp…) via Drupal -->
-  <div class="wrap newsletter" id="newsletter">
+<!-- Note de maquette : inscription simulée ; à brancher sur l’outil d’e-mailing du Parc (Brevo, Mailchimp…) via Drupal -->
+<section class="newsletter-block" id="newsletter" aria-labelledby="nl-title" data-bento="Newsletter form">
+  <div class="wrap newsletter">
     <div class="newsletter__intro">
-      <p class="newsletter__label">Newsletter</p>
-      <h2 class="newsletter__title">Les prochains événements du Parc, dans votre boîte mail</h2>
+      <p class="eyebrow">Newsletter</p>
+      <h2 class="newsletter__title title title--l3" id="nl-title" data-bento="Title">Les prochains événements du Parc, dans votre boîte mail</h2>
       <p>Une lettre par mois : salons, congrès et concerts à venir. Désinscription en un clic.</p>
     </div>
     <form class="newsletter__form" data-newsletter novalidate>
       <label class="newsletter__field-label" for="nl-email">Votre adresse e-mail</label>
       <div class="newsletter__row">
         <input id="nl-email" name="email" type="email" autocomplete="email" required placeholder="nom@exemple.com" aria-describedby="nl-email-error">
-        <button class="btn btn--primary" type="submit">S’inscrire</button>
+        <button class="btn btn--primary" data-bento="Button" type="submit">S’inscrire</button>
       </div>
       <p class="newsletter__error" id="nl-email-error" hidden>Indiquez une adresse e-mail valide, par exemple nom@exemple.com.</p>
       <label class="check newsletter__consent"><input id="nl-consent" type="checkbox" required aria-describedby="nl-consent-error"><span>J’accepte de recevoir la newsletter du Parc. Voir la <a href="informations-legales.html#confidentialite">politique de confidentialité</a>.</span></label>
@@ -553,49 +555,68 @@
     </form>
     <p class="newsletter__ok" role="status" tabindex="-1" hidden></p>
   </div>
-  <div class="wrap footer__grid">
-    <div class="footer__brand">
-      <img src="assets/logo-pea.webp" alt="" width="394" height="210" loading="lazy">
-      <p><b>Parc des Expositions d’Abidjan</b><br>Boulevard de l’aéroport · Abidjan · Côte d’Ivoire<br><a class="wa-link" href="https://wa.me/2252721710997?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20le%20Parc%20des%20Expositions%20d%E2%80%99Abidjan." target="_blank" rel="noopener" aria-label="WhatsApp : +225 27 21 71 09 97 (nouvel onglet)"><svg class="i i--wa" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.2 20.8l4.5-1.2A8.8 8.8 0 1 0 12 3.2z"/><path class="i--wa-handset" d="M9.1 7.6c-.3 0-.7.1-.9.5-.4.6-.6 1.4-.3 2.3.6 1.9 2.5 4 4.6 4.8.9.3 1.7.2 2.3-.2.4-.3.6-.7.5-1l-.2-.5-1.6-.8c-.3-.1-.5 0-.7.2l-.5.6c-1-.4-2-1.4-2.4-2.4l.6-.5c.2-.2.3-.4.2-.7l-.7-1.6c-.1-.3-.4-.4-.6-.4z"/></svg>+225 27 21 71 09 97</a></p>
+</section>
+<footer class="footer" data-bento="Footer">
+  <div class="wrap footer__columns">
+    <div class="footer__col footer__col--brand">
+      <img class="footer__logo" src="assets/logo-pea.webp" alt="Parc des Expositions d’Abidjan" width="394" height="210" loading="lazy">
+      <address class="footer__contact" data-bento="Contact details">
+        <span>Boulevard de l’aéroport<br>Abidjan · Côte d’Ivoire</span>
+        <a class="wa-link" href="https://wa.me/2252721710997?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20le%20Parc%20des%20Expositions%20d%E2%80%99Abidjan." target="_blank" rel="noopener" aria-label="WhatsApp : +225 27 21 71 09 97 (nouvel onglet)"><svg class="i i--wa" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.2 20.8l4.5-1.2A8.8 8.8 0 1 0 12 3.2z"/><path class="i--wa-handset" d="M9.1 7.6c-.3 0-.7.1-.9.5-.4.6-.6 1.4-.3 2.3.6 1.9 2.5 4 4.6 4.8.9.3 1.7.2 2.3-.2.4-.3.6-.7.5-1l-.2-.5-1.6-.8c-.3-.1-.5 0-.7.2l-.5.6c-1-.4-2-1.4-2.4-2.4l.6-.5c.2-.2.3-.4.2-.7l-.7-1.6c-.1-.3-.4-.4-.6-.4z"/></svg>+225 27 21 71 09 97</a>
+      </address>
     </div>
-    <nav class="footer__nav" aria-label="Liens du pied de page">
-      <ul role="list">
+    <nav class="footer__col" aria-labelledby="ft-espaces">
+      <h2 class="footer__title title title--l5" id="ft-espaces" data-bento="Title">Nos espaces</h2>
+      <ul class="footer__menu" role="list">
+        <li><a href="hall-exposition.html">Hall d’Exposition</a></li>
+        <li><a href="le-dome.html">Le Dôme</a></li>
+        <li><a href="parvis-esplanades.html">Parvis & Esplanades</a></li>
+        <li><a href="visite-virtuelle.html">Visite virtuelle 360°</a></li>
+        <li><a href="nos-services.html">Nos services</a></li>
+      </ul>
+    </nav>
+    <nav class="footer__col" aria-labelledby="ft-evenement">
+      <h2 class="footer__title title title--l5" id="ft-evenement" data-bento="Title">Votre événement</h2>
+      <ul class="footer__menu" role="list">
         <li><a href="salons-professionnels.html">Salons</a></li>
         <li><a href="congres-conferences.html">Congrès</a></li>
         <li><a href="evenements-entreprise.html">Entreprises</a></li>
         <li><a href="concerts-spectacles.html">Concerts</a></li>
         <li><a href="venir-a-abidjan.html">Venir à Abidjan</a></li>
+        <li><a href="contact-devis.html">Demander un devis</a></li>
       </ul>
     </nav>
-    <a class="footer__partner" href="https://www.gl-events.com/" target="_blank" rel="noopener" aria-label="GL events, expertise internationale (nouvel onglet)">
-      <span class="footer__partner-logo"><img src="assets/logo-gl-events.png" alt="GL events" width="225" height="225" loading="lazy"></span>
-      <span class="footer__partner-text">Expertise internationale</span>
-    </a>
-    <div class="footer__bottom">
-    <nav class="footer__legal" aria-label="Informations légales">
-      <ul role="list">
-        <li><a href="informations-legales.html#mentions-legales">Mentions légales</a></li>
-        <li><a href="informations-legales.html#cookies">Politique cookies</a></li>
-        <li><a href="informations-legales.html#confidentialite">Politique de confidentialité</a></li>
-        <li><a href="informations-legales.html#cgu">CGU</a></li>
-        <li><a href="informations-legales.html#ethique">Éthique et conformité</a></li>
-        <li><button type="button" class="footer__cookies" data-consent-open>Gérer les cookies</button></li>
-      </ul>
-    </nav>
-    <p class="footer__credit">Design par <a href="https://bigfive.solutions/" target="_blank" rel="noopener" aria-label="Big Five, design du site (nouvel onglet)">Big Five</a></p>
+  </div>
+  <div class="wrap footer__legal-wrap">
+    <div class="footer__legal-bar">
+      <a class="footer__partner" href="https://www.gl-events.com/" target="_blank" rel="noopener" aria-label="GL events, expertise internationale (nouvel onglet)">
+        <span class="footer__partner-logo"><img src="assets/logo-gl-events.png" alt="GL events" width="225" height="225" loading="lazy"></span>
+      </a>
+      <p class="footer__copyright">© 2026 Parc des Expositions d’Abidjan · GL events</p>
+      <nav class="footer__legal" aria-label="Informations légales">
+        <ul role="list">
+          <li><a href="informations-legales.html#mentions-legales">Mentions légales</a></li>
+          <li><a href="informations-legales.html#cookies">Politique cookies</a></li>
+          <li><a href="informations-legales.html#confidentialite">Politique de confidentialité</a></li>
+          <li><a href="informations-legales.html#cgu">CGU</a></li>
+          <li><a href="informations-legales.html#ethique">Éthique et conformité</a></li>
+          <li><button type="button" class="footer__cookies" data-consent-open>Gérer les cookies</button></li>
+        </ul>
+      </nav>
+      <p class="footer__credit">Design par <a href="https://bigfive.solutions/" target="_blank" rel="noopener" aria-label="Big Five, design du site (nouvel onglet)">Big Five</a></p>
     </div>
   </div>
 </footer>
 <a class="to-top" href="#contenu" aria-label="Retour en haut de page"><svg viewBox="16 -1 360 62.5" aria-hidden="true" focusable="false"><path d="M20 61C70 54 120 25.5 150 12C164 5.7 182 0 196 0C210 0 228 5.7 242 12C272 25.5 322 54 372 61Z"/></svg></a>
-<section class="cookie-banner" id="cookie-consent" aria-labelledby="consent-title" hidden>
+<section class="cookie-banner" data-bento="Modal" id="cookie-consent" aria-labelledby="consent-title" hidden>
   <div class="wrap consent__inner">
     <div class="consent__text">
-      <h2 class="consent__title" id="consent-title">Cookies et contenus tiers</h2>
+      <h2 class="consent__title title title--l5" id="consent-title" data-bento="Title">Cookies et contenus tiers</h2>
       <p>Ce site mémorise uniquement votre choix. Avec votre accord, la carte Google Maps, le fil Facebook et la visite virtuelle Matterport sont chargés et peuvent déposer leurs propres cookies. <a href="informations-legales.html#cookies">En savoir plus</a></p>
     </div>
     <div class="consent__actions">
-      <button class="btn btn--secondary" type="button" data-consent="refused">Tout refuser</button>
-      <button class="btn btn--secondary" type="button" data-consent="accepted">Tout accepter</button>
+      <button class="btn btn--invert btn--outline" data-bento="Button" type="button" data-consent="refused">Tout refuser</button>
+      <button class="btn btn--invert btn--outline" data-bento="Button" type="button" data-consent="accepted">Tout accepter</button>
     </div>
   </div>
 </section>

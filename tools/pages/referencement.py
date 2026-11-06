@@ -121,13 +121,13 @@ META = {
 # ---------------------------------------------------------------- pages par type d'événement
 def reasons(items):
     lis = "".join(f'<li><h3>{h}</h3><p>{p}</p></li>' for h, p in items)
-    return f'<ul class="reasons" role="list">{lis}</ul>'
+    return f'<ul class="reasons" role="list" data-bento="Block/Icons text">{lis}</ul>'
 
 
 def cta_block(title, href):
     return f"""<section class="section">
   <div class="wrap">
-    <div class="cta cta--photo">
+    <div class="cta cta--photo" data-bento="Cta">
       <div class="cta__img" aria-hidden="true"></div>
       <p class="eyebrow">{t("Votre projet", "Your project")}</p>
       <h2>{title}</h2>
@@ -159,7 +159,7 @@ def landing(name, eyebrow, h1, lead, why, spaces_html, events, cta_title, devis_
 <section class="section section--white">
   <div class="wrap">
     <div class="section__head"><p class="eyebrow">{t("Au Parc", "At the venue")}</p><h2>{t("Prochainement au Parc", "Coming up at the venue")}</h2></div>
-    <div class="agenda">
+    <div class="collection collection--3" data-bento="Collection">
 {event_cards(events)}
     </div>
     <p class="section__more"><a class="link-arrow" href="agenda.html">{t("Voir tout l’agenda", "See the full events calendar")} {ARROW}</a></p>
@@ -178,7 +178,7 @@ def landing(name, eyebrow, h1, lead, why, spaces_html, events, cta_title, devis_
 <section class="section">
   <div class="wrap">
     <div class="section__head"><p class="eyebrow">{t("Les espaces", "The venues")}</p><h2>{t("Les espaces adaptés.", "The right venues.")}</h2></div>
-    <div class="spaces{" spaces--2" if spaces_html.count('<a class="space') == 2 else ""}">
+    <div class="collection collection--{2 if spaces_html.count('card--space') == 2 else 3}" data-bento="Collection">
 {spaces_html}
     </div>
     {type_links(name, t("Autres types d’événements", "Other event types"))}
@@ -314,7 +314,7 @@ PAGES["venir-a-abidjan.html"] = ("Venir à Abidjan", page_hero(
 
 <section class="section section--white">
   <div class="wrap">
-    <ul class="reasons" role="list">
+    <ul class="reasons" role="list" data-bento="Block/Icons text">
       <li><h2 class="t3">{t("Rejoindre le Parc", "Getting to the venue")}</h2>
         <p>{t("Le Parc se trouve boulevard de l’aéroport, à Port-Bouët, à quelques minutes de l’aéroport international Félix-Houphouët-Boigny.", "The venue is on Boulevard de l’aéroport in Port-Bouët, just minutes from Félix-Houphouët-Boigny International Airport.")}</p>
         <p>{t("Plus d’une vingtaine de compagnies aériennes relient Abidjan à l’Afrique et au reste du monde.", "More than twenty airlines connect Abidjan with Africa and the rest of the world.")}</p>
@@ -334,14 +334,14 @@ PAGES["venir-a-abidjan.html"] = ("Venir à Abidjan", page_hero(
 <section class="section" id="faq">
   <div class="wrap faq">
     <div class="section__head"><p class="eyebrow">FAQ</p><h2>{t("Questions fréquentes", "Frequently asked questions")}</h2></div>
-    <div class="faq__list">{FAQ_HTML}</div>
+    <div class="faq__list" data-bento="Accordion">{FAQ_HTML}</div>
   </div>
 </section>
 
 <section class="section section--white">
   <div class="wrap">
     <div class="section__head"><p class="eyebrow">{t("Une destination", "A destination")}</p><h2>{t("Abidjan, ville d’affaires et d’expériences.", "Abidjan, a city of business and experiences.")}</h2></div>
-    <div class="destination-grid" data-lightbox>{DESTINATION_ITEMS}</div>
+    <div class="destination-grid" data-lightbox data-bento="Image gallery">{DESTINATION_ITEMS}</div>
   </div>
 </section>
 {LIGHTBOX}
@@ -377,6 +377,8 @@ def cut(s, n=155):
 
 
 EVENT_PAGES = {}
+BACK_ICON = '<svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg>'
+EVENT_BG = {"Concert": "slider/concert-scene", "Cérémonie": "espaces/dome/officiel-dome-salle", "Forum": "espaces/dome/officiel-dome-salle"}
 for i, (slug_, title, start, end, kind, tags, resa, resa_label) in enumerate(EVENTS):
     name = f"evenement-{slug_}.html"
     det = DETAILS.get(slug_, {})
@@ -393,27 +395,26 @@ for i, (slug_, title, start, end, kind, tags, resa, resa_label) in enumerate(EVE
     if det.get("site"):
         links.append(f'<a class="link-arrow" href="{det["site"]}" target="_blank" rel="noopener" aria-label="Site officiel : {title} (nouvel onglet)">Site officiel {EXT}</a>')
     others = [e[0] for e in EVENTS[i + 1:i + 4]] or [e[0] for e in EVENTS[:3]]
-    PAGES[name] = (title, f"""
-<section class="hero hero--small hero--under-header">
-  <div class="hero__img" aria-hidden="true">{img(f"agenda/{slug_}", priority=True, lazy=False)}</div>
-  <div class="wrap hero__inner">
-    {crumbs(A, ("Agenda", "agenda.html"), (title, None), ink=True)}
-    <p class="eyebrow">Agenda · {kind}</p>
-    <h1>{title}</h1>
-    <p class="lead">{when_long(start, end)}</p>
-  </div>
-</section>
+    t(f"Affiche : {title}", f"Poster: {tr_en(title)}")
+    if desc and cut(desc, 160) != desc:
+        t(cut(desc, 160), cut(tr_en(desc), 160))  # résumé de l’en-tête de page
+    back = f'<a class="page-hero__back" href="agenda.html">{BACK_ICON}{t("Tout l’agenda", "All events")}</a>'
+    meta = f'{back}<span class="page-hero__date">{when_long(start, end)}</span><span class="page-hero__category">{kind}</span>'
+    addons = (links[0] if resa else "") + f'<span class="badge">{lieu}</span>'
+    PAGES[name] = (title, page_hero(crumbs(A, ("Agenda", "agenda.html"), (title, None)), f"Agenda · {kind}", title,
+                                    cut(desc, 160), compact=True, meta=meta, addons=addons) + f"""
 
 <section class="section section--white">
   <div class="wrap with-aside">
     <div>
+      <figure class="ev-poster">{img(f"agenda/{slug_}", f"Affiche : {title}", "(min-width: 1024px) 50vw, 100vw")}</figure>
       <h2>{t("À propos de l’événement", "About the event")}</h2>
       <p class="lead">{desc}</p>
       <dl class="ev-facts block-gap">{facts_html}</dl>
       <div class="ev-links block-gap">{"".join(links)}</div>
       {note("Zone administrable Drupal : présentation, programme, organisateur, informations pratiques.")}
     </div>
-    <aside class="aside-box" aria-labelledby="aside-{slug_}">
+    <aside class="aside-box card" aria-labelledby="aside-{slug_}" data-bento="Card">
       <p class="eyebrow">{t("Organisateurs", "Organizers")}</p>
       <h2 class="t3" id="aside-{slug_}">{t("Votre événement au Parc ?", "Your event at the venue?")}</h2>
       <p>{t("Salons, congrès, concerts : parlez-nous de votre projet.", "Trade shows, congresses, concerts: tell us about your project.")}</p>
@@ -425,7 +426,7 @@ for i, (slug_, title, start, end, kind, tags, resa, resa_label) in enumerate(EVE
 <section class="section">
   <div class="wrap">
     <div class="section__head"><p class="eyebrow">Agenda</p><h2>{t("À suivre au Parc", "Next at the venue")}</h2></div>
-    <div class="agenda">
+    <div class="collection collection--3" data-bento="Collection">
 {event_cards(others)}
     </div>
     <p class="section__more"><a class="link-arrow" href="agenda.html">{t("Voir tout l’agenda", "See the full events calendar")} {ARROW}</a></p>
@@ -433,6 +434,7 @@ for i, (slug_, title, start, end, kind, tags, resa, resa_label) in enumerate(EVE
 </section>
 """)
     SECTION_OF[name] = "agenda.html"
+    PAGE_BG[name] = EVENT_BG.get(kind, "slider/salon-vue-plongeante")
     when_fr, when_en_ = when_long(start, end), when_en(start, end)
     t(when_fr, when_en_)  # dates de l'en-tête et des fiches en anglais
     title_en = tr_en(title)

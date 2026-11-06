@@ -8,7 +8,7 @@
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../styles.css">
 <script src="../assets/site.js" defer></script>
 <meta name="description" content="Trade shows, congresses, conventions and concerts in Abidjan: the Dome (5,023 seats), a 6,500 m² hall and 67,000 m² of esplanades. Request a quote.">
@@ -79,9 +79,12 @@
 </head>
 <body>
 <a class="skip" href="#contenu">Skip to content</a>
-<div class="utility utility--overlay">
+<div class="utility" data-bento="Topbar">
   <div class="wrap utility__inner">
-    <a class="wa-link utility__tel" href="https://wa.me/2252721710997?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20le%20Parc%20des%20Expositions%20d%E2%80%99Abidjan." target="_blank" rel="noopener" aria-label="WhatsApp: +225 27 21 71 09 97 (new tab)"><svg class="i i--wa" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.2 20.8l4.5-1.2A8.8 8.8 0 1 0 12 3.2z"/><path class="i--wa-handset" d="M9.1 7.6c-.3 0-.7.1-.9.5-.4.6-.6 1.4-.3 2.3.6 1.9 2.5 4 4.6 4.8.9.3 1.7.2 2.3-.2.4-.3.6-.7.5-1l-.2-.5-1.6-.8c-.3-.1-.5 0-.7.2l-.5.6c-1-.4-2-1.4-2.4-2.4l.6-.5c.2-.2.3-.4.2-.7l-.7-1.6c-.1-.3-.4-.4-.6-.4z"/></svg>+225 27 21 71 09 97</a>
+    <ul class="utility__items" role="list">
+      <li class="utility__item"><a class="wa-link utility__tel" href="https://wa.me/2252721710997?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20le%20Parc%20des%20Expositions%20d%E2%80%99Abidjan." target="_blank" rel="noopener" aria-label="WhatsApp: +225 27 21 71 09 97 (new tab)"><svg class="i i--wa" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.2 20.8l4.5-1.2A8.8 8.8 0 1 0 12 3.2z"/><path class="i--wa-handset" d="M9.1 7.6c-.3 0-.7.1-.9.5-.4.6-.6 1.4-.3 2.3.6 1.9 2.5 4 4.6 4.8.9.3 1.7.2 2.3-.2.4-.3.6-.7.5-1l-.2-.5-1.6-.8c-.3-.1-.5 0-.7.2l-.5.6c-1-.4-2-1.4-2.4-2.4l.6-.5c.2-.2.3-.4.2-.7l-.7-1.6c-.1-.3-.4-.4-.6-.4z"/></svg>+225 27 21 71 09 97</a></li>
+      <li class="utility__item utility__item--place"><svg class="i i--pin" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s-6.5-6.1-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 14.9 12 21 12 21z"/><circle cx="12" cy="9.8" r="2.3"/></svg><span>Abidjan, Côte d’Ivoire</span></li>
+    </ul>
     <div class="utility__end">
     <nav class="lang-switch" aria-label="Language"><a href="../index.html" hreflang="fr" lang="fr">FR</a><a href="index.html" hreflang="en" lang="en" aria-current="true">EN</a></nav>
     <ul class="social" role="list" aria-label="Social media">
@@ -92,11 +95,11 @@
     </div>
   </div>
 </div>
-<header class="topbar topbar--overlay">
+<header class="topbar topbar--overlay" data-bento="Site header">
   <div class="wrap topbar__inner">
     <a class="brand" href="index.html"><img src="../assets/logo-pea.webp" alt="Abidjan Exhibition Center — home" width="394" height="210"></a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-principale"><span class="menu-toggle__bars" aria-hidden="true"></span>Menu</button>
-    <nav class="nav" id="nav-principale" aria-label="Main navigation">
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-principale"><span class="menu-toggle__bars" aria-hidden="true"></span><span class="sr-only">Menu</span></button>
+    <nav class="nav" id="nav-principale" aria-label="Main navigation" data-bento="Menu">
       <ul>
       <li><a href="qui-sommes-nous.html">About us</a></li>
       <li class="nav__item--sub"><a href="nos-espaces.html">Our venues</a><button class="nav__subtoggle" type="button" aria-expanded="false" aria-controls="sub-espaces" aria-label="Our venues submenu"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></button><ul class="nav__sub" id="sub-espaces" role="list"><li><a href="hall-exposition.html"><span class="nav__sub-title">Exhibition Hall</span><span class="nav__sub-desc">6,500 m² · 17 m ceiling height</span></a></li><li><a href="le-dome.html"><span class="nav__sub-title">The Dome</span><span class="nav__sub-desc">5,000 m² · 5,023 seated · 9,588 standing</span></a></li><li><a href="parvis-esplanades.html"><span class="nav__sub-title">Forecourt &amp; Esplanades</span><span class="nav__sub-desc">67,000 m² of outdoor space</span></a></li><li><a href="visite-virtuelle.html"><span class="nav__sub-title">360° virtual tour</span><span class="nav__sub-desc">Explore the venue remotely</span></a></li></ul></li>
@@ -111,11 +114,11 @@
       </ul>
     </nav>
     <a class="topbar__wa" href="https://wa.me/2252721710997?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20le%20Parc%20des%20Expositions%20d%E2%80%99Abidjan." target="_blank" rel="noopener" aria-label="WhatsApp: +225 27 21 71 09 97 (new tab)"><svg class="i i--wa" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.2 20.8l4.5-1.2A8.8 8.8 0 1 0 12 3.2z"/><path class="i--wa-handset" d="M9.1 7.6c-.3 0-.7.1-.9.5-.4.6-.6 1.4-.3 2.3.6 1.9 2.5 4 4.6 4.8.9.3 1.7.2 2.3-.2.4-.3.6-.7.5-1l-.2-.5-1.6-.8c-.3-.1-.5 0-.7.2l-.5.6c-1-.4-2-1.4-2.4-2.4l.6-.5c.2-.2.3-.4.2-.7l-.7-1.6c-.1-.3-.4-.4-.6-.4z"/></svg><span class="topbar__wa-num">+225 27 21 71 09 97</span></a>
-    <a class="btn btn--primary topbar__cta" href="contact-devis.html"><span class="hide-sm">Request a quote</span><span class="show-sm">Quote</span></a>
+    <a class="btn btn--primary topbar__cta" data-bento="Button" href="contact-devis.html"><span class="hide-sm">Request a quote</span><span class="show-sm">Quote</span></a>
   </div>
 </header>
 <main class="page" id="contenu" tabindex="-1">
-<section class="hero hero--slider hero--under-header" data-slider>
+<section class="hero hero--slider hero--under-header" data-slider data-bento="Block/Hero">
   <div class="slider" aria-hidden="true">
     <figure class="slider__slide is-active"><img src="../assets/img/espaces/dome/officiel-dome-ciel-1600.webp" srcset="../assets/img/espaces/dome/officiel-dome-ciel-800.webp 800w, ../assets/img/espaces/dome/officiel-dome-ciel-1600.webp 1600w" sizes="100vw" alt="" width="1600" height="900" fetchpriority="high"></figure>
     <figure class="slider__slide"><img src="../assets/img/slider/salon-vue-plongeante-1600.webp" srcset="../assets/img/slider/salon-vue-plongeante-800.webp 800w, ../assets/img/slider/salon-vue-plongeante-1600.webp 1475w" sizes="100vw" alt="" width="1475" height="900" loading="lazy" decoding="async"></figure>
@@ -127,8 +130,8 @@
     <figure class="slider__slide"><img src="../assets/img/slider/journee-internationale-1600.webp" srcset="../assets/img/slider/journee-internationale-800.webp 800w, ../assets/img/slider/journee-internationale-1600.webp 1600w" sizes="100vw" alt="" width="1600" height="1067" loading="lazy" decoding="async"></figure>
   </div>
   <span class="hero__arch" aria-hidden="true"></span>
-  <a class="scroll-cue" href="#decouvrir" aria-label="Go to the next section"><span class="scroll-cue__mouse" aria-hidden="true"></span></a>
-  <div class="ctrl ctrl--on-photo slider__controls" role="group" aria-label="Slideshow">
+  <a class="scroll-cue" href="#decouvrir" aria-label="Go to the next section"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></a>
+  <div class="ctrl ctrl--on-photo slider__controls" role="group" aria-label="Slideshow" data-bento="Carousel">
     <p class="ctrl__count"><span class="sr-only">Image </span><span data-ctrl-current>01</span> / 08</p>
     <ol class="ctrl__track" role="list" aria-hidden="true"><li><span class="ctrl__seg" aria-current="true"></span></li><li><span class="ctrl__seg"></span></li><li><span class="ctrl__seg"></span></li><li><span class="ctrl__seg"></span></li><li><span class="ctrl__seg"></span></li><li><span class="ctrl__seg"></span></li><li><span class="ctrl__seg"></span></li><li><span class="ctrl__seg"></span></li></ol>
     <button type="button" class="ctrl__btn" data-slide-prev aria-label="Previous image"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -137,56 +140,58 @@
   </div>
   <div class="wrap hero__inner">
     <svg class="arch" viewBox="16 -1 360 68" aria-hidden="true" focusable="false"><path d="M20 61C70 54 120 25.5 150 12C164 5.7 182 0 196 0C210 0 228 5.7 242 12C272 25.5 322 54 372 61L372 61.5C322 54.5 272 31 242 17.5C226 10.5 210 6.5 196 6.5C182 6.5 166 10.5 150 17.5C120 31 70 54.5 20 61.5Z"/><path d="M36 64.8C100 54 150 47 200 47C250 47 300 54 364 64.8L364 65.3C300 57 250 50.5 200 50.5C150 50.5 100 57 36 65.3Z"/></svg>
-    <p class="eyebrow">Abidjan · Côte d’Ivoire</p>
-    <h1>Trade shows, congresses and major events in Abidjan.</h1>
+    <p class="eyebrow">The largest exhibition center in West Africa</p>
+    <h1 class="title title--l1" data-bento="Title">Trade shows, congresses and major events in Abidjan.</h1>
     <p class="lead">Flexible venues, full-service support and a destination at the heart of West Africa.</p>
-    <div class="actions"><a class="btn btn--primary" href="nos-espaces.html">Explore our venues <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a><a class="btn btn--secondary" href="contact-devis.html">Request a quote</a></div>
+    <div class="actions"><a class="btn btn--primary" data-bento="Button" href="nos-espaces.html">Explore our venues <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a><a class="btn btn--invert" data-bento="Button" href="contact-devis.html">Request a quote</a></div>
   </div>
 </section>
 
 <section class="section" id="decouvrir">
   <div class="wrap">
     <div class="intro">
-      <div><p class="eyebrow">Why the Exhibition Center?</p><h2>A venue built to help events grow.</h2></div>
+      <div><p class="eyebrow">Why the Exhibition Center?</p><h2 class="title title--l2" data-bento="Title">A venue built to help events grow.</h2></div>
       <!-- Note de maquette (texte d’origine) : Le site doit répondre immédiatement à une question : pourquoi organiser son événement au Parc des Expositions d’Abidjan ? La réponse s’articule autour de quatre piliers : espaces, services, destination et expertise. -->
       <p>Why hold your event at the Abidjan Exhibition Center? Four reasons: large-scale venues, integrated services, an attractive destination and international expertise.</p>
     </div>
-    <ul class="figures figures--4 figures--interactive" role="list">
+    <ul class="figures figures--4 figures--light" role="list" data-bento="Block/Key figures">
       <li class="figure"><strong><span class="sr-only">6,500 m²</span><span aria-hidden="true"><span data-count="6500">6,500</span> m²</span></strong>Exhibition hall</li>
       <li class="figure"><strong><span class="sr-only">5,000 m²</span><span aria-hidden="true"><span data-count="5000">5,000</span> m²</span></strong>The Dome</li>
       <li class="figure"><strong><span class="sr-only">67,000 m²</span><span aria-hidden="true"><span data-count="67000">67,000</span> m²</span></strong>Forecourt &amp; esplanades</li>
-      <li class="figure"><strong><span class="sr-only">360° tour</span><span aria-hidden="true"><span data-count="360">360</span>°</span></strong><a class="btn btn--secondary btn--sm" href="visite-virtuelle.html#visite">Tour the venue <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></li>
+      <li class="figure"><strong><span class="sr-only">360° tour</span><span aria-hidden="true"><span data-count="360">360</span>°</span></strong><a class="btn btn--tertiary btn--sm" data-bento="Button" href="visite-virtuelle.html#visite">Tour the venue <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></li>
     </ul>
   </div>
 </section>
 
-<section class="section section--ink video-block" aria-labelledby="video-titre">
+<section class="section section--brun video-block" aria-labelledby="video-titre" data-bento="Block/Video">
   <div class="wrap">
-    <div class="section__head"><p class="eyebrow">The venue on video</p><h2 id="video-titre">Discover the venue in 1 min 37.</h2></div>
+    <div class="section__head"><p class="eyebrow">The venue on video</p><h2 class="title title--l2" id="video-titre" data-bento="Title">Discover the venue in 1 min 37.</h2></div>
     <div class="video" data-video>
       <a class="video__facade" href="../assets/video/presentation-pea-1080.mp4" data-video-hd="../assets/video/presentation-pea-1080.mp4" data-video-sd="../assets/video/presentation-pea-720.mp4" data-video-title="Presentation video of the Abidjan Exhibition Center">
         <img src="../assets/img/video/presentation-poster-1600.webp" srcset="../assets/img/video/presentation-poster-800.webp 800w, ../assets/img/video/presentation-poster-1600.webp 1600w" sizes="(min-width: 1320px) 1320px, 100vw" alt="" width="1600" height="902" loading="lazy" decoding="async">
-        <span class="video__play"><span class="video__icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5v14l11-7z"/></svg></span><span class="video__label">Watch the presentation video<span class="video__meta">1 min 37 · in French</span></span></span>
+        <span class="video__play" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="sr-only">Watch the presentation video (1 min 37, in French)</span>
       </a>
     </div>
+    <p class="video__meta">1 min 37 · in French</p>
   </div>
 </section>
 
 <section class="section section--white">
   <div class="wrap">
-    <div class="section__head"><p class="eyebrow">Our venues</p><h2>The right venue for every project.</h2></div>
-    <div class="spaces">
-      <a class="space" href="hall-exposition.html">
-        <div class="space__media"><img src="../assets/img/espaces/hall/officiel-hall-drapeaux-1600.webp" srcset="../assets/img/espaces/hall/officiel-hall-drapeaux-800.webp 800w, ../assets/img/espaces/hall/officiel-hall-drapeaux-1600.webp 1600w" sizes="(min-width: 768px) 50vw, 100vw" alt="" width="1600" height="1067" loading="lazy" decoding="async"></div>
-        <div class="space__plate"><span class="space__letter" aria-hidden="true">A</span><div><h3>Exhibition Hall</h3><p>Trade shows · exhibitions · corporate</p></div><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+    <div class="section__head"><p class="eyebrow">Our venues</p><h2 class="title title--l2" data-bento="Title">The right venue for every project.</h2></div>
+    <div class="collection collection--3" data-bento="Collection">
+      <a class="card card--space" href="hall-exposition.html" data-bento="Card">
+        <div class="card__media"><img src="../assets/img/espaces/hall/officiel-hall-drapeaux-1600.webp" srcset="../assets/img/espaces/hall/officiel-hall-drapeaux-800.webp 800w, ../assets/img/espaces/hall/officiel-hall-drapeaux-1600.webp 1600w" sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" alt="" width="1600" height="1067" loading="lazy" decoding="async"><span class="badge badge--primary card__badge" data-bento="Badge">Venue A</span></div>
+        <div class="card__content"><h3 class="card__title title title--l4" data-bento="Title">Exhibition Hall</h3><p class="card__desc">Trade shows · exhibitions · corporate</p><span class="card__link">Discover <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></div>
       </a>
-      <a class="space space--ink" href="le-dome.html">
-        <div class="space__media"><img src="../assets/img/espaces/dome/officiel-dome-ciel-1600.webp" srcset="../assets/img/espaces/dome/officiel-dome-ciel-800.webp 800w, ../assets/img/espaces/dome/officiel-dome-ciel-1600.webp 1600w" sizes="(min-width: 768px) 50vw, 100vw" alt="" width="1600" height="900" loading="lazy" decoding="async"></div>
-        <div class="space__plate"><span class="space__letter" aria-hidden="true">B</span><div><h3>The Dome</h3><p>Conventions · conferences · concerts</p></div><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+      <a class="card card--space" href="le-dome.html" data-bento="Card">
+        <div class="card__media"><img src="../assets/img/espaces/dome/officiel-dome-ciel-1600.webp" srcset="../assets/img/espaces/dome/officiel-dome-ciel-800.webp 800w, ../assets/img/espaces/dome/officiel-dome-ciel-1600.webp 1600w" sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" alt="" width="1600" height="900" loading="lazy" decoding="async"><span class="badge badge--primary card__badge" data-bento="Badge">Venue B</span></div>
+        <div class="card__content"><h3 class="card__title title title--l4" data-bento="Title">The Dome</h3><p class="card__desc">Conventions · conferences · concerts</p><span class="card__link">Discover <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></div>
       </a>
-      <a class="space" href="parvis-esplanades.html">
-        <div class="space__media"><img src="../assets/img/espaces/parvis/officiel-dome-panorama-1600.webp" srcset="../assets/img/espaces/parvis/officiel-dome-panorama-800.webp 800w, ../assets/img/espaces/parvis/officiel-dome-panorama-1600.webp 1600w" sizes="(min-width: 768px) 50vw, 100vw" alt="" width="1600" height="789" loading="lazy" decoding="async"></div>
-        <div class="space__plate"><span class="space__letter" aria-hidden="true">C</span><div><h3>Forecourt &amp; Esplanades</h3><p>Outdoor formats · public events</p></div><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+      <a class="card card--space" href="parvis-esplanades.html" data-bento="Card">
+        <div class="card__media"><img src="../assets/img/espaces/parvis/officiel-dome-panorama-1600.webp" srcset="../assets/img/espaces/parvis/officiel-dome-panorama-800.webp 800w, ../assets/img/espaces/parvis/officiel-dome-panorama-1600.webp 1600w" sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" alt="" width="1600" height="789" loading="lazy" decoding="async"><span class="badge badge--primary card__badge" data-bento="Badge">Venue C</span></div>
+        <div class="card__content"><h3 class="card__title title title--l4" data-bento="Title">Forecourt &amp; Esplanades</h3><p class="card__desc">Outdoor formats · public events</p><span class="card__link">Discover <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></div>
       </a>
     </div>
   </div>
@@ -194,35 +199,35 @@
 
 <section class="section">
   <div class="wrap split">
-    <div class="media media--top"><img src="../assets/img/pages/destination-abidjan-1600.webp" srcset="../assets/img/pages/destination-abidjan-800.webp 800w, ../assets/img/pages/destination-abidjan-1600.webp 1080w" sizes="(min-width: 1024px) 50vw, 100vw" alt="Abidjan at night: the bridge and lagoon lit up" width="1080" height="1080" loading="lazy" decoding="async"><span class="plaque">Abidjan, MICE destination</span></div>
+    <div class="media media--top"><img src="../assets/img/pages/destination-abidjan-1600.webp" srcset="../assets/img/pages/destination-abidjan-800.webp 800w, ../assets/img/pages/destination-abidjan-1600.webp 1080w" sizes="(min-width: 1024px) 50vw, 100vw" alt="Abidjan at night: the bridge and lagoon lit up" width="1080" height="1080" loading="lazy" decoding="async"><span class="badge badge--primary media__badge" data-bento="Badge">Abidjan, MICE destination</span></div>
     <div>
       <p class="eyebrow">A destination</p>
-      <h2>Your event starts in Abidjan.</h2>
+      <h2 class="title title--l2" data-bento="Title">Your event starts in Abidjan.</h2>
       <!-- Note de maquette (texte d’origine) : Accessibilité, hôtellerie, vie économique et rayonnement régional : la destination devient un argument commercial à part entière. -->
       <p>Easy access, hotels, a thriving economy and regional reach: Abidjan gives your attendees a destination that lives up to your event.</p>
-      <a class="btn btn--secondary" href="venir-a-abidjan.html">Coming to Abidjan <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn--secondary" data-bento="Button" href="venir-a-abidjan.html">Coming to Abidjan <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
     </div>
   </div>
 </section>
 
 <section class="section section--white">
   <div class="wrap">
-    <div class="section__head"><p class="eyebrow">Events</p><h2>Coming up at the venue</h2></div>
-    <div class="agenda">
-      <a class="event" href="evenement-auto-expo.html">
-        <div class="event__thumb"><img src="../assets/img/agenda/auto-expo-800.webp" alt="" width="800" height="451" loading="lazy" decoding="async"></div>
-        <div class="event__body"><span class="date">8–10 Oct 2026</span><h3>Auto Expo</h3><p>Automotive industry trade show</p></div>
+    <div class="section__head"><p class="eyebrow">Events</p><h2 class="title title--l2" data-bento="Title">Coming up at the venue</h2></div>
+    <div class="collection collection--3" data-bento="Collection">
+      <a class="card card--event" href="evenement-auto-expo.html" data-bento="Card">
+        <div class="card__media card__media--poster"><img src="../assets/img/agenda/auto-expo-800.webp" alt="" width="800" height="451" loading="lazy" decoding="async"><span class="badge card__badge" data-bento="Badge">8–10 Oct 2026</span></div>
+        <div class="card__content"><h3 class="card__title title title--l4" data-bento="Title">Auto Expo</h3><p class="card__desc">Automotive industry trade show</p><span class="card__link">View the event <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></div>
       </a>
-      <a class="event" href="evenement-concert-tayc.html">
-        <div class="event__thumb"><img src="../assets/img/agenda/concert-tayc-800.webp" alt="" width="800" height="1000" loading="lazy" decoding="async"></div>
-        <div class="event__body"><span class="date">11 Oct 2026</span><h3>Concert TAYC</h3><p>Concert</p></div>
+      <a class="card card--event" href="evenement-concert-tayc.html" data-bento="Card">
+        <div class="card__media card__media--poster"><img src="../assets/img/agenda/concert-tayc-800.webp" alt="" width="800" height="1000" loading="lazy" decoding="async"><span class="badge card__badge" data-bento="Badge">11 Oct 2026</span></div>
+        <div class="card__content"><h3 class="card__title title title--l4" data-bento="Title">Concert TAYC</h3><p class="card__desc">Concert</p><span class="card__link">View the event <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></div>
       </a>
-      <a class="event" href="evenement-brands-licensing-africa.html">
-        <div class="event__thumb"><img src="../assets/img/agenda/brands-licensing-africa-800.webp" alt="" width="800" height="473" loading="lazy" decoding="async"></div>
-        <div class="event__body"><span class="date">15–16 Oct 2026</span><h3>Brands Licensing Africa</h3><p>Brand licensing trade show</p></div>
+      <a class="card card--event" href="evenement-brands-licensing-africa.html" data-bento="Card">
+        <div class="card__media card__media--poster"><img src="../assets/img/agenda/brands-licensing-africa-800.webp" alt="" width="800" height="473" loading="lazy" decoding="async"><span class="badge card__badge" data-bento="Badge">15–16 Oct 2026</span></div>
+        <div class="card__content"><h3 class="card__title title title--l4" data-bento="Title">Brands Licensing Africa</h3><p class="card__desc">Brand licensing trade show</p><span class="card__link">View the event <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></div>
       </a>
     </div>
-    <p class="section__more"><a class="link-arrow" href="agenda.html">See the full events calendar <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></p>
+    <p class="section__more"><a class="link-arrow" data-bento="Link" href="agenda.html">See the full events calendar <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></p>
   </div>
 </section>
 
@@ -230,32 +235,32 @@
 <!-- Note de maquette : le fil Facebook utilise le Page Plugin officiel de Meta. Instagram et LinkedIn n’offrent pas de fil intégrable sans jeton : en production, les alimenter via un agrégateur (Curator.io, Juicer, Walls.io…) ou via les API Meta Graph et LinkedIn depuis Drupal. -->
 <section class="section section--white" aria-labelledby="mur-titre">
   <div class="wrap">
-    <div class="section__head"><p class="eyebrow">News</p><h2 id="mur-titre">Live from the venue</h2></div>
-    <div class="wall">
-      <article class="wall__tile wall__tile--fb" aria-labelledby="mur-fb">
-        <header class="wall__head"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="social__fb"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.6-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.9v3h2.6V21z"/></svg><h3 class="wall__name t3" id="mur-fb">Facebook</h3><a class="wall__handle" href="https://www.facebook.com/profile.php?id=61572597774113" target="_blank" rel="noopener" aria-label="Follow the venue on Facebook (new tab)">Follow <svg class="i i--ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg></a></header>
+    <div class="section__head"><p class="eyebrow">News</p><h2 class="title title--l2" id="mur-titre" data-bento="Title">Live from the venue</h2></div>
+    <div class="wall" data-bento="Collection">
+      <article class="card wall__tile wall__tile--fb" data-bento="Card" aria-labelledby="mur-fb">
+        <header class="wall__head"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="social__fb"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.6-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.9v3h2.6V21z"/></svg><h3 class="wall__name t3 title title--l4" id="mur-fb" data-bento="Title">Facebook</h3><a class="wall__handle" href="https://www.facebook.com/profile.php?id=61572597774113" target="_blank" rel="noopener" aria-label="Follow the venue on Facebook (new tab)">Follow <svg class="i i--ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg></a></header>
         <div class="wall__embed" data-embed-src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D61572597774113&amp;tabs=timeline&amp;width=500&amp;height=620&amp;small_header=true&amp;adapt_container_width=true&amp;hide_cover=true&amp;show_facepile=false&amp;locale=fr_FR" data-embed-title="Facebook posts from the Abidjan Exhibition Center">
           <div class="embed-facade">
             <p>The Facebook feed is provided by Meta, which may set cookies.</p>
-            <button class="btn btn--secondary" type="button" data-embed-load>Show posts</button>
+            <button class="btn btn--secondary" data-bento="Button" type="button" data-embed-load>Show posts</button>
           </div>
         </div>
       </article>
-      <article class="wall__tile wall__tile--ig" aria-labelledby="mur-ig">
-        <header class="wall__head"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="social__ig"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" class="social__dot"/></svg><h3 class="wall__name t3" id="mur-ig">Instagram</h3><a class="wall__handle" href="https://www.instagram.com/parcdesexpositionsabidjan/" target="_blank" rel="noopener" aria-label="Follow parcdesexpositionsabidjan on Instagram (new tab)">@parcdesexpositionsabidjan <svg class="i i--ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg></a></header>
+      <article class="card wall__tile wall__tile--ig" data-bento="Card" aria-labelledby="mur-ig">
+        <header class="wall__head"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="social__ig"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" class="social__dot"/></svg><h3 class="wall__name t3 title title--l4" id="mur-ig" data-bento="Title">Instagram</h3><a class="wall__handle" href="https://www.instagram.com/parcdesexpositionsabidjan/" target="_blank" rel="noopener" aria-label="Follow parcdesexpositionsabidjan on Instagram (new tab)">@parcdesexpositionsabidjan <svg class="i i--ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg></a></header>
         <ul class="wall__grid" role="list"><li><a class="wall__post" href="https://www.instagram.com/p/DeBy3SlAVIs/" target="_blank" rel="noopener" aria-label="Instagram: poster for the International Food, Packaging and HoReCa Show, 8–10 October 2026 (new tab)"><img src="../assets/img/instagram/DeBy3SlAVIs-1600.webp" srcset="../assets/img/instagram/DeBy3SlAVIs-800.webp 800w, ../assets/img/instagram/DeBy3SlAVIs-1600.webp 1600w" sizes="(min-width: 1024px) 12vw, 33vw" alt="" width="1600" height="2001" loading="lazy" decoding="async"></a></li><li><a class="wall__post" href="https://www.instagram.com/p/Dd_xVHAlsvb/" target="_blank" rel="noopener" aria-label="Instagram: poster for the Abidjan Land Days, 5–7 October 2026 (new tab)"><img src="../assets/img/instagram/Dd_xVHAlsvb-1600.webp" srcset="../assets/img/instagram/Dd_xVHAlsvb-800.webp 800w, ../assets/img/instagram/Dd_xVHAlsvb-1600.webp 1600w" sizes="(min-width: 1024px) 12vw, 33vw" alt="" width="1600" height="1600" loading="lazy" decoding="async"></a></li><li><a class="wall__post" href="https://www.instagram.com/p/Dd7CplyFh-A/" target="_blank" rel="noopener" aria-label="Instagram: October events at the Abidjan Exhibition Center (new tab)"><img src="../assets/img/instagram/Dd7CplyFh-A-1600.webp" srcset="../assets/img/instagram/Dd7CplyFh-A-800.webp 800w, ../assets/img/instagram/Dd7CplyFh-A-1600.webp 1600w" sizes="(min-width: 1024px) 12vw, 33vw" alt="" width="1600" height="1600" loading="lazy" decoding="async"></a></li><li><a class="wall__post" href="https://www.instagram.com/p/Ddo52rDjXNZ/" target="_blank" rel="noopener" aria-label="Instagram: poster for Africa Space Expo, 24–26 September 2026 (new tab)"><img src="../assets/img/instagram/Ddo52rDjXNZ-1600.webp" srcset="../assets/img/instagram/Ddo52rDjXNZ-800.webp 800w, ../assets/img/instagram/Ddo52rDjXNZ-1600.webp 1080w" sizes="(min-width: 1024px) 12vw, 33vw" alt="" width="1080" height="809" loading="lazy" decoding="async"></a></li><li><a class="wall__post" href="https://www.instagram.com/p/DdbcGUfD4bJ/" target="_blank" rel="noopener" aria-label="Instagram: poster for the show Ramatoulaye 2 Tenues, Saturday 19 September (new tab)"><img src="../assets/img/instagram/DdbcGUfD4bJ-1600.webp" srcset="../assets/img/instagram/DdbcGUfD4bJ-800.webp 800w, ../assets/img/instagram/DdbcGUfD4bJ-1600.webp 1080w" sizes="(min-width: 1024px) 12vw, 33vw" alt="" width="1080" height="792" loading="lazy" decoding="async"></a></li><li><a class="wall__post" href="https://www.instagram.com/p/DdZggPXFXRa/" target="_blank" rel="noopener" aria-label="Instagram: why choose Abidjan for your next event? (new tab)"><img src="../assets/img/instagram/DdZggPXFXRa-1600.webp" srcset="../assets/img/instagram/DdZggPXFXRa-800.webp 800w, ../assets/img/instagram/DdZggPXFXRa-1600.webp 1080w" sizes="(min-width: 1024px) 12vw, 33vw" alt="" width="1080" height="1080" loading="lazy" decoding="async"></a></li></ul>
       </article>
-      <article class="wall__tile wall__tile--li" aria-labelledby="mur-li">
-        <header class="wall__head"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="social__fb"><path d="M4.6 9.2h3.1v10.3H4.6zM6.1 4.3a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6zM9.9 9.2h3v1.4c.4-.8 1.4-1.6 2.9-1.6 3.1 0 3.7 2 3.7 4.7v5.8h-3.1v-5.1c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7v5.2H9.9z"/></svg><h3 class="wall__name t3" id="mur-li">LinkedIn</h3></header>
+      <article class="card wall__tile wall__tile--li" data-bento="Card" aria-labelledby="mur-li">
+        <header class="wall__head"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="social__fb"><path d="M4.6 9.2h3.1v10.3H4.6zM6.1 4.3a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6zM9.9 9.2h3v1.4c.4-.8 1.4-1.6 2.9-1.6 3.1 0 3.7 2 3.7 4.7v5.8h-3.1v-5.1c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7v5.2H9.9z"/></svg><h3 class="wall__name t3 title title--l4" id="mur-li" data-bento="Title">LinkedIn</h3></header>
         <p>Trade shows, partnerships and business news from the Abidjan Exhibition Center.</p>
-        <a class="btn btn--secondary" href="https://www.linkedin.com/company/parc-des-expositions-d-abidjan/" target="_blank" rel="noopener" aria-label="Follow the venue on LinkedIn (new tab)">Follow on LinkedIn <svg class="i i--ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg></a>
+        <a class="btn btn--secondary" data-bento="Button" href="https://www.linkedin.com/company/parc-des-expositions-d-abidjan/" target="_blank" rel="noopener" aria-label="Follow the venue on LinkedIn (new tab)">Follow on LinkedIn <svg class="i i--ext" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg></a>
       </article>
-      <article class="wall__tile wall__tile--next" aria-labelledby="mur-next">
+      <article class="card wall__tile wall__tile--next" data-bento="Card" aria-labelledby="mur-next">
         <p class="wall__kicker">Coming up at the venue</p>
-        <h3 class="t3" id="mur-next">Auto Expo</h3>
+        <h3 class="t3 title title--l4" id="mur-next" data-bento="Title">Auto Expo</h3>
         <p class="wall__date">8–10 Oct 2026</p>
         <p>The automotive industry trade show: over 15 countries and 900 professional buyers.</p>
-        <a class="link-arrow" href="agenda.html#auto-expo">See the events <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+        <a class="link-arrow" data-bento="Link" href="agenda.html#auto-expo">See the events <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
       </article>
     </div>
   </div>
@@ -263,22 +268,22 @@
 
 <section class="section">
   <div class="wrap">
-    <div class="cta cta--photo">
+    <div class="cta cta--photo" data-bento="Cta">
       <div class="cta__img" aria-hidden="true"></div>
       <p class="eyebrow">Your next event</p>
-      <h2>Tell us about your project.</h2>
+      <h2 class="title title--l2" data-bento="Title">Tell us about your project.</h2>
       <!-- Note de maquette (texte d’origine) : Un parcours simple pour transformer une visite en demande commerciale qualifiée. -->
       <p>Describe your event in a few minutes: our sales team will get back to you with a tailored proposal.</p>
-      <a class="btn btn--primary" href="contact-devis.html">Request a quote <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn--primary" data-bento="Button" href="contact-devis.html">Request a quote <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
     </div>
   </div>
 </section>
 
-<section class="section section--white" aria-labelledby="refs-title">
+<section class="section section--white" aria-labelledby="refs-title" data-bento="Block/Partners">
   <div class="wrap">
     <div class="logos-head">
-      <div><p class="eyebrow">References</p><h2 id="refs-title">They trusted us</h2></div>
-      <div class="ctrl logos-controls" role="group" aria-label="Logo carousel">
+      <div><p class="eyebrow">References</p><h2 class="title title--l2" id="refs-title" data-bento="Title">They trusted us</h2></div>
+      <div class="ctrl logos-controls" role="group" aria-label="Logo carousel" data-bento="Carousel">
         <p class="ctrl__count"><span class="sr-only">Page </span><span data-ctrl-current>1</span> / <span data-ctrl-total>2</span></p>
         <ol class="ctrl__track" role="list" aria-hidden="true" data-logos-pages></ol>
         <button class="ctrl__btn" type="button" data-logos-prev aria-label="Previous logos"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -292,19 +297,19 @@
   </div>
 </section>
 </main>
-<footer class="footer">
-  <!-- Note de maquette : inscription simulée ; à brancher sur l’outil d’e-mailing du Parc (Brevo, Mailchimp…) via Drupal -->
-  <div class="wrap newsletter" id="newsletter">
+<!-- Note de maquette : inscription simulée ; à brancher sur l’outil d’e-mailing du Parc (Brevo, Mailchimp…) via Drupal -->
+<section class="newsletter-block" id="newsletter" aria-labelledby="nl-title" data-bento="Newsletter form">
+  <div class="wrap newsletter">
     <div class="newsletter__intro">
-      <p class="newsletter__label">Newsletter</p>
-      <h2 class="newsletter__title">Upcoming events at the venue, straight to your inbox</h2>
+      <p class="eyebrow">Newsletter</p>
+      <h2 class="newsletter__title title title--l3" id="nl-title" data-bento="Title">Upcoming events at the venue, straight to your inbox</h2>
       <p>One email a month: upcoming trade shows, congresses and concerts. Unsubscribe in one click.</p>
     </div>
     <form class="newsletter__form" data-newsletter novalidate>
       <label class="newsletter__field-label" for="nl-email">Your email address</label>
       <div class="newsletter__row">
         <input id="nl-email" name="email" type="email" autocomplete="email" required placeholder="name@example.com" aria-describedby="nl-email-error">
-        <button class="btn btn--primary" type="submit">Subscribe</button>
+        <button class="btn btn--primary" data-bento="Button" type="submit">Subscribe</button>
       </div>
       <p class="newsletter__error" id="nl-email-error" hidden>Enter a valid email address, for example name@example.com.</p>
       <label class="check newsletter__consent"><input id="nl-consent" type="checkbox" required aria-describedby="nl-consent-error"><span>I agree to receive the venue’s newsletter. See the <a href="informations-legales.html#confidentialite">privacy policy</a>.</span></label>
@@ -312,49 +317,68 @@
     </form>
     <p class="newsletter__ok" role="status" tabindex="-1" hidden></p>
   </div>
-  <div class="wrap footer__grid">
-    <div class="footer__brand">
-      <img src="../assets/logo-pea.webp" alt="" width="394" height="210" loading="lazy">
-      <p><b>Abidjan Exhibition Center</b><br>Boulevard de l’aéroport · Abidjan · Côte d’Ivoire<br><a class="wa-link" href="https://wa.me/2252721710997?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20le%20Parc%20des%20Expositions%20d%E2%80%99Abidjan." target="_blank" rel="noopener" aria-label="WhatsApp: +225 27 21 71 09 97 (new tab)"><svg class="i i--wa" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.2 20.8l4.5-1.2A8.8 8.8 0 1 0 12 3.2z"/><path class="i--wa-handset" d="M9.1 7.6c-.3 0-.7.1-.9.5-.4.6-.6 1.4-.3 2.3.6 1.9 2.5 4 4.6 4.8.9.3 1.7.2 2.3-.2.4-.3.6-.7.5-1l-.2-.5-1.6-.8c-.3-.1-.5 0-.7.2l-.5.6c-1-.4-2-1.4-2.4-2.4l.6-.5c.2-.2.3-.4.2-.7l-.7-1.6c-.1-.3-.4-.4-.6-.4z"/></svg>+225 27 21 71 09 97</a></p>
+</section>
+<footer class="footer" data-bento="Footer">
+  <div class="wrap footer__columns">
+    <div class="footer__col footer__col--brand">
+      <img class="footer__logo" src="../assets/logo-pea.webp" alt="Abidjan Exhibition Center" width="394" height="210" loading="lazy">
+      <address class="footer__contact" data-bento="Contact details">
+        <span>Boulevard de l’aéroport<br>Abidjan · Côte d’Ivoire</span>
+        <a class="wa-link" href="https://wa.me/2252721710997?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20le%20Parc%20des%20Expositions%20d%E2%80%99Abidjan." target="_blank" rel="noopener" aria-label="WhatsApp: +225 27 21 71 09 97 (new tab)"><svg class="i i--wa" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.2 20.8l4.5-1.2A8.8 8.8 0 1 0 12 3.2z"/><path class="i--wa-handset" d="M9.1 7.6c-.3 0-.7.1-.9.5-.4.6-.6 1.4-.3 2.3.6 1.9 2.5 4 4.6 4.8.9.3 1.7.2 2.3-.2.4-.3.6-.7.5-1l-.2-.5-1.6-.8c-.3-.1-.5 0-.7.2l-.5.6c-1-.4-2-1.4-2.4-2.4l.6-.5c.2-.2.3-.4.2-.7l-.7-1.6c-.1-.3-.4-.4-.6-.4z"/></svg>+225 27 21 71 09 97</a>
+      </address>
     </div>
-    <nav class="footer__nav" aria-label="Footer links">
-      <ul role="list">
+    <nav class="footer__col" aria-labelledby="ft-espaces">
+      <h2 class="footer__title title title--l5" id="ft-espaces" data-bento="Title">Our venues</h2>
+      <ul class="footer__menu" role="list">
+        <li><a href="hall-exposition.html">Exhibition Hall</a></li>
+        <li><a href="le-dome.html">The Dome</a></li>
+        <li><a href="parvis-esplanades.html">Forecourt &amp; Esplanades</a></li>
+        <li><a href="visite-virtuelle.html">360° virtual tour</a></li>
+        <li><a href="nos-services.html">Our services</a></li>
+      </ul>
+    </nav>
+    <nav class="footer__col" aria-labelledby="ft-evenement">
+      <h2 class="footer__title title title--l5" id="ft-evenement" data-bento="Title">Your event</h2>
+      <ul class="footer__menu" role="list">
         <li><a href="salons-professionnels.html">Trade shows</a></li>
         <li><a href="congres-conferences.html">Congresses</a></li>
         <li><a href="evenements-entreprise.html">Corporate</a></li>
         <li><a href="concerts-spectacles.html">Concerts</a></li>
         <li><a href="venir-a-abidjan.html">Coming to Abidjan</a></li>
+        <li><a href="contact-devis.html">Request a quote</a></li>
       </ul>
     </nav>
-    <a class="footer__partner" href="https://www.gl-events.com/" target="_blank" rel="noopener" aria-label="GL events, international expertise (new tab)">
-      <span class="footer__partner-logo"><img src="../assets/logo-gl-events.png" alt="GL events" width="225" height="225" loading="lazy"></span>
-      <span class="footer__partner-text">International expertise</span>
-    </a>
-    <div class="footer__bottom">
-    <nav class="footer__legal" aria-label="Legal information">
-      <ul role="list">
-        <li><a href="informations-legales.html#mentions-legales">Legal notice</a></li>
-        <li><a href="informations-legales.html#cookies">Cookie policy</a></li>
-        <li><a href="informations-legales.html#confidentialite">Privacy policy</a></li>
-        <li><a href="informations-legales.html#cgu">Terms of use</a></li>
-        <li><a href="informations-legales.html#ethique">Ethics &amp; compliance</a></li>
-        <li><button type="button" class="footer__cookies" data-consent-open>Manage cookies</button></li>
-      </ul>
-    </nav>
-    <p class="footer__credit">Design by <a href="https://bigfive.solutions/" target="_blank" rel="noopener" aria-label="Big Five, website design (new tab)">Big Five</a></p>
+  </div>
+  <div class="wrap footer__legal-wrap">
+    <div class="footer__legal-bar">
+      <a class="footer__partner" href="https://www.gl-events.com/" target="_blank" rel="noopener" aria-label="GL events, international expertise (new tab)">
+        <span class="footer__partner-logo"><img src="../assets/logo-gl-events.png" alt="GL events" width="225" height="225" loading="lazy"></span>
+      </a>
+      <p class="footer__copyright">© 2026 Abidjan Exhibition Center · GL events</p>
+      <nav class="footer__legal" aria-label="Legal information">
+        <ul role="list">
+          <li><a href="informations-legales.html#mentions-legales">Legal notice</a></li>
+          <li><a href="informations-legales.html#cookies">Cookie policy</a></li>
+          <li><a href="informations-legales.html#confidentialite">Privacy policy</a></li>
+          <li><a href="informations-legales.html#cgu">Terms of use</a></li>
+          <li><a href="informations-legales.html#ethique">Ethics &amp; compliance</a></li>
+          <li><button type="button" class="footer__cookies" data-consent-open>Manage cookies</button></li>
+        </ul>
+      </nav>
+      <p class="footer__credit">Design by <a href="https://bigfive.solutions/" target="_blank" rel="noopener" aria-label="Big Five, website design (new tab)">Big Five</a></p>
     </div>
   </div>
 </footer>
 <a class="to-top" href="#contenu" aria-label="Back to top"><svg viewBox="16 -1 360 62.5" aria-hidden="true" focusable="false"><path d="M20 61C70 54 120 25.5 150 12C164 5.7 182 0 196 0C210 0 228 5.7 242 12C272 25.5 322 54 372 61Z"/></svg></a>
-<section class="cookie-banner" id="cookie-consent" aria-labelledby="consent-title" hidden>
+<section class="cookie-banner" data-bento="Modal" id="cookie-consent" aria-labelledby="consent-title" hidden>
   <div class="wrap consent__inner">
     <div class="consent__text">
-      <h2 class="consent__title" id="consent-title">Cookies and third-party content</h2>
+      <h2 class="consent__title title title--l5" id="consent-title" data-bento="Title">Cookies and third-party content</h2>
       <p>This site only stores your choice. With your consent, the Google Maps map, the Facebook feed and the Matterport virtual tour are loaded and may set their own cookies. <a href="informations-legales.html#cookies">Learn more</a></p>
     </div>
     <div class="consent__actions">
-      <button class="btn btn--secondary" type="button" data-consent="refused">Reject all</button>
-      <button class="btn btn--secondary" type="button" data-consent="accepted">Accept all</button>
+      <button class="btn btn--invert btn--outline" data-bento="Button" type="button" data-consent="refused">Reject all</button>
+      <button class="btn btn--invert btn--outline" data-bento="Button" type="button" data-consent="accepted">Accept all</button>
     </div>
   </div>
 </section>

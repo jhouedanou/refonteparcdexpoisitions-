@@ -417,6 +417,13 @@ EN = {
 "Le Hall d’Exposition pavoisé des drapeaux des nations": "The Exhibition Hall hung with national flags",
 "La salle plénière du Dôme": "The Dome’s plenary hall",
 "Foyer boisé du Parc, œuvre d’art au mur": "Wood-panelled foyer with an artwork on the wall",
+"Découvrir": "Discover",
+"Voir l’événement": "View the event",
+"Le plus grand parc exposition d’Afrique de l’Ouest": "The largest exhibition center in West Africa",
+"Voir la vidéo de présentation (1 min 37, en français)": "Watch the presentation video (1 min 37, in French)",
+"© 2026 Parc des Expositions d’Abidjan · GL events": "© 2026 Abidjan Exhibition Center · GL events",
+"Votre événement": "Your event",
+"Visite virtuelle 360°": "360° virtual tour",
 }
 pathlib.Path(__file__).with_name("en.json").write_text(json.dumps(EN, ensure_ascii=False, indent=1), encoding="utf-8")
 print(len(EN), "entrées")

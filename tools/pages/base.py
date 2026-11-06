@@ -18,8 +18,8 @@ NAV = [
 
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
-         '<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400'
-         '&amp;display=swap" rel="stylesheet">')  # charte : Poppins seule
+         '<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,400'
+         '&amp;display=swap" rel="stylesheet">')  # charte, kit web : Poppins Thin, Regular, Bold
 
 
 def head(title):
