@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Convertit les photos sources (dossier images/) en WebP optimisés dans assets/img/.
 
-Usage : python3 tools/optimiser-images.py [--agenda]
+Usage : python3 tools/optimiser-images.py [--agenda] [--video]
   --agenda  télécharge aussi les visuels des événements depuis le site officiel du Parc.
+  --video   réencode la vidéo de présentation officielle (ffmpeg) et son affiche.
 
 Chaque image est produite en deux largeurs : <nom>-1600.webp (affichage large) et <nom>-800.webp
 (vignettes, mobile), à utiliser avec srcset. Les originaux restent dans images/.
@@ -119,6 +120,77 @@ def convert_folders():
     print(f"Dossiers pilotés : {ko(before)} -> {ko(after)}")
 
 
+# Photos officielles fournies par le client (docs/retourclient/images, non versionné : 1 Go, vidéo > 100 Mo).
+# Écrites APRÈS les dossiers pilotés (qui vident leurs sorties) pour rejoindre les galeries des pages espaces.
+# Les TIF et les très grandes images passent d'abord par sips (JPEG 3200 px) : cwebp ne lit pas le TIFF partout.
+OFFICIELLES_SRC = ROOT / "docs" / "retourclient" / "images"
+OFFICIELLES = {
+    "Hall 1 bis.jpg": "espaces/hall/officiel-hall-drapeaux",
+    "_DSF6401.jpg": "espaces/hall/officiel-hall-portes",
+    "_DSF6404.jpg": "espaces/hall/officiel-hall-perspective",
+    "IMG_3429.JPG": "espaces/dome/officiel-dome-ciel",
+    "IMG_3415.JPG": "espaces/dome/officiel-dome-aerien",
+    "IMG_3413.JPG": "espaces/dome/officiel-dome-toiture",
+    "6C2A7053.jpg": "espaces/dome/officiel-dome-salle",
+    "6C2A7050.jpg": "espaces/dome/officiel-dome-fauteuils",
+    "_DSF6430.tif": "espaces/dome/officiel-dome-parterre",
+    "_DSF6437.tif": "espaces/dome/officiel-dome-gradins",
+    "Dôme Panorama.tif": "espaces/parvis/officiel-dome-panorama",
+    "_DSF6457.tif": "pages/foyer-galerie",
+    "_DSF6458.tif": "pages/foyer-banc",
+    "_DSF6459.tif": "pages/foyer-oeuvre",
+    "_DSF6460.tif": "pages/foyer-accueil",
+}
+
+
+def convert_officielles():
+    if not OFFICIELLES_SRC.is_dir():
+        print("  photos officielles absentes : docs/retourclient/images")
+        return
+    before = after = 0
+    with tempfile.TemporaryDirectory() as tmp:
+        for name, target in OFFICIELLES.items():
+            src = OFFICIELLES_SRC / name
+            if not src.exists():
+                print(f"  absent : docs/retourclient/images/{name}")
+                continue
+            before += src.stat().st_size
+            mid = pathlib.Path(tmp) / (pathlib.Path(target).name + ".jpg")
+            subprocess.run(["sips", "-s", "format", "jpeg", "-s", "formatOptions", "92", "-Z", "3200",
+                            str(src), "--out", str(mid)], check=True, capture_output=True)
+            for w in WIDTHS:
+                dest = OUT / f"{target}-{w}.webp"
+                cwebp(mid, dest, w)
+                after += dest.stat().st_size
+            print(f"  officielle {name} -> assets/img/{target}-{{1600,800}}.webp")
+    print(f"Photos officielles : {ko(before)} -> {ko(after)}")
+
+
+VIDEO_SRC = OFFICIELLES_SRC / "Vidéo présentation PEA FRANÇAIS.mp4"
+
+
+def convert_video():
+    """Vidéo de présentation : H.264 1080p (~25 Mo) et 720p (~14 Mo), affiche WebP tirée de la 4e seconde (vue aérienne)."""
+    if not VIDEO_SRC.exists():
+        print("  vidéo source absente : docs/retourclient/images")
+        return
+    out = ROOT / "assets" / "video"
+    out.mkdir(parents=True, exist_ok=True)
+    for width, crf, maxrate, audio in ((1920, "28", "2000k", "128k"), (1280, "28", "1100k", "96k")):
+        name = "1080" if width == 1920 else "720"
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(VIDEO_SRC), "-vf", f"scale={width}:-2",
+                        "-c:v", "libx264", "-preset", "slow", "-crf", crf, "-maxrate", maxrate, "-bufsize", str(int(maxrate[:-1]) * 2) + "k",
+                        "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", audio, "-movflags", "+faststart",
+                        str(out / f"presentation-pea-{name}.mp4")], check=True)
+    with tempfile.TemporaryDirectory() as tmp:
+        frame = pathlib.Path(tmp) / "poster.png"
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", "4", "-i", str(VIDEO_SRC), "-frames:v", "1",
+                        "-vf", "scale=1920:-2", str(frame)], check=True)
+        for w in WIDTHS:
+            cwebp(frame, OUT / "video" / f"presentation-poster-{w}.webp", w)
+    print("  vidéo -> assets/video/presentation-pea-{1080,720}.mp4 + affiche")
+
+
 # Logos des références (images/logos) : une seule largeur, transparence conservée
 LOGOS_NOMS = {"images.png": "sara-2025"}
 
@@ -217,6 +289,9 @@ def download_agenda():
 if __name__ == "__main__":
     convert_images()
     convert_folders()
+    convert_officielles()
     convert_logos()
     if "--agenda" in sys.argv:
         download_agenda()
+    if "--video" in sys.argv:
+        convert_video()

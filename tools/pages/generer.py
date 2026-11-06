@@ -79,7 +79,7 @@ def header(active):
       </ul>
     </nav>
     <a class="topbar__wa" href="{WA_URL}" target="_blank" rel="noopener" aria-label="WhatsApp : +225 27 21 71 09 97 (nouvel onglet)">{WA_ICON}<span class="topbar__wa-num">+225 27 21 71 09 97</span></a>
-    <a class="btn btn--primary topbar__cta" href="contact-devis.html"{cta_cur}><span><span class="hide-sm">Demander un </span>devis</span></a>
+    <a class="btn btn--primary topbar__cta" href="contact-devis.html"{cta_cur}><span class="hide-sm">Demander un devis</span><span class="show-sm">Devis</span></a>
   </div>
 </header>
 <main class="page" id="contenu" tabindex="-1">"""
@@ -228,7 +228,7 @@ def img(name, alt="", sizes="100vw", cls="", lazy=True, priority=False):
 
 
 SPACE_URL = {"A": "hall-exposition.html", "B": "le-dome.html", "C": "parvis-esplanades.html"}
-SPACE_IMG = {"A": "espaces/hall/interieur", "B": "espaces/parvis/dome-sous-le-nuage", "C": "espaces/parvis/salon-plein-air-aerien"}
+SPACE_IMG = {"A": "espaces/hall/officiel-hall-drapeaux", "B": "espaces/dome/officiel-dome-ciel", "C": "espaces/parvis/officiel-dome-panorama"}
 
 
 def space(letter, title, sub, media=None, ink=False, h="h3", usage=""):
@@ -407,8 +407,8 @@ IG_POSTS = "".join(
     for code, alt in IG_ITEMS)
 
 # Diaporama de l'accueil : ordre d'affichage (images produites par tools/optimiser-images.py)
-SLIDES = ["slider/dome-rendu", "slider/salon-vue-plongeante", "slider/concert-foule", "slider/percussions",
-          "slider/concert-scene", "slider/salon-rencontres", "slider/spectacle-scene", "slider/journee-internationale"]
+SLIDES = ["espaces/dome/officiel-dome-ciel", "slider/salon-vue-plongeante", "espaces/dome/officiel-dome-salle", "slider/concert-foule",
+          "espaces/hall/officiel-hall-drapeaux", "slider/concert-scene", "espaces/dome/officiel-dome-aerien", "slider/journee-internationale"]
 SLIDES_HTML = "\n".join(
     f'    <figure class="slider__slide{" is-active" if i == 0 else ""}">'
     f'{img(n, sizes="100vw", priority=i == 0, lazy=i != 0)}</figure>' for i, n in enumerate(SLIDES))
@@ -430,6 +430,28 @@ LOGOS_SOMBRES = {"abidjan-border-forum"}
 LOGO_ITEMS = "".join(f'<li class="logos__item{" logos__item--dark" if n in LOGOS_SOMBRES else ""}">{img("logos/" + n, a)}</li>' for n, a in LOGOS)
 CHEV_L = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg>'
 CHEV_R = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg>'
+
+# ---------------------------------------------------------------- Vidéo de présentation (composant Bento « Block/Video »)
+# Façade (affiche + bouton) : la vidéo n'est chargée qu'au clic (assets/site.js). Sans JS, le lien ouvre le MP4.
+# Source : docs/retourclient/images/Vidéo présentation PEA FRANÇAIS.mp4 (4K HEVC, 333 Mo) recompressée en H.264 1080p / 720p.
+PLAY_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5v14l11-7z"/></svg>'
+
+
+def video_block(heading_id, h="h2"):
+    return f"""
+<section class="section section--ink video-block" aria-labelledby="{heading_id}">
+  <div class="wrap">
+    <div class="section__head"><p class="eyebrow">Le Parc en vidéo</p><{h} id="{heading_id}">Découvrez le Parc en 1 min 37.</{h}></div>
+    <div class="video" data-video>
+      <a class="video__facade" href="assets/video/presentation-pea-1080.mp4" data-video-hd="assets/video/presentation-pea-1080.mp4" data-video-sd="assets/video/presentation-pea-720.mp4" data-video-title="Vidéo de présentation du Parc des Expositions d’Abidjan">
+        {img("video/presentation-poster", "", "(min-width: 1320px) 1320px, 100vw")}
+        <span class="video__play"><span class="video__icon">{PLAY_ICON}</span><span class="video__label">Voir la vidéo de présentation<span class="video__meta">1 min 37 · en français</span></span></span>
+      </a>
+    </div>
+  </div>
+</section>
+"""
+
 
 # ---------------------------------------------------------------- Accueil
 PAGES["index.html"] = ("Accueil — Parc des Expositions d’Abidjan", f"""
@@ -470,7 +492,7 @@ PAGES["index.html"] = ("Accueil — Parc des Expositions d’Abidjan", f"""
     </ul>
   </div>
 </section>
-
+{video_block("video-titre")}
 <section class="section section--white">
   <div class="wrap">
     <div class="section__head"><p class="eyebrow">Nos espaces</p><h2>À chaque projet, son espace.</h2></div>
@@ -618,7 +640,7 @@ PAGES["qui-sommes-nous.html"] = ("Qui sommes-nous ? — Parc des Expositions d�
     </div>
   </div>
 </section>
-
+{video_block("video-titre")}
 <section class="section" id="destination">
   <div class="wrap">
   <div class="intro">
@@ -724,6 +746,18 @@ ALTS = {
     "parking-couvert": "Parking couvert sous les ombrières",
     "engins-devant-le-dome": "Engins de chantier exposés sur le parvis devant le Dôme",
     "salon-plein-air-aerien": "Vue aérienne d’un salon en plein air sur l’esplanade",
+    # Photos officielles (docs/retourclient/images, novembre 2026)
+    "officiel-hall-drapeaux": "Le Hall d’Exposition vide, pavoisé des drapeaux des nations sous sa charpente noire",
+    "officiel-hall-portes": "Grand volume du Hall d’Exposition et ses portes de chargement",
+    "officiel-hall-perspective": "Perspective du Hall d’Exposition, sol béton et charpente pavoisée",
+    "officiel-dome-ciel": "La coupole du Dôme sous un ciel bleu",
+    "officiel-dome-aerien": "Le Dôme vu du ciel, au milieu des esplanades",
+    "officiel-dome-toiture": "La toiture ondulée du Dôme, vue de près",
+    "officiel-dome-salle": "La salle plénière du Dôme : fauteuils face à la scène",
+    "officiel-dome-fauteuils": "Rangées de fauteuils de la salle du Dôme",
+    "officiel-dome-parterre": "Le parterre du Dôme dégagé, sous la charpente en bois",
+    "officiel-dome-gradins": "Gradins et parterre de la salle du Dôme",
+    "officiel-dome-panorama": "Le Dôme et son parvis, vus depuis l’esplanade",
 }
 
 
@@ -747,7 +781,7 @@ SPACES = [
          note_txt="La fiche espace concentre l’information commerciale et technique : usages possibles, capacité, configuration, prestations associées et documents à télécharger.",
          text="Avec 6 500 m² d’un seul tenant et 17 m libres sous plafond, le Hall d’Exposition peut être divisé en 2 ou 3 espaces d’exposition distincts pour accueillir salons, expositions et grands événements d’entreprise.",
          usages=["Salon professionnel", "Exposition", "Lancement", "Convention"], equip=None,
-         photos=folder_photos("espaces/hall", "interieur", "Hall d’Exposition"),
+         photos=folder_photos("espaces/hall", "officiel-hall-drapeaux", "Hall d’Exposition"),
          doc=("assets/fiche-technique-hall-exposition.pdf", "Télécharger la fiche technique", True)),
     dict(file="le-dome.html", title="Le Dôme", letter="B", code="dome",
          lead="Le Convention Center du Parc : une salle de 5 000 m² équipée pour les conférences, les événements institutionnels, les salons et les concerts.",
@@ -756,7 +790,7 @@ SPACES = [
          text="Avec 5 000 m² exploitables, le Dôme accueille jusqu’à 5 023 personnes assises et 9 588 debout, avec une infrastructure technique pensée pour les événements professionnels comme pour le grand public.",
          usages=["Conférence internationale", "Événement institutionnel", "Salon & exposition", "Concert & spectacle"],
          equip=["96 enceintes", "365 projecteurs", "240 m² d’écran LED"],
-         photos=folder_photos("espaces/dome", "panel-connect", "Le Dôme"),
+         photos=folder_photos("espaces/dome", "officiel-dome-salle", "Le Dôme"),
          doc=(None, None, False)),
     dict(file="parvis-esplanades.html", title="Parvis & Esplanades", letter="C", code="parvis",
          lead="67 000 m² d’espaces extérieurs pour les expositions et les événements en plein air.",
@@ -764,7 +798,7 @@ SPACES = [
          h2="De grands espaces extérieurs, à l’échelle de vos projets.", note_txt=None,
          text="Le Parvis et les esplanades Est et Nord-Est totalisent 67 000 m² pour les expositions extérieures, les formats outdoor et les événements grand public.",
          usages=["Exposition extérieure", "Format outdoor", "Événement grand public", "Concert"], equip=None,
-         photos=folder_photos("espaces/parvis", "dome-sous-le-nuage", "Parvis & Esplanades"),
+         photos=folder_photos("espaces/parvis", "officiel-dome-panorama", "Parvis & Esplanades"),
          doc=(None, None, False)),
 ]
 
@@ -909,6 +943,10 @@ PAGES["nos-services.html"] = ("Nos services — Parc des Expositions d’Abidjan
 
 # ---------------------------------------------------------------- Photothèque
 PHOTOS = [  # (fichier, espace, type, texte alternatif) — espaces et types déduits des photos, à confirmer
+    ("espaces/dome/officiel-dome-ciel", "dome", "lieux", "La coupole du Dôme sous un ciel bleu"),
+    ("espaces/hall/officiel-hall-drapeaux", "hall", "lieux", "Le Hall d’Exposition pavoisé des drapeaux des nations"),
+    ("espaces/dome/officiel-dome-salle", "dome", "lieux", "La salle plénière du Dôme"),
+    ("pages/foyer-oeuvre", "dome", "lieux", "Foyer boisé du Parc, œuvre d’art au mur"),
     ("phototheque/salon-stand", "hall", "salons", "Stand d’exposant lors d’un salon professionnel"),
     ("phototheque/dome-lumieres", "dome", "concerts", "Public sous les lumières bleues du Dôme"),
     ("phototheque/salon-auto", "hall", "salons", "Véhicules exposés lors d’un salon automobile"),
@@ -929,7 +967,7 @@ PAGES["phototheque.html"] = ("Photothèque — Parc des Expositions d’Abidjan"
     "Parcourez les espaces et les événements accueillis au Parc, par lieu ou par type d’événement.",
     "\n    <div class=\"filter-rows\">"
     + filters("Filtrer par espace", ["Tous", "Hall", "Dôme"], "photos", "espace", row_label="Espace")
-    + filters("Filtrer par type d’événement", ["Tous", "Salons", "Concerts", "Sport"], "photos", "type", row_label="Type")
+    + filters("Filtrer par type d’événement", ["Tous", "Lieux", "Salons", "Concerts", "Sport"], "photos", "type", row_label="Type")
     + "</div>",
     lead_note=note("Une galerie immersive organisée par espace et par type d’événement, pensée autant pour l’inspiration que pour la preuve commerciale.")) + f"""
 
@@ -1242,17 +1280,17 @@ def with_lang_links(page, src, lang):
 
 # Image de l’en-tête de chaque page : photo dans la silhouette exacte de l’arche du logo (variante E2 « dôme posé »)
 PAGE_BG = {
-    "qui-sommes-nous.html": "slider/dome-rendu",
+    "qui-sommes-nous.html": "espaces/dome/officiel-dome-aerien",
     "nos-espaces.html": "espaces/hall/salon-vue-plongeante",
-    "hall-exposition.html": "espaces/hall/interieur",
-    "le-dome.html": "espaces/parvis/dome-sous-le-nuage",
-    "parvis-esplanades.html": "espaces/parvis/salon-plein-air-aerien",
+    "hall-exposition.html": "espaces/hall/officiel-hall-perspective",
+    "le-dome.html": "espaces/dome/officiel-dome-toiture",
+    "parvis-esplanades.html": "espaces/parvis/officiel-dome-panorama",
     "nos-services.html": "phototheque/salon-stand",
     "phototheque.html": "phototheque/dome-lumieres",
     "agenda.html": "slider/concert-scene",
-    "contact-devis.html": "pages/parlez-nous",
+    "contact-devis.html": "pages/foyer-accueil",
     "visite-virtuelle.html": "espaces/parvis/vue-aerienne",
-    "informations-legales.html": "espaces/hall/galerie-couverte",
+    "informations-legales.html": "pages/foyer-galerie",
 }
 
 

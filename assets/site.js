@@ -148,6 +148,27 @@
     });
   }
 
+  // ---------- Vidéo de présentation (Block/Video) : chargée seulement au clic (façade) ----------
+  document.querySelectorAll('[data-video] .video__facade').forEach(function (facade) {
+    facade.addEventListener('click', function (e) {
+      e.preventDefault();
+      var stage = facade.parentElement;
+      var small = window.matchMedia('(max-width: 767px)').matches;
+      var video = document.createElement('video');
+      video.src = facade.getAttribute(small ? 'data-video-sd' : 'data-video-hd');
+      video.controls = true;
+      video.playsInline = true;
+      video.preload = 'auto';
+      video.setAttribute('aria-label', facade.getAttribute('data-video-title'));
+      var poster = facade.querySelector('img');
+      if (poster) video.poster = poster.currentSrc || poster.src;
+      stage.replaceChildren(video);
+      video.focus();
+      var p = video.play();   // geste de l’utilisateur : lecture avec le son autorisée
+      if (p && p.catch) p.catch(function () {});
+    });
+  });
+
   // ---------- En-tête transparent (toutes les pages) : fond blanc dès qu'on défile ou que le menu est ouvert ----------
   var overlay = document.querySelector('.topbar--overlay');
   if (overlay) {

@@ -7,7 +7,7 @@ import json as _js
 
 SITE = "https://pae-orpin.vercel.app/"  # adresse de la maquette : remplacer par le domaine du Parc à la mise en ligne
 NAME_FR, NAME_EN = "Parc des Expositions d’Abidjan", "Abidjan Exhibition Center"
-OG_DEFAULT = "slider/dome-rendu"
+OG_DEFAULT = "espaces/dome/officiel-dome-ciel"
 ADDRESS = {"@type": "PostalAddress", "streetAddress": "Boulevard de l’aéroport", "addressLocality": "Abidjan",
            "addressRegion": "Port-Bouët", "addressCountry": "CI"}
 GEO = {"@type": "GeoCoordinates", "latitude": 5.2634735, "longitude": -3.9465668}
@@ -55,7 +55,7 @@ def asset_url(name, size=1600):
 
 # ---------------------------------------------------------------- balises des pages existantes (titre Google, description, image de partage)
 META = {
-    "index.html": dict(image="slider/dome-rendu",
+    "index.html": dict(image="espaces/dome/officiel-dome-ciel",
         fr=("Parc des Expositions d’Abidjan – Convention center & salons en Côte d’Ivoire",
             "Salons, congrès, conventions et concerts à Abidjan : le Dôme (5 023 places assises), un hall de 6 500 m² et 67 000 m² d’esplanades. Demandez votre devis."),
         en=("Abidjan Exhibition Center – Convention center & trade shows in Côte d’Ivoire",
@@ -70,17 +70,17 @@ META = {
             "Comparez les espaces du Parc des Expositions d’Abidjan : Hall d’exposition de 6 500 m², Dôme de 5 000 m², 67 000 m² de parvis et d’esplanades."),
         en=("Event venues in Abidjan: Hall, Dome, Esplanades | Abidjan Exhibition Center",
             "Compare the Abidjan Exhibition Center’s venues: a 6,500 m² exhibition hall, the 5,000 m² Dome and 67,000 m² of forecourts and esplanades.")),
-    "hall-exposition.html": dict(image="espaces/hall/interieur",
+    "hall-exposition.html": dict(image="espaces/hall/officiel-hall-drapeaux",
         fr=("Hall d’exposition à Abidjan – 6 500 m², 17 m sous plafond | Parc des Expositions d’Abidjan",
             "Le Hall d’exposition du Parc : 6 500 m² d’un seul tenant, 17 m sous plafond, divisible en 2 ou 3 espaces pour vos salons et expositions."),
         en=("Exhibition hall in Abidjan – 6,500 m², 17 m ceiling | Abidjan Exhibition Center",
             "The venue’s exhibition hall: 6,500 m² in a single space, 17 m clear height, divisible into 2 or 3 areas for your trade shows and exhibitions.")),
-    "le-dome.html": dict(image="espaces/parvis/dome-sous-le-nuage",
+    "le-dome.html": dict(image="espaces/dome/officiel-dome-ciel",
         fr=("Le Dôme, convention center d’Abidjan – 5 023 places assises | Parc des Expositions d’Abidjan",
             "Le Dôme : 5 000 m², 5 023 places assises et 9 588 personnes debout pour vos congrès, conventions, cérémonies et concerts à Abidjan."),
         en=("The Dome, Abidjan’s convention center – 5,023 seats | Abidjan Exhibition Center",
             "The Dome: 5,000 m², 5,023 seats and room for 9,588 standing guests for your congresses, conventions, ceremonies and concerts in Abidjan.")),
-    "parvis-esplanades.html": dict(image="espaces/parvis/salon-plein-air-aerien",
+    "parvis-esplanades.html": dict(image="espaces/parvis/officiel-dome-panorama",
         fr=("Esplanades événementielles à Abidjan – 67 000 m² en plein air | Parc des Expositions d’Abidjan",
             "Parvis et esplanades du Parc : 67 000 m² d’espaces extérieurs pour salons en plein air, expositions de véhicules et concerts à Abidjan."),
         en=("Outdoor event space in Abidjan – 67,000 m² | Abidjan Exhibition Center",
@@ -261,7 +261,7 @@ LANDING_META = {
          "Organisez votre salon professionnel à Abidjan : hall d’exposition modulable de 6 500 m², 67 000 m² d’espaces extérieurs, services intégrés et équipe dédiée."),
         ("Trade show venue in Abidjan – 6,500 m² hall | Abidjan Exhibition Center",
          "Host your trade show in Abidjan: a modular 6,500 m² exhibition hall, 67,000 m² of outdoor space, integrated services and a dedicated team.")),
-    "congres-conferences.html": ("slider/journee-internationale",
+    "congres-conferences.html": ("espaces/dome/officiel-dome-salle",
         ("Congrès et conférences à Abidjan – Le Dôme, 5 023 places | Parc des Expositions d’Abidjan",
          "Votre congrès ou conférence à Abidjan : le Dôme offre 5 000 m² et 5 023 places assises, avec audiovisuel, restauration et accueil des délégations."),
         ("Congress & conference venue in Abidjan – the Dome, 5,023 seats | Abidjan Exhibition Center",
@@ -460,7 +460,7 @@ def venue_graph(lang):
            "sameAs": [IG_URL, FB_URL, LI_URL],
            "parentOrganization": {"@type": "Organization", "name": "GL events", "url": "https://www.gl-events.com/"}}
     venue = {"@type": "EventVenue", "@id": VENUE_ID, "name": nm, "url": page_url("index.html", lang), "address": ADDRESS, "geo": GEO,
-             "telephone": "+225 27 21 71 09 97", "maximumAttendeeCapacity": 9588, "image": asset_url("slider/dome-rendu"),
+             "telephone": "+225 27 21 71 09 97", "maximumAttendeeCapacity": 9588, "image": asset_url("espaces/dome/officiel-dome-ciel"),
              "hasMap": MAPS_PLACE, "publicAccess": True}
     return [org, venue]
 
