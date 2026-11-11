@@ -249,8 +249,8 @@ PAGES["nos-espaces.html"] = ("Nos espaces — PEA", page_hero(
 <section class="section section--white">
   <div class="wrap">
     <div class="spaces">
-{space("A", "Hall d’Exposition", "6 500 m² · 17 m sous plafond", "media--photo", h="h2")}
-{space("B", "Le Dôme", "5 000 m² · 5 023 assis · 9 588 debout", "media--arch", ink=True, h="h2")}
+{space("A", "Hall d’Exposition", "6 500 m² · 12 m sous plafond", "media--photo", h="h2")}
+{space("B", "Le Dôme", "5 000 m² · 4 800 assis · 9 353 assis/debout", "media--arch", ink=True, h="h2")}
 {space("C", "Parvis & Esplanades", "67 000 m² d’espaces extérieurs", "media--plan", h="h2")}
     </div>
   </div>
@@ -280,8 +280,8 @@ PAGES["fiche-espace.html"] = ("Hall d’Exposition — PEA", page_hero(
     <div class="gallery" id="galerie"><div></div><div></div><div></div><div></div><div></div></div>
     <ul class="figures figures--3 figures--tight" id="caracteristiques" role="list">
       <li class="figure figure--ink"><strong>6 500 m²</strong>Surface</li>
-      <li class="figure"><strong>17 m</strong>Hauteur sous plafond</li>
-      <li class="figure"><strong>Modulable</strong>Configurations multiples</li>
+      <li class="figure"><strong>12 m</strong>Hauteur sous plafond</li>
+      <li class="figure"><strong>6 500</strong>Personnes accueillies</li>
     </ul>
   </div>
 </section>

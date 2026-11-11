@@ -57,9 +57,9 @@ def asset_url(name, size=1600):
 META = {
     "index.html": dict(image="officiel/dome-exterieur/dome-ciel",
         fr=("Parc des Expositions d’Abidjan – Convention center & salons en Côte d’Ivoire",
-            "Salons, congrès, conventions et concerts à Abidjan : le Dôme (5 023 places assises), un hall de 6 500 m² et 67 000 m² d’esplanades. Demandez votre devis."),
+            "Salons, congrès, conventions et concerts à Abidjan : le Dôme (4 800 places assises), un hall de 6 500 m² et 67 000 m² d’esplanades. Demandez votre devis."),
         en=("Abidjan Exhibition Center – Convention center & trade shows in Côte d’Ivoire",
-            "Trade shows, congresses, conventions and concerts in Abidjan: the Dome (5,023 seats), a 6,500 m² hall and 67,000 m² of esplanades. Request a quote.")),
+            "Trade shows, congresses, conventions and concerts in Abidjan: the Dome (4,800 seats), a 6,500 m² hall and 67,000 m² of esplanades. Request a quote.")),
     "qui-sommes-nous.html": dict(image="officiel/dome-exterieur/dome-ciel",
         fr=("Qui sommes-nous ? Le Parc des Expositions d’Abidjan, exploité par GL events",
             "Le Parc des Expositions d’Abidjan accueille salons, congrès et concerts d’Afrique de l’Ouest, avec l’expertise internationale de GL events."),
@@ -71,15 +71,15 @@ META = {
         en=("Event venues in Abidjan: Hall, Dome, Esplanades | Abidjan Exhibition Center",
             "Compare the Abidjan Exhibition Center’s venues: a 6,500 m² exhibition hall, the 5,000 m² Dome and 67,000 m² of forecourts and esplanades.")),
     "hall-exposition.html": dict(image="officiel/hall/hall-drapeaux",
-        fr=("Hall d’exposition à Abidjan – 6 500 m², 17 m sous plafond | Parc des Expositions d’Abidjan",
-            "Le Hall d’exposition du Parc : 6 500 m² d’un seul tenant, 17 m sous plafond, divisible en 2 ou 3 espaces pour vos salons et expositions."),
-        en=("Exhibition hall in Abidjan – 6,500 m², 17 m ceiling | Abidjan Exhibition Center",
-            "The venue’s exhibition hall: 6,500 m² in a single space, 17 m clear height, divisible into 2 or 3 areas for your trade shows and exhibitions.")),
+        fr=("Hall d’exposition à Abidjan – 6 500 m², 12 m sous plafond | Parc des Expositions d’Abidjan",
+            "Le Hall d’exposition du Parc : 6 500 m², 12 m libres sous plafond et jusqu’à 6 500 personnes pour vos salons et expositions."),
+        en=("Exhibition hall in Abidjan – 6,500 m², 12 m ceiling | Abidjan Exhibition Center",
+            "The venue’s exhibition hall: 6,500 m², 12 m clear height and up to 6,500 people for your trade shows and exhibitions.")),
     "le-dome.html": dict(image="officiel/dome-exterieur/dome-ciel",
-        fr=("Le Dôme, convention center d’Abidjan – 5 023 places assises | Parc des Expositions d’Abidjan",
-            "Le Dôme : 5 000 m², 5 023 places assises et 9 588 personnes debout pour vos congrès, conventions, cérémonies et concerts à Abidjan."),
-        en=("The Dome, Abidjan’s convention center – 5,023 seats | Abidjan Exhibition Center",
-            "The Dome: 5,000 m², 5,023 seats and room for 9,588 standing guests for your congresses, conventions, ceremonies and concerts in Abidjan.")),
+        fr=("Le Dôme, convention center d’Abidjan – 4 800 places assises | Parc des Expositions d’Abidjan",
+            "Le Dôme : 5 000 m², 4 800 places assises en convention et 9 353 personnes en assis/debout pour vos congrès, conventions, cérémonies et concerts à Abidjan."),
+        en=("The Dome, Abidjan’s convention center – 4,800 seats | Abidjan Exhibition Center",
+            "The Dome: 5,000 m², 4,800 convention seats and room for 9,353 seated/standing guests for your congresses, conventions, ceremonies and concerts in Abidjan.")),
     "parvis-esplanades.html": dict(image="officiel/dome-exterieur/dome-panorama",
         fr=("Esplanades événementielles à Abidjan – 67 000 m² en plein air | Parc des Expositions d’Abidjan",
             "Parvis et esplanades du Parc : 67 000 m² d’espaces extérieurs pour salons en plein air, expositions de véhicules et concerts à Abidjan."),
@@ -196,27 +196,27 @@ landing(
     t("Un hall de 6 500 m² modulable, des esplanades pour les grands formats et des services intégrés : le Parc accueille les salons de référence d’Afrique de l’Ouest.",
       "A modular 6,500 m² hall, esplanades for large formats and integrated services: the venue hosts West Africa’s leading trade shows."),
     [(t("6 500 m² d’un seul tenant", "6,500 m² in a single space"),
-      t("Le Hall d’exposition, 17 m sous plafond, se divise en 2 ou 3 espaces pour accueillir un ou plusieurs salons.", "The exhibition hall, with 17 m clear height, can be split into 2 or 3 areas for one or several trade shows.")),
+      t("Le Hall d’exposition, 12 m libres sous plafond, accueille jusqu’à 6 500 personnes.", "The exhibition hall, with 12 m clear height, holds up to 6,500 people.")),
      (t("Des extérieurs pour les grands formats", "Outdoor space for large formats"),
       t("67 000 m² de parvis et d’esplanades pour les véhicules, les engins et les démonstrations en plein air.", "67,000 m² of forecourts and esplanades for vehicles, machinery and open-air demonstrations.")),
      (t("Un seul interlocuteur", "One point of contact"),
       t("Montage, mobilier, audiovisuel, restauration, sécurité et nettoyage : nos équipes coordonnent toutes les prestations.", "Set-up, furniture, audiovisual, catering, security and cleaning: our teams coordinate every service."))],
-    "\n".join([space("A", "Hall d’Exposition", "6 500 m² · 17 m sous plafond"), space("C", "Parvis & Esplanades", "67 000 m² d’espaces extérieurs")]),
+    "\n".join([space("A", "Hall d’Exposition", "6 500 m² · 12 m sous plafond"), space("C", "Parvis & Esplanades", "67 000 m² d’espaces extérieurs")]),
     ["auto-expo", "horeca-expo", "brands-licensing-africa"],
     t("Parlez-nous de votre salon.", "Tell us about your trade show."), "salon")
 
 landing(
     "congres-conferences.html", t("Organiser un congrès", "Hosting a congress"),
     t("Congrès et conférences à Abidjan.", "Congresses and conferences in Abidjan."),
-    t("Le Dôme, convention center du Parc, accueille jusqu’à 5 023 participants assis pour vos congrès, assemblées et conférences internationales.",
-      "The Dome, the venue’s convention center, seats up to 5,023 participants for your congresses, general assemblies and international conferences."),
-    [(t("5 023 places assises", "5,023 seats"),
-      t("Le Dôme offre 5 000 m² exploitables et accueille jusqu’à 9 588 personnes debout pour les grandes plénières.", "The Dome offers 5,000 m² of usable space and holds up to 9,588 standing guests for large plenary sessions.")),
+    t("Le Dôme, convention center du Parc, accueille jusqu’à 4 800 participants assis pour vos congrès, assemblées et conférences internationales.",
+      "The Dome, the venue’s convention center, seats up to 4,800 participants for your congresses, general assemblies and international conferences."),
+    [(t("4 800 places assises", "4,800 seats"),
+      t("Le Dôme offre 5 000 m² exploitables et accueille jusqu’à 5 183 personnes en dîner de gala.", "The Dome offers 5,000 m² of usable space and holds up to 5,183 guests for a gala dinner.")),
      (t("Une équipe pour vos délégations", "A team for your delegations"),
       t("Accueil, protocole, audiovisuel, restauration et sécurité sont coordonnés par un seul interlocuteur.", "Reception, protocol, audiovisual, catering and security are coordinated by a single point of contact.")),
      (t("Abidjan, porte d’entrée régionale", "Abidjan, a regional gateway"),
       t("Plus d’une vingtaine de compagnies aériennes desservent Abidjan, et le Parc se trouve à quelques minutes de l’aéroport.", "More than twenty airlines serve Abidjan, and the venue is just minutes from the airport."))],
-    "\n".join([space("B", "Le Dôme", "5 000 m² · 5 023 assis · 9 588 debout", ink=True), space("A", "Hall d’Exposition", "6 500 m² · 17 m sous plafond")]),
+    "\n".join([space("B", "Le Dôme", "5 000 m² · 4 800 assis · 9 353 assis/debout", ink=True), space("A", "Hall d’Exposition", "6 500 m² · 12 m sous plafond")]),
     ["abidjan-border-forum"],
     t("Parlez-nous de votre congrès.", "Tell us about your congress."), "congres")
 
@@ -240,18 +240,18 @@ landing(
     t("Concerts et spectacles à Abidjan.", "Concerts and shows in Abidjan."),
     t("Le Dôme et les esplanades du Parc accueillent les grands artistes ivoiriens et internationaux, devant des milliers de spectateurs.",
       "The venue’s Dome and esplanades host leading Ivorian and international artists in front of thousands of spectators."),
-    [(t("Jusqu’à 9 588 spectateurs", "Up to 9,588 spectators"),
-      t("Le Dôme accueille 9 588 personnes debout ou 5 023 assises.", "The Dome holds 9,588 standing or 5,023 seated spectators.")),
+    [(t("Jusqu’à 9 353 spectateurs", "Up to 9,353 spectators"),
+      t("Le Dôme accueille 9 353 personnes en configuration assis/debout ou 4 800 assises.", "The Dome holds 9,353 spectators in a seated/standing layout, or 4,800 seated.")),
      (t("Le plein air sur l’esplanade", "Open air on the esplanade"),
       t("Pour les grands concerts en extérieur, comme celui de Serge Beynaud en décembre 2026.", "For large outdoor concerts, such as Serge Beynaud’s in December 2026.")),
      (t("Un public bien accueilli", "A well-hosted audience"),
       t("Sécurité, gestion des flux et accueil du public sont adaptés aux grandes jauges.", "Security, crowd flow and audience reception are designed for large capacities."))],
-    "\n".join([space("B", "Le Dôme", "9 588 debout · 5 023 assis", ink=True), space("C", "Parvis & Esplanades", "Concerts en plein air")]),
+    "\n".join([space("B", "Le Dôme", "9 353 assis/debout · 4 800 assis", ink=True), space("C", "Parvis & Esplanades", "Concerts en plein air")]),
     ["concert-tayc", "concert-milo", "concert-40-ans-de-carriere-gadji-celi"],
     t("Parlez-nous de votre concert.", "Tell us about your concert."), "concert")
 
 for fr, en in [("Plénières · soirées · cérémonies", "Plenaries · evenings · ceremonies"), ("Conventions avec exposition", "Conventions with an exhibition"),
-               ("Formats en plein air", "Open-air formats"), ("9 588 debout · 5 023 assis", "9,588 standing · 5,023 seated"),
+               ("Formats en plein air", "Open-air formats"), ("9 353 assis/debout · 4 800 assis", "9,353 seated/standing · 4,800 seated"),
                ("Concerts en plein air", "Open-air concerts")]:
     t(fr, en)
 
@@ -262,20 +262,20 @@ LANDING_META = {
         ("Trade show venue in Abidjan – 6,500 m² hall | Abidjan Exhibition Center",
          "Host your trade show in Abidjan: a modular 6,500 m² exhibition hall, 67,000 m² of outdoor space, integrated services and a dedicated team.")),
     "congres-conferences.html": ("officiel/dome-salle/salle-pleniere",
-        ("Congrès et conférences à Abidjan – Le Dôme, 5 023 places | Parc des Expositions d’Abidjan",
-         "Votre congrès ou conférence à Abidjan : le Dôme offre 5 000 m² et 5 023 places assises, avec audiovisuel, restauration et accueil des délégations."),
-        ("Congress & conference venue in Abidjan – the Dome, 5,023 seats | Abidjan Exhibition Center",
-         "Host your congress or conference in Abidjan: the Dome offers 5,000 m² and 5,023 seats, with audiovisual, catering and delegate reception services.")),
+        ("Congrès et conférences à Abidjan – Le Dôme, 4 800 places | Parc des Expositions d’Abidjan",
+         "Votre congrès ou conférence à Abidjan : le Dôme offre 5 000 m² et 4 800 places assises, avec audiovisuel, restauration et accueil des délégations."),
+        ("Congress & conference venue in Abidjan – the Dome, 4,800 seats | Abidjan Exhibition Center",
+         "Host your congress or conference in Abidjan: the Dome offers 5,000 m² and 4,800 seats, with audiovisual, catering and delegate reception services.")),
     "evenements-entreprise.html": ("officiel/dome-salon-vip/salon-vip-galerie",
         ("Événement d’entreprise à Abidjan – conventions, lancements, galas | Parc des Expositions d’Abidjan",
          "Convention, lancement de produit, assemblée, soirée de gala : le Parc accueille vos événements d’entreprise à Abidjan, jusqu’à près de 10 000 invités."),
         ("Corporate events in Abidjan – conventions, launches, galas | Abidjan Exhibition Center",
          "Conventions, product launches, general meetings, gala evenings: the Abidjan Exhibition Center hosts your corporate events for up to nearly 10,000 guests.")),
     "concerts-spectacles.html": ("officiel/dome-salle/salle-gradins",
-        ("Salle de concert à Abidjan – le Dôme, jusqu’à 9 588 spectateurs | Parc des Expositions d’Abidjan",
-         "Concerts, spectacles et grands shows à Abidjan : le Dôme accueille jusqu’à 9 588 spectateurs debout, et les esplanades les événements en plein air."),
-        ("Concert venue in Abidjan – the Dome, up to 9,588 spectators | Abidjan Exhibition Center",
-         "Concerts, shows and major productions in Abidjan: the Dome holds up to 9,588 standing spectators, and the esplanades host open-air events.")),
+        ("Salle de concert à Abidjan – le Dôme, jusqu’à 9 353 spectateurs | Parc des Expositions d’Abidjan",
+         "Concerts, spectacles et grands shows à Abidjan : le Dôme accueille jusqu’à 9 353 spectateurs en assis/debout, et les esplanades les événements en plein air."),
+        ("Concert venue in Abidjan – the Dome, up to 9,353 spectators | Abidjan Exhibition Center",
+         "Concerts, shows and major productions in Abidjan: the Dome holds up to 9,353 seated/standing spectators, and the esplanades host open-air events.")),
 }
 for n, (bg, fr_, en_) in LANDING_META.items():
     META[n] = dict(image=bg, fr=fr_, en=en_)
@@ -303,7 +303,12 @@ FAQ_HTML = "".join(f'<details class="faq__item"><summary>{q}</summary><p>{a}</p>
 PRACTICAL = [(t("Monnaie", "Currency"), t("Franc CFA (XOF)", "CFA franc (XOF)")),
              (t("Langue", "Language"), t("Français", "French")),
              (t("Fuseau horaire", "Time zone"), t("GMT (UTC+0), toute l’année", "GMT (UTC+0), all year round")),
-             (t("Indicatif téléphonique", "Country code"), "+225")]
+             (t("Indicatif téléphonique", "Country code"), "+225"),
+             # Plaquette commerciale du Parc (page « Informations pratiques »)
+             (t("Depuis l’aéroport", "From the airport"), t("3 km en voiture · 5 km du rond-point Akwaba", "3 km by car · 5 km from the Akwaba roundabout")),
+             (t("Stationnement", "Parking"), t("Parking public P1 de 800 places (entrées A et B), surveillé 24 h/24, 7 j/7", "800-space public car park P1 (entrances A and B), guarded 24/7")),
+             (t("Horaires hors manifestations", "Opening hours outside events"), t("Du lundi au vendredi, de 9 h à 18 h", "Monday to Friday, 9 am to 6 pm")),
+             (t("Accessibilité", "Accessibility"), t("Parc accessible aux personnes à mobilité réduite", "Venue accessible to people with reduced mobility"))]
 PRACTICAL_HTML = "".join(f"<div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in PRACTICAL)
 
 PAGES["venir-a-abidjan.html"] = ("Venir à Abidjan", page_hero(
@@ -321,6 +326,8 @@ PAGES["venir-a-abidjan.html"] = ("Venir à Abidjan", page_hero(
         <p><a class="link-arrow" href="contact-devis.html#acces">{t("Voir la carte d’accès", "See the access map")} {ARROW}</a></p></li>
       <li><h2 class="t3">{t("Où loger", "Where to stay")}</h2>
         <p>{t("Abidjan offre une hôtellerie variée, des hôtels d’affaires du Plateau aux établissements de Marcory, de la Riviera et de Port-Bouët, proches du Parc.", "Abidjan offers a wide range of hotels, from business hotels in Le Plateau to establishments in Marcory, Riviera and Port-Bouët, close to the venue.")}</p>
+        <p>{t("À 5 minutes : Onomo Hôtel Abidjan Aéroport (208 chambres) et Radisson Blu Hotel, Abidjan Airport (261 chambres).", "5 minutes away: Onomo Hotel Abidjan Airport (208 rooms) and Radisson Blu Hotel, Abidjan Airport (261 rooms).")}</p>
+        <p>{t("À 20 minutes, à Marcory : Novotel (201 chambres), Azalaï Hôtel (200 chambres), Ibis (135 chambres) et Adagio (110 appartements).", "20 minutes away, in Marcory: Novotel (201 rooms), Azalaï Hotel (200 rooms), Ibis (135 rooms) and Adagio (110 apartments).")}</p>
         <p>{t("Notre équipe peut vous orienter selon la taille de votre délégation.", "Our team can advise you according to the size of your delegation.")}</p></li>
       <li><h2 class="t3">{t("Visas et formalités", "Visas and formalities")}</h2>
         <p>{t("Les ressortissants des pays de la CEDEAO entrent en Côte d’Ivoire sans visa. Les autres voyageurs demandent un visa biométrique en ligne avant le départ.", "ECOWAS nationals enter Côte d’Ivoire without a visa. Other travellers apply for a biometric visa online before departure.")}</p>
@@ -450,7 +457,7 @@ for fr, en in [("Type", "Type"), ("Organisateurs", "Organizers")]:
 # ---------------------------------------------------------------- données structurées (Schema.org, JSON-LD)
 SPACE_LD = {
     "hall-exposition.html": dict(name="Hall d’Exposition", en="Exhibition Hall", cap=None),
-    "le-dome.html": dict(name="Le Dôme", en="The Dome", cap=9588),
+    "le-dome.html": dict(name="Le Dôme", en="The Dome", cap=9353),
     "parvis-esplanades.html": dict(name="Parvis & Esplanades", en="Forecourts & Esplanades", cap=None),
 }
 
@@ -462,7 +469,7 @@ def venue_graph(lang):
            "sameAs": [IG_URL, FB_URL, LI_URL],
            "parentOrganization": {"@type": "Organization", "name": "GL events", "url": "https://www.gl-events.com/"}}
     venue = {"@type": "EventVenue", "@id": VENUE_ID, "name": nm, "url": page_url("index.html", lang), "address": ADDRESS, "geo": GEO,
-             "telephone": "+225 27 21 71 09 97", "maximumAttendeeCapacity": 9588, "image": asset_url("officiel/dome-exterieur/dome-ciel"),
+             "telephone": "+225 27 21 71 09 97", "maximumAttendeeCapacity": 9353, "image": asset_url("officiel/dome-exterieur/dome-ciel"),
              "hasMap": MAPS_PLACE, "publicAccess": True}
     return [org, venue]
 

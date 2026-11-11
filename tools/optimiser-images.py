@@ -57,6 +57,23 @@ IMAGES = {
     "contacts.jpg": "pages/contact-signaletique",
     "abidjan.jpg": "pages/destination-abidjan",  # visuel carré avec texte incrusté en bas : recadrer sur le haut
     "parleznousvotreprojet.jpg": "pages/parlez-nous",
+    # Plaquette commerciale (JPEG d’origine extraits du PDF, images/plaquette ; les doublons des photos officielles ne sont pas publiés)
+    "plaquette/dome-acces-aerien.jpg": "plaquette/dome-acces-aerien",
+    "plaquette/salle-panorama.jpg": "plaquette/salle-panorama",
+    "plaquette/salle-scene.jpg": "plaquette/salle-scene",
+    "plaquette/ecran-led-arriere.jpg": "plaquette/ecran-led-arriere",
+    "plaquette/loges-signaletique.jpg": "plaquette/loges-signaletique",
+    "plaquette/loge-miroirs.jpg": "plaquette/loge-miroirs",
+    "plaquette/loge-coiffeuse.jpg": "plaquette/loge-coiffeuse",
+    "plaquette/loges-couloir.jpg": "plaquette/loges-couloir",
+    "plaquette/pas-perdus-salon.jpg": "plaquette/pas-perdus-salon",
+    "plaquette/pas-perdus-fauteuils.jpg": "plaquette/pas-perdus-fauteuils",
+    "plaquette/parvis-auvent.jpg": "plaquette/parvis-auvent",
+    "plaquette/esplanade-ombrieres-aerien.jpg": "plaquette/esplanade-ombrieres-aerien",
+    "plaquette/esplanade-ombriere.jpg": "plaquette/esplanade-ombriere",
+    "plaquette/abidjan-plateau-tours.jpg": "plaquette/abidjan-plateau-tours",
+    "plaquette/abidjan-panorama.jpg": "plaquette/abidjan-panorama",
+    "plaquette/abidjan-cathedrale.jpg": "plaquette/abidjan-cathedrale",
 }
 
 # Dossiers pilotés : TOUTES leurs images sont converties (ajouter une photo = la déposer dans le dossier).

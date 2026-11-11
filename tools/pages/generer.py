@@ -30,8 +30,8 @@ def note(original):
 
 PIN_ICON = ('<svg class="i i--pin" viewBox="0 0 24 24" aria-hidden="true" focusable="false">'
             '<path d="M12 21s-6.5-6.1-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 14.9 12 21 12 21z"/><circle cx="12" cy="9.8" r="2.3"/></svg>')
-SUB_ESPACES = [("hall-exposition.html", "Hall d’Exposition", "6 500 m² · 17 m sous plafond"),
-               ("le-dome.html", "Le Dôme", "5 000 m² · 5 023 assis · 9 588 debout"),
+SUB_ESPACES = [("hall-exposition.html", "Hall d’Exposition", "6 500 m² · 12 m sous plafond"),
+               ("le-dome.html", "Le Dôme", "5 000 m² · 4 800 assis · 9 353 assis/debout"),
                ("parvis-esplanades.html", "Parvis & Esplanades", "67 000 m² d’espaces extérieurs"),
                ("visite-virtuelle.html", "Visite virtuelle 360°", "Explorer le Parc à distance")]
 
@@ -140,6 +140,7 @@ FOOTER = f"""</main>
         <li><a href="concerts-spectacles.html">Concerts</a></li>
         <li><a href="venir-a-abidjan.html">Venir à Abidjan</a></li>
         <li><a href="contact-devis.html">Demander un devis</a></li>
+        <li><a href="assets/plaquette-commerciale-pea.pdf" download>Plaquette commerciale (PDF)</a></li>
       </ul>
     </nav>
   </div>
@@ -291,6 +292,7 @@ def type_links(current=None, title="Par type d’événement"):
 
 TYPE_LINKS = type_links()
 PLAN_PDF = "https://www.parcdesexpositionsabidjan.com/sites/default/files/assets/fichier/dervin/2025-02/plan-commercial-pea.pdf"
+PLAQUETTE_PDF = "assets/plaquette-commerciale-pea.pdf"  # plaquette commerciale du client (9 pages, 12 Mo)
 A = "Accueil", "index.html"
 PAGES = {}
 
@@ -664,6 +666,7 @@ PAGES["qui-sommes-nous.html"] = ("Qui sommes-nous ? — Parc des Expositions d�
       <p class="eyebrow">Notre ambition</p>
       <h2>Faire d’Abidjan un point de rencontre régional.</h2>
       <p>Le Parc des Expositions d’Abidjan accueille salons, expositions, conventions, conférences, concerts et grands rendez-vous professionnels.</p>
+      <p>Œuvre de l’architecte Pierre Fakhoury, ouvert au public en juillet 2023, le Parc s’étend sur 16 hectares : un Convention Center, un hall d’exposition et des espaces extérieurs.</p>
       <ul class="figures figures--tight" role="list" data-bento="Block/Key figures">
         <li class="figure"><strong>3</strong>grands univers d’espaces</li>
         <li class="figure"><strong>GL events</strong>expertise internationale</li>
@@ -690,6 +693,8 @@ PAGES["qui-sommes-nous.html"] = ("Qui sommes-nous ? — Parc des Expositions d�
     <h2>Un savoir-faire événementiel international.</h2>
     {note("Bloc destiné à présenter le rôle de GL events, ses standards d’exploitation et sa capacité à accompagner les organisateurs.")}
     <p class="lead">Le Parc s’appuie sur l’expertise de GL events et ses standards d’exploitation pour accompagner les organisateurs à chaque étape, de la conception à l’accueil du public.</p>
+    <p>Depuis le 15 janvier 2025, le Parc est géré et exploité par la société Abidjan Events PEA, filiale du groupe GL events.</p>
+    <p>Fort de 45 ans d’expérience, GL events gère un réseau de 61 sites événementiels en Europe, en Amérique du Sud, en Asie et en Afrique.</p>
   </div>
 </section>
 {LIGHTBOX}
@@ -708,8 +713,8 @@ PAGES["nos-espaces.html"] = ("Nos espaces — Parc des Expositions d’Abidjan",
     {results("espaces", "3 espaces", "Aucun espace ne correspond à cet usage. Parlez-nous de votre projet : nous étudions chaque configuration.")}
     <!-- Usages par espace (déduits des légendes de l’accueil) : à confirmer et administrer dans Drupal -->
     <div class="collection collection--3" id="espaces" data-bento="Collection">
-{space("A", "Hall d’Exposition", "6 500 m² · 17 m sous plafond", h="h2", usage="salon corporate")}
-{space("B", "Le Dôme", "5 000 m² · 5 023 assis · 9 588 debout", ink=True, h="h2", usage="congres conference convention concert")}
+{space("A", "Hall d’Exposition", "6 500 m² · 12 m sous plafond", h="h2", usage="salon corporate")}
+{space("B", "Le Dôme", "5 000 m² · 4 800 assis · 9 353 assis/debout", ink=True, h="h2", usage="congres conference convention concert")}
 {space("C", "Parvis & Esplanades", "67 000 m² d’espaces extérieurs", h="h2", usage="concert salon")}
     </div>
     {TYPE_LINKS}
@@ -724,8 +729,8 @@ PAGES["nos-espaces.html"] = ("Nos espaces — Parc des Expositions d’Abidjan",
       <caption class="sr-only">Comparatif des espaces : surface, hauteur, capacité, usages, documents et devis</caption>
       <thead><tr><th scope="col">Espace</th><th scope="col">Surface</th><th scope="col">Hauteur</th><th scope="col">Capacité</th><th scope="col">Usages</th><th scope="col">Documents</th><th scope="col"><span class="sr-only">Devis</span></th></tr></thead>
       <tbody>
-        <tr><th scope="row"><a href="hall-exposition.html">Hall d’Exposition</a></th><td data-label="Surface">6 500 m²</td><td data-label="Hauteur">17 m</td><td data-label="Capacité">Divisible en 2 ou 3 espaces</td><td data-label="Usages">Salons, expositions, corporate</td><td data-label="Documents"><a href="assets/fiche-technique-hall-exposition.pdf" download>Fiche technique (PDF)</a></td><td><a class="btn btn--primary btn--sm" href="contact-devis.html?espace=hall#devis" aria-label="Demander un devis pour le Hall d’Exposition">Devis</a></td></tr>
-        <tr><th scope="row"><a href="le-dome.html">Le Dôme</a></th><td data-label="Surface">5 000 m²</td><td data-label="Hauteur">Non communiquée</td><td data-label="Capacité">5 023 assis · 9 588 debout</td><td data-label="Usages">Conférences, institutionnel, salons, concerts</td><td data-label="Documents"><a href="{PLAN_PDF}" target="_blank" rel="noopener" aria-label="Plan du Parc, PDF (nouvel onglet)">Plan du Parc (PDF)</a></td><td><a class="btn btn--primary btn--sm" href="contact-devis.html?espace=dome#devis" aria-label="Demander un devis pour le Dôme">Devis</a></td></tr>
+        <tr><th scope="row"><a href="hall-exposition.html">Hall d’Exposition</a></th><td data-label="Surface">6 500 m²</td><td data-label="Hauteur">12 m</td><td data-label="Capacité">6 500 personnes</td><td data-label="Usages">Salons, expositions, corporate</td><td data-label="Documents"><a href="assets/fiche-technique-hall-exposition.pdf" download>Fiche technique (PDF)</a></td><td><a class="btn btn--primary btn--sm" href="contact-devis.html?espace=hall#devis" aria-label="Demander un devis pour le Hall d’Exposition">Devis</a></td></tr>
+        <tr><th scope="row"><a href="le-dome.html">Le Dôme</a></th><td data-label="Surface">5 000 m²</td><td data-label="Hauteur">Non communiquée</td><td data-label="Capacité">4 800 assis · 9 353 assis/debout</td><td data-label="Usages">Conférences, institutionnel, salons, concerts</td><td data-label="Documents"><a href="{PLAN_PDF}" target="_blank" rel="noopener" aria-label="Plan du Parc, PDF (nouvel onglet)">Plan du Parc (PDF)</a></td><td><a class="btn btn--primary btn--sm" href="contact-devis.html?espace=dome#devis" aria-label="Demander un devis pour le Dôme">Devis</a></td></tr>
         <tr><th scope="row"><a href="parvis-esplanades.html">Parvis & Esplanades</a></th><td data-label="Surface">67 000 m²</td><td data-label="Hauteur">Plein air</td><td data-label="Capacité">Parvis 11 000 m² · 2 esplanades de 28 000 m²</td><td data-label="Usages">Expositions extérieures, formats outdoor</td><td data-label="Documents"><a href="{PLAN_PDF}" target="_blank" rel="noopener" aria-label="Plan du Parc, PDF (nouvel onglet)">Plan du Parc (PDF)</a></td><td><a class="btn btn--primary btn--sm" href="contact-devis.html?espace=parvis#devis" aria-label="Demander un devis pour le Parvis & Esplanades">Devis</a></td></tr>
       </tbody>
     </table>
@@ -789,10 +794,24 @@ ALTS = {
     "salle-fauteuils": "Rangées de fauteuils de la salle du Dôme",
     "salle-parterre": "Le parterre du Dôme dégagé, sous la charpente en bois",
     "salle-gradins": "Gradins et parterre de la salle du Dôme",
-    "salon-vip-galerie": "La galerie boisée du salon VIP du Dôme",
-    "salon-vip-banc": "Le salon VIP du Dôme : banc et appliques murales",
-    "salon-vip-oeuvre": "Le salon VIP du Dôme et son œuvre d’art",
-    "salon-vip-accueil": "La banque d’accueil du salon VIP du Dôme",
+    "salon-vip-galerie": "La galerie boisée des Pas Perdus du Dôme",
+    "salon-vip-banc": "Les Pas Perdus du Dôme : banc et appliques murales",
+    "salon-vip-oeuvre": "Les Pas Perdus du Dôme et leur œuvre d’art",
+    "salon-vip-accueil": "La banque d’accueil des Pas Perdus du Dôme",
+    # Plaquette commerciale (images/plaquette, tools/optimiser-images.py)
+    "dome-acces-aerien": "L’allée d’accès et les parkings couverts menant au Dôme, vus du ciel",
+    "salle-panorama": "Vue panoramique de la salle du Dôme, des gradins jusqu’à la scène",
+    "salle-scene": "La scène du Dôme et son écran, face aux fauteuils",
+    "ecran-led-arriere": "L’arrière de l’écran LED géant du Dôme",
+    "loges-signaletique": "Signalétique menant aux loges d’artistes du Dôme",
+    "loge-miroirs": "Loge d’artiste du Dôme : plan de travail et miroirs",
+    "loge-coiffeuse": "Loge d’artiste du Dôme : coiffeuse et miroir",
+    "loges-couloir": "Le couloir des loges d’artistes du Dôme",
+    "pas-perdus-salon": "L’espace cocktail des Pas Perdus : fauteuils et plantes sous les boiseries",
+    "pas-perdus-fauteuils": "Fauteuils et tables basses en marbre des Pas Perdus",
+    "parvis-auvent": "L’auvent du Parc et sa charpente, au bord du parvis",
+    "esplanade-ombrieres-aerien": "Les ombrières et une esplanade du Parc, vues du ciel",
+    "esplanade-ombriere": "Une esplanade du Parc et son ombrière",
 }
 
 
@@ -828,30 +847,39 @@ def folder_photos(group, featured, label):
 SPACES = [
     dict(file="hall-exposition.html", title="Hall d’Exposition", letter="A", code="hall",
          lead="Un espace de grande capacité dédié aux salons, expositions et événements corporate.",
-         figures=[("6 500 m²", "Surface"), ("17 m", "Hauteur libre sous plafond"), ("2 ou 3", "Espaces d’exposition distincts")],
+         figures=[("6 500 m²", "Surface"), ("12 m", "Hauteur libre sous plafond"), ("6 500", "Personnes accueillies")],
          h2="Un espace pensé pour les événements de grande ampleur.",
          note_txt="La fiche espace concentre l’information commerciale et technique : usages possibles, capacité, configuration, prestations associées et documents à télécharger.",
-         text="Avec 6 500 m² d’un seul tenant et 17 m libres sous plafond, le Hall d’Exposition peut être divisé en 2 ou 3 espaces d’exposition distincts pour accueillir salons, expositions et grands événements d’entreprise.",
+         text="Avec 6 500 m² et 12 m libres sous plafond, le Hall d’Exposition accueille jusqu’à 6 500 personnes pour vos expositions, lancements de produits, salons et conférences.",
+         more=["Le Hall mesure 119,3 m de long sur 59,29 m de large, pour 12,38 m de haut.",
+               "Il compte 3 bars-restaurants au rez-de-chaussée, ainsi qu’un espace lounge et une salle de réunion à l’étage."],
          usages=["Salon professionnel", "Exposition", "Lancement", "Convention"], equip=None,
          photos=official_photos(["officiel/hall"], "hall-drapeaux", "Hall d’Exposition"),
          doc=("assets/fiche-technique-hall-exposition.pdf", "Télécharger la fiche technique", True)),
     dict(file="le-dome.html", title="Le Dôme", letter="B", code="dome",
          lead="Le Convention Center du Parc : une salle de 5 000 m² équipée pour les conférences, les événements institutionnels, les salons et les concerts.",
-         figures=[("5 000 m²", "Surface exploitable"), ("5 023", "Places assises"), ("9 588", "Personnes debout")],
+         figures=[("5 000 m²", "Surface exploitable"), ("4 800", "Places assises en convention"), ("9 353", "Personnes en assis/debout")],
          h2="Une salle de prestige pour les grands rendez-vous.", note_txt=None,
-         text="Avec 5 000 m² exploitables, le Dôme accueille jusqu’à 5 023 personnes assises et 9 588 debout, avec une infrastructure technique pensée pour les événements professionnels comme pour le grand public.",
+         text="Avec 5 000 m² exploitables, le Dôme accueille 4 800 personnes assises en convention, 5 183 en dîner de gala et jusqu’à 9 353 en configuration assis/debout, avec une infrastructure technique pensée pour les événements professionnels comme pour le grand public.",
+         more=["Son auditorium à gradins rétractables se prête aux congrès, conventions, salons, conférences et dîners de gala.",
+               "Le Dôme dispose de 8 loges d’artistes et de 2 bureaux organisateurs.",
+               "Les Pas Perdus, un espace cocktail de 581,5 m², reçoivent jusqu’à 160 personnes."],
          usages=["Conférence internationale", "Événement institutionnel", "Salon & exposition", "Concert & spectacle"],
-         equip=["96 enceintes", "365 projecteurs", "240 m² d’écran LED"],
-         photos=official_photos(["officiel/dome-salle", "officiel/dome-exterieur", "officiel/dome-salon-vip"], "salle-pleniere", "Le Dôme"),
+         equip=["96 enceintes", "365 projecteurs", "240 m² d’écran LED", "Gradins rétractables", "8 loges d’artistes", "2 bureaux organisateurs"],
+         photos=official_photos(["officiel/dome-salle", "officiel/dome-exterieur", "officiel/dome-salon-vip"], "salle-pleniere", "Le Dôme",
+                                extra=["plaquette/" + n for n in ("salle-panorama", "salle-scene", "ecran-led-arriere", "pas-perdus-salon", "pas-perdus-fauteuils",
+                                                                  "loges-signaletique", "loge-miroirs", "loge-coiffeuse", "loges-couloir", "dome-acces-aerien")]),
          doc=(None, None, False)),
     dict(file="parvis-esplanades.html", title="Parvis & Esplanades", letter="C", code="parvis",
          lead="67 000 m² d’espaces extérieurs pour les expositions et les événements en plein air.",
          figures=[("11 000 m²", "Parvis"), ("28 000 m²", "Esplanade Est"), ("28 000 m²", "Esplanade Nord-Est")],
          h2="De grands espaces extérieurs, à l’échelle de vos projets.", note_txt=None,
          text="Le Parvis et les esplanades Est et Nord-Est totalisent 67 000 m² pour les expositions extérieures, les formats outdoor et les événements grand public.",
+         more=["Des chapiteaux éphémères peuvent y prolonger les expositions en plein air."],
          usages=["Exposition extérieure", "Format outdoor", "Événement grand public", "Concert"], equip=None,
          photos=official_photos(["officiel/esplanades"], "dome-panorama", "Parvis & Esplanades",
-                                extra=["officiel/dome-exterieur/dome-panorama", "officiel/dome-exterieur/dome-aerien"]),
+                                extra=["officiel/dome-exterieur/dome-panorama", "plaquette/parvis-auvent", "plaquette/esplanade-ombrieres-aerien",
+                                       "plaquette/esplanade-ombriere", "officiel/dome-exterieur/dome-aerien"]),
          doc=(None, None, False)),
 ]
 
@@ -867,10 +895,12 @@ def space_page(sp):
         equip_items = "".join(f'<li class="badge">{e}</li>' for e in sp["equip"])
         equip = ("\n      <h3 class=\"block-gap\" id=\"equipements\">Équipements</h3>"
                  f"\n      <ul class=\"tags\" role=\"list\">{equip_items}</ul>")
+    more = "".join(f"\n      <p>{m}</p>" for m in sp.get("more", ()))
     doc_url, doc_label, local = sp["doc"]
     docs = ""
     if doc_url:
         docs += f'\n      <a class="btn btn--secondary btn--block" href="{doc_url}" download>{doc_label} <span class="btn__meta">PDF</span></a>'
+    docs += f'\n      <a class="btn btn--secondary btn--block" href="{PLAQUETTE_PDF}" download>Télécharger la plaquette commerciale <span class="btn__meta">PDF</span></a>'
     docs += f'\n      <a class="link-arrow" href="{PLAN_PDF}" target="_blank" rel="noopener" aria-label="Plan du Parc, PDF (nouvel onglet)">Plan du Parc (PDF) {EXT}</a>'
     subnav_equip = '<a href="#equipements">Équipements</a>' if sp["equip"] else ""
     lead_note = note(sp["note_txt"]) if sp["note_txt"] else ""
@@ -893,7 +923,7 @@ def space_page(sp):
     <div>
       <h2 id="presentation">{sp["h2"]}</h2>
       {lead_note}
-      <p>{sp["text"]}</p>
+      <p>{sp["text"]}</p>{more}
       <h3 class="block-gap">Usages recommandés</h3>
       <ul class="tags" role="list">{usages}</ul>{equip}
       <h3 class="block-gap" id="services-associes">Services associés</h3>
@@ -999,7 +1029,7 @@ PHOTOS = [  # (fichier, espace, type, texte alternatif) — espaces et types dé
     ("officiel/dome-exterieur/dome-ciel", "dome", "lieux", "La coupole du Dôme sous un ciel bleu"),
     ("officiel/hall/hall-drapeaux", "hall", "lieux", "Le Hall d’Exposition pavoisé des drapeaux des nations"),
     ("officiel/dome-salle/salle-pleniere", "dome", "lieux", "La salle plénière du Dôme"),
-    ("officiel/dome-salon-vip/salon-vip-oeuvre", "dome", "lieux", "Le salon VIP du Dôme et son œuvre d’art"),
+    ("officiel/dome-salon-vip/salon-vip-oeuvre", "dome", "lieux", "Les Pas Perdus du Dôme et leur œuvre d’art"),
     ("phototheque/salon-stand", "hall", "salons", "Stand d’exposant lors d’un salon professionnel"),
     ("phototheque/dome-lumieres", "dome", "concerts", "Public sous les lumières bleues du Dôme"),
     ("phototheque/salon-auto", "hall", "salons", "Véhicules exposés lors d’un salon automobile"),
@@ -1141,7 +1171,7 @@ FORM = f"""    <div class="form-col">
     </div>"""
 
 # Photo du totem : dans l’encadré « Nous contacter » (et non plus dans l’en-tête)
-CONTACT_TOTEM = img("officiel/dome-salon-vip/salon-vip-accueil", "La banque d’accueil du salon VIP du Dôme", "(min-width: 1024px) 340px, 100vw")
+CONTACT_TOTEM = img("officiel/dome-salon-vip/salon-vip-accueil", "La banque d’accueil des Pas Perdus du Dôme", "(min-width: 1024px) 340px, 100vw")
 PAGES["contact-devis.html"] = ("Contact & Devis — Parc des Expositions d’Abidjan", page_hero(
     crumbs(A, ("Contact", None), ("Devis", None)),
     "Contact",

@@ -5,7 +5,7 @@ colors:
   brand: "#da5900"
   primary: "#b34900"
   primary-hover: "#9d4015"
-  aplat-brun: "#9d4015"
+  aplat-brun: "#e67833"
   aplat-vert: "#006528"
   aplat-brun-fonce: "#5d120a"
   aplat-creme: "#fcf2ea"

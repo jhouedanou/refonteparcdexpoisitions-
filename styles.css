@@ -25,6 +25,7 @@
   --brand-primary-400: #d68644;   /* terracotta clair 214-134-68 */
   --brand-primary-500: #dd5f2e;   /* 221-95-46 */
   --brand-primary-600: #da5900;   /* ORANGE PEA 218-89-0 — couleur du logo */
+  --orange-plaquette: #e67833;    /* orange de la plaquette commerciale, mesuré sur la couverture du PDF (230-120-51) */
   --brand-primary-700: #b34900;   /* ombre de l’orange : texte blanc 5,43:1 */
   --brand-primary-800: #9d4015;   /* brun 157-64-21 */
   --brand-primary-900: #5d120a;   /* brun foncé 93-18-10 */
@@ -73,7 +74,7 @@
   /* — Semantic — */
   --color-brand: var(--brand-primary-600);
   --color-primary: var(--brand-primary-700);
-  --color-primary-hover: var(--brand-primary-800);
+  --color-primary-hover: var(--orange-plaquette);
   --color-primary-content: var(--color-white);
   --color-secondary: var(--brand-secondary-600);
   --color-secondary-hover: var(--brand-secondary-700);
@@ -90,7 +91,7 @@
   --color-overlay-scrim: var(--color-black);         /* voile sur photo uniquement */
   --color-error: var(--color-neutral-950);           /* Bento form/error-color */
   /* Aplats de la charte (PowerPoint p. 16) : un rôle chacun */
-  --aplat-brun: var(--brand-primary-800);
+  --aplat-brun: var(--orange-plaquette);   /* orange de la plaquette (orange PEA) ; le nom du jeton est conservé */
   --aplat-vert: var(--brand-secondary-600);
   --aplat-brun-fonce: var(--brand-primary-900);
   --aplat-creme: var(--brand-primary-50);
@@ -107,8 +108,8 @@
   --btn-font-size: var(--text-base);
   --btn-font-weight: var(--fw-regular);
   --btn-border-width: var(--border-thick);
-  --btn-primary-bg: var(--color-primary);
-  --btn-primary-bg-hover: var(--color-primary-hover);
+  --btn-primary-bg: var(--orange-plaquette);   /* orange de la plaquette */
+  --btn-primary-bg-hover: var(--brand-primary-700);
   --btn-primary-fg: var(--color-primary-content);
   --badge-padding-x: var(--s-3);
   --badge-padding-y: var(--s-1);
@@ -121,16 +122,16 @@
   --card-media-height: 240px;
   --card-poster-height: 400px;
   --collection-gap: var(--s-5);
-  --topbar-bg: var(--brand-primary-800);
+  --topbar-bg: var(--orange-plaquette);
   --topbar-height: 48px;
   --site-header-height: 64px;
   --site-header-logo-height: 40px;
   --site-header-stuck-shadow: 0 2px 8px rgba(0, 0, 0, .12);
   --menu-fg: var(--color-neutral-950);
-  --menu-fg-active: var(--brand-primary-800);
+  --menu-fg-active: var(--orange-plaquette);
   --page-header-bg: var(--color-primary);
   --page-header-padding-block: var(--s-8);       /* Bento page-header/padding-block = 128 : 64 → 96 (≥ 768) → 128 (≥ 1280) */
-  --footer-bg: var(--brand-primary-800);
+  --footer-bg: var(--orange-plaquette);
   --footer-fg: var(--color-neutral-50);
   --form-border-color: var(--color-neutral-500);     /* écart : neutral/300 = 1,5:1 */
   --form-placeholder: #6b6b6b;
@@ -198,6 +199,7 @@ main:focus { outline: none; }
 .section--vert { background: var(--aplat-vert); }
 .section--brun-fonce { background: var(--aplat-brun-fonce); }
 :is(.section--brun, .section--vert, .section--brun-fonce) p { color: var(--color-on-dark-muted); }
+.section--brun p { color: var(--color-white); }   /* sur l’orange, le crème tombe à 3,05:1 */
 :is(.section--brun, .section--vert, .section--brun-fonce) :focus-visible { outline-color: var(--color-white); }
 .section__head { margin-bottom: var(--s-7); }
 .section__head .title { margin-bottom: 0; max-width: 26ch; }
