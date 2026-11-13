@@ -65,7 +65,7 @@
     "longitude": -3.9465668
    },
    "telephone": "+225 27 21 71 09 97",
-   "maximumAttendeeCapacity": 9353,
+   "maximumAttendeeCapacity": 10000,
    "image": "https://pae-orpin.vercel.app/assets/img/officiel/dome-exterieur/dome-ciel-1600.webp",
    "hasMap": "https://www.google.com/maps/place/Abidjan+Exhibition+Center/@5.2634735,-3.9491417,17z/data=!3m1!4b1!4m6!3m5!1s0xfc1ef58a482d019:0x8268f3aea9d9066d!8m2!3d5.2634735!4d-3.9465668!16s%2Fg%2F11h9jwm292",
    "publicAccess": true
@@ -125,7 +125,7 @@
     <nav class="nav" id="nav-principale" aria-label="Main navigation" data-bento="Menu">
       <ul>
       <li><a href="qui-sommes-nous.html">About us</a></li>
-      <li class="nav__item--sub"><a href="nos-espaces.html">Our venues</a><button class="nav__subtoggle" type="button" aria-expanded="false" aria-controls="sub-espaces" aria-label="Our venues submenu"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></button><ul class="nav__sub" id="sub-espaces" role="list"><li><a href="hall-exposition.html"><span class="nav__sub-title">Exhibition Hall</span><span class="nav__sub-desc">6,500 m² · 12 m ceiling height</span></a></li><li><a href="le-dome.html"><span class="nav__sub-title">The Dome</span><span class="nav__sub-desc">5,000 m² · 4,800 seated · 9,353 seated/standing</span></a></li><li><a href="parvis-esplanades.html"><span class="nav__sub-title">Forecourt &amp; Esplanades</span><span class="nav__sub-desc">67,000 m² of outdoor space</span></a></li><li><a href="visite-virtuelle.html"><span class="nav__sub-title">360° virtual tour</span><span class="nav__sub-desc">Explore the venue remotely</span></a></li></ul></li>
+      <li class="nav__item--sub"><a href="nos-espaces.html">Our venues</a><button class="nav__subtoggle" type="button" aria-expanded="false" aria-controls="sub-espaces" aria-label="Our venues submenu"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg></button><ul class="nav__sub" id="sub-espaces" role="list"><li><a href="hall-exposition.html"><span class="nav__sub-title">Exhibition Hall</span><span class="nav__sub-desc">6,500 m² · 12 m ceiling height</span></a></li><li><a href="le-dome.html"><span class="nav__sub-title">The Dome</span><span class="nav__sub-desc">5,000 m² · 5,000 seated · 10,000 standing</span></a></li><li><a href="parvis-esplanades.html"><span class="nav__sub-title">Gardens, forecourt &amp; esplanade</span><span class="nav__sub-desc">46,200 m² of outdoor space</span></a></li><li><a href="visite-virtuelle.html"><span class="nav__sub-title">360° virtual tour</span><span class="nav__sub-desc">Explore the venue remotely</span></a></li></ul></li>
       <li><a href="nos-services.html">Our services</a></li>
       <li><a href="phototheque.html">Photo library</a></li>
       <li><a href="agenda.html">Events</a></li>
@@ -171,7 +171,7 @@
           <div class="form__grid">
         <div class="field" data-bento="Form/Field"><label for="type">Event type <span class="req" aria-hidden="true">*</span></label><select id="type" name="type" required><option value="" disabled selected>Choose…</option><option value="salon">Trade show</option><option value="congres">Congresses</option><option value="conference">Conference</option><option value="convention">Convention</option><option value="concert">Concert</option><option value="exposition">Exhibition</option><option value="corporate">Corporate</option><option value="autre">Other</option></select><p class="field__error" id="type-error" hidden>Please choose the event type.</p></div>
         <div class="field" data-bento="Form/Field"><label for="participants">Number of attendees <span class="opt">(optional)</span></label><input id="participants" name="participants" type="number" min="1" step="1" inputmode="numeric" placeholder="E.g. 800"></div>
-        <div class="field" data-bento="Form/Field"><label for="espace">Preferred venue <span class="opt">(optional)</span></label><select id="espace" name="espace"><option value="">Not sure yet</option><option value="hall">Exhibition Hall</option><option value="dome">The Dome</option><option value="parvis">Forecourt &amp; Esplanades</option></select></div>
+        <div class="field" data-bento="Form/Field"><label for="espace">Preferred venue <span class="opt">(optional)</span></label><select id="espace" name="espace"><option value="">Not sure yet</option><option value="hall">Exhibition Hall</option><option value="dome">The Dome</option><option value="parvis">Gardens, forecourt &amp; esplanade</option></select></div>
             <fieldset class="field field--full dates" data-bento="Form/Field">
               <legend>Preferred dates <span class="opt">(optional)</span></legend>
               <div class="dates__row">
@@ -186,7 +186,7 @@
           <legend>Your needs</legend>
           <fieldset class="checks">
             <legend>Services required <span class="opt">(optional)</span></legend>
-            <div class="checks__grid"><label class="check"><input type="checkbox" name="services" value="audiovisuel"> Audiovisual</label><label class="check"><input type="checkbox" name="services" value="mobilier"> Furniture</label><label class="check"><input type="checkbox" name="services" value="restauration"> Catering</label><label class="check"><input type="checkbox" name="services" value="securite"> Security</label><label class="check"><input type="checkbox" name="services" value="accueil"> Reception</label><label class="check"><input type="checkbox" name="services" value="nettoyage"> Cleaning</label><label class="check"><input type="checkbox" name="services" value="technique"> Technical support</label><label class="check"><input type="checkbox" name="services" value="logistique"> Logistics</label></div>
+            <div class="checks__grid"><label class="check"><input type="checkbox" name="services" value="nettoyage-et-gestion-des-dechets"> Cleaning and waste management</label><label class="check"><input type="checkbox" name="services" value="assistance-medicale"> Medical assistance</label><label class="check"><input type="checkbox" name="services" value="assistance-audiovisuelle"> Audiovisual assistance</label><label class="check"><input type="checkbox" name="services" value="securite-incendie"> Fire safety</label><label class="check"><input type="checkbox" name="services" value="surete"> Security</label><label class="check"><input type="checkbox" name="services" value="distribution-electrique"> Power distribution</label><label class="check"><input type="checkbox" name="services" value="food-beverage"> Food &amp; Beverage</label><label class="check"><input type="checkbox" name="services" value="logistique"> Logistics</label><label class="check"><input type="checkbox" name="services" value="prestations-ephemeres"> Temporary structures</label><label class="check"><input type="checkbox" name="services" value="traduction-et-interpretariat"> Translation and interpreting</label><label class="check"><input type="checkbox" name="services" value="signaletique-et-branding"> Signage and branding</label><label class="check"><input type="checkbox" name="services" value="billetterie-et-controle-dacces"> Ticketing and access control</label><label class="check"><input type="checkbox" name="services" value="conciergerie"> Concierge services</label></div>
           </fieldset>
         <div class="field field--full" data-bento="Form/Field"><label for="projet">Describe your project <span class="opt">(optional)</span></label><textarea id="projet" name="projet" placeholder="A few lines about your event"></textarea></div>
         </fieldset>
@@ -208,7 +208,7 @@
       </div>
     </div>
     <aside class="aside-box card" id="nous-contacter" aria-labelledby="aside-contact" data-bento="Card">
-      <figure class="aside-box__media"><img src="../assets/img/officiel/dome-salon-vip/salon-vip-accueil-1600.webp" srcset="../assets/img/officiel/dome-salon-vip/salon-vip-accueil-800.webp 800w, ../assets/img/officiel/dome-salon-vip/salon-vip-accueil-1600.webp 1600w" sizes="(min-width: 1024px) 340px, 100vw" alt="The reception desk of the Dome’s Pas Perdus" width="1600" height="1067" loading="lazy" decoding="async"></figure>
+      <figure class="aside-box__media"><img src="../assets/img/officiel/dome-exterieur/dome-aerien-1600.webp" srcset="../assets/img/officiel/dome-exterieur/dome-aerien-800.webp 800w, ../assets/img/officiel/dome-exterieur/dome-aerien-1600.webp 1600w" sizes="(min-width: 1024px) 340px, 100vw" alt="Une vue aérienne du Dôme" width="1600" height="900" loading="lazy" decoding="async"></figure>
       <p class="eyebrow">Abidjan Exhibition Center</p>
       <h2 class="t3 title title--l4" id="aside-contact" data-bento="Title">Contact us</h2>
       <address class="contact-details" data-bento="Contact details"><span><a class="wa-link" href="https://wa.me/2252721710997?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20le%20Parc%20des%20Expositions%20d%E2%80%99Abidjan." target="_blank" rel="noopener" aria-label="WhatsApp: +225 27 21 71 09 97 (new tab)"><svg class="i i--wa" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3.2 20.8l4.5-1.2A8.8 8.8 0 1 0 12 3.2z"/><path class="i--wa-handset" d="M9.1 7.6c-.3 0-.7.1-.9.5-.4.6-.6 1.4-.3 2.3.6 1.9 2.5 4 4.6 4.8.9.3 1.7.2 2.3-.2.4-.3.6-.7.5-1l-.2-.5-1.6-.8c-.3-.1-.5 0-.7.2l-.5.6c-1-.4-2-1.4-2.4-2.4l.6-.5c.2-.2.3-.4.2-.7l-.7-1.6c-.1-.3-.4-.4-.6-.4z"/></svg>+225 27 21 71 09 97</a></span><span>Boulevard de l’aéroport<br>Abidjan · Côte d’Ivoire</span></address>
@@ -273,7 +273,7 @@
       <ul class="footer__menu" role="list">
         <li><a href="hall-exposition.html">Exhibition Hall</a></li>
         <li><a href="le-dome.html">The Dome</a></li>
-        <li><a href="parvis-esplanades.html">Forecourt &amp; Esplanades</a></li>
+        <li><a href="parvis-esplanades.html">Gardens, forecourt &amp; esplanade</a></li>
         <li><a href="visite-virtuelle.html">360° virtual tour</a></li>
         <li><a href="nos-services.html">Our services</a></li>
       </ul>

@@ -2621,6 +2621,7 @@ a.card:hover .card__link .i {
 .service {
   display: grid;
   grid-template-columns: 3rem 1fr;
+  align-content: start;
   column-gap: var(--s-4);
   padding-bottom: var(--s-5);
   border-bottom: var(--border-thin) solid rgba(255, 255, 255, 0.3);

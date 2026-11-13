@@ -31,8 +31,8 @@ def note(original):
 PIN_ICON = ('<svg class="i i--pin" viewBox="0 0 24 24" aria-hidden="true" focusable="false">'
             '<path d="M12 21s-6.5-6.1-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 14.9 12 21 12 21z"/><circle cx="12" cy="9.8" r="2.3"/></svg>')
 SUB_ESPACES = [("hall-exposition.html", "Hall d’Exposition", "6 500 m² · 12 m sous plafond"),
-               ("le-dome.html", "Le Dôme", "5 000 m² · 4 800 assis · 9 353 assis/debout"),
-               ("parvis-esplanades.html", "Parvis & Esplanades", "67 000 m² d’espaces extérieurs"),
+               ("le-dome.html", "Le Dôme", "5 000 m² · 5 000 assis · 10 000 debout"),
+               ("parvis-esplanades.html", "Jardins, parvis & esplanade", "46 200 m² d’espaces extérieurs"),
                ("visite-virtuelle.html", "Visite virtuelle 360°", "Explorer le Parc à distance")]
 
 
@@ -126,7 +126,7 @@ FOOTER = f"""</main>
       <ul class="footer__menu" role="list">
         <li><a href="hall-exposition.html">Hall d’Exposition</a></li>
         <li><a href="le-dome.html">Le Dôme</a></li>
-        <li><a href="parvis-esplanades.html">Parvis & Esplanades</a></li>
+        <li><a href="parvis-esplanades.html">Jardins, parvis & esplanade</a></li>
         <li><a href="visite-virtuelle.html">Visite virtuelle 360°</a></li>
         <li><a href="nos-services.html">Nos services</a></li>
       </ul>
@@ -196,7 +196,7 @@ def crumbs(*parts, ink=False):
 
 def slug(t):
     t = t.lower()
-    for a, b in (("é", "e"), ("è", "e"), ("ê", "e"), ("ô", "o"), ("’", ""), ("'", "")):
+    for a, b in (("é", "e"), ("è", "e"), ("ê", "e"), ("ô", "o"), ("û", "u"), ("’", ""), ("'", "")):
         t = t.replace(a, b)
     return re.sub(r"[^a-z0-9]+", "-", t).strip("-")
 
@@ -261,7 +261,7 @@ def space(letter, title, sub, media=None, ink=False, h="h3", usage=""):
     """Composant Bento « Card » (vertical, landscape) : image + badge, titre, description, lien."""
     data = f' data-usage="{usage}"' if usage else ""
     return f"""      <a class="card card--space" href="{SPACE_URL[letter]}"{data} data-bento="Card">
-        <div class="card__media">{img(SPACE_IMG[letter], sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw")}<span class="badge badge--primary card__badge">Espace {letter}</span></div>
+        <div class="card__media">{img(SPACE_IMG[letter], sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw")}</div>
         <div class="card__content"><{h} class="card__title{' t3' if h == "h2" else ''}">{title}</{h}><p class="card__desc">{sub}</p><span class="card__link">Découvrir {ARROW}</span></div>
       </a>"""
 
@@ -470,17 +470,17 @@ PLAY_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path
 
 def video_block(heading_id, h="h2"):
     return f"""
-<section class="section section--brun video-block" aria-labelledby="{heading_id}" data-bento="Block/Video">
+<section class="section section--brun video-block" id="videodepresentation" aria-labelledby="{heading_id}" data-bento="Block/Video">
   <div class="wrap">
-    <div class="section__head"><p class="eyebrow">Le Parc en vidéo</p><{h} id="{heading_id}">Découvrez le Parc en 1 min 37.</{h}></div>
+    <div class="section__head"><p class="eyebrow">Le Parc en vidéo</p><{h} id="{heading_id}">Découvrez le Parc.</{h}></div>
     <div class="video" data-video>
       <a class="video__facade" href="assets/video/presentation-pea-1080.mp4" data-video-hd="assets/video/presentation-pea-1080.mp4" data-video-sd="assets/video/presentation-pea-720.mp4" data-video-title="Vidéo de présentation du Parc des Expositions d’Abidjan">
         {img("video/presentation-poster", "", "(min-width: 1320px) 1320px, 100vw")}
         <span class="video__play" aria-hidden="true">{PLAY_ICON}</span>
-        <span class="sr-only">Voir la vidéo de présentation (1 min 37, en français)</span>
+        <span class="sr-only">Voir la vidéo de présentation (en français)</span>
       </a>
     </div>
-    <p class="video__meta">1 min 37 · en français</p>
+    <p class="video__meta">Vidéo en français</p>
   </div>
 </section>
 """
@@ -503,24 +503,20 @@ PAGES["index.html"] = ("Accueil — Parc des Expositions d’Abidjan", f"""
   </div>
   <div class="wrap hero__inner">
     {ARCH.format(cls="arch")}
-    <p class="eyebrow">Le plus grand parc exposition d’Afrique de l’Ouest</p>
-    <h1>Salons, congrès et grands événements à Abidjan.</h1>
-    <p class="lead">Des espaces modulables, des services complets et une destination au cœur de l’Afrique de l’Ouest.</p>
+    <p class="eyebrow">Le plus grand parc d’expositions d’Afrique de l’Ouest</p>
+    <h1>Bienvenue au Parc des Expositions d’Abidjan</h1>
+    <p class="lead">Le lieu dédié aux grands événements.</p>
     <div class="actions"><a class="btn btn--primary" href="nos-espaces.html">Découvrir nos espaces {ARROW}</a><a class="btn btn--invert" href="contact-devis.html">Demander un devis</a></div>
   </div>
 </section>
 
 <section class="section" id="decouvrir">
   <div class="wrap">
-    <div class="intro">
-      <div><p class="eyebrow">Pourquoi le Parc des Expositions ?</p><h2>Un lieu conçu pour faire grandir les événements.</h2></div>
-      {note("Le site doit répondre immédiatement à une question : pourquoi organiser son événement au Parc des Expositions d’Abidjan ? La réponse s’articule autour de quatre piliers : espaces, services, destination et expertise.")}
-      <p>Pourquoi organiser votre événement au Parc des Expositions d’Abidjan ? Pour quatre raisons : des espaces à grande échelle, des services intégrés, une destination attractive et une expertise internationale.</p>
-    </div>
+    <div class="section__head"><p class="eyebrow">Pourquoi le Parc des Expositions ?</p></div>
     <ul class="figures figures--4 figures--light" role="list" data-bento="Block/Key figures">
       <li class="figure"><strong><span class="sr-only">6 500 m²</span><span aria-hidden="true"><span data-count="6500">6 500</span> m²</span></strong>Hall d’exposition</li>
       <li class="figure"><strong><span class="sr-only">5 000 m²</span><span aria-hidden="true"><span data-count="5000">5 000</span> m²</span></strong>Le Dôme</li>
-      <li class="figure"><strong><span class="sr-only">67 000 m²</span><span aria-hidden="true"><span data-count="67000">67 000</span> m²</span></strong>Parvis & esplanades</li>
+      <li class="figure"><strong><span class="sr-only">46 200 m²</span><span aria-hidden="true"><span data-count="46200">46 200</span> m²</span></strong>Jardins, parvis & esplanade</li>
       <li class="figure"><strong><span class="sr-only">360°</span><span aria-hidden="true"><span data-count="360">360</span>°</span></strong><a class="btn btn--tertiary btn--sm" href="visite-virtuelle.html#visite">Visiter le Parc {ARROW}</a></li>
     </ul>
   </div>
@@ -530,9 +526,9 @@ PAGES["index.html"] = ("Accueil — Parc des Expositions d’Abidjan", f"""
   <div class="wrap">
     <div class="section__head"><p class="eyebrow">Nos espaces</p><h2>À chaque projet, son espace.</h2></div>
     <div class="collection collection--3" data-bento="Collection">
-{space("A", "Hall d’Exposition", "Salons · expositions · corporate")}
+{space("A", "Hall d’Exposition", "Salons · expositions")}
 {space("B", "Le Dôme", "Conventions · conférences · concerts", ink=True)}
-{space("C", "Parvis & Esplanades", "Formats outdoor · grands publics")}
+{space("C", "Jardins, parvis & esplanade", "Expositions en plein air · concerts · festivals")}
     </div>
   </div>
 </section>
@@ -655,46 +651,44 @@ DESTINATION_ITEMS = "".join(gallery_item(n, a, "(min-width: 1024px) 25vw, 50vw")
 
 PAGES["qui-sommes-nous.html"] = ("Qui sommes-nous ? — Parc des Expositions d’Abidjan", page_hero(
     crumbs(A, ("Qui sommes-nous ?", None)), "Le Parc",
-    "Un équipement majeur au service des grands événements.",
-    "Salons, congrès, concerts : à Abidjan, le Parc accueille les grands rendez-vous professionnels et grand public d’Afrique de l’Ouest.",
-    lead_note=note("Une présentation institutionnelle plus éditoriale, orientée vers la preuve, la destination et l’expertise.")) + f"""
+    "Qui sommes-nous ?",
+    "Inauguré en Juillet 2023, le Parc des Expositions d’Abidjan (PEA), est un site événementiel dédié à l’accueil de grands événements, expositions & spectacles à Abidjan.") + f"""
 
+<!-- Texte repris à l’identique de la page officielle /fr/qui-sommes-nous (relevé du 13 novembre 2026) -->
 <section class="section section--white">
   <div class="wrap split">
     <div class="media">{img("officiel/dome-salle/salle-pleniere", "La salle plénière du Dôme, fauteuils face à la scène", "(min-width: 1024px) 50vw, 100vw")}</div>
     <div>
-      <p class="eyebrow">Notre ambition</p>
-      <h2>Faire d’Abidjan un point de rencontre régional.</h2>
-      <p>Le Parc des Expositions d’Abidjan accueille salons, expositions, conventions, conférences, concerts et grands rendez-vous professionnels.</p>
-      <p>Œuvre de l’architecte Pierre Fakhoury, ouvert au public en juillet 2023, le Parc s’étend sur 16 hectares : un Convention Center, un hall d’exposition et des espaces extérieurs.</p>
-      <ul class="figures figures--tight" role="list" data-bento="Block/Key figures">
-        <li class="figure"><strong>3</strong>grands univers d’espaces</li>
-        <li class="figure"><strong>GL events</strong>expertise internationale</li>
-      </ul>
+      <p>Œuvre de l’architecte Pierre Fakhoury, ce très bel équipement est situé sur la commune de Port-Bouët, et s’étend sur 16 hectares, à proximité de l’aéroport international d’Abidjan.</p>
+      <p>Depuis le 15 Janvier 2025, il est géré et opéré par la société Abidjan Events PEA, filiale du groupe GL events, opérateur événementiel international.</p>
     </div>
   </div>
 </section>
 {video_block("video-titre")}
-<section class="section" id="destination">
+<section class="section" id="expertise">
   <div class="wrap">
-  <div class="intro">
-    <div><p class="eyebrow">Une destination</p><h2>Abidjan, ville d’affaires et d’expériences.</h2></div>
-    {note("Cette section valorise l’accessibilité, l’hôtellerie, le dynamisme économique, culturel et touristique de la Côte d’Ivoire afin de soutenir la visibilité internationale du Parc.")}
-    <p>Accessibilité, offre hôtelière, dynamisme économique, culturel et touristique : la Côte d’Ivoire réunit tout ce qu’il faut pour accueillir vos participants venus de la région et du monde entier.</p>
-  </div>
-    <div class="destination-grid block-gap" data-lightbox data-bento="Image gallery">{DESTINATION_ITEMS}</div>
-    <p class="section__more"><a class="link-arrow" href="venir-a-abidjan.html">Accès, hôtels, visas : venir à Abidjan {ARROW}</a></p>
+    <h2>Le groupe GL events, acteur mondial de l’événement</h2>
+    <p class="lead">Groupe intégré des métiers de l’événement, GL events est un acteur de référence présent sur les trois grands marchés du secteur :</p>
+    <ul>
+      <li>Congrès et conventions,</li>
+      <li>Événements et manifestations, qu’ils soient culturels, sportifs, institutionnels, ou corporate,</li>
+      <li>Salons et expositions à destination des professionnels ou du grand public</li>
+    </ul>
+    <p>Fort de 45 ans d’expérience, GL events intervient pour le compte de nombreux clients publics et privés en France et dans le monde : entreprises, institutions et organisateurs de manifestations. Il les accompagne sur l’ensemble de leurs projets, de la définition des stratégies ou concepts jusqu’à la mise en œuvre des opérations sur le terrain.</p>
   </div>
 </section>
 
-<section class="section section--brun-fonce" id="expertise">
+<section class="section section--brun-fonce" id="reseau">
   <div class="wrap">
-    <p class="eyebrow">Expertise</p>
-    <h2>Un savoir-faire événementiel international.</h2>
-    {note("Bloc destiné à présenter le rôle de GL events, ses standards d’exploitation et sa capacité à accompagner les organisateurs.")}
-    <p class="lead">Le Parc s’appuie sur l’expertise de GL events et ses standards d’exploitation pour accompagner les organisateurs à chaque étape, de la conception à l’accueil du public.</p>
-    <p>Depuis le 15 janvier 2025, le Parc est géré et exploité par la société Abidjan Events PEA, filiale du groupe GL events.</p>
-    <p>Fort de 45 ans d’expérience, GL events gère un réseau de 61 sites événementiels en Europe, en Amérique du Sud, en Asie et en Afrique.</p>
+    <h2>Le réseau GL events Venues</h2>
+    <p class="lead">GL events gère un réseau de 60 sites événementiels en Europe, Amérique du Sud, Asie et en Afrique : centres de congrès, parc expositions, lieux réceptifs, espaces multifonctionnels, salles de concert et spectacles, arenas et stades.</p>
+    <p>Engagé au côté des pouvoirs publics dans leur stratégie d’attractivité et de rayonnement des territoires, le savoir-faire du réseau GL events Venues contribue à la valeur ajoutée de chaque site à différents niveaux :</p>
+    <ul>
+      <li>Une gamme complète et unique, allant de la conception à la réalisation de l’événement</li>
+      <li>Expertise d’un opérateur professionnel au service des sites</li>
+      <li>Synergies commerciales pour une meilleure visibilité et satisfaction clients</li>
+    </ul>
+    <p>En créant Abidjan events PEA, structure dédiée à la gestion du plus grand parc des expositions d’Afrique de l’Ouest, GL events répond à la demande de l’État de Côte d’Ivoire de doter la destination d’une nouvelle ambition événementielle au travers d’une gestion professionnelle, engagée, innovante et ancrée dans le territoire.</p>
   </div>
 </section>
 {LIGHTBOX}
@@ -704,18 +698,18 @@ PAGES["qui-sommes-nous.html"] = ("Qui sommes-nous ? — Parc des Expositions d�
 PAGES["nos-espaces.html"] = ("Nos espaces — Parc des Expositions d’Abidjan", page_hero(
     crumbs(A, ("Nos espaces", None)), "Espaces",
     "Des espaces à la hauteur de vos ambitions.",
-    "Comparez nos espaces par capacité, usage et configuration, explorez-les en visite virtuelle et téléchargez leurs fiches techniques.",
-    "\n    " + filters("Filtrer par usage", ["Tous", "Salon", "Congrès", "Conférence", "Convention", "Concert", "Corporate"], "espaces", "usage"),
-    lead_note=note("Une entrée simple par capacité, usage et configuration, avec accès direct à la visite virtuelle et aux fiches techniques.")) + f"""
+    "Comparez nos espaces par capacité, usage et configuration et explorez-les en visite virtuelle.",
+    "\n    " + filters("Filtrer par usage", ["Tous", "Salon", "Congrès", "Conférence", "Convention", "Concert"], "espaces", "usage"),
+    lead_note=note("Une entrée simple par capacité, usage et configuration, avec accès direct à la visite virtuelle.")) + f"""
 
 <section class="section section--white">
   <div class="wrap">
     {results("espaces", "3 espaces", "Aucun espace ne correspond à cet usage. Parlez-nous de votre projet : nous étudions chaque configuration.")}
     <!-- Usages par espace (déduits des légendes de l’accueil) : à confirmer et administrer dans Drupal -->
     <div class="collection collection--3" id="espaces" data-bento="Collection">
-{space("A", "Hall d’Exposition", "6 500 m² · 12 m sous plafond", h="h2", usage="salon corporate")}
-{space("B", "Le Dôme", "5 000 m² · 4 800 assis · 9 353 assis/debout", ink=True, h="h2", usage="congres conference convention concert")}
-{space("C", "Parvis & Esplanades", "67 000 m² d’espaces extérieurs", h="h2", usage="concert salon")}
+{space("A", "Hall d’Exposition", "6 500 m² · 12 m sous plafond", h="h2", usage="salon")}
+{space("B", "Le Dôme", "5 000 m² · 5 000 assis · 10 000 debout", ink=True, h="h2", usage="congres conference convention concert")}
+{space("C", "Jardins, parvis & esplanade", "46 200 m² d’espaces extérieurs", h="h2", usage="concert salon")}
     </div>
     {TYPE_LINKS}
   </div>
@@ -729,9 +723,9 @@ PAGES["nos-espaces.html"] = ("Nos espaces — Parc des Expositions d’Abidjan",
       <caption class="sr-only">Comparatif des espaces : surface, hauteur, capacité, usages, documents et devis</caption>
       <thead><tr><th scope="col">Espace</th><th scope="col">Surface</th><th scope="col">Hauteur</th><th scope="col">Capacité</th><th scope="col">Usages</th><th scope="col">Documents</th><th scope="col"><span class="sr-only">Devis</span></th></tr></thead>
       <tbody>
-        <tr><th scope="row"><a href="hall-exposition.html">Hall d’Exposition</a></th><td data-label="Surface">6 500 m²</td><td data-label="Hauteur">12 m</td><td data-label="Capacité">6 500 personnes</td><td data-label="Usages">Salons, expositions, corporate</td><td data-label="Documents"><a href="assets/fiche-technique-hall-exposition.pdf" download>Fiche technique (PDF)</a></td><td><a class="btn btn--primary btn--sm" href="contact-devis.html?espace=hall#devis" aria-label="Demander un devis pour le Hall d’Exposition">Devis</a></td></tr>
-        <tr><th scope="row"><a href="le-dome.html">Le Dôme</a></th><td data-label="Surface">5 000 m²</td><td data-label="Hauteur">Non communiquée</td><td data-label="Capacité">4 800 assis · 9 353 assis/debout</td><td data-label="Usages">Conférences, institutionnel, salons, concerts</td><td data-label="Documents"><a href="{PLAN_PDF}" target="_blank" rel="noopener" aria-label="Plan du Parc, PDF (nouvel onglet)">Plan du Parc (PDF)</a></td><td><a class="btn btn--primary btn--sm" href="contact-devis.html?espace=dome#devis" aria-label="Demander un devis pour le Dôme">Devis</a></td></tr>
-        <tr><th scope="row"><a href="parvis-esplanades.html">Parvis & Esplanades</a></th><td data-label="Surface">67 000 m²</td><td data-label="Hauteur">Plein air</td><td data-label="Capacité">Parvis 11 000 m² · 2 esplanades de 28 000 m²</td><td data-label="Usages">Expositions extérieures, formats outdoor</td><td data-label="Documents"><a href="{PLAN_PDF}" target="_blank" rel="noopener" aria-label="Plan du Parc, PDF (nouvel onglet)">Plan du Parc (PDF)</a></td><td><a class="btn btn--primary btn--sm" href="contact-devis.html?espace=parvis#devis" aria-label="Demander un devis pour le Parvis & Esplanades">Devis</a></td></tr>
+        <tr><th scope="row"><a href="hall-exposition.html">Hall d’Exposition</a></th><td data-label="Surface">6 500 m²</td><td data-label="Hauteur">12 m</td><td data-label="Capacité">6 500 personnes</td><td data-label="Usages">Salons, expositions</td><td data-label="Documents"><a href="{PLAN_PDF}" target="_blank" rel="noopener" aria-label="Plan du Parc, PDF (nouvel onglet)">Plan du Parc (PDF)</a></td><td><a class="btn btn--primary btn--sm" href="contact-devis.html?espace=hall#devis" aria-label="Demander un devis pour le Hall d’Exposition">Devis</a></td></tr>
+        <tr><th scope="row"><a href="le-dome.html">Le Dôme</a></th><td data-label="Surface">5 000 m²</td><td data-label="Hauteur">Non communiquée</td><td data-label="Capacité">5 000 assis · 10 000 debout</td><td data-label="Usages">Conférences, institutionnel, salons, concerts</td><td data-label="Documents"><a href="{PLAN_PDF}" target="_blank" rel="noopener" aria-label="Plan du Parc, PDF (nouvel onglet)">Plan du Parc (PDF)</a></td><td><a class="btn btn--primary btn--sm" href="contact-devis.html?espace=dome#devis" aria-label="Demander un devis pour le Dôme">Devis</a></td></tr>
+        <tr><th scope="row"><a href="parvis-esplanades.html">Jardins, parvis & esplanade</a></th><td data-label="Surface">46 200 m²</td><td data-label="Hauteur">Plein air</td><td data-label="Capacité">3 jardins de 35 200 m² · parvis de 11 000 m²</td><td data-label="Usages">Expositions en plein air, concerts, festivals</td><td data-label="Documents"><a href="{PLAN_PDF}" target="_blank" rel="noopener" aria-label="Plan du Parc, PDF (nouvel onglet)">Plan du Parc (PDF)</a></td><td><a class="btn btn--primary btn--sm" href="contact-devis.html?espace=parvis#devis" aria-label="Demander un devis pour les espaces extérieurs">Devis</a></td></tr>
       </tbody>
     </table>
   </div>
@@ -846,7 +840,7 @@ def folder_photos(group, featured, label):
 
 SPACES = [
     dict(file="hall-exposition.html", title="Hall d’Exposition", letter="A", code="hall",
-         lead="Un espace de grande capacité dédié aux salons, expositions et événements corporate.",
+         lead="Un espace de grande capacité dédié aux salons et aux expositions.",
          figures=[("6 500 m²", "Surface"), ("12 m", "Hauteur libre sous plafond"), ("6 500", "Personnes accueillies")],
          h2="Un espace pensé pour les événements de grande ampleur.",
          note_txt="La fiche espace concentre l’information commerciale et technique : usages possibles, capacité, configuration, prestations associées et documents à télécharger.",
@@ -855,12 +849,12 @@ SPACES = [
                "Il compte 3 bars-restaurants au rez-de-chaussée, ainsi qu’un espace lounge et une salle de réunion à l’étage."],
          usages=["Salon professionnel", "Exposition", "Lancement", "Convention"], equip=None,
          photos=official_photos(["officiel/hall"], "hall-drapeaux", "Hall d’Exposition"),
-         doc=("assets/fiche-technique-hall-exposition.pdf", "Télécharger la fiche technique", True)),
+         doc=(None, None, False)),
     dict(file="le-dome.html", title="Le Dôme", letter="B", code="dome",
          lead="Le Convention Center du Parc : une salle de 5 000 m² équipée pour les conférences, les événements institutionnels, les salons et les concerts.",
-         figures=[("5 000 m²", "Surface exploitable"), ("4 800", "Places assises en convention"), ("9 353", "Personnes en assis/debout")],
+         figures=[("5 000 m²", "Surface exploitable"), ("5 000", "Places assises"), ("10 000", "Places debout")],
          h2="Une salle de prestige pour les grands rendez-vous.", note_txt=None,
-         text="Avec 5 000 m² exploitables, le Dôme accueille 4 800 personnes assises en convention, 5 183 en dîner de gala et jusqu’à 9 353 en configuration assis/debout, avec une infrastructure technique pensée pour les événements professionnels comme pour le grand public.",
+         text="Avec 5 000 m² exploitables, le Dôme accueille 5 000 personnes assises et jusqu’à 10 000 debout, avec une infrastructure technique pensée pour les événements professionnels comme pour le grand public.",
          more=["Son auditorium à gradins rétractables se prête aux congrès, conventions, salons, conférences et dîners de gala.",
                "Le Dôme dispose de 8 loges d’artistes et de 2 bureaux organisateurs.",
                "Les Pas Perdus, un espace cocktail de 581,5 m², reçoivent jusqu’à 160 personnes."],
@@ -870,14 +864,14 @@ SPACES = [
                                 extra=["plaquette/" + n for n in ("salle-panorama", "salle-scene", "ecran-led-arriere", "pas-perdus-salon", "pas-perdus-fauteuils",
                                                                   "loges-signaletique", "loge-miroirs", "loge-coiffeuse", "loges-couloir", "dome-acces-aerien")]),
          doc=(None, None, False)),
-    dict(file="parvis-esplanades.html", title="Parvis & Esplanades", letter="C", code="parvis",
-         lead="67 000 m² d’espaces extérieurs pour les expositions et les événements en plein air.",
-         figures=[("11 000 m²", "Parvis"), ("28 000 m²", "Esplanade Est"), ("28 000 m²", "Esplanade Nord-Est")],
+    dict(file="parvis-esplanades.html", title="Jardins, parvis & esplanade", letter="C", code="parvis",
+         lead="46 200 m² d’espaces extérieurs pour les expositions en plein air, les concerts et les festivals.",
+         figures=[("46 200 m²", "Surface totale"), ("35 200 m²", "3 jardins"), ("11 000 m²", "Parvis")],
          h2="De grands espaces extérieurs, à l’échelle de vos projets.", note_txt=None,
-         text="Le Parvis et les esplanades Est et Nord-Est totalisent 67 000 m² pour les expositions extérieures, les formats outdoor et les événements grand public.",
-         more=["Des chapiteaux éphémères peuvent y prolonger les expositions en plein air."],
-         usages=["Exposition extérieure", "Format outdoor", "Événement grand public", "Concert"], equip=None,
-         photos=official_photos(["officiel/esplanades"], "dome-panorama", "Parvis & Esplanades",
+         text="Des espaces extérieurs complémentaires de 46 200 m² : 3 jardins de 35 200 m² et le parvis de 11 000 m².",
+         more=[],
+         usages=["Exposition en plein air", "Concert", "Festival"], equip=None,
+         photos=official_photos(["officiel/esplanades"], "dome-panorama", "Jardins, parvis & esplanade",
                                 extra=["officiel/dome-exterieur/dome-panorama", "plaquette/parvis-auvent", "plaquette/esplanade-ombrieres-aerien",
                                        "plaquette/esplanade-ombriere", "officiel/dome-exterieur/dome-aerien"]),
          doc=(None, None, False)),
@@ -905,7 +899,7 @@ def space_page(sp):
     subnav_equip = '<a href="#equipements">Équipements</a>' if sp["equip"] else ""
     lead_note = note(sp["note_txt"]) if sp["note_txt"] else ""
     return (f"{sp['title']} — Parc des Expositions d’Abidjan", page_hero(
-        crumbs(A, ("Nos espaces", "nos-espaces.html"), (sp["title"], None)), f"Espace {sp['letter']}",
+        crumbs(A, ("Nos espaces", "nos-espaces.html"), (sp["title"], None)), "Nos espaces",
         sp["title"], sp["lead"], compact=True) + f"""
 
 <section class="section section--white section--tight">
@@ -927,11 +921,12 @@ def space_page(sp):
       <h3 class="block-gap">Usages recommandés</h3>
       <ul class="tags" role="list">{usages}</ul>{equip}
       <h3 class="block-gap" id="services-associes">Services associés</h3>
-      <p>Audiovisuel · mobilier · restauration · sécurité · accueil · nettoyage · logistique.</p>
+      <p>Nettoyage · assistance médicale · audiovisuel · sécurité incendie · sûreté · distribution électrique · food & beverage · logistique · prestations éphémères · traduction · signalétique · billetterie · conciergerie.</p>
+      <p><a class="link-arrow" href="nos-services.html">Toutes nos prestations {ARROW}</a></p>
     </div>
     <aside class="aside-box card" id="documents" aria-labelledby="aside-espace" data-bento="Card">
       <p class="eyebrow">Organiser ici</p>
-      <h3 id="aside-espace">Votre projet {"au" if sp["code"] == "dome" else ("dans le" if sp["code"] == "hall" else "sur le")} {sp["title"].replace("Le ", "").replace("Hall d’Exposition", "Hall")} ?</h3>
+      <h3 id="aside-espace">{"Votre projet en extérieur ?" if sp["code"] == "parvis" else "Votre projet " + ("au" if sp["code"] == "dome" else "dans le") + " " + sp["title"].replace("Le ", "").replace("Hall d’Exposition", "Hall") + " ?"}</h3>
       <p>Accédez au formulaire de devis avec l’espace pré-sélectionné.</p>
       <a class="btn btn--primary btn--block" href="contact-devis.html?espace={sp["code"]}#devis">Demander un devis {ARROW}</a>{docs}
     </aside>
@@ -945,54 +940,136 @@ for _sp in SPACES:
     PAGES[_sp["file"]] = space_page(_sp)
 
 # ---------------------------------------------------------------- Nos services
-SERVICES = [
-    ("Audiovisuel", "Son, lumière, vidéo et dispositifs techniques."),
-    ("Mobilier", "Configurations adaptées à chaque format."),
-    ("Restauration", "Solutions food & beverage selon le projet."),
-    ("Sécurité", "Dispositifs adaptés aux flux et jauges."),
-    ("Accueil", "Orientation, protocole et assistance visiteurs."),
-    ("Nettoyage", "Préparation et maintien opérationnel."),
-    ("Technique", "Accompagnement avant et pendant l’événement."),
-    ("Logistique", "Coordination, accès et exploitation."),
+# Book de prestations du Parc (document de travail du client, novembre 2026) : contenu repris, PDF non publié.
+# (famille, [(prestation, [lignes])])
+SERVICE_GROUPS = [
+    ("Prestations locatives", [
+        ("Nettoyage et gestion des déchets", [
+            "Permanence sanitaires pendant le montage, l’événement et le démontage",
+            "Nettoyage intégral du Convention Center et du Hall d’expositions à la fin de l’événement",
+            "Nettoyage des stands pendant l’événement",
+            "Nettoyage de l’esplanade, des jardins et des parkings",
+            "Évacuation des déchets (7 m³ ou 20 m³)",
+            "En option : permanence sanitaires extérieurs, agents supplémentaires",
+        ]),
+        ("Assistance médicale", [
+            "Mise à disposition d’une infirmerie",
+            "Mise à disposition d’une ambulance médicalisée",
+            "Présence de médecins, d’urgentistes, d’infirmiers et d’ambulanciers",
+            "Aménagement d’un couloir d’évacuation",
+            "2 défibrillateurs sur site",
+        ]),
+        ("Assistance audiovisuelle", [
+            "Assistance technique audiovisuelle au Convention Center",
+            "Maintenance et gestion des équipements audiovisuels pendant les événements",
+            "Mise à disposition de régisseurs vidéo, lumières, son et scène",
+            "Hall d’expositions : service à la demande",
+        ]),
+        ("Sécurité incendie", [
+            "Mise à disposition d’agents de sécurité incendie qualifiés (SSIAP 1, SSIAP 2, SSIAP 3)",
+        ]),
+        ("Sûreté", [
+            "Gardiennage des espaces",
+            "Surveillance des locaux",
+            "Surveillance vidéo et mise à disposition de caméras de vidéosurveillance",
+            "Garde rapprochée",
+            "Agents de sécurité complémentaires selon les besoins de l’événement",
+        ]),
+        ("Distribution électrique", [
+            "Location de groupes électrogènes",
+            "Location de boîtiers électriques",
+        ]),
+    ]),
+    ("Prestations obligatoires", [
+        ("Food & Beverage", [
+            "Service traiteur",
+            "Snacking",
+            "Pause café",
+            "Dîner gala",
+        ]),
+        ("Logistique", [
+            "Location de chaises et de tables",
+            "Mise à disposition de mobilier événementiel",
+            "Mise à disposition de manutentionnaires",
+            "Location de nacelle et de chariot élévateur",
+            "Barrières, crash barrières et potelets (1 000 barrières et 250 crash barrières disponibles)",
+            "Prestations d’élingage",
+        ]),
+        ("Prestations éphémères", [
+            "Installation de chapiteaux et tentes",
+            "Conception et construction de stands modulaires",
+            "Conception et construction de stands personnalisés",
+            "Installation de cloisons et structures temporaires",
+        ]),
+        ("Traduction et interprétariat", [
+            "Location de cabines de traduction (2 doubles cabines)",
+            "Location de casques de traduction (500 casques)",
+            "Traducteurs et interprètes",
+            "Traduction de documents",
+            "Assistance technique liée au dispositif de traduction",
+            "Mise à disposition du système de diffusion sonore associé, selon les équipements prévus",
+        ]),
+        ("Signalétique et branding", [
+            "Impressions, poses et déposes : bâches, kakémonos, flyers, comptoirs…",
+            "Le branding des cadres extérieurs du hall 1 et de la clôture extérieure est obligatoirement réalisé par le Parc",
+        ]),
+    ]),
+    ("Prestations optionnelles", [
+        ("Billetterie et contrôle d’accès", [
+            "Billetterie en ligne",
+            "Édition et impression des tickets",
+            "Gestion et contrôle des accès",
+            "Distribution de tickets dans les points de vente physiques",
+            "Location de box d’accueil pour le contrôle des accès",
+        ]),
+        ("Conciergerie", [
+            "Mise à disposition d’hôtesses et d’hôtes d’accueil",
+            "Gestion de l’enregistrement des invités",
+            "Orientation et installation des participants",
+            "Accueil protocolaire",
+            "Accueil et accompagnement des personnalités et invités VIP",
+            "Gestion des dispositifs d’accueil spécifiques",
+        ]),
+    ]),
 ]
-service_items = "\n".join(
-    f'      <li class="service"><span>{i:02d}</span><h2 class="t3">{n}</h2><p>{d}</p></li>'
-    for i, (n, d) in enumerate(SERVICES, 1)
-)
+SERVICES = [(n, rows) for _, items in SERVICE_GROUPS for n, rows in items]  # sert aussi aux cases du formulaire de devis
+
+
+def _service_groups():
+    out, i = [], 0
+    for gi, (group, items) in enumerate(SERVICE_GROUPS):
+        lis = []
+        for n, rows in items:
+            i += 1
+            lis.append(f'      <li class="service"><span>{i:02d}</span><h3 class="t3">{n}</h3><p>{"<br>".join(rows)}</p></li>')
+        gap = ' class="block-gap"' if gi else ""
+        out.append(f'    <h2{gap}>{group}</h2>\n    <ul class="services" role="list" data-bento="Item list">\n' + "\n".join(lis) + "\n    </ul>")
+    return "\n".join(out)
+
+
+service_items = _service_groups()
 PAGES["nos-services.html"] = ("Nos services — Parc des Expositions d’Abidjan", page_hero(
     crumbs(A, ("Nos services", None)), "Services",
-    "Tout ce qu’il faut pour faire fonctionner votre événement.",
-    "Au-delà des espaces, le Parc réunit chez un seul interlocuteur les prestations nécessaires à votre événement.",
+    "Bien plus qu’un lieu, une expérience événementielle complète.",
+    "Le Parc des Expositions d’Abidjan accompagne ses clients dans la conception et la réalisation de leurs événements, en mettant à leur disposition des infrastructures modernes, des espaces modulables et une gamme complète de prestations et de services.",
     lead_note=note("Une présentation claire des prestations pour transformer le Parc en solution complète, pas seulement en location d’espace.")) + f"""
 
 <section class="section section--vert">
   <div class="wrap">
-    <ul class="services" role="list" data-bento="Item list">
 {service_items}
-    </ul>
   </div>
 </section>
 
 <!-- Contenus repris de la page officielle /fr/nos-espaces-services (relevé du 7 octobre 2026) -->
 <section class="section">
-  <div class="wrap support">
+  <div class="wrap">
     <div>
       <p class="eyebrow">Prestations de services</p>
       <h2>Une équipe à vos côtés, de la préparation au jour J.</h2>
-      <p class="lead">Nos équipes accompagnent et conseillent au quotidien les organisateurs dans la réalisation de leur événement, en mettant à disposition les espaces et l’ensemble des prestations nécessaires à son bon déroulement : restauration, matériel audiovisuel, mobilier, sécurité, nettoyage… Sur site, elles coordonnent l’ensemble des prestations d’accueil.</p>
+      <p class="lead">Parce que la réussite d’un événement repose autant sur la qualité du lieu que sur celle de son organisation, nous avons développé une offre de services pensée pour répondre aux exigences des organisateurs, entreprises, institutions et partenaires, quels que soient le format, la taille ou la nature de leur événement.</p>
+      <p>De la restauration à la traduction et l’interprétariat, en passant par les solutions techniques et audiovisuelles, la sécurité, l’accueil, la signalétique, la logistique et l’accompagnement opérationnel, nos équipes et nos partenaires mettent leur expertise au service de chaque projet.</p>
+      <p>Notre ambition : vous permettre de vous concentrer sur l’essentiel : votre événement.</p>
     </div>
-    <section class="support__building" aria-labelledby="batiment" data-bento="Card">
-      <h3 id="batiment">Bâtiment administratif</h3>
-      <p>Un accueil disponible 24h/24 et des équipements au service de votre événement.</p>
-      <ul class="support__list" role="list">
-        <li><strong>24h/24</strong>Accueil</li>
-        <li><strong>Sécurité</strong>Poste de sécurité</li>
-        <li><strong>Police</strong>Poste de police</li>
-        <li><strong>Santé</strong>Infirmerie</li>
-        <li><strong>Technique</strong>Équipements techniques</li>
-        <li><strong>Stockage</strong>Locaux de stockage</li>
-      </ul>
-    </section>
   </div>
 </section>
 
@@ -1133,7 +1210,7 @@ FORM = f"""    <div class="form-col">
           <div class="form__grid">
 {field("type", "Type d’événement", f'<select id="type" name="type" required>{TYPE_OPTS}</select>', True, "Choisissez le type d’événement.")}
 {field("participants", "Nombre de participants", '<input id="participants" name="participants" type="number" min="1" step="1" inputmode="numeric" placeholder="Ex. 800">')}
-{field("espace", "Espace envisagé", '<select id="espace" name="espace"><option value="">Je ne sais pas encore</option><option value="hall">Hall d’Exposition</option><option value="dome">Le Dôme</option><option value="parvis">Parvis & Esplanades</option></select>')}
+{field("espace", "Espace envisagé", '<select id="espace" name="espace"><option value="">Je ne sais pas encore</option><option value="hall">Hall d’Exposition</option><option value="dome">Le Dôme</option><option value="parvis">Jardins, parvis & esplanade</option></select>')}
             <fieldset class="field field--full dates">
               <legend>Date envisagée{OPT}</legend>
               <div class="dates__row">
@@ -1171,7 +1248,7 @@ FORM = f"""    <div class="form-col">
     </div>"""
 
 # Photo du totem : dans l’encadré « Nous contacter » (et non plus dans l’en-tête)
-CONTACT_TOTEM = img("officiel/dome-salon-vip/salon-vip-accueil", "La banque d’accueil des Pas Perdus du Dôme", "(min-width: 1024px) 340px, 100vw")
+CONTACT_TOTEM = img("officiel/dome-exterieur/dome-aerien", "Une vue aérienne du Dôme", "(min-width: 1024px) 340px, 100vw")
 PAGES["contact-devis.html"] = ("Contact & Devis — Parc des Expositions d’Abidjan", page_hero(
     crumbs(A, ("Contact", None), ("Devis", None)),
     "Contact",
