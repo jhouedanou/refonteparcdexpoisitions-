@@ -1375,6 +1375,12 @@ PAGE_BG = {
 }
 
 
+def with_page_id(page, src):
+    """Pose sur <body> un id et une classe au nom de la page (fichier sans .html)."""
+    slug = page.removesuffix(".html")
+    return src.replace("<body>", f'<body id="{slug}" class="{slug}">', 1)
+
+
 def with_page_bg(name, src):
     bg = PAGE_BG.get(name)
     if not bg:
@@ -1421,8 +1427,8 @@ def bentoize(src):
 for name, (title, body) in PAGES.items():
     fr_html = bentoize(with_page_bg(name, head(title) + "\n" + header(name) + body + FOOTER))
     en_html = to_english(name, fr_html.replace("__FR__", "../" + name).replace("__EN__", name))
-    (ROOT / name).write_text(with_lang_links(name, apply_seo(name, fr_html, "fr"), "fr"), encoding="utf-8")
-    (ROOT / "en" / name).write_text(with_lang_links(name, apply_seo(name, en_html, "en"), "en"), encoding="utf-8")
+    (ROOT / name).write_text(with_page_id(name, with_lang_links(name, apply_seo(name, fr_html, "fr"), "fr")), encoding="utf-8")
+    (ROOT / "en" / name).write_text(with_page_id(name, with_lang_links(name, apply_seo(name, en_html, "en"), "en")), encoding="utf-8")
     print("écrit", name, "+ en/" + name)
 write_sitemap()
 
@@ -1451,8 +1457,8 @@ index = head("Parc des Expositions d’Abidjan — Planche HTML").replace("</hea
 </html>
 """
 index = bentoize(index)
-(ROOT / "planches.html").write_text(with_lang_links("planches.html", index, "fr"), encoding="utf-8")
-(ROOT / "en" / "planches.html").write_text(with_lang_links("planches.html", to_english("planches.html", index), "en"), encoding="utf-8")
+(ROOT / "planches.html").write_text(with_page_id("planches.html", with_lang_links("planches.html", index, "fr")), encoding="utf-8")
+(ROOT / "en" / "planches.html").write_text(with_page_id("planches.html", with_lang_links("planches.html", to_english("planches.html", index), "en")), encoding="utf-8")
 print("écrit planches.html")
 
 # Ancienne adresse de l’accueil : redirection vers index.html (liens et favoris existants)
@@ -1468,10 +1474,10 @@ REDIRECT = """<!doctype html>
 <body><p><a href="index.html">{label}</a></p></body>
 </html>
 """
-(ROOT / "accueil.html").write_text(REDIRECT.format(lang="fr", label="Accueil du Parc des Expositions d’Abidjan"), encoding="utf-8")
-(ROOT / "en" / "accueil.html").write_text(REDIRECT.format(lang="en", label="Abidjan Exhibition Center home page"), encoding="utf-8")
+(ROOT / "accueil.html").write_text(with_page_id("accueil.html", REDIRECT.format(lang="fr", label="Accueil du Parc des Expositions d’Abidjan")), encoding="utf-8")
+(ROOT / "en" / "accueil.html").write_text(with_page_id("accueil.html", REDIRECT.format(lang="en", label="Abidjan Exhibition Center home page")), encoding="utf-8")
 # Ancienne fiche événement (gabarit) : remplacée par une page par événement
 _to_auto = lambda t: t.replace("index.html", "evenement-auto-expo.html")
-(ROOT / "fiche-evenement.html").write_text(_to_auto(REDIRECT.format(lang="fr", label="Auto Expo au Parc des Expositions d’Abidjan")), encoding="utf-8")
-(ROOT / "en" / "fiche-evenement.html").write_text(_to_auto(REDIRECT.format(lang="en", label="Auto Expo at the Abidjan Exhibition Center")), encoding="utf-8")
+(ROOT / "fiche-evenement.html").write_text(with_page_id("fiche-evenement.html", _to_auto(REDIRECT.format(lang="fr", label="Auto Expo au Parc des Expositions d’Abidjan"))), encoding="utf-8")
+(ROOT / "en" / "fiche-evenement.html").write_text(with_page_id("fiche-evenement.html", _to_auto(REDIRECT.format(lang="en", label="Auto Expo at the Abidjan Exhibition Center"))), encoding="utf-8")
 print("écrit accueil.html (redirection)")
